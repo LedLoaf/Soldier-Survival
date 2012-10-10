@@ -1,4 +1,4 @@
-Soldier--Survival
+Soldier: Survival
 =================
 
-Isometric game developing by 34fun team.
+Isometric game creating by 34fun team for Software Engineering classes on University of Science and Technology in Cracow, Poland.
