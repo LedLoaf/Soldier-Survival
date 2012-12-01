@@ -1,52 +1,47 @@
-class MainMenuWindow : Window {
-public:
-	MainMenuWindow() {
-		initModel();
-		initUI();
-	}
+#include <view/window/MainMenuWindow.hpp>
+#include <view/model/SelectionViewModel.hpp>
+#include <view/SelectionView.hpp>
+#include <game/Application.hpp>
 
-	void initModel() {
-		mainMenuSelectionModel = new MainMenuSelectionModel();
-	}
+namespace view {
 
-	void initUI() {
-		// x, y, width, height, model
-		selectionView = new SelectionView(100, 100, 150, 400, mainMenuSelectionModel);
-		addView(mainMenuSelectionView);
+void MainMenuWindow::initModel() {
+	selectionViewModel = new SelectionViewModel();
+}
 
-
-		mainMenuLogoPath = Application.getResourceManager().getPath(Resource.MAIN_MENU_LOGO);
-
-		addView(new ImageView(100, 0, 150, 200, mainMenuLogoPath));
-	}
+void MainMenuWindow::initUI() {
+	// x, y, width, height, model
+	selectionView = new SelectionView(100, 100, 150, 400, selectionViewModel);
+	addView(mainMenuSelectionView);
 
 
-	void onArrowPressed(arrow) {
-		if (arrow == down) {
-			if (mainMenuSelectionView.hasNextOption())
-				mainMenuSelectionView.selectNextOption();
-		}
+//	mainMenuLogoPath = Application.getResourceManager().getPath(Resource.MAIN_MENU_LOGO);
+//
+//	addView(new ImageView(100, 0, 150, 200, mainMenuLogoPath));
+}
 
 
+void MainMenuWindow::onArrowPressed(util::Key::Arrow arrow) {
+	if (arrow == util::Key::DOWN) {
+		if (selectionView.hasNextElement())
+			selectionView.selectNextElement()();
 	}
 
 
-	List<View> getViews() {
-		return childViews;
+}
+
+
+void MainMenuWindow::onEnterPressed() {
+	util::Action optionAction = selectionView.getSelectedElement().getAction();
+
+	switch(optionAction) {
+		case util::Action::RUN_LEVEL_SELECTION:
+			game::Application::getInstance().getGameEngine().runLevelSelection();
+			break;
+		case util::Action::RUN_EXIT:
+			game::Application::getInstance().getGameEngine().exitGame();
+			break;
 	}
+}
 
-
-
-	void onEnterPressed() {
-		Action optionAction = mainMenuSelectionView.getSelectedElement().getAction();
-
-		switch(optionAction) {
-			case: Action.RUN_LEVEL_SELECTION
-				Application->getGameEngine()->runLevelSelection();
-		
-			case Action.RUN_EXIT
-				gameEngine.exitGame();
-		}
-	}
-
-};
+}

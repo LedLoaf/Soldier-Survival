@@ -2,11 +2,12 @@
 #include <game/object/LevelDescription.hpp>
 #include <view/window/MainMenuWindow.hpp>
 
+namespace game {
 
 void GameMasterEngine::run() {
 	// show main menu
-	MainMenuWindow *mainMenuWindow = new MainMenuWindow()
-	context->setActiveWindow(mainMenuWindow);
+	MainMenuWindow *mainMenuWindow = new MainMenuWindow();
+	context.setActiveWindow(*mainMenuWindow);
 
 	// graphic engine ciagle pyta sie o aktywne okno kontekstu i tylko takie rysuje
 }
@@ -60,7 +61,7 @@ void GameMasterEngine::returnToGame() {
 	context->setActiveWindow(parentWindow);
 }
 
-
+}
 
 
 

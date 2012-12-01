@@ -4,13 +4,18 @@
 
 #include <game/IEventHandler.hpp>
 
+namespace game {
+
 class SFMLEventHandler : IEventHandler {
 
 public:
 	void processEvent();
+	void setEventInput(sf::RenderWindow* renderWindow);
 
 private:
-	renderWindow
+	sf::RenderWindow* renderWindow;
 };
+
+}
 
 #endif

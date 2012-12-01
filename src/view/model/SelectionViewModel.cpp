@@ -1,27 +1,44 @@
-class MainMenuSelectionModel { 
-private:
-	void init() {
-		SelectableElement selectableElement = new SelectableElement("Play");
+/*
+ * SelectionViewModel.cpp
+ *
+ *  Created on: Nov 20, 2012
+ *      Author: yet1
+ */
 
-		selectableElement.setTitle("Play");
-		selectableElement.setAction(Action.RUN_LEVEL_SELECTION);
-		mSelectableElements.add(selectableElement);
+#include "SelectionViewModel.hpp"
 
+namespace view {
 
-		selectableElement.setTitle("About");
-		selectableElement.setAction(Action.RUN_ABOUT);
-		mSelectableElements.add(selectableElement);
-
-		selectableElement.setTitle("Exit");
-		selectableElement.setAction(Action.RUN_EXIT);
-		mSelectableElements.add(selectableElement);
-
-	}
-
-public:
-
-	List<SelectableElement> getSelectableElements() {
-		return mSelectableElements;
-	}
+SelectionViewModel::SelectionViewModel() {
+	// TODO Auto-generated constructor stub
 
 }
+
+SelectionViewModel::~SelectionViewModel() {
+	// TODO Auto-generated destructor stub
+}
+
+void SelectionViewModel::setUnselected(int positionOfElement) {
+	selectableElements[positionOfElement].setUnselected();
+}
+
+void SelectionViewModel::setSelected(int positionOfElement) {
+	selectableElements[positionOfElement].setSelected();
+
+}
+
+int SelectionViewModel::getSize()() {
+	return selectableElements.size();
+}
+
+
+void SelectionViewModel::SelectableElement::setSelected() {
+	isSelected = true;
+}
+
+void SelectionViewModel::SelectableElement::setUnselected() {
+	isSelected = false;
+}
+
+
+} /* namespace view */

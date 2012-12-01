@@ -1,47 +1,40 @@
-#ifndef SELECTION_VIEW_PAINTER_HPP_
-#define SELECTION_VIEW_PAINTER_HPP_
+#include <graphic/amazin/painter/SelectionViewPainter.hpp>
+#include <view/model/SelectionViewModel.hpp>
+#include <algorithm>
+#include <vector>
 
-namespace view {
+namespace graphic {
+namespace amazin {
 
-class SelectionViewPainter : AbstractViewPainter {
+SelectionViewPainter::SelectionViewPainter(view::SelectionViewModel& model) {
+	this->model = model;
 
-	SelectionViewPainter(ViewModel model) {
-		this.model = model;
+	init();
+}
 
-		init();
-	}
+void initSelectableSprite(view::SelectionViewModel::SelectableElement& selectableElement) {
+	sprites.insert(std::pair<int, Sprite&>(selectableElement.getId(), new Sprite(selectableElement));
+}
 
-	void init() {
+void updateSelectableSprite(view::SelectionViewModel::SelectableElement& selectableElement) {
 
-		for (SelectableElement element : model.getSelectableElements()) {
-
-			// klucz wartosc, mapa
-			sprites.add(element.getId(), new Sprite(x, y, ..., model.getTitle()));
-
-		}
-	}
-
-
-	void update() {
-
-
-		for (SelectableElement element : model.getSelectableElements()) {
-
-			if (element.isSelected())
-				sprites.get(element.getId()).setColor(zaznaczony);
-			else 
-				sprites.get(element.getId()).setColor(niezaznaczony);
-
-		}
-
-	}
+	if (selectableElement.isSelected())
+		sprites.get(element.getId()).setColor(zaznaczony);
+	else
+		sprites.get(element.getId()).setColor(niezaznaczony);
+}
 
 
-	List<Sprite> getSprites() {
-		return sprites;
-	}
-};
+void SelectionViewPainter::init() {
+	for_each (selectableElements.begin(), selectableElements.end(), initSelectableSprite);
+}
 
+
+void SelectionViewPainter::update() {
+	for_each (selectableElements.begin(), selectableElements.end(), updateSelectableSprite);
+}
+
+}
 }
 
 #endif

@@ -1,12 +1,15 @@
+#include <view/window/Window.hpp>
 
 
+namespace game {
 
-void setActiveWindow(Window& window) {
-
+void Context::setActiveWindow(view::Window& window) {
+	activeWindow = window;
 }
 
 
-Window& getActiveWindow() {
-	return mActiveWindow;
+view::Window& Context::getActiveWindow() {
+	return activeWindow;
 }
 
+}

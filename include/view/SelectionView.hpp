@@ -2,16 +2,21 @@
 #define SELECTION_VIEW_HPP_
 
 #include <view/View.hpp>
+#include <iostream>
+#include <list>
+
 
 namespace view {
 
 class SelectionView : View {
-private:
-	SelectionViewModel model;
-
 public:
 	void selectNextElement();
-	bool canSelectNextElement();
+	bool hasNextElement();
+	SelectionViewModel::SelectableElement& getSelectedElement();
+
+private:
+	SelectionViewModel model;
+	int positionOfSelectedElement;
 	
 };
 

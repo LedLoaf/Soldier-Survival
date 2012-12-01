@@ -1,46 +1,46 @@
-class MapView : View {
-private:
-	// MapViewModel jest doslownie modelem - nie ma zadnej konkretnej logiki, trzyma tylko 2 tablice 2 wymiarowe z mapa
-	MapViewModel mapModel;
+#include <view/View.hpp>
+#include <game/object/LevelDescription.hpp>
+#include <game/object/Character.hpp>
 
-public:
+#include <util/Location.hpp>
 
-	MapView(LevelDescription& levelDescription) {
-		generateMapModel(levelDescription);
-	}
+namespace view {
 
-	void moveCharacter(Character& ch, vector) {
-		// getPositionOf() jest generyczna - mozna tam podac np. referencje do danego kafeleku rzeki
-		Position position = mapModel->getPositionOf(ch);
+MapView::MapView(game::LevelDescription& levelDescription) {
+	generateMapModel(levelDescription);
+}
 
-		mapModel->removeCharacterFrom(position);
+void MapView::moveCharacter(game::Character& ch, util::Location::Vector vector) {
+	// getPositionOf() jest generyczna - mozna tam podac np. referencje do danego kafeleku rzeki
+	util::Location::Position position = mapModel->getPositionOf(ch);
 
-		// tutaj sobie przeladujemy '+' w position, zeby zwrocil nam nowa pozycje przesunieta o dany wektor w stosunku
-		// do starej
-		mapModel->put(character, position + vector);
-	}
+	mapModel.removeCharacterFrom(position);
 
-
-	bool canMoveCharacter(vector) {
-		// MapView gra role MapHandlera
-		// sprawdzam w tablicy z mapa czy jest taka mozliwosc
-	}
+	// tutaj sobie przeladujemy '+' w position, zeby zwrocil nam nowa pozycje przesunieta o dany wektor w stosunku
+	// do starej
+	mapModel.put(ch, position + vector);
+}
 
 
-	void generateMapModel(LevelDescription& levelDescription) {
-		// tworze drogi, rzeki, postacie, itd
-		// wszystko w MapViewModel
-
-		// x, y kafelek - tam umieszczam Enemy
-
-		/*
-		 Character dostaje referencje do tego widoku, zeby mogl sie poruszac
-			kozystajac z metod canMoveCharacter() i moveCharacter()
-		 */
+bool MapView::canMoveCharacter(vector) {
+	// MapView gra role MapHandlera
+	// sprawdzam w tablicy z mapa czy jest taka mozliwosc
+}
 
 
-		mapModel.add(x, y, new Enemy(this))
-	}
+void MapView::generateMapModel(game::LevelDescription& levelDescription) {
+	// tworze drogi, rzeki, postacie, itd
+	// wszystko w MapViewModel
 
-	
+	// x, y kafelek - tam umieszczam Enemy
+
+	/*
+	 Character dostaje referencje do tego widoku, zeby mogl sie poruszac
+		kozystajac z metod canMoveCharacter() i moveCharacter()
+	 */
+
+
+	mapModel.add(x, y, new Enemy(this))
+}
+
 }

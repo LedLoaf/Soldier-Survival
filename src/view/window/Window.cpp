@@ -1,17 +1,24 @@
+#include <view/window/Window.hpp>
+#include <list>
+
 namespace view {
 
+void Window::addView(View& view) {
+	views.push_back(view);
+}
 
-	Window(int x, int y, int width, int height) {
-		
-	}
+std::list<View&> Window::getViews() {
+	return views;
+}
 
-	void addView(View& view) {
-		views.add(view);
-	}
+bool Window::hasSubWindow() {
+	if (subWindow)
+		return true;
+	else
+		return false;
+}
 
-	void getViews() {
-		return views;
-	}
-
-
+void Window::setSubWindow(Window& window) {
+	subWindow = window;
+}
 }

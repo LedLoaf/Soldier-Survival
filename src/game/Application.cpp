@@ -1,8 +1,6 @@
 #include <game/Application.hpp>
 #include <game/IEventHandler.hpp>
 #include <SFML/Graphics.hpp>
-#include <iostream>
-
 
 
 static Application* Application::create(int width, int height) {
@@ -36,4 +34,9 @@ void setEventHandler(IEventHandler* eventHandler) {
 
 	this->eventHandler = eventHandler;
 }
+
+void Application::processEvent() {
+	this->eventHandler->processEvent();
+}
+
 

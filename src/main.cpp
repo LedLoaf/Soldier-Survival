@@ -1,27 +1,28 @@
 #include <game/Application.hpp>
 #include <game/GameMasterEngine.hpp>
+#include <graphic/amazin/SFMLAmazinGraphicEngine.hpp>
 
 
+using namespace game;
 
 
 int main() {
 	Application* app = Application::create(800, 600);
 
 
-	game::GameMasterEngine gameEngine = new GameMasterEngine();
-
-	app.setEventHandler(new game::SFMLEventHandler(app));
-	app.setGameEngine(new game::GameMasterEngine(app));
-	app.setGraphicEngine(new graphic::BasicGraphicEngine(app));
+	app->setEventHandler(new game::SFMLEventHandler());
+	app->setGameEngine(new game::GameMasterEngine());
+	app->setGraphicEngine(new graphic::SFMLAmazinGraphicEngine());
 
 
-	app.run();
+	app->run();
 
 
-	while (app.isRunning()) {
+	while (app->isRunning()) {
 		app->processEvent();
 		app->display();
 	}
+
 
 
 	return 0;

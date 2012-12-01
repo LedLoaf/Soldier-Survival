@@ -8,11 +8,13 @@
 #ifndef SELECTIONVIEWMODEL_HPP_
 #define SELECTIONVIEWMODEL_HPP_
 
-#include <list>
+#include <util/Action.hpp>
+#include <vector>
+#include <iostream>
 
 namespace view {
 
-class SelectionViewModel {
+class SelectionViewModel : ViewModel {
 public:
 	class SelectableElement;
 
@@ -20,17 +22,27 @@ public:
 	SelectionViewModel();
 	virtual ~SelectionViewModel();
 
-	List<SelectableElement>* getSelectableElements();
-
-
-	List<SelectableElement> selectableElements;
-
+	std::vector<SelectableElement>* getSelectableElements();
+	void setSelected(int positionOfElement);
+	void setUnselected(int positionOfElement);
+	int getSize();
 
 
 
 	class SelectableElement {
-
+	public:
+		util::Action getAction();
+		void setUnselected();
+		void setSelected();
+	private:
+		bool isSelected;
 	};
+
+
+
+private:
+	std::vector<SelectableElement&> selectableElements;
+
 };
 
 } /* namespace view */

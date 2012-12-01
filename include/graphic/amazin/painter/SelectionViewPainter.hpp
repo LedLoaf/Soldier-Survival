@@ -1,44 +1,25 @@
 #ifndef SELECTION_VIEW_PAINTER_HPP_
 #define SELECTION_VIEW_PAINTER_HPP_
 
+#include <graphic/painter/SFMLAbstractViewPainter.hpp>
 
-class SelectionViewPainter : ViewPainter {
+namespace graphic {
+namespace amazin {
 
-	SelectionViewPainter(ViewModel model) {
-		this.model = model;
+class SelectionViewPainter : SFMLAbstractViewPainter {
+public:
+	SelectionViewPainter(view::SelectionViewModel& model);
 
-		init();
-	}
+	void init();
+	void update();
 
-	void init() {
+private:
+	view::SelectionViewModel& model;
 
-		for (SelectableElement element : model.getSelectableElements()) {
-
-			// klucz wartosc, mapa
-			sprites.add(element.getId(), new Sprite(x, y, ..., element.getTitle()));
-
-		}
-	}
-
-
-	void update() {
-
-
-		for (SelectableElement element : model.getSelectableElements()) {
-
-			if (element.isSelected())
-				sprites.get(element.getId()).setColor(zaznaczony);
-			else 
-				sprites.get(element.getId()).setColor(niezaznaczony);
-
-		}
-
-	}
-
-
-	List<Sprite> getSprites() {
-		return sprites;
-	}
 };
+
+}
+}
+
 
 #endif

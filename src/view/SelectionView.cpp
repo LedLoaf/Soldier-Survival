@@ -3,16 +3,15 @@
 using namespace view;
 
 void SelectionView::selectNextElement() {
-	if (canSelectNextElement()) {
-		model.setSelected(++mPositionOfSelectedElement);
-	}
+	model.setUnselected(positionOfSelectedElement);
+	model.setSelected(++positionOfSelectedElement);
 }
 
-bool SelectionView::canSelectNextElement() {
-	if (mPositionOfSelectedElement < model.getSize())
+bool SelectionView::hasNextElement() {
+	if (positionOfSelectedElement < model.getSize())
 		return true;
-
-	return false;
+	else
+		return false;
 }
 
 	

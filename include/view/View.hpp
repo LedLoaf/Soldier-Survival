@@ -8,18 +8,28 @@
 #ifndef VIEW_HPP_
 #define VIEW_HPP_
 
+#include <view/model/ViewModel.hpp>
+
 namespace view {
 
 class View {
 public:
-	View(int x, int y, int width, int height);
+	enum Type {
+		SELECTION_VIEW, IMAGE_VIEW
+	};
+
+	View(int xStart, int yStart, int xEnd, int yEnd);
+	View(int xStart, int yStart, int xEnd, int yEnd, ViewModel& viewModel);
 	virtual ~View();
+	virtual Type getType() = 0;
+
 
 protected:
-	int x;
-	int y;
-	int width;
-	int height;
+	int xStart;
+	int xEnd;
+	int yStart;
+	int yEnd;
+
 };
 
 } /* namespace graphic */

@@ -5,8 +5,6 @@ class IEventHandler {
 public:
     virtual ~IEventHandler();
     virtual void processEvent() = 0;
-	void setEventInput(Object eventInput) = 0;
-
 };
 
 #endif
