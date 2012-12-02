@@ -5,14 +5,11 @@
 
 namespace view {
 
-void MainMenuWindow::initModel() {
-	selectionViewModel = new SelectionViewModel();
-}
-
 void MainMenuWindow::initUI() {
-	// x, y, width, height, model
-	selectionView = new SelectionView(100, 100, 150, 400);
-    selectionView->setSelectionModel(selectionViewModel);
+	selectionView = new SelectionView();
+    selectionView.addElement(new SelectionViewModel::SelectableElement(Util::Action::RUN_LEVEL_SELECTION));
+    selectionView.addElement(new SelectionViewModel::SelectableElement(Util::Action::RUN_EXIT));
+    
     
 	addView(selectionView);
 

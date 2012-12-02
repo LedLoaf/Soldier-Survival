@@ -11,10 +11,10 @@ namespace graphic {
 namespace amazin {
 
 
-SFMLAbstractViewPainter* SFMLAmazinGraphicEngine::getPainterForView(view::View* view) {
+SFMLAbstractViewPainter* SFMLAmazinGraphicEngine::getPainterForView(view::View* view, view::View::Type parentViewType) {
 	switch (view->getType()) {
         case view::View::SELECTION_VIEW :
-            return new graphic::amazin::SelectionViewPainter(dynamic_cast<view::SelectionView*>(view)->getModel());
+            return new graphic::amazin::SelectionViewPainter(dynamic_cast<view::SelectionView*>(view)->getModel(), parentViewType);
 	}
 
 

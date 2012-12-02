@@ -9,11 +9,6 @@
 
 namespace view {
 
-View::View(int xStart, int yStart, int xEnd, int yEnd) {
-	// TODO Auto-generated constructor stub
-
-}
-
 View::~View() {
 	// TODO Auto-generated destructor stub
 }

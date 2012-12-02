@@ -27,7 +27,6 @@ public:
     
 	void setSelected(int positionOfElement);
 	void setUnselected(int positionOfElement);
-	int getSize();
 
     void addElement(SelectableElement* element);
 
@@ -42,21 +41,10 @@ public:
         bool isSelected();
 
         util::Location::Position getPosition();
-        void setPosition(util::Location::Position position);
-
-        
-        int setElementWidth(int width);
-        int setElementHeight(int height);   
-        
-        int getElementWidth();
-        int getElementHeight();        
         
 	private:
 		bool selected;
         Util::Action action;
-        int elementWidth, elementHeight;
-        //Orientation orientation;
-        
 	};
 
 

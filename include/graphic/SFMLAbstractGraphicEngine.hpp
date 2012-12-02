@@ -19,7 +19,7 @@ public:
 	void displayGraphicFromPainters();
 	void initWindowPainters(view::Window* window);
 	bool isPaintingCurrentWindow();
-	virtual SFMLAbstractViewPainter* getPainterForView(view::View* view) = 0;
+	virtual SFMLAbstractViewPainter* getPainterForView(view::View* view, view::View::Type parentViewType) = 0;
 
 private:
     std::vector<SFMLAbstractViewPainter*> painters;

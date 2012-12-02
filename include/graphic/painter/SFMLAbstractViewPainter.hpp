@@ -19,6 +19,7 @@ public:
 protected:
 //	std::map<int, sf::Sprite&> sprites;
     std::vector<sf::Sprite*> sprites;
+    view::View::Type parentViewType;
 };
 
 }

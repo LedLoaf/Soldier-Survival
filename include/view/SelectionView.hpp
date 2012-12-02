@@ -11,13 +11,15 @@ namespace view {
 
 class SelectionView : public View {
 public:
-    SelectionView(int xStart, int yStart, int xEnd, int yEnd) : View(xStart, yStart, xEnd, yEnd) {}
+    SelectionView() {}
 	void selectNextElement();
 	bool hasNextElement();
 	SelectionViewModel::SelectableElement* getSelectedElement();
     void setSelectionModel(SelectionViewModel* selectionViewModel);
     virtual Type getType();
     SelectionViewModel* getModel();
+    
+    void addElement(SelectionViewModel::SelectableElement* element);
     
     
 

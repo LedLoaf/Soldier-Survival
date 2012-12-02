@@ -18,16 +18,9 @@ public:
 		SELECTION_VIEW, IMAGE_VIEW, MAIN_MENU_WINDOW
 	};
 
-	View(int xStart, int yStart, int xEnd, int yEnd);
 	virtual ~View();
 	virtual Type getType() = 0;
 
-
-protected:
-	int xStart;
-	int xEnd;
-	int yStart;
-	int yEnd;
 
 };
 

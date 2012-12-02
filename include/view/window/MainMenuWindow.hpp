@@ -14,7 +14,6 @@ namespace view {
 class MainMenuWindow : public Window {
 public:
 	MainMenuWindow();
-	void initModel();
 	void initUI();
 
 	void onArrowPressed(util::Key::Arrow arrow);

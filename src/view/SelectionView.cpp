@@ -2,6 +2,10 @@
 
 namespace view {
 
+SelectionView::SelectionView() {
+    selectionModel =  new SelectionViewModel();
+}    
+    
 void SelectionView::selectNextElement() {
 	selectionModel->setUnselected(positionOfSelectedElement);
 	selectionModel->setSelected(++positionOfSelectedElement);
@@ -31,6 +35,9 @@ SelectionViewModel::SelectableElement* SelectionView::getSelectedElement() {
     return getModel()->getSelectableElements().at(positionOfSelectedElement);
 }
 
+void SelectionView::addElement(SelectionViewModel::SelectableElement* element) {
+    selectionModel->addElement(element);
+}
 
 
 }

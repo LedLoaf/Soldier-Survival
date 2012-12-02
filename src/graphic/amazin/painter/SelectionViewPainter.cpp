@@ -8,9 +8,10 @@
 namespace graphic {
 namespace amazin {
 
-SelectionViewPainter::SelectionViewPainter(view::SelectionViewModel* model) {
+SelectionViewPainter::SelectionViewPainter(view::SelectionViewModel* model, view::View::Type parentViewType) {
 	this->selectionModel = model;
     this->selectableElements = model->getSelectableElements();
+    this->parentViewType = parentViewType;
 
 	init();
 }
@@ -50,12 +51,23 @@ void SelectionViewPainter::updateSelectableSprite(view::SelectionViewModel::Sele
 
 void SelectionViewPainter::init() {
 //	std::for_each (selectableElements.begin(), selectableElements.end(), initSelectableSprite);
+    int elementWidth, elementHeight;
+    int viewXPosition, viewYPosition;
     
-    for(std::vector<view::SelectionViewModel::SelectableElement*>::iterator it = selectableElements.begin(); it != selectableElements.end(); ++it) {
+    if (parentViewType == view::View::Type::MAIN_MENU_WINDOW) {
+        viewXPosition = 100;
+        viewYPosition = 100;
+        
+        elementWidth = 100;
+        elementHeight = 20;
+        
+    }
+        
+    for (std::vector<view::SelectionViewModel::SelectableElement*>::iterator it = selectableElements.begin(); it != selectableElements.end(); ++it) {
         sf::Sprite* sprite = new sf::Sprite();
-        sprite->Resize((*it)->getElementWidth(), (*it)->getElementHeight());
-        sprite->SetX(selectionModel->getViewPosition().getX());
-        sprite->SetY(selectionModel->getViewPosition().getY());
+        sprite->Resize(elementWidth, elementHeight);
+        sprite->SetX(viewXPosition);
+        sprite->SetY(viewYPosition + std::distance(selectableElements.begin(), it) * elementHeight);
         sprite->SetColor(sf::Color::Green);
 
         selectableSpritesMap.insert(std::pair<view::SelectionViewModel::SelectableElement*, sf::Sprite*>(*it, sprite));

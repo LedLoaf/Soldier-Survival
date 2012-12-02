@@ -13,7 +13,7 @@ namespace amazin {
 
 class SelectionViewPainter : public SFMLAbstractViewPainter {
 public:
-	SelectionViewPainter(view::SelectionViewModel* model);
+	SelectionViewPainter(view::SelectionViewModel* model, view::View::Type parentViewType);
     
     void initSelectableSprite(view::SelectionViewModel::SelectableElement& selectableElement);
     void updateSelectableSprite(view::SelectionViewModel::SelectableElement* selectableElement); 

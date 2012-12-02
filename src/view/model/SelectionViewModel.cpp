@@ -27,11 +27,6 @@ void SelectionViewModel::setSelected(int positionOfElement) {
 
 }
 
-int SelectionViewModel::getSize() {
-	return selectableElements.size();
-}
-
-
 void SelectionViewModel::SelectableElement::setSelected() {
 	selected = true;
 }
@@ -52,30 +47,7 @@ std::vector<SelectionViewModel::SelectableElement*> SelectionViewModel::getSelec
     return selectableElements;
 }
 
-
-void SelectionViewModel::SelectableElement::setElementHeight(int height) {
-    elementHeight = height;
-}
-
-void SelectionViewModel::SelectableElement::setElementWidth(int width) {
-    elementWidth = width;
-}
-
-int SelectionViewModel::SelectableElement::getElementHeight() {
-    return elementHeight;
-}
-
-int SelectionViewModel::SelectableElement::getElementWidth() {
-    return elementWidth;
-}
-
 void SelectionViewModel::addElement(SelectableElement* element) {
-    SelectableElement* lastElement = *selectableElements.back();
-
-    // vertical view
-    element->setPosition(new util::Location::Position(getViewPosition().getX(), 
-            lastElement->getPosition().getY() + lastElement->getElementHeight()));
-
     selectableElements.push_back(element);
 }
 
