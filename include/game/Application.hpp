@@ -23,6 +23,8 @@ public:
 
 	GameMasterEngine& getGameEngine();
 
+    sf::RenderWindow* getRenderWinow();
+    
 	void processEvent();
 	void display();
 

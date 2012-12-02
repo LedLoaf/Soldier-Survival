@@ -34,6 +34,9 @@ Application::Application(int width, int height)  {
 //	resourceManager = new ResourceManager.createFor(graphicEngine);
 //}
 
+sf::RenderWindow* Application::getRenderWinow() {
+    return renderWindow;
+}
 
 void Application::setEventHandler(SFMLEventHandler* eventHandler) {
 	eventHandler->setEventInput(renderWindow);
@@ -66,6 +69,8 @@ Context* Application::getContext() {
 
 void Application::run() {
     running = true;
+    
+    gameEngine->run();
 }
 
 void Application::display() {

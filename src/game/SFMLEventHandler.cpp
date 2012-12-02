@@ -16,6 +16,9 @@ void SFMLEventHandler::processEvent() {
 					Application::getInstance().getContext()->getActiveWindow()->onArrowPressed(util::Key::LEFT);
 					break;
 			}
+            
+        if (Event.Type == sf::Event::Closed)
+                Application::getInstance().getRenderWinow()->Close();
 	}
 
 }
