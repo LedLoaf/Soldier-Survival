@@ -11,6 +11,8 @@ namespace view {
 
 class Window : public view::View {
 public:
+    Window(int xStart, int yStart, int xEnd, int yEnd);
+    
 	void addView(View* view);
 	std::vector<View*> getViews();
 	bool hasSubWindow();

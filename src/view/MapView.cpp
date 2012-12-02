@@ -7,7 +7,12 @@
 
 namespace view {
 
-void MapView::generateLevel(game::LevelDescription& levelDescription) {
+MapView::MapView(int xStart, int yStart, int xEnd, int yEnd) : View(xStart, yStart, xEnd, yEnd) {
+}
+
+    
+    
+void MapView::generateLevel(game::LevelDescription* levelDescription) {
 	generateMapModel(levelDescription);
 }
 
@@ -29,7 +34,7 @@ bool canMoveCharacter(util::Location::Vector vector) {
 }
 
 
-void MapView::generateMapModel(game::LevelDescription& levelDescription) {
+void MapView::generateMapModel(game::LevelDescription* levelDescription) {
 	// tworze drogi, rzeki, postacie, itd
 	// wszystko w MapViewModel
 
@@ -42,6 +47,10 @@ void MapView::generateMapModel(game::LevelDescription& levelDescription) {
 
 
 //	mapModel.add(x, y, new Enemy(this))
+}
+
+View::Type MapView::getType() {
+    return View::MAP_VIEW;
 }
 
 }

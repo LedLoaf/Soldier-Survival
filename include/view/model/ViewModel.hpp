@@ -8,8 +8,14 @@ namespace view {
 
 class ViewModel {
 public:
-    util::Location::Position getViewPosition();
-    void setViewPosition(util::Location::Position position);
+    util::Location::Position* getViewStartPosition();
+    util::Location::Position* getViewEndPosition();
+    
+    void setViewPosition(util::Location::Position* startPosition, util::Location::Position* endPosition);
+    
+private:
+    util::Location::Position* startPosition;
+    util::Location::Position* endPosition;
 };
 
 }

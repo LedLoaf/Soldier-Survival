@@ -1,24 +1,37 @@
-//class ImageViewPainter : ViewPainter {
-//
-//	ImageViewPainter(String bitmapPath) {
-//		this.bitmapPath = bitmapPath;
-//
-//		init();
-//	}
-//
-//	void init() {
-//
-//			// klucz wartosc, mapa
-//			sprites.add(element.getId(), new Sprite(x, y, ..., model.getBitmap()));
-//
-//	}
-//
-//
-//	void update() {
-//	}
-//
-//
-//	List<Sprite> getSprites() {
-//		return sprites;
-//	}
-//};
+#include <graphic/amazin/painter/ImageViewPainter.hpp>
+#include <SFML/Graphics/Sprite.hpp>
+
+#include <SFML/Graphics/Image.hpp>
+
+#include "view/model/ImageViewModel.hpp"
+
+namespace graphic {
+namespace amazin {
+
+
+ImageViewPainter::ImageViewPainter(view::ImageViewModel* model, view::View::Type parentViewType) {
+    this->imageViewModel = model;
+}
+    
+
+void ImageViewPainter::init() {
+    sf::Image image;
+    if (!image.LoadFromFile(imageViewModel->getImagePath())) {
+        //TODO: throw exception
+    }
+    
+    sf::Sprite* sprite = new sf::Sprite;
+    sprite->SetImage(image);
+
+    
+    sprites.push_back(sprite);
+}
+
+
+void ImageViewPainter::update() {   
+}
+    
+
+
+}
+}

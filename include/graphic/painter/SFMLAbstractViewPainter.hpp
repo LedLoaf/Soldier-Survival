@@ -13,7 +13,7 @@ public:
 	virtual void init() = 0;
 	virtual void update() = 0;
 
-	virtual std::vector<sf::Sprite*> getSprites() = 0;
+	std::vector<sf::Sprite*> getSprites();
 
 
 protected:

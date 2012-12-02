@@ -15,7 +15,7 @@ private:
 	MapView* mapView;
 
 public:
-	GamePlayWindow(game::LevelDescription& levelDescription);
+	GamePlayWindow(int xStart, int yStart, int xEnd, int yEnd, game::LevelDescription* levelDescription);
 	void onEnterPressed();
 	void onArrowPressed(util::Key::Arrow arrow);
 	void setSubWindow(Window& window);

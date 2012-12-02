@@ -10,13 +10,17 @@
 
 namespace view {
 
-class ImageView : View {
+class ImageView : public View {
 public:
-//    ImageView(int xStart, int yStart, int xEnd, int yEnd);
-    void setModel(ImageViewModel& model);
+    ImageView(int xStart, int yStart, int xEnd, int yEnd, std::string imagePath);
+    void setModel(ImageViewModel* model);
+    ImageViewModel* getModel();
+    
+	virtual Type getType();
+    
         
 private:
-    ImageViewModel& imageViewModel;
+    ImageViewModel* imageViewModel;
 };
 
 }

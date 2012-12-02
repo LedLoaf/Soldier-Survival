@@ -15,8 +15,14 @@ public:
 	DeviceManager();
 	virtual ~DeviceManager();
 
-	static int getScreenWidth();
-	static int getScreenHeight();
+    int setScreenWidth(int width);
+    int setScreenHeight(int height);
+
+    
+	int getScreenWidth();
+	int getScreenHeight();
+private:
+    int screenHeight, screenWidth;
 
 };
 

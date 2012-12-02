@@ -1,21 +1,30 @@
-///*
-// * DeviceManager.cpp
-// *
-// *  Created on: Nov 20, 2012
-// *      Author: yet1
-// */
-//
-////#include "DeviceManager.hpp"
-//
-//namespace util {
-//
-//DeviceManager::DeviceManager() {
-//	// TODO Auto-generated constructor stub
-//
-//}
-//
-//DeviceManager::~DeviceManager() {
-//	// TODO Auto-generated destructor stub
-//}
-//
-//} /* namespace util */
+#include <util/DeviceManager.hpp>
+
+namespace util {
+
+DeviceManager::DeviceManager() {
+	// TODO Auto-generated constructor stub
+
+}
+
+DeviceManager::~DeviceManager() {
+	// TODO Auto-generated destructor stub
+}
+
+int DeviceManager::setScreenWidth(int width) {
+    this->screenWidth = width;
+}
+int DeviceManager::setScreenHeight(int height){
+    this->screenHeight = height;
+}
+
+
+int DeviceManager::getScreenWidth() {
+    return screenWidth;
+}
+
+int DeviceManager::getScreenHeight() {
+    return screenHeight;
+}
+
+} /* namespace util */

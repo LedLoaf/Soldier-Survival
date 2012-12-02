@@ -7,15 +7,26 @@
 
 #ifndef IMAGEVIEWMODEL_HPP
 #define	IMAGEVIEWMODEL_HPP
+#include <string>
+#include <view/model/ViewModel.hpp>
 
-class ImageViewModel {
+namespace view {
+    
+
+class ImageViewModel : public ViewModel {
 public:
-        ImageViewModel();
-        ImageViewModel(const ImageViewModel& orig);
-        virtual ~ImageViewModel();
-private:
+    ImageViewModel();
+    ImageViewModel(const ImageViewModel& orig);
+    virtual ~ImageViewModel();
 
+    void setImagePath(std::string path);
+    std::string getImagePath();
+        
+private:
+    std::string imagePath; 
 };
+
+}
 
 #endif	/* IMAGEVIEWMODEL_HPP */
 

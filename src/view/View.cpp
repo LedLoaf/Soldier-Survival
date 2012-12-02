@@ -9,6 +9,14 @@
 
 namespace view {
 
+View::View(int xStart, int yStart, int xEnd, int yEnd) {
+    this->xStart = xStart;
+    this->xEnd = xEnd;
+    
+    this->yStart = yStart;
+    this->yEnd = yEnd;
+}  
+    
 View::~View() {
 	// TODO Auto-generated destructor stub
 }

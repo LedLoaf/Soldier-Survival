@@ -3,6 +3,7 @@
 
 namespace game {
 
+ 
 void Context::setActiveWindow(view::Window* window) {
 	activeWindow = window;
 }
@@ -11,5 +12,10 @@ void Context::setActiveWindow(view::Window* window) {
 view::Window* Context::getActiveWindow() {
 	return activeWindow;
 }
+
+util::Resource* Context::getResourceManager() {
+    return util::Resource::getResourceManagerFor(view::View::MAIN_MENU_WINDOW);
+}
+
 
 }

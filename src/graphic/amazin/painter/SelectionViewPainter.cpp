@@ -1,6 +1,8 @@
 #include <graphic/amazin/painter/SelectionViewPainter.hpp>
 #include <graphic/painter/SFMLAbstractViewPainter.hpp>
 #include <view/model/SelectionViewModel.hpp>
+#include <util/Location.hpp>
+
 #include <algorithm>
 #include <vector>
 #include <map>
@@ -54,12 +56,8 @@ void SelectionViewPainter::updateSelectableSprite(view::SelectionViewModel::Sele
 void SelectionViewPainter::init() {
 //	std::for_each (selectableElements.begin(), selectableElements.end(), initSelectableSprite);
     int elementWidth, elementHeight;
-    int viewXPosition, viewYPosition;
     
     if (parentViewType == view::View::MAIN_MENU_WINDOW) {
-        viewXPosition = 100;
-        viewYPosition = 100;
-        
         elementWidth = 100;
         elementHeight = 20;
         
@@ -68,8 +66,8 @@ void SelectionViewPainter::init() {
     for (std::vector<view::SelectionViewModel::SelectableElement*>::iterator it = selectableElements.begin(); it != selectableElements.end(); ++it) {
         sf::Sprite* sprite = new sf::Sprite();
         sprite->Resize(elementWidth, elementHeight);
-        sprite->SetX(viewXPosition);
-        sprite->SetY(viewYPosition + std::distance(selectableElements.begin(), it) * elementHeight);
+        sprite->SetX(selectionModel->getViewStartPosition()->getX());
+        sprite->SetY(selectionModel->getViewStartPosition()->getY() + std::distance(selectableElements.begin(), it) * elementHeight);
         sprite->SetColor(sf::Color::Green);
 
         selectableSpritesMap.insert(std::pair<view::SelectionViewModel::SelectableElement*, sf::Sprite*>(*it, sprite));

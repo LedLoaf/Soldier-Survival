@@ -25,6 +25,8 @@ public:
 
     sf::RenderWindow* getRenderWinow();
     
+    util::DeviceManager* getDeviceManager();
+    
 	void processEvent();
 	void display();
 
@@ -40,7 +42,8 @@ private:
     graphic::SFMLAbstractGraphicEngine* graphicEngine;
     
     Context* context;
-
+    util::DeviceManager* deviceManager;
+    
 	int width;
 	int height;
     bool running;

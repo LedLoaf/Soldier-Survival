@@ -28,6 +28,10 @@ Application::Application(int width, int height)  {
 
     this->context = new Context();
 	this->renderWindow = new sf::RenderWindow(sf::VideoMode(width, height, 32), "Soldier: Survival");
+    
+    this->deviceManager = new util::DeviceManager();
+    this->deviceManager->setScreenWidth(width);
+    this->deviceManager->setScreenHeight(height);
 }
 
 //void Application::initResourceManager() {
@@ -79,6 +83,10 @@ void Application::display() {
 
 bool Application::isRunning() {
     return running;
+}
+
+util::DeviceManager* Application::getDeviceManager() {
+    return deviceManager;
 }
 
 }

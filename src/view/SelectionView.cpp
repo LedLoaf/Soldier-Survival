@@ -1,9 +1,11 @@
 #include <view/SelectionView.hpp>
+#include <util/Location.hpp>
 
 namespace view {
 
-SelectionView::SelectionView() {
-    selectionModel =  new SelectionViewModel();
+SelectionView::SelectionView(int xStart, int yStart, int xEnd, int yEnd) : View(xStart, yStart, xEnd, yEnd) {
+    selectionModel = new SelectionViewModel();
+    selectionModel->setViewPosition(new util::Location::Position(xStart, yStart), new util::Location::Position(xEnd, yEnd));
 }    
     
 void SelectionView::selectNextElement() {

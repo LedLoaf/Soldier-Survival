@@ -7,6 +7,8 @@
 
 #include <view/model/ImageViewModel.hpp>
 
+namespace view {
+    
 ImageViewModel::ImageViewModel() {
 }
 
@@ -14,5 +16,15 @@ ImageViewModel::ImageViewModel(const ImageViewModel& orig) {
 }
 
 ImageViewModel::~ImageViewModel() {
+}
+
+void ImageViewModel::setImagePath(std::string path) {
+   this->imagePath = path; 
+}
+
+std::string ImageViewModel::getImagePath() {
+   return this->imagePath;
+}
+
 }
 

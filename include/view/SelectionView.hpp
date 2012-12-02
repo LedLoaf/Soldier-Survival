@@ -11,7 +11,7 @@ namespace view {
 
 class SelectionView : public View {
 public:
-    SelectionView();
+    SelectionView(int xStart, int yStart, int xEnd, int yEnd);
 	void selectNextElement();
 	bool hasNextElement();
 	SelectionViewModel::SelectableElement* getSelectedElement();
