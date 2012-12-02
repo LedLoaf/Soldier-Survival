@@ -3,12 +3,13 @@
 
 #include <view/window/Window.hpp>
 #include <graphic/painter/SFMLAbstractViewPainter.hpp>
+#include <graphic/SFMLAbstractGraphicEngine.hpp>
 
 
 namespace graphic {
 namespace amazin {
 
-class SFMLAmazinGraphicEngine : SFMLAbstractGraphicEngine {
+class SFMLAmazinGraphicEngine : public SFMLAbstractGraphicEngine {
 
 public:
 	virtual ~SFMLAmazinGraphicEngine();
@@ -18,8 +19,7 @@ public:
 	void displayGraphicFromPainters();
 	void initWindowPainters(view::Window& window);
 	bool isPaintingCurrentWindow();
-	void displayGraphicFromPainters();
-	virtual SFMLAbstractViewPainter& getPainterForView(const view::View& view);
+	virtual SFMLAbstractViewPainter* getPainterForView(view::View* view);
 
 private:
 

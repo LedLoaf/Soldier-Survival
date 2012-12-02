@@ -11,8 +11,10 @@ void MainMenuWindow::initModel() {
 
 void MainMenuWindow::initUI() {
 	// x, y, width, height, model
-	selectionView = new SelectionView(100, 100, 150, 400, selectionViewModel);
-	addView(mainMenuSelectionView);
+	selectionView = new SelectionView(100, 100, 150, 400);
+    selectionView->setSelectionModel(selectionViewModel);
+    
+	addView(selectionView);
 
 
 //	mainMenuLogoPath = Application.getResourceManager().getPath(Resource.MAIN_MENU_LOGO);
@@ -23,8 +25,8 @@ void MainMenuWindow::initUI() {
 
 void MainMenuWindow::onArrowPressed(util::Key::Arrow arrow) {
 	if (arrow == util::Key::DOWN) {
-		if (selectionView.hasNextElement())
-			selectionView.selectNextElement()();
+		if (selectionView->hasNextElement())
+			selectionView->selectNextElement();
 	}
 
 
@@ -32,16 +34,18 @@ void MainMenuWindow::onArrowPressed(util::Key::Arrow arrow) {
 
 
 void MainMenuWindow::onEnterPressed() {
-	util::Action optionAction = selectionView.getSelectedElement().getAction();
-
-	switch(optionAction) {
-		case util::Action::RUN_LEVEL_SELECTION:
-			game::Application::getInstance().getGameEngine().runLevelSelection();
-			break;
-		case util::Action::RUN_EXIT:
-			game::Application::getInstance().getGameEngine().exitGame();
-			break;
-	}
+//	Util::Action optionAction = selectionView->getSelectedElement()->getAction();
+//
+//	if (optionAction == Util::RUN_LEVEL_SELECTION)
+//			game::Application::getInstance().getGameEngine()->runLevelSelection();
+//    else if(optionAction == Util::RUN_EXIT)
+//			game::Application::getInstance().getGameEngine()->exitGame();
+	
 }
+
+View::Type getType() {
+    return View::MAIN_MENU_WINDOW;
+}
+
 
 }

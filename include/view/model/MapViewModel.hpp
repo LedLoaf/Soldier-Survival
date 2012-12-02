@@ -2,7 +2,8 @@
 #ifndef MAP_VIEW_MODEL_HPP_
 #define MAP_VIEW_MODEL_HPP_
 
-#include <util/Action.hpp>
+#include <game/object/Character.hpp>
+#include <util/Util.hpp>
 #include <vector>
 #include <iostream>
 
@@ -10,20 +11,14 @@ namespace view {
 
 class MapViewModel : ViewModel {
 public:
-	void remove(util::Location::Position position, const game::object::Character& ch);
-	void remove(util::Location::Position position, const game::object::Terrain& terrain);
+	void remove(util::Location::Position position, const game::Character& ch);
+//	void remove(util::Location::Position position, const game::Terrain& terrain);
 
 
-	util::Location::Position getPositionOf(const game::object::Character& ch);
+	util::Location::Position getPositionOf(const game::Character& ch);
 
-	void put(util::Location::Position position, const game::object::Character& ch);
-	void put(util::Location::Position position, const game::object::Terrain& terrain);
-
-
-
-
-private:
-	std::vector<SelectableElement&> selectableElements;
+	void put(util::Location::Position position, const game::Character& ch);
+//	void put(util::Location::Position position, const game::object::Terrain& terrain);
 
 };
 

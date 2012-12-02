@@ -9,7 +9,7 @@
 
 namespace view {
 
-View::View() {
+View::View(int xStart, int yStart, int xEnd, int yEnd) {
 	// TODO Auto-generated constructor stub
 
 }

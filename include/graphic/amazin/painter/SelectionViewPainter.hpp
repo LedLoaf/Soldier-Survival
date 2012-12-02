@@ -1,20 +1,33 @@
 #ifndef SELECTION_VIEW_PAINTER_HPP_
 #define SELECTION_VIEW_PAINTER_HPP_
 
+#include <view/View.hpp>
+#include <view/model/SelectionViewModel.hpp>
 #include <graphic/painter/SFMLAbstractViewPainter.hpp>
+#include <map>
+
+
 
 namespace graphic {
 namespace amazin {
 
-class SelectionViewPainter : SFMLAbstractViewPainter {
+class SelectionViewPainter : public SFMLAbstractViewPainter {
 public:
-	SelectionViewPainter(view::SelectionViewModel& model);
+	SelectionViewPainter(view::SelectionViewModel* model);
+    
+    void initSelectableSprite(view::SelectionViewModel::SelectableElement& selectableElement);
+    void updateSelectableSprite(view::SelectionViewModel::SelectableElement* selectableElement); 
 
-	void init();
-	void update();
+	virtual void init();
+	virtual void update();
+    
+    virtual std::vector<sf::Sprite*> getSprites();
 
 private:
-	view::SelectionViewModel& model;
+	view::SelectionViewModel* selectionModel;
+    std::vector<view::SelectionViewModel::SelectableElement*> selectableElements;
+    
+    std::map<view::SelectionViewModel::SelectableElement*, sf::Sprite*> selectableSpritesMap;
 
 };
 

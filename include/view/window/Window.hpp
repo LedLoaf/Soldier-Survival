@@ -3,26 +3,27 @@
 
 #include <view/View.hpp>
 #include <util/DeviceManager.hpp>
-#include <list>
+#include <vector>
 #include <iostream>
 
 namespace view {
 
-class Window : view::View {
+class Window : public view::View {
 public:
-	Window() : View(0, 0, util::DeviceManager::getScreenWidth(), util::DeviceManager::getScreenHeight()) {
-	}
+	Window() : View(0, 0, util::DeviceManager::getScreenWidth(), util::DeviceManager::getScreenHeight()) {}
 
 
-	void addView(View& view);
-	std::list<View&> getViews();
+	void addView(View* view);
+	std::vector<View*> getViews();
 	bool hasSubWindow();
-	void setSubWindow(Window& window);
+	void setSubWindow(Window* window);
+	virtual Type getType() = 0;
+    
 
-private:
+protected:
 //	WindowModel model;
-	std::list<View&> views;
-	Window& subWindow;
+	std::vector<View*> views;
+	Window* subWindow;
 
 };
 

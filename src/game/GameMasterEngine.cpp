@@ -2,12 +2,14 @@
 #include <game/object/LevelDescription.hpp>
 #include <view/window/MainMenuWindow.hpp>
 
+using namespace view;
+
 namespace game {
 
 void GameMasterEngine::run() {
 	// show main menu
 	MainMenuWindow *mainMenuWindow = new MainMenuWindow();
-	context.setActiveWindow(*mainMenuWindow);
+	context->setActiveWindow(mainMenuWindow);
 
 	// graphic engine ciagle pyta sie o aktywne okno kontekstu i tylko takie rysuje
 }
@@ -24,23 +26,23 @@ void GameMasterEngine::runLevelSelection() {
 void GameMasterEngine::runLevel(LevelDescription& levelDescription) {
 	// tworzone jest nowe okno, ktore jest rysowane.
 	// w GamePlayWindow mapGenerator generuje poziom z informacji w obiekcie LevelDescription
-
-	// okno wyboru levelu jest niszczone
-	~context->getActiveWindow();
-
-	context->setActiveWindow(new GamePlayWindow(levelDescription));
+//
+//	// okno wyboru levelu jest niszczone
+//	~context->getActiveWindow();
+//
+//	context->setActiveWindow(new GamePlayWindow(levelDescription));
 }
 
 
 void GameMasterEngine::pauseLevel() {
 	// pausa na mapie.
 	// pausa na czasie gry
-
-	PauseWindow pauseWindow = new PauseWindow(); 
-	// w tym momencie okno jest juz narysowane nad mapa, hudem, itd.
-	pauseWindow.setParent(context->getActiveWindow()); // GamePlayWindow;
-
-	context->setActiveWindow(pauseWindow);
+//
+//	PauseWindow pauseWindow = new PauseWindow(); 
+//	// w tym momencie okno jest juz narysowane nad mapa, hudem, itd.
+//	pauseWindow.setParent(context->getActiveWindow()); // GamePlayWindow;
+//
+//	context->setActiveWindow(pauseWindow);
 }
 
 void GameMasterEngine::resumeLevel() {
@@ -52,13 +54,13 @@ void GameMasterEngine::resumeLevel() {
 
 // Wywolywana np. po nacisnieciu 'powrot do gry' w oknie dialogowym przedstawiajacym pause
 void GameMasterEngine::returnToGame() {
-	Window activeWindow = context->getActiveWindow();
-
-	Window parentWindow = activeWindow->getParent(); // tutaj teraz bedzie np. GamePlayWindow
-
-	~activeWindow(); // niszcze okno dialogowe przedstawiajace pause
-
-	context->setActiveWindow(parentWindow);
+//	Window activeWindow = context->getActiveWindow();
+//
+//	Window parentWindow = activeWindow->getParent(); // tutaj teraz bedzie np. GamePlayWindow
+//
+//	~activeWindow(); // niszcze okno dialogowe przedstawiajace pause
+//
+//	context->setActiveWindow(parentWindow);
 }
 
 }

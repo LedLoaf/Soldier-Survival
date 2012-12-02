@@ -2,7 +2,11 @@
 #ifndef SFML_EVENT_HANDLER_HPP_
 #define SFML_EVENT_HANDLER_HPP_
 
+#include <cstddef> //do poprawnej kompilacji SFML //(NULL)
+
+
 #include <game/IEventHandler.hpp>
+#include <SFML/Graphics/RenderWindow.hpp>
 
 namespace game {
 

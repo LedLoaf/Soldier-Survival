@@ -13,7 +13,8 @@ class Application {
 
 public:
 	static Application* create(int width, int height);
-	static Application& Application::getInstance();
+	static Application& getInstance();
+    
 	void run();
 	bool isRunning();
 	void setEventHandler(SFMLEventHandler* eventHandler);
@@ -25,17 +26,22 @@ public:
 	void processEvent();
 	void display();
 
-	Context& getContext();
+	Context* getContext();
 
 private:
 	static Application* instance;
 
 
 	sf::RenderWindow* renderWindow;
-	Context& context;
+    SFMLEventHandler* eventHandler;
+    GameMasterEngine* gameEngine;
+    graphic::SFMLAbstractGraphicEngine* graphicEngine;
+    
+    Context* context;
 
 	int width;
 	int height;
+    bool running;
 
 	Application(int width, int height);
 

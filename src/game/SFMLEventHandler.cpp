@@ -1,4 +1,5 @@
 #include <game/SFMLEventHandler.hpp>
+#include <game/Application.hpp>
 
 using namespace game;
 

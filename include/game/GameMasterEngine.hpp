@@ -21,7 +21,7 @@ public:
 
 private:
 	void returnToGame();
-	Context& context;
+	Context* context;
 
 };
 

@@ -4,13 +4,14 @@
 #include <iostream>
 #include <list>
 
+#include <view/View.hpp>
 #include <view/window/Window.hpp>
 #include <view/SelectionView.hpp>
 #include <util/Key.hpp>
 
 namespace view {
 
-class MainMenuWindow : Window {
+class MainMenuWindow : public Window {
 public:
 	MainMenuWindow();
 	void initModel();
@@ -19,11 +20,12 @@ public:
 	void onArrowPressed(util::Key::Arrow arrow);
 
 	void onEnterPressed() ;
+	virtual Type getType();
 
 
 private:
-	SelectionViewModel& selectionViewModel;
-	SelectionView& selectionView;
+	SelectionViewModel* selectionViewModel;
+	SelectionView* selectionView;
 
 };
 

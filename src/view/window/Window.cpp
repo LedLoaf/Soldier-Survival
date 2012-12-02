@@ -1,13 +1,14 @@
 #include <view/window/Window.hpp>
+#include <view/View.hpp>
 #include <list>
 
 namespace view {
 
-void Window::addView(View& view) {
+void Window::addView(View* view) {
 	views.push_back(view);
 }
 
-std::list<View&> Window::getViews() {
+std::vector<View*> Window::getViews() {
 	return views;
 }
 
@@ -18,7 +19,7 @@ bool Window::hasSubWindow() {
 		return false;
 }
 
-void Window::setSubWindow(Window& window) {
+void Window::setSubWindow(Window* window) {
 	subWindow = window;
 }
 }

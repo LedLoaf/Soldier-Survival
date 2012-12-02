@@ -1,10 +1,12 @@
 #include <graphic/SFMLAbstractGraphicEngine.hpp>
 #include <SFML/Graphics/Sprite.hpp>
+#include <graphic/painter/SFMLAbstractViewPainter.hpp>
 
 
-using namespace view;
+namespace graphic {
 
-
-std::list<sf::Sprite&> AbstractViewPainter::getSprites() {
+std::vector<sf::Sprite*> SFMLAbstractViewPainter::getSprites() {
 	return sprites;
+}
+
 }

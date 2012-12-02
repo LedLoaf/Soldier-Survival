@@ -5,21 +5,26 @@
 #include <view/View.hpp>
 #include <graphic/painter/SFMLAbstractViewPainter.hpp>
 
+#include <SFML/Graphics/RenderWindow.hpp>
+
 namespace graphic {
 
 class SFMLAbstractGraphicEngine {
 
 public:
+    void setRenderWindow(sf::RenderWindow* renderWindow);
+    
 	void display();
 	void updatePainters();
 	void displayGraphicFromPainters();
-	void initWindowPainters(view::Window& window);
+	void initWindowPainters(view::Window* window);
 	bool isPaintingCurrentWindow();
-	void displayGraphicFromPainters();
-	virtual SFMLAbstractViewPainter& getPainterForView(const view::View& view) = 0;
+	virtual SFMLAbstractViewPainter* getPainterForView(view::View* view) = 0;
 
 private:
-
+    std::vector<SFMLAbstractViewPainter*> painters;
+    view::Window* currentWindowPainting;
+    sf::RenderWindow* renderWindow;
 
 };
 

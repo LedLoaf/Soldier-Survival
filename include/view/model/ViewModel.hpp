@@ -1,17 +1,16 @@
-/*
- * SelectionViewModel.hpp
- *
- *  Created on: Nov 20, 2012
- *      Author: yet1
- */
-
 #ifndef VIEW_MODEL_HPP
 #define VIEW_MODEL_HPP
+
+#include <util/Location.hpp>
 
 
 namespace view {
 
 class ViewModel {
+public:
+    util::Location::Position getViewPosition();
+    void setViewPosition(util::Location::Position position);
+};
 
-}; /* namespace view */
+}
 #endif

@@ -15,11 +15,10 @@ namespace view {
 class View {
 public:
 	enum Type {
-		SELECTION_VIEW, IMAGE_VIEW
+		SELECTION_VIEW, IMAGE_VIEW, MAIN_MENU_WINDOW
 	};
 
 	View(int xStart, int yStart, int xEnd, int yEnd);
-	View(int xStart, int yStart, int xEnd, int yEnd, ViewModel& viewModel);
 	virtual ~View();
 	virtual Type getType() = 0;
 

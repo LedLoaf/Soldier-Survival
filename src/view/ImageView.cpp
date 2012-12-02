@@ -1,10 +1,9 @@
-class ImageView : View {
-private:
-	ImageViewModel model;
+#include <view/ImageView.hpp>
 
-public:
-	ImageView(ImageViewModel& model) {
-		this.model = model;
-	}
-	
+namespace view {
+
+void ImageView::setModel(ImageViewModel& model) {
+	this->imageViewModel = model;
+}
+
 }

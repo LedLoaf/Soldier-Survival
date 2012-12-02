@@ -1,5 +1,8 @@
 #include <view/View.hpp>
-
+#include <view/model/MapViewModel.hpp>
+#include <game/object/LevelDescription.hpp>
+#include <game/object/Character.hpp>
+#include <util/Location.hpp>
 
 namespace view {
 
@@ -10,11 +13,10 @@ private:
 
 public:
 
-	MapView(LevelDescription& levelDescription);
-
-	void moveCharacter(Character& ch, vector);
-	bool canMoveCharacter(vector);
-	void generateMapModel(LevelDescription& levelDescription);
+	void generateLevel(game::LevelDescription& levelDescription);
+	void moveCharacter(game::Character& ch, util::Location::Vector vector);
+	bool canMoveCharacter(util::Location::Vector vector);
+	void generateMapModel(game::LevelDescription& levelDescription);
 	
 };
 

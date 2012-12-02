@@ -1,4 +1,5 @@
 #include <view/View.hpp>
+#include <view/MapView.hpp>
 #include <game/object/LevelDescription.hpp>
 #include <game/object/Character.hpp>
 
@@ -6,23 +7,23 @@
 
 namespace view {
 
-MapView::MapView(game::LevelDescription& levelDescription) {
+void MapView::generateLevel(game::LevelDescription& levelDescription) {
 	generateMapModel(levelDescription);
 }
 
 void MapView::moveCharacter(game::Character& ch, util::Location::Vector vector) {
 	// getPositionOf() jest generyczna - mozna tam podac np. referencje do danego kafeleku rzeki
-	util::Location::Position position = mapModel->getPositionOf(ch);
-
-	mapModel.removeCharacterFrom(position);
+//	util::Location::Position position = mapModel.getPositionOf(ch);
+//
+//	mapModel.remove(position, ch);
 
 	// tutaj sobie przeladujemy '+' w position, zeby zwrocil nam nowa pozycje przesunieta o dany wektor w stosunku
 	// do starej
-	mapModel.put(ch, position + vector);
+//	mapModel.put(ch, position + vector);
 }
 
 
-bool MapView::canMoveCharacter(vector) {
+bool canMoveCharacter(util::Location::Vector vector) {
 	// MapView gra role MapHandlera
 	// sprawdzam w tablicy z mapa czy jest taka mozliwosc
 }
@@ -40,7 +41,7 @@ void MapView::generateMapModel(game::LevelDescription& levelDescription) {
 	 */
 
 
-	mapModel.add(x, y, new Enemy(this))
+//	mapModel.add(x, y, new Enemy(this))
 }
 
 }
