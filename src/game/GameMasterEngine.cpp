@@ -10,8 +10,6 @@ void GameMasterEngine::run() {
 	// show main menu
 	MainMenuWindow *mainMenuWindow = new MainMenuWindow();
 	context->setActiveWindow(mainMenuWindow);
-
-	// graphic engine ciagle pyta sie o aktywne okno kontekstu i tylko takie rysuje
 }
 
 void GameMasterEngine::runLevelSelection() {

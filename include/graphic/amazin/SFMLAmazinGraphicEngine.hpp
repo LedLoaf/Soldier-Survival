@@ -9,10 +9,10 @@
 namespace graphic {
 namespace amazin {
 
-class SFMLAmazinGraphicEngine : public SFMLAbstractGraphicEngine {
+class SFMLAmazinGraphicEngine : public graphic::SFMLAbstractGraphicEngine {
 
 public:
-	virtual ~SFMLAmazinGraphicEngine();
+//	virtual ~SFMLAmazinGraphicEngine();
 
 	void display();
 	void updatePainters();

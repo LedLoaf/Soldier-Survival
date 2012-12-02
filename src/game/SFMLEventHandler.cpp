@@ -1,6 +1,8 @@
 #include <game/SFMLEventHandler.hpp>
 #include <game/Application.hpp>
 
+#include "util/Key.hpp"
+
 using namespace game;
 
 void SFMLEventHandler::processEvent() {
@@ -11,7 +13,7 @@ void SFMLEventHandler::processEvent() {
 
 			switch(Event.Key.Code) {
 				case sf::Key::Left :
-					Application::getInstance().getGameEngine().onLeftArrowPressed();
+					Application::getInstance().getContext()->getActiveWindow()->onArrowPressed(util::Key::LEFT);
 					break;
 			}
 	}

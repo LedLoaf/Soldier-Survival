@@ -35,8 +35,16 @@ void SelectionViewModel::SelectableElement::setUnselected() {
 	selected = false;
 }
 
+bool SelectionViewModel::SelectableElement::isSelected() {
+    return selected;
+}
+
 void SelectionViewModel::SelectableElement::setAction(Util::Action action) {
 	this->action = action;
+}
+
+SelectionViewModel::SelectableElement::SelectableElement(Util::Action action) {
+    this->action = action;
 }
 
 Util::Action SelectionViewModel::SelectableElement::getAction() {

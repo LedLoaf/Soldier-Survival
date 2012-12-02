@@ -33,6 +33,8 @@ public:
 
 	class SelectableElement {
 	public:
+        SelectableElement(Util::Action action);
+        
         void setAction(Util::Action action);
 		Util::Action getAction();
 		void setUnselected();

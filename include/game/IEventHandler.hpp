@@ -3,7 +3,7 @@
 
 class IEventHandler {
 public:
-    virtual ~IEventHandler();
+//    virtual ~IEventHandler();
     virtual void processEvent() = 0;
 };
 

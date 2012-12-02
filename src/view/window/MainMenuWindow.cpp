@@ -3,12 +3,18 @@
 #include <view/SelectionView.hpp>
 #include <game/Application.hpp>
 
+#include <util/Util.hpp>
+
 namespace view {
+
+MainMenuWindow::MainMenuWindow() : Window() {
+    initUI();
+}
 
 void MainMenuWindow::initUI() {
 	selectionView = new SelectionView();
-    selectionView.addElement(new SelectionViewModel::SelectableElement(Util::Action::RUN_LEVEL_SELECTION));
-    selectionView.addElement(new SelectionViewModel::SelectableElement(Util::Action::RUN_EXIT));
+    selectionView->addElement(new SelectionViewModel::SelectableElement(Util::RUN_LEVEL_SELECTION));
+    selectionView->addElement(new SelectionViewModel::SelectableElement(Util::RUN_EXIT));
     
     
 	addView(selectionView);
@@ -40,7 +46,7 @@ void MainMenuWindow::onEnterPressed() {
 	
 }
 
-View::Type getType() {
+View::Type MainMenuWindow::getType() {
     return View::MAIN_MENU_WINDOW;
 }
 

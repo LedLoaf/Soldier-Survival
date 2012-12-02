@@ -5,6 +5,8 @@
 #include <vector>
 #include <map>
 
+#include <SFML/Graphics/Sprite.hpp>
+
 namespace graphic {
 namespace amazin {
 
@@ -54,7 +56,7 @@ void SelectionViewPainter::init() {
     int elementWidth, elementHeight;
     int viewXPosition, viewYPosition;
     
-    if (parentViewType == view::View::Type::MAIN_MENU_WINDOW) {
+    if (parentViewType == view::View::MAIN_MENU_WINDOW) {
         viewXPosition = 100;
         viewYPosition = 100;
         

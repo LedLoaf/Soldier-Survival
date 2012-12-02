@@ -1,11 +1,12 @@
 #include <game/Application.hpp>
 #include <game/IEventHandler.hpp>
+
 #include <SFML/Graphics.hpp>
 
-#include <SFML/Graphics/RenderWindow.hpp>
-
 namespace game {
-    
+
+Application* Application::instance;
+
 
 Application* Application::create(int width, int height) {
 	Application::instance = new Application(width, height);
@@ -25,7 +26,7 @@ Application::Application(int width, int height)  {
 	this->width = width;
 	this->height = height;
 
-//    this->context = new Context();
+    this->context = new Context();
 	this->renderWindow = new sf::RenderWindow(sf::VideoMode(width, height, 32), "Soldier: Survival");
 }
 
@@ -50,6 +51,10 @@ void Application::setGameEngine(GameMasterEngine* gameEngine) {
     this->gameEngine = gameEngine;
 }
 
+GameMasterEngine& Application::getGameEngine() {
+    return *gameEngine;
+}
+
 
 void Application::processEvent() {
 	this->eventHandler->processEvent();
@@ -61,6 +66,10 @@ Context* Application::getContext() {
 
 void Application::run() {
     running = true;
+}
+
+void Application::display() {
+    graphicEngine->display();
 }
 
 bool Application::isRunning() {

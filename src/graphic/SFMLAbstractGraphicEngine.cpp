@@ -37,7 +37,7 @@ void SFMLAbstractGraphicEngine::initWindowPainters(Window* window) {
     
     std::vector<view::View*> views = window->getViews();
     for(std::vector<view::View*>::iterator it = views.begin(); it != views.end(); ++it) {
-        painters.push_back(getPainterForView(*it));
+        painters.push_back(getPainterForView(*it, window->getType()));
     }
 }
 

@@ -12,7 +12,7 @@ void SelectionView::selectNextElement() {
 }
 
 bool SelectionView::hasNextElement() {
-	if (positionOfSelectedElement < selectionModel->getSize())
+	if (positionOfSelectedElement < selectionModel->getSelectableElements().size())
 		return true;
 	else
 		return false;
