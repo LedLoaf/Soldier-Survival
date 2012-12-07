@@ -16,20 +16,23 @@ MainMenuWindow::MainMenuWindow() : Window(0, 0, game::Application::getInstance()
 
 
 void MainMenuWindow::initUI() {
+//    std::string logoPath =
+   
+	addView(new ImageView(200, 10, 150, 200, util::Resource::MAIN_MENU_LOGO));    
+    
+    
 	selectionView = new SelectionView(200, 200, 200, 500);
     selectionView->addElement(new SelectionViewModel::SelectableElement(Util::RUN_LEVEL_SELECTION));
     selectionView->addElement(new SelectionViewModel::SelectableElement(Util::RUN_ABOUT));
-
     selectionView->addElement(new SelectionViewModel::SelectableElement(Util::RUN_EXIT));
     
     selectionView->selectElement(0);
+    
 	addView(selectionView);
+    
 
 
-//    
-//    std::string logoPath = game::Application::getInstance().getContext()->getResourceManager()->getPath(util::Resource::MAIN_MENU_LOGO);
-//   
-//	addView(new ImageView(100, 0, 150, 200, logoPath));
+
 }
 
 
@@ -47,12 +50,12 @@ void MainMenuWindow::onArrowPressed(util::Key::Arrow arrow) {
 
 
 void MainMenuWindow::onEnterPressed() {
-//	Util::Action optionAction = selectionView->getSelectedElement()->getAction();
-//
-//	if (optionAction == Util::RUN_LEVEL_SELECTION)
-//			game::Application::getInstance().getGameEngine()->runLevelSelection();
-//    else if(optionAction == Util::RUN_EXIT)
-//			game::Application::getInstance().getGameEngine()->exitGame();
+	Util::Action optionAction = selectionView->getSelectedElement()->getAction();
+
+	if (optionAction == Util::RUN_LEVEL_SELECTION)
+			game::Application::getInstance().getGameEngine()->runLevelSelection();
+    else if(optionAction == Util::RUN_EXIT)
+			game::Application::getInstance().getGameEngine()->onExitGameRequest();
 	
 }
 

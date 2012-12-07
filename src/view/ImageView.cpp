@@ -1,12 +1,13 @@
+#include <game/Application.hpp>
 #include <view/ImageView.hpp>
 #include <string>
 
+
 namespace view {
 
-ImageView::ImageView(int xStart, int yStart, int xEnd, int yEnd, std::string imagePath) : View(xStart, yStart, xEnd, yEnd) {
+ImageView::ImageView(int xStart, int yStart, int xEnd, int yEnd, util::Resource::Type resource) : View(xStart, yStart, xEnd, yEnd) {
     imageViewModel = new ImageViewModel();
     imageViewModel->setViewPosition(new util::Location::Position(xStart, yStart), new util::Location::Position(xEnd, yEnd));
-    imageViewModel->setImagePath(imagePath);
 }
 
 void ImageView::setModel(ImageViewModel* model) {

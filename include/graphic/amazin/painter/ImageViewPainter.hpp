@@ -4,7 +4,6 @@
 #include <view/View.hpp>
 #include <view/model/ImageViewModel.hpp>
 #include <graphic/painter/SFMLAbstractViewPainter.hpp>
-#include <map>
 
 
 namespace graphic {

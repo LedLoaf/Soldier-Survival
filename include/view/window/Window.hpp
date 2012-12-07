@@ -19,6 +19,7 @@ public:
 	void setSubWindow(Window* window);
 	virtual Type getType() = 0;
 	virtual void onArrowPressed(util::Key::Arrow arrow) = 0;
+	virtual void onEnterPressed() = 0;
     
     
 

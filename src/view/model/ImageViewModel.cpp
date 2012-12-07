@@ -18,12 +18,12 @@ ImageViewModel::ImageViewModel(const ImageViewModel& orig) {
 ImageViewModel::~ImageViewModel() {
 }
 
-void ImageViewModel::setImagePath(std::string path) {
-   this->imagePath = path; 
+void ImageViewModel::setImageResource(util::Resource::Type resource) {
+   this->imageResource = resource; 
 }
 
-std::string ImageViewModel::getImagePath() {
-   return this->imagePath;
+util::Resource::Type ImageViewModel::getImageResource() {
+   return this->imageResource;
 }
 
 }

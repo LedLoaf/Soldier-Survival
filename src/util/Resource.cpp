@@ -14,11 +14,11 @@ Resource* Resource::getResourceManagerFor(view::View::Type windowType) {
 }
 
 
-std::string Resource::MainMenuResourceManager::getPath(Resource::Path resourcePath) {
+std::string Resource::MainMenuResourceManager::getPath(Resource::Type resourcePath) {
 
 }
 
-std::string Resource::GamePlayResourceManager::getPath(Resource::Path resourcePath) {
+std::string Resource::GamePlayResourceManager::getPath(Resource::Type resourcePath) {
 
 }
 

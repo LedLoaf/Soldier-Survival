@@ -13,11 +13,11 @@ public:
     class MainMenuResourceManager;
     class GamePlayResourceManager;
     
-    enum Path {
+    enum Type {
         MAIN_MENU_LOGO
     };
     
-    virtual std::string getPath(Resource::Path resourcePath) = 0;
+    virtual std::string getPath(Resource::Type resourcePath) = 0;
     
     static Resource* getResourceManagerFor(view::View::Type windowType);
    
@@ -31,14 +31,14 @@ private:
 
 class Resource::MainMenuResourceManager : Resource {
 public:
-    virtual std::string getPath(Resource::Path resourcePath);
+    virtual std::string getPath(Resource::Type resourcePath);
 
 };    
 
 
 class Resource::GamePlayResourceManager : Resource {
 public:
-    virtual std::string getPath(Resource::Path resourcePath);
+    virtual std::string getPath(Resource::Type resourcePath);
 
 };     
 

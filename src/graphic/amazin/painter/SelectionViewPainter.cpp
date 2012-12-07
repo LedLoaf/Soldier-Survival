@@ -42,10 +42,10 @@ void SelectionViewPainter::init() {
     }
     
     
-    sf::Font font;
-    if (!font.LoadFromFile(fontPath, 50)) {
-        // throw exception. error
-    }    
+//    sf::Font font;
+//    if (!font.LoadFromFile(fontPath, 50)) {
+//        // throw exception. error
+//    }    
         
     for (int i = 0; i < selectableElements.size(); i++) {
         sf::Sprite* sprite = new sf::Sprite();

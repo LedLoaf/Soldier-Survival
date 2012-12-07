@@ -9,6 +9,7 @@
 #define	IMAGEVIEWMODEL_HPP
 #include <string>
 #include <view/model/ViewModel.hpp>
+#include <util/Resource.hpp>
 
 namespace view {
     
@@ -19,11 +20,11 @@ public:
     ImageViewModel(const ImageViewModel& orig);
     virtual ~ImageViewModel();
 
-    void setImagePath(std::string path);
-    std::string getImagePath();
+    void setImageResource(util::Resource::Type resource);
+    util::Resource::Type getImageResource();
         
 private:
-    std::string imagePath; 
+    util::Resource::Type imageResource; 
 };
 
 }

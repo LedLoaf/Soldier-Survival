@@ -23,7 +23,11 @@ void SFMLEventHandler::processEvent() {
 					break;        
 				case sf::Key::Down :
 					Application::getInstance().getContext()->getActiveWindow()->onArrowPressed(util::Key::DOWN);
-					break;                                  
+					break;         
+                    
+				case sf::Key::Return :
+					Application::getInstance().getContext()->getActiveWindow()->onEnterPressed();
+					break;                        
 			}
             
         if (Event.Type == sf::Event::Closed)
