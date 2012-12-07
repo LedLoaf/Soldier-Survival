@@ -21,6 +21,8 @@ public:
 	virtual void init();
 	virtual void update();
     
+    std::string getTextFor(Util::Action action);
+    
 private:
 	view::SelectionViewModel* selectionModel;
     std::vector<view::SelectionViewModel::SelectableElement*> selectableElements;

@@ -4,6 +4,7 @@
 #include <graphic/SFMLAbstractGraphicEngine.hpp>
 
 #include <SFML/Graphics/RenderWindow.hpp>
+#include <SFML/Graphics/Drawable.hpp>
 
 
 #include <game/Application.hpp>
@@ -52,18 +53,15 @@ bool SFMLAbstractGraphicEngine::isPaintingCurrentWindow() {
 
 
 void SFMLAbstractGraphicEngine::displayGraphicFromPainters() {
-    std::vector<sf::Sprite*> sprites;
+    std::vector<sf::Drawable*> drawables;
   
 
     for(std::vector<SFMLAbstractViewPainter*>::iterator it = painters.begin(); it != painters.end(); ++it) {
         
-        sprites = (*it)->getSprites();
-        int no = std::distance(sprites.begin(), sprites.end());
+        drawables = (*it)->getDrawables();        
+        for(int i = 0; i < drawables.size(); i++)
+            renderWindow->Draw(*drawables[i]);
         
-//        for(std::vector<sf::Sprite*>::iterator spriteIt = sprites.begin(); spriteIt != sprites.end(); spriteIt++) {
-        for(int i = 0; i < sprites.size(); i++) {
-            renderWindow->Draw(*sprites[i]);
-        }    
     }
     
     renderWindow->Display();

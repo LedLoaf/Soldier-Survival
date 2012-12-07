@@ -13,12 +13,10 @@ public:
 	virtual void init() = 0;
 	virtual void update() = 0;
 
-	std::vector<sf::Sprite*> getSprites();
-
+	std::vector<sf::Drawable*> getDrawables();
 
 protected:
-//	std::map<int, sf::Sprite&> sprites;
-    std::vector<sf::Sprite*> sprites;
+    std::vector<sf::Drawable*> drawables;
     view::View::Type parentViewType;
 };
 

@@ -24,7 +24,7 @@ void ImageViewPainter::init() {
     sprite->SetImage(image);
 
     
-    sprites.push_back(sprite);
+    drawables.push_back(sprite);
 }
 
 
