@@ -6,15 +6,30 @@ namespace view {
 SelectionView::SelectionView(int xStart, int yStart, int xEnd, int yEnd) : View(xStart, yStart, xEnd, yEnd) {
     selectionModel = new SelectionViewModel();
     selectionModel->setViewPosition(new util::Location::Position(xStart, yStart), new util::Location::Position(xEnd, yEnd));
+    
 }    
     
+void SelectionView::selectPreviousElement() {
+	selectionModel->setUnselected(positionOfSelectedElement);
+	selectionModel->setSelected(--positionOfSelectedElement);
+}
+
+bool SelectionView::hasPreviousElement() {
+	if (positionOfSelectedElement - 1 >= 0)
+		return true;
+	else
+		return false;
+}
+
 void SelectionView::selectNextElement() {
 	selectionModel->setUnselected(positionOfSelectedElement);
 	selectionModel->setSelected(++positionOfSelectedElement);
 }
 
 bool SelectionView::hasNextElement() {
-	if (positionOfSelectedElement < selectionModel->getSelectableElements().size())
+    int size = selectionModel->getSelectableElements().size();
+    
+	if (positionOfSelectedElement < selectionModel->getSelectableElements().size() - 1)
 		return true;
 	else
 		return false;
@@ -39,6 +54,12 @@ SelectionViewModel::SelectableElement* SelectionView::getSelectedElement() {
 
 void SelectionView::addElement(SelectionViewModel::SelectableElement* element) {
     selectionModel->addElement(element);
+}
+
+void SelectionView::selectElement(int pos) {
+//    TODO: rzucac wyjatek jezeli pos > liczba elementow
+    if (pos < selectionModel->getSelectableElements().size())
+        selectionModel->setSelected(pos);
 }
 
 

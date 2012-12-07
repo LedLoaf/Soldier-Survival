@@ -21,8 +21,6 @@ public:
 	virtual void init();
 	virtual void update();
     
-    virtual std::vector<sf::Sprite*> getSprites();
-
 private:
 	view::SelectionViewModel* selectionModel;
     std::vector<view::SelectionViewModel::SelectableElement*> selectableElements;

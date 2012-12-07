@@ -15,10 +15,19 @@ void SFMLEventHandler::processEvent() {
 				case sf::Key::Left :
 					Application::getInstance().getContext()->getActiveWindow()->onArrowPressed(util::Key::LEFT);
 					break;
+				case sf::Key::Right :
+					Application::getInstance().getContext()->getActiveWindow()->onArrowPressed(util::Key::RIGHT);
+					break;      
+				case sf::Key::Up :
+					Application::getInstance().getContext()->getActiveWindow()->onArrowPressed(util::Key::UP);
+					break;        
+				case sf::Key::Down :
+					Application::getInstance().getContext()->getActiveWindow()->onArrowPressed(util::Key::DOWN);
+					break;                                  
 			}
             
         if (Event.Type == sf::Event::Closed)
-                Application::getInstance().getRenderWinow()->Close();
+                Application::getInstance().getGameEngine()->onExitGameRequest();
 	}
 
 }

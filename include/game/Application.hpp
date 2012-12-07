@@ -17,11 +17,13 @@ public:
     
 	void run();
 	bool isRunning();
+    void exit();
+    
 	void setEventHandler(SFMLEventHandler* eventHandler);
 	void setGameEngine(GameMasterEngine* gameEngine);
 	void setGraphicEngine(graphic::SFMLAbstractGraphicEngine* graphicEngine);
 
-	GameMasterEngine& getGameEngine();
+	GameMasterEngine* getGameEngine();
 
     sf::RenderWindow* getRenderWinow();
     

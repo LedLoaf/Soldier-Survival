@@ -6,7 +6,7 @@
 class Util {
 public:
     enum Action {
-        RUN_LEVEL_SELECTION, RUN_EXIT
+        RUN_LEVEL_SELECTION, RUN_ABOUT, RUN_EXIT
     };       
 };
  /* namespace util */

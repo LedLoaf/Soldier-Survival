@@ -5,8 +5,7 @@
 #include <game/Application.hpp>
 
 #include <util/Util.hpp>
-
-#include "util/Resource.hpp"
+#include <util/Resource.hpp>
 
 namespace view {
 
@@ -17,23 +16,28 @@ MainMenuWindow::MainMenuWindow() : Window(0, 0, game::Application::getInstance()
 
 
 void MainMenuWindow::initUI() {
-	selectionView = new SelectionView(100, 100, 200, 500);
+	selectionView = new SelectionView(200, 200, 200, 500);
     selectionView->addElement(new SelectionViewModel::SelectableElement(Util::RUN_LEVEL_SELECTION));
+    selectionView->addElement(new SelectionViewModel::SelectableElement(Util::RUN_ABOUT));
+
     selectionView->addElement(new SelectionViewModel::SelectableElement(Util::RUN_EXIT));
     
-    
+    selectionView->selectElement(0);
 	addView(selectionView);
 
 
-    
-    std::string logoPath = game::Application::getInstance().getContext()->getResourceManager()->getPath(util::Resource::MAIN_MENU_LOGO);
-   
-	addView(new ImageView(100, 0, 150, 200, logoPath));
+//    
+//    std::string logoPath = game::Application::getInstance().getContext()->getResourceManager()->getPath(util::Resource::MAIN_MENU_LOGO);
+//   
+//	addView(new ImageView(100, 0, 150, 200, logoPath));
 }
 
 
 void MainMenuWindow::onArrowPressed(util::Key::Arrow arrow) {
-	if (arrow == util::Key::DOWN) {
+	if (arrow == util::Key::UP) {
+		if (selectionView->hasPreviousElement())
+			selectionView->selectPreviousElement();
+	} else if (arrow == util::Key::DOWN) {
 		if (selectionView->hasNextElement())
 			selectionView->selectNextElement();
 	}

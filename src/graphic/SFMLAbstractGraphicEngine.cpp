@@ -17,7 +17,7 @@ void SFMLAbstractGraphicEngine::display() {
 	updatePainters();
 
 	//  display
-	displayGraphicFromPainters();
+	displayGraphicFromPainters();    
 }
 
 
@@ -39,6 +39,8 @@ void SFMLAbstractGraphicEngine::initWindowPainters(Window* window) {
     for(std::vector<view::View*>::iterator it = views.begin(); it != views.end(); ++it) {
         painters.push_back(getPainterForView(*it, window->getType()));
     }
+    
+    currentWindowPainting = window;
 }
 
 
@@ -51,14 +53,20 @@ bool SFMLAbstractGraphicEngine::isPaintingCurrentWindow() {
 
 void SFMLAbstractGraphicEngine::displayGraphicFromPainters() {
     std::vector<sf::Sprite*> sprites;
-    
+  
+
     for(std::vector<SFMLAbstractViewPainter*>::iterator it = painters.begin(); it != painters.end(); ++it) {
         
         sprites = (*it)->getSprites();
-        for(std::vector<sf::Sprite*>::iterator spriteIt = sprites.begin(); spriteIt != sprites.end(); ++spriteIt) {
-            renderWindow->Draw(**spriteIt);
+        int no = std::distance(sprites.begin(), sprites.end());
+        
+//        for(std::vector<sf::Sprite*>::iterator spriteIt = sprites.begin(); spriteIt != sprites.end(); spriteIt++) {
+        for(int i = 0; i < sprites.size(); i++) {
+            renderWindow->Draw(*sprites[i]);
         }    
     }
+    
+    renderWindow->Display();
 }
 
 void SFMLAbstractGraphicEngine::setRenderWindow(sf::RenderWindow* renderWindow) {

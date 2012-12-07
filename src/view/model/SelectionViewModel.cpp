@@ -45,6 +45,7 @@ void SelectionViewModel::SelectableElement::setAction(Util::Action action) {
 
 SelectionViewModel::SelectableElement::SelectableElement(Util::Action action) {
     this->action = action;
+    this->selected = false;
 }
 
 Util::Action SelectionViewModel::SelectableElement::getAction() {

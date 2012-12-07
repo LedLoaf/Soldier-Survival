@@ -14,7 +14,7 @@ GamePlayWindow::GamePlayWindow(int xStart, int yStart, int xEnd, int yEnd, game:
     
 //		this.miniMapWindow = new MiniMapWindow();
 
-//		this.player = mapHandler->getPlayer();
+//      this.player = mapHandler->getPlayer();
 }
 
 void GamePlayWindow::onEnterPressed() {
@@ -22,8 +22,8 @@ void GamePlayWindow::onEnterPressed() {
 
 
 void GamePlayWindow::onArrowPressed(util::Key::Arrow arrow) {
-    
-    
+//    
+//    
 //	if (hasSubWindow()) {
 //		subWindow->onArrowPressed(arrow);
 //

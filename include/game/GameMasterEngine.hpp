@@ -17,11 +17,10 @@ public:
 	void resumeLevel();
 	void onLeftArrowPressed();
 
-	void exitGame();
-
+    void onExitGameRequest();
+    
 private:
 	void returnToGame();
-	Context* context;
 
 };
 

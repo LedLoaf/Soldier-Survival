@@ -6,7 +6,7 @@ namespace util {
 class Key {
 public:
 	enum Arrow {
-		LEFT, RIGT, TOP, DOWN
+		LEFT, RIGHT, UP, DOWN
 	};
 
 };

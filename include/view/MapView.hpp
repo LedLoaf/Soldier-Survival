@@ -16,11 +16,12 @@ public:
     virtual Type getType();
 
 	void generateLevel(game::LevelDescription* levelDescription);
+    
 	void moveCharacter(game::Character& ch, util::Location::Vector vector);
+    
 	bool canMoveCharacter(util::Location::Vector vector);
     
 	void generateMapModel(game::LevelDescription* levelDescription);
-	
 };
 
 }

@@ -20,57 +20,26 @@ SelectionViewPainter::SelectionViewPainter(view::SelectionViewModel* model, view
 	init();
 }
 
-void SelectionViewPainter::initSelectableSprite(view::SelectionViewModel::SelectableElement& selectableElement) {
-//	sprites.insert(std::pair<int, Sprite&>(selectableElement.getId(), new sf::Sprite(selectableElement));
-    
-//    sf::Sprite* sprite = new sf::Sprite();
-//    sprite.Resize(selectionModel->getElementWidth(), selectionModel->getElementHeight());
-//    sprite->SetX(selectionModel->getViewPosition().getX());
-//    sprite->SetY(selectionModel->getViewPosition().getY());
-//    sprite->SetColor(sf::Color::Green);
-//    
-//    selectableSpritesMap.insert(std::pair<view::SelectionViewModel::SelectableElement*, sf::Sprite*>(selectableElement, sprite));
-}
-
-void SelectionViewPainter::updateSelectableSprite(view::SelectionViewModel::SelectableElement* selectableElement) {
-//    std::vector::iterator element = std::find(sprites.begin(), sprites.end(), selectableElement);
-//    size_t index = std::distance(sprites.begin(), element);
-//
-//        
-//	if (selectableElement.isSelected())
-//		sprites[index].setColor(sf::Color::Blue);
-//	else
-//		sprites[index].setColor(sf::Color::Green);
-    // mapa <
-    
-//    sf::Sprite* selectableSprite = selectableSpritesMap.find(selectableElement)->second;
-//    
-//    if (selectableElement->isSelected())
-//        selectableSprite->SetColor(sf::Color::Blue);
-//    else
-//        selectableSprite->SetColor(sf::Color::Green);
-
-}
-
 
 void SelectionViewPainter::init() {
 //	std::for_each (selectableElements.begin(), selectableElements.end(), initSelectableSprite);
     int elementWidth, elementHeight;
     
     if (parentViewType == view::View::MAIN_MENU_WINDOW) {
-        elementWidth = 100;
-        elementHeight = 20;
+        elementWidth = 300;
+        elementHeight = 50;
         
     }
         
-    for (std::vector<view::SelectionViewModel::SelectableElement*>::iterator it = selectableElements.begin(); it != selectableElements.end(); ++it) {
+    for (int i = 0; i < selectableElements.size(); i++) {
         sf::Sprite* sprite = new sf::Sprite();
         sprite->Resize(elementWidth, elementHeight);
         sprite->SetX(selectionModel->getViewStartPosition()->getX());
-        sprite->SetY(selectionModel->getViewStartPosition()->getY() + std::distance(selectableElements.begin(), it) * elementHeight);
+        sprite->SetY(selectionModel->getViewStartPosition()->getY() + i * elementHeight);
         sprite->SetColor(sf::Color::Green);
 
-        selectableSpritesMap.insert(std::pair<view::SelectionViewModel::SelectableElement*, sf::Sprite*>(*it, sprite));
+        selectableSpritesMap.insert(std::pair<view::SelectionViewModel::SelectableElement*, sf::Sprite*>(selectableElements[i], sprite));
+        sprites.push_back(sprite);
     }
 }
 
@@ -85,23 +54,12 @@ void SelectionViewPainter::update() {
         sf::Sprite* selectableSprite = selectableSpritesMap.find(*it)->second;
 
         if ((*it)->isSelected())
-            selectableSprite->SetColor(sf::Color::Blue);
+            selectableSprite->SetColor(sf::Color::Red);
         else
             selectableSprite->SetColor(sf::Color::Green);
     }    
 }
 
-std::vector<sf::Sprite*> SelectionViewPainter::getSprites() {
-    std::vector<sf::Sprite*> sprites;
-    
-    for( std::map<view::SelectionViewModel::SelectableElement*, sf::Sprite*>::iterator it = selectableSpritesMap.begin(); it != selectableSpritesMap.end(); ++it ) {
-    	sprites.push_back( it->second );
-    }
-    
-    return sprites;
-}
-
 
 }
 }
-

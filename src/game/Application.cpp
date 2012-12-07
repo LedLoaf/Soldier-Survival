@@ -58,8 +58,8 @@ void Application::setGameEngine(GameMasterEngine* gameEngine) {
     this->gameEngine = gameEngine;
 }
 
-GameMasterEngine& Application::getGameEngine() {
-    return *gameEngine;
+GameMasterEngine* Application::getGameEngine() {
+    return gameEngine;
 }
 
 
@@ -75,6 +75,12 @@ void Application::run() {
     running = true;
     
     gameEngine->run();
+}
+
+void Application::exit() {
+    renderWindow->Close();
+    
+    std::exit(0);
 }
 
 void Application::display() {

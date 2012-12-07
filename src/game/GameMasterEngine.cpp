@@ -2,6 +2,8 @@
 #include <game/object/LevelDescription.hpp>
 #include <view/window/MainMenuWindow.hpp>
 
+#include "game/Application.hpp"
+
 using namespace view;
 
 namespace game {
@@ -9,7 +11,7 @@ namespace game {
 void GameMasterEngine::run() {
 	// show main menu
 	MainMenuWindow *mainMenuWindow = new MainMenuWindow();
-	context->setActiveWindow(mainMenuWindow);
+	Application::getInstance().getContext()->setActiveWindow(mainMenuWindow);
 }
 
 void GameMasterEngine::runLevelSelection() {
@@ -60,6 +62,12 @@ void GameMasterEngine::returnToGame() {
 //
 //	context->setActiveWindow(parentWindow);
 }
+
+void GameMasterEngine::onExitGameRequest() {
+    if (Application::getInstance().getContext()->getActiveWindow()->getType() == view::View::MAIN_MENU_WINDOW)
+        Application::getInstance().exit();
+}
+
 
 }
 
