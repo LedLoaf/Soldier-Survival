@@ -34,6 +34,7 @@ void SFMLAbstractGraphicEngine::updatePainters() {
 
 
 void SFMLAbstractGraphicEngine::initWindowPainters(Window* window) {
+    renderWindow->Clear(sf::Color::Black);
 	painters.clear();
     
     std::vector<view::View*> views = window->getViews();

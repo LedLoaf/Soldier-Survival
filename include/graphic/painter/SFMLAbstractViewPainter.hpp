@@ -13,7 +13,7 @@ public:
 	virtual void init() = 0;
 	virtual void update() = 0;
 
-	std::vector<sf::Drawable*> getDrawables();
+	virtual std::vector<sf::Drawable*> getDrawables();
 
 protected:
     std::vector<sf::Drawable*> drawables;

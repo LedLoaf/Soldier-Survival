@@ -94,7 +94,9 @@ std::string SelectionViewPainter::getTextFor(Util::Action action) {
         case Util::RUN_ABOUT :
             return "about";
         case Util::RUN_EXIT :
-            return "exit";            
+            return "exit"; 
+        case Util::RUN_GAME_PLAY :
+            return "play";             
         default:
             return "";
     }

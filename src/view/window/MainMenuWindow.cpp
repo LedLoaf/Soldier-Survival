@@ -22,6 +22,7 @@ void MainMenuWindow::initUI() {
     
     
 	selectionView = new SelectionView(200, 200, 200, 500);
+    selectionView->addElement(new SelectionViewModel::SelectableElement(Util::RUN_GAME_PLAY));    
     selectionView->addElement(new SelectionViewModel::SelectableElement(Util::RUN_LEVEL_SELECTION));
     selectionView->addElement(new SelectionViewModel::SelectableElement(Util::RUN_ABOUT));
     selectionView->addElement(new SelectionViewModel::SelectableElement(Util::RUN_EXIT));
@@ -56,6 +57,8 @@ void MainMenuWindow::onEnterPressed() {
 			game::Application::getInstance().getGameEngine()->runLevelSelection();
     else if(optionAction == Util::RUN_EXIT)
 			game::Application::getInstance().getGameEngine()->onExitGameRequest();
+    else if(optionAction == Util::RUN_GAME_PLAY)
+			game::Application::getInstance().getGameEngine()->runGamePlay(new game::LevelDescription());
 	
 }
 

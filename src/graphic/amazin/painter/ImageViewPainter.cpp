@@ -42,7 +42,7 @@ void ImageViewPainter::init() {
     
 
     
-    drawables.push_back(sprite);
+        drawables.push_back(sprite);
 }
 
 

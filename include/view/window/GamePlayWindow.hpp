@@ -3,6 +3,7 @@
 
 #include <view/window/Window.hpp>
 #include <view/MapView.hpp>
+#include <view/HUDView.hpp>
 #include <game/object/LevelDescription.hpp>
 
 #include <util/Key.hpp>
@@ -12,13 +13,20 @@ namespace view {
 class GamePlayWindow : public Window {
 
 private:
+    HUDView* hudView;
 	MapView* mapView;
+    game::LevelDescription* levelDescription;
+    
 
 public:
-	GamePlayWindow(int xStart, int yStart, int xEnd, int yEnd, game::LevelDescription* levelDescription);
-	void onEnterPressed();
-	void onArrowPressed(util::Key::Arrow arrow);
-	void setSubWindow(Window& window);
+	GamePlayWindow(game::LevelDescription* levelDescription);
+	void initUI();
+        
+	virtual void onEnterPressed();
+	virtual void onArrowPressed(util::Key::Arrow arrow);
+    
+	virtual Type getType();
+    
 };
 
 }

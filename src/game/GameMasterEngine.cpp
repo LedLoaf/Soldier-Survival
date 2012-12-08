@@ -3,6 +3,7 @@
 #include <view/window/MainMenuWindow.hpp>
 
 #include "game/Application.hpp"
+#include "view/window/GamePlayWindow.hpp"
 
 using namespace view;
 
@@ -15,7 +16,7 @@ void GameMasterEngine::run() {
 }
 
 void GameMasterEngine::runLevelSelection() {
-
+  
 }
 
 /*
@@ -23,14 +24,16 @@ void GameMasterEngine::runLevelSelection() {
 
 	Metoda wywolywana po wyborze levelu w menu
 */
-void GameMasterEngine::runLevel(LevelDescription& levelDescription) {
+void GameMasterEngine::runGamePlay(LevelDescription* levelDescription) {
 	// tworzone jest nowe okno, ktore jest rysowane.
 	// w GamePlayWindow mapGenerator generuje poziom z informacji w obiekcie LevelDescription
 //
 //	// okno wyboru levelu jest niszczone
 //	~context->getActiveWindow();
 //
-//	context->setActiveWindow(new GamePlayWindow(levelDescription));
+    
+    GamePlayWindow *gamePlayWindow = new GamePlayWindow(levelDescription);
+	Application::getInstance().getContext()->setActiveWindow(gamePlayWindow);  
 }
 
 
@@ -66,6 +69,12 @@ void GameMasterEngine::returnToGame() {
 void GameMasterEngine::onExitGameRequest() {
     if (Application::getInstance().getContext()->getActiveWindow()->getType() == view::View::MAIN_MENU_WINDOW)
         Application::getInstance().exit();
+    else if (Application::getInstance().getContext()->getActiveWindow()->getType() == view::View::GAME_PLAY_WINDOW) {
+        // TODO: wyswietlic subwindow i potwierdzic chec wyjscia z gry + ewentualny zapis gry
+        Application::getInstance().exit();
+
+    }
+    
 }
 
 
