@@ -11,7 +11,8 @@ namespace view {
 
 class SelectionView : public View {
 public:
-    SelectionView(int xStart, int yStart, int xEnd, int yEnd);
+
+    SelectionView(int xStart, int yStart, int xEnd, int yEnd, SelectionViewModel::Type modelType);
     
  	void selectPreviousElement();   
 	void selectNextElement();
@@ -31,8 +32,7 @@ public:
 
 private:
 	SelectionViewModel* selectionModel;
-	int positionOfSelectedElement;
-    
+	int positionOfSelectedElement;    
 	
 };
 

@@ -22,6 +22,7 @@ public:
     
     View(int xStart, int yStart, int xEnd, int yEnd);
 
+    bool hasViews();
     void addView(View* view);
 	std::vector<View*> getViews();
     

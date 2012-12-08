@@ -12,6 +12,9 @@
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/String.hpp>
 
+#include "view/SelectionView.hpp"
+#include <game/object/weapon/Weapon.hpp>
+
 namespace graphic {
 namespace amazin {
 
@@ -40,36 +43,59 @@ void SelectionViewPainter::init() {
         
         paddingLeft = paddingTop = 5;
     }
-    
-    
-//    sf::Font font;
-//    if (!font.LoadFromFile(fontPath, 50)) {
-//        // throw exception. error
-//    }    
-        
+ 
     for (int i = 0; i < selectableElements.size(); i++) {
         sf::Sprite* sprite = new sf::Sprite();
         sprite->Resize(elementWidth, elementHeight);
         sprite->SetX(selectionModel->getViewStartPosition()->getX());
         sprite->SetY(selectionModel->getViewStartPosition()->getY() + i * elementHeight);
         sprite->SetColor(sf::Color::Green);
-
-
-        sf::String* text = new sf::String();
-        text->SetText(getTextFor(selectableElements[i]->getAction()));
-        // przy text->SetFont(font) segmentation fault - cos zle z plikeim ttf
-        text->SetFont(sf::Font::GetDefaultFont());
-        text->SetSize(textSize);
-        text->SetX(selectionModel->getViewStartPosition()->getX() + paddingLeft);
-        text->SetY(selectionModel->getViewStartPosition()->getY() + i * elementHeight + paddingTop);
-
-
+     
         selectableSpritesMap.insert(std::pair<view::SelectionViewModel::SelectableElement*, sf::Sprite*>(selectableElements[i], sprite));
-        drawables.push_back(sprite);
-        drawables.push_back(text);
+        drawables.push_back(sprite);     
         
         
-    }
+        
+        if (selectionModel->getType() == view::SelectionViewModel::SIMPLE_MENU) {
+            sf::String* text = new sf::String();
+            text->SetText(getTextFor(selectableElements[i]->getAction()));
+            // przy text->SetFont(font) segmentation fault - cos zle z plikeim ttf
+            text->SetFont(sf::Font::GetDefaultFont());
+            text->SetSize(textSize);
+            text->SetX(selectionModel->getViewStartPosition()->getX() + paddingLeft);
+            text->SetY(selectionModel->getViewStartPosition()->getY() + i * elementHeight + paddingTop);    
+
+            drawables.push_back(text);
+
+        } else if (selectionModel->getType() == view::SelectionViewModel::WEAPONS) {
+                view::SelectionViewModel::WeaponSelectableElement* weaponElement = 
+                        dynamic_cast<view::SelectionViewModel::WeaponSelectableElement*>(selectableElements[i]);
+
+                std::string imgPath;
+                
+                switch (weaponElement->getWeaponType()) {
+                    case game::Weapon::KNIFE :
+                        imgPath = "resource/graphic/amazin/game_play/img/weapon/knife.jpg";
+                }
+
+                // wskaznik, bo inaczej zostanie zniszczony
+                // w destruktorze niszczyc
+                sf::Image* image = new sf::Image();
+                if (!image->LoadFromFile(imgPath)) {
+                    std::cout << "Failed to load " << imgPath << std::endl;
+                }
+
+                sf::Sprite* sprite = new sf::Sprite;
+                sprite->SetX(selectionModel->getViewStartPosition()->getX() + paddingLeft);
+                sprite->SetY(selectionModel->getViewStartPosition()->getY() + i * elementHeight + paddingTop);    
+                sprite->SetImage(*image);
+                
+                drawables.push_back(sprite);
+        }        
+    }    
+    
+
+    
 }
 
 

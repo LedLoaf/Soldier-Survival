@@ -3,10 +3,11 @@
 
 namespace view {
 
-SelectionView::SelectionView(int xStart, int yStart, int xEnd, int yEnd) : View(xStart, yStart, xEnd, yEnd) {
-    selectionModel = new SelectionViewModel();
+SelectionView::SelectionView(int xStart, int yStart, int xEnd, int yEnd, SelectionViewModel::Type modelType) : View(xStart, yStart, xEnd, yEnd) {
+    selectionModel = new SelectionViewModel(modelType);
     selectionModel->setViewPosition(new util::Location::Position(xStart, yStart), new util::Location::Position(xEnd, yEnd));
     
+    positionOfSelectedElement = 0;
 }    
     
 void SelectionView::selectPreviousElement() {
@@ -58,7 +59,7 @@ void SelectionView::addElement(SelectionViewModel::SelectableElement* element) {
 
 void SelectionView::selectElement(int pos) {
 //    TODO: rzucac wyjatek jezeli pos > liczba elementow
-    if (pos < selectionModel->getSelectableElements().size())
+    if (pos < selectionModel->getSelectableElements().size()) 
         selectionModel->setSelected(pos);
 }
 

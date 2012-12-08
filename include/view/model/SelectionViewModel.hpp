@@ -12,6 +12,7 @@
 #include <vector>
 #include <iostream>
 
+#include <game/object/weapon/Weapon.hpp>
 #include <view/View.hpp>
 
 namespace view {
@@ -19,8 +20,12 @@ namespace view {
 class SelectionViewModel : public ViewModel {
 public:
 	class SelectableElement;
-
-	SelectionViewModel();
+    
+   enum Type {
+        SIMPLE_MENU, WEAPONS
+    };
+    
+	SelectionViewModel(Type modelType);
 	virtual ~SelectionViewModel();
 
     std::vector<SelectableElement*> getSelectableElements();
@@ -29,17 +34,18 @@ public:
 	void setUnselected(int positionOfElement);
 
     void addElement(SelectableElement* element);
-
+    
+    Type getType();
 
 	class SelectableElement {
 	public:
+        SelectableElement();
         SelectableElement(Util::Action action);
         
-        void setAction(Util::Action action);
-		Util::Action getAction();
+        virtual void setAction(Util::Action action);
+		virtual Util::Action getAction();
 		void setUnselected();
 		void setSelected();
-        int getId();
         bool isSelected();
 
         util::Location::Position getPosition();
@@ -48,12 +54,26 @@ public:
 		bool selected;
         Util::Action action;
 	};
+    
+	class WeaponSelectableElement : public SelectableElement {
+	public:
+        WeaponSelectableElement(game::Weapon* weapon);
+        
+        game::Weapon::Type getWeaponType();
+
+        util::Location::Position getPosition();
+        
+	private:
+		bool selected;
+        Util::Action action;
+        game::Weapon* weapon;
+	};    
 
 
 
 private:
 	std::vector<SelectableElement*> selectableElements;
-
+    Type type;
 };
 
 } /* namespace view */

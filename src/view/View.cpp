@@ -21,6 +21,14 @@ View::~View() {
 	// TODO Auto-generated destructor stub
 }
 
+bool View::hasViews() {
+    if (views.size() > 0)
+        return true;
+    else
+        return false;
+}
+
+
 void View::addView(View* view) {
 	views.push_back(view);
 }

@@ -27,8 +27,7 @@ void GamePlayWindow::initUI() {
    
     
 	addView(hudView);
-    
-
+  
 }
 
 
