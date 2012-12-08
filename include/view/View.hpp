@@ -15,7 +15,8 @@ namespace view {
 class View {
 public:
 	enum Type {
-		SELECTION_VIEW, IMAGE_VIEW, MAP_VIEW, MAIN_MENU_WINDOW
+		SELECTION_VIEW, IMAGE_VIEW, HUD_VIEW, MAP_VIEW, 
+        MAIN_MENU_WINDOW, GAME_PLAY_WINDOW
 	};
     
     View(int xStart, int yStart, int xEnd, int yEnd);

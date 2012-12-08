@@ -12,7 +12,7 @@ public:
 	void setGraphicEngine(graphic::SFMLAbstractGraphicEngine& graphicEngine);
 	void run();
 	void runLevelSelection();
-	void runLevel(LevelDescription& levelDescription);
+	void runGamePlay(LevelDescription* levelDescription);
 	void pauseLevel();
 	void resumeLevel();
 	void onLeftArrowPressed();
