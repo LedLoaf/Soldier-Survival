@@ -21,4 +21,12 @@ View::~View() {
 	// TODO Auto-generated destructor stub
 }
 
+void View::addView(View* view) {
+	views.push_back(view);
+}
+
+std::vector<View*> View::getViews() {
+	return views;
+}
+
 } /* namespace graphic */

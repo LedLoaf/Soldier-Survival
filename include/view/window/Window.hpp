@@ -13,8 +13,7 @@ class Window : public view::View {
 public:
     Window(int xStart, int yStart, int xEnd, int yEnd);
     
-	void addView(View* view);
-	std::vector<View*> getViews();
+
 	bool hasSubWindow();
 	void setSubWindow(Window* window);
 	virtual Type getType() = 0;
@@ -25,7 +24,6 @@ public:
 
 protected:
 //	WindowModel model;
-	std::vector<View*> views;
 	Window* subWindow;
 
 };

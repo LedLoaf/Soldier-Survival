@@ -8,6 +8,7 @@
 #ifndef VIEW_HPP_
 #define VIEW_HPP_
 
+#include <vector>
 #include <view/model/ViewModel.hpp>
 
 namespace view {
@@ -21,11 +22,16 @@ public:
     
     View(int xStart, int yStart, int xEnd, int yEnd);
 
+    void addView(View* view);
+	std::vector<View*> getViews();
+    
 	virtual ~View();
 	virtual Type getType() = 0;
 
 protected:
     int xStart, yStart, xEnd, yEnd;
+	std::vector<View*> views;
+    
 };
 
 } /* namespace graphic */
