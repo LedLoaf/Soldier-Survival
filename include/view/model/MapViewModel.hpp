@@ -11,6 +11,10 @@ namespace view {
 
 class MapViewModel : ViewModel {
 public:
+    enum Element {
+        PLAYER, ENEMY_SHOOTER, ENEMY_ABC, GREEN_GRASS, YELLOW_GRASS, RIVER
+    };    
+    
 	void remove(util::Location::Position position, const game::Character& ch);
 //	void remove(util::Location::Position position, const game::Terrain& terrain);
 

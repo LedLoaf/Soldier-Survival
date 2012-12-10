@@ -3,6 +3,7 @@
 #include <view/model/SelectionViewModel.hpp>
 #include <util/Location.hpp>
 #include <util/Util.hpp>
+#include <util/SFMLAmazinResource>
 
 #include <algorithm>
 #include <vector>
@@ -13,8 +14,6 @@
 #include <SFML/Graphics/String.hpp>
 
 #include <graphic/amazin/painter/MiniMapViewPainter.hpp>
-
-#include "util/Resource.hpp"
 
 
 namespace graphic {
@@ -33,12 +32,12 @@ void MiniMapViewPainter::init() {
     
     viewWidth = miniMapViewModel->getViewEndPosition()->getX() - miniMapViewModel->getViewStartPosition()->getX();
     elementWidth = viewWidth / numberOfColumns;
+        
     
-    // TODO: dynamicznie alokowac pamiec dla dwuwymiarowej tablicy map
-    sf::Sprite* msap[numberOfColumnsp][numberOfRows];
-    
-    for (int i = 0; i < numberOfColumns; i++) {
-        for (int j = 0; j < numberOfRows; j++) {
+    for (int i = 0; i < numberOfRows; i++) {
+        map[i] = new sf::Sprite[numberOfColumns];
+        
+        for (int j = 0; j < numberOfColumns; j++) {
             map[i][j] = new sf::Sprite();
             map[i][j]->SetPosition(miniMapViewModel->getViewStartPosition()->getX() + elementWidth * i, elementWidth * j + 1);
         }    
@@ -49,7 +48,7 @@ void MiniMapViewPainter::init() {
 virtual void MiniMapViewPainter::update() {
     for (int i = 0; i < numberOfColumns; i++) {
         for (int j = 0; j < numberOfRows; j++) {            
-            map[i][j]->SetImage(util::SFMLResource::getImage(miniMapViewModel->getTopElementAt(i, j)));
+            map[i][j]->SetImage(util::SFMLAmazinResource::getInstance()->getImage(miniMapViewModel->getTopElementAt(i, j)));
         }    
     }    
 }

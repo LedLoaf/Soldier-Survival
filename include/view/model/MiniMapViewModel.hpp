@@ -7,19 +7,21 @@
 
 #include <view/View.hpp>
 
+#include "MapViewModel.hpp"
+
 namespace view {
 
 class MiniMapViewModel : public ViewModel {
 public:
-    enum Element {
-        PLAYER, ENEMY_SHOOTER, ENEMY_ABC, GREEN_GRASS, YELLOW_GRASS, RIVER
-    };
     
 	MiniMapViewModel();
 	virtual ~MiniMapViewModel();
+
+    int getNumberOfColumns();
+    int getNumberOfRows();
     
     // element na widoczny dla uzytkownika (na samej gorze)
-    Element getTopElementAt(int x, int y);
+    MapViewModel::Element getTopElementAt(int x, int y);
 
 private:
     
