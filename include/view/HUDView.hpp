@@ -19,6 +19,9 @@ public:
     
     virtual View::Type getType();
     
+    virtual void pause();
+    virtual void resume();
+    
     SelectionView* getWeaponSelectionView();
 
 private:

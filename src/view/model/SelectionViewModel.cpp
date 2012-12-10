@@ -19,6 +19,14 @@ SelectionViewModel::~SelectionViewModel() {
 	// TODO Auto-generated destructor stub
 }
 
+void SelectionViewModel::setViewOrientation(view::View::Orientation orientation) {
+    this->orientation = orientation;
+}
+
+void SelectionViewModel::getViewOrientation() {
+    this->orientation;
+}
+
 void SelectionViewModel::setUnselected(int positionOfElement) {
 	selectableElements.at(positionOfElement)->setUnselected();
 }

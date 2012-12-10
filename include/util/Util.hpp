@@ -9,7 +9,8 @@ namespace util {
 class Util {
 public:
     enum Action {
-        RUN_LEVEL_SELECTION, RUN_ABOUT, RUN_EXIT, RUN_GAME_PLAY
+        RUN_LEVEL_SELECTION, RUN_ABOUT, RUN_EXIT, RUN_GAME_PLAY,
+        RESUME_GAME, RETURN_TO_MAIN_MENU
     };  
     
     std::string static toString(int integer) {

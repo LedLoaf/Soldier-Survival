@@ -29,6 +29,9 @@ public:
     
 	virtual Type getType();
     
+    virtual void pause();
+    virtual void resume();
+    
 };
 
 }

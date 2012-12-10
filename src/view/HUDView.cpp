@@ -38,4 +38,12 @@ SelectionView* HUDView::getWeaponSelectionView() {
     return this->weaponsSelectionView;
 };
 
+void HUDView::pause() {
+        
+}
+
+void HUDView::resume() {
+    
+}
+
 }

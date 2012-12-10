@@ -47,4 +47,16 @@ std::vector<View*> View::getViews() {
 	return views;
 }
 
+void View::pause() {
+    paused = true;
+}
+
+bool View::isPaused() {
+    return paused;
+}
+
+void View::resume() {
+    paused = false
+}
+
 } /* namespace graphic */

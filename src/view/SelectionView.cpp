@@ -8,7 +8,12 @@ SelectionView::SelectionView(int xStart, int yStart, int xEnd, int yEnd, Selecti
     selectionModel->setViewPosition(new util::Location::Position(xStart, yStart), new util::Location::Position(xEnd, yEnd));
     
     positionOfSelectedElement = 0;
+    selectionModel->setViewOrientation(view::View::VERTICAL);
 }    
+
+void SelectionView::setOrientation(view::View::Orientation orientation) {
+    this->selectionModel->setViewOrientation(orientation);
+}
     
 void SelectionView::selectPreviousElement() {
 	selectionModel->setUnselected(positionOfSelectedElement);

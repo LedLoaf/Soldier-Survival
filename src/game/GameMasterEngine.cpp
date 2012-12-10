@@ -4,13 +4,13 @@
 
 #include "game/Application.hpp"
 #include "view/window/GamePlayWindow.hpp"
+#include "view/window/PauseWindow.hpp"
 
 using namespace view;
 
 namespace game {
 
 void GameMasterEngine::run() {
-	// show main menu
 	MainMenuWindow *mainMenuWindow = new MainMenuWindow();
 	Application::getInstance().getContext()->setActiveWindow(mainMenuWindow);
 }
@@ -25,9 +25,7 @@ void GameMasterEngine::runLevelSelection() {
 	Metoda wywolywana po wyborze levelu w menu
 */
 void GameMasterEngine::runGamePlay(LevelDescription* levelDescription) {
-	// tworzone jest nowe okno, ktore jest rysowane.
-	// w GamePlayWindow mapGenerator generuje poziom z informacji w obiekcie LevelDescription
-//
+
 //	// okno wyboru levelu jest niszczone
 //	~context->getActiveWindow();
 //
@@ -37,21 +35,17 @@ void GameMasterEngine::runGamePlay(LevelDescription* levelDescription) {
 }
 
 
-void GameMasterEngine::pauseLevel() {
-	// pausa na mapie.
-	// pausa na czasie gry
-//
-//	PauseWindow pauseWindow = new PauseWindow(); 
-//	// w tym momencie okno jest juz narysowane nad mapa, hudem, itd.
-//	pauseWindow.setParent(context->getActiveWindow()); // GamePlayWindow;
-//
-//	context->setActiveWindow(pauseWindow);
+void GameMasterEngine::pauseGame() {
+    Window* activeWindow = Application::getInstance().getContext()->getActiveWindow();
+    activeWindow->pause();
+    activeWindow->setSubWindow(new PauseWindow());
 }
 
-void GameMasterEngine::resumeLevel() {
-	
+void GameMasterEngine::resumeGame() {
+    Window* activeWindow = Application::getInstance().getContext()->getActiveWindow();
+    activeWindow->resume();
+    ~activeWindow->getSubWindow();
 }
-
 
 
 

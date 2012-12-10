@@ -44,6 +44,15 @@ void SelectionViewPainter::init() {
 
             paddingLeft = paddingTop = 5;
             break;
+        case view::SelectionViewModel::SIMPLE_PAUSE_MENU :
+            elementWidth = 100;
+            elementHeight = 50;
+            fontPath = "resource/graphic/amazin/font/magnum.ttf";
+
+            textSize = 20;
+
+            paddingLeft = paddingTop = 5;
+            break;            
             
         case view::SelectionViewModel::WEAPONS :
             elementWidth = 300;
@@ -58,29 +67,40 @@ void SelectionViewPainter::init() {
     }
  
     for (int i = 0; i < selectableElements.size(); i++) {
-        sf::Sprite* sprite = new sf::Sprite();
-        sprite->Resize(elementWidth, elementHeight);
-        sprite->SetX(selectionModel->getViewStartPosition()->getX());
-        sprite->SetY(selectionModel->getViewStartPosition()->getY() + i * elementHeight);
-        sprite->SetColor(sf::Color::Green);
+        sf::Sprite* backgroundSprite = new sf::Sprite();
+        
+        if (selectionModel->getViewOrientation() == view::View::Orientation::VERTICAL) {
+            backgroundSprite->SetX(selectionModel->getViewStartPosition()->getX());
+            backgroundSprite->SetY(selectionModel->getViewStartPosition()->getY() + i * elementHeight);            
+        }
+        else if (selectionModel->getViewOrientation() == view::View::Orientation::HORIZONTAL) {
+            backgroundSprite->SetX(selectionModel->getViewStartPosition()->getX() + i * elementWidth);
+            backgroundSprite->SetY(selectionModel->getViewStartPosition()->getY());            
+        
+        }
+            
+        backgroundSprite->Resize(elementWidth, elementHeight);
+        backgroundSprite->SetColor(sf::Color::Green);
      
-        selectableSpritesMap.insert(std::pair<view::SelectionViewModel::SelectableElement*, sf::Sprite*>(selectableElements[i], sprite));
-        drawables.push_back(sprite);     
+        selectableSpritesMap.insert(std::pair<view::SelectionViewModel::SelectableElement*, sf::Sprite*>(selectableElements[i], backgroundSprite));
+        drawables.push_back(backgroundSprite);     
         
         
         
-        if (selectionModel->getType() == view::SelectionViewModel::SIMPLE_MENU) {
-            sf::String* text = new sf::String();
-            text->SetText(getTextFor(selectableElements[i]->getAction()));
-            // przy text->SetFont(font) segmentation fault - cos zle z plikeim ttf
-            text->SetFont(sf::Font::GetDefaultFont());
-            text->SetSize(textSize);
-            text->SetX(selectionModel->getViewStartPosition()->getX() + paddingLeft);
-            text->SetY(selectionModel->getViewStartPosition()->getY() + i * elementHeight + paddingTop);    
+        switch (selectionModel->getType()) {
+            case view::SelectionViewModel::SIMPLE_MENU :
+                sf::String* text = new sf::String();
+                text->SetText(getTextFor(selectableElements[i]->getAction()));
+                // przy text->SetFont(font) segmentation fault - cos zle z plikeim ttf
+                text->SetFont(sf::Font::GetDefaultFont());
+                text->SetSize(textSize);
+                text->SetX(selectionModel->getViewStartPosition()->getX() + paddingLeft);
+                text->SetY(selectionModel->getViewStartPosition()->getY() + i * elementHeight + paddingTop);    
 
-            drawables.push_back(text);
+                drawables.push_back(text);
+                break;
 
-        } else if (selectionModel->getType() == view::SelectionViewModel::WEAPONS) {
+           case view::SelectionViewModel::WEAPONS :
                 view::SelectionViewModel::WeaponSelectableElement* weaponElement = 
                         dynamic_cast<view::SelectionViewModel::WeaponSelectableElement*>(selectableElements[i]);
 
@@ -119,8 +139,22 @@ void SelectionViewPainter::init() {
                 text->SetY(selectionModel->getViewStartPosition()->getY() + i * elementHeight + paddingTop);    
 
                 drawables.push_back(text);                
-        }        
-    }    
+                break;
+                
+           case view::SelectionViewModel::SIMPLE_PAUSE_MENU :
+                sf::String* text = new sf::String();
+                text->SetText(getTextFor(selectableElements[i]->getAction()));
+                // przy text->SetFont(font) segmentation fault - cos zle z plikeim ttf
+                text->SetFont(sf::Font::GetDefaultFont());
+                text->SetSize(textSize);
+                text->SetX(selectionModel->getViewStartPosition()->getX() + paddingLeft);
+                text->SetY(selectionModel->getViewStartPosition()->getY() + i * elementHeight + paddingTop);    
+
+                drawables.push_back(text);
+                break;                
+
+        }
+    }
     
 
     
@@ -150,7 +184,11 @@ std::string SelectionViewPainter::getTextFor(util::Util::Action action) {
         case util::Util::RUN_EXIT :
             return "exit"; 
         case util::Util::RUN_GAME_PLAY :
-            return "play";             
+            return "play";      
+        case util::Util::RESUME_GAME :
+            return "resume";          
+        case util::Util::RETURN_TO_MAIN_MENU :
+            return "exit";             
         default:
             return "";
     }

@@ -13,8 +13,8 @@ public:
 	void run();
 	void runLevelSelection();
 	void runGamePlay(LevelDescription* levelDescription);
-	void pauseLevel();
-	void resumeLevel();
+	void pauseGame();
+	void resumeGame();
 	void onLeftArrowPressed();
     void exitGame();
     

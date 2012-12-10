@@ -14,6 +14,8 @@ public:
 
     SelectionView(int xStart, int yStart, int xEnd, int yEnd, SelectionViewModel::Type modelType);
     
+    void setOrientation(view::View::Orientation orientation);
+    
  	void selectPreviousElement();   
 	void selectNextElement();
     bool hasPreviousElement();

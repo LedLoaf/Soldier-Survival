@@ -3,7 +3,7 @@
 #include <view/model/SelectionViewModel.hpp>
 #include <util/Location.hpp>
 #include <util/Util.hpp>
-#include <util/SFMLAmazinResource>
+#include <util/SFMLAmazinResource.hpp>
 
 #include <algorithm>
 #include <vector>
@@ -33,12 +33,16 @@ void MiniMapViewPainter::init() {
     viewWidth = miniMapViewModel->getViewEndPosition()->getX() - miniMapViewModel->getViewStartPosition()->getX();
     elementWidth = viewWidth / numberOfColumns;
         
+    sf::Sprite* mapElementSprite;
     
     for (int i = 0; i < numberOfRows; i++) {
         map[i] = new sf::Sprite[numberOfColumns];
         
         for (int j = 0; j < numberOfColumns; j++) {
-            map[i][j] = new sf::Sprite();
+            mapElementSprite = new sf::Sprite();
+            drawables.push_back(mapElementSprite);
+            
+            map[i][j] = mapElementSprite;
             map[i][j]->SetPosition(miniMapViewModel->getViewStartPosition()->getX() + elementWidth * i, elementWidth * j + 1);
         }    
     }
@@ -54,13 +58,6 @@ virtual void MiniMapViewPainter::update() {
 }
 
 
-std::vector<sf::Drawable*> HUDViewPainter::getDrawables() {
-    int size = healthIndicatorSprites.size();
-    drawables.insert(drawables.end(), healthIndicatorSprites.begin(), healthIndicatorSprites.end());
-
-    
-	return drawables;
-}
 
 }
 }

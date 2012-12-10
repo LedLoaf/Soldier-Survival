@@ -17,8 +17,12 @@ class View {
 public:
 	enum Type {
 		SELECTION_VIEW, IMAGE_VIEW, HUD_VIEW, MAP_VIEW, MINI_MAP_VIEW,
-        MAIN_MENU_WINDOW, GAME_PLAY_WINDOW
+        MAIN_MENU_WINDOW, GAME_PLAY_WINDOW, PAUSE_WINDOW
 	};
+    
+    enum Orientation {
+        HORIZONTAL, VERTICAL
+    };
     
     View(int xStart, int yStart, int xEnd, int yEnd);
 
@@ -32,9 +36,14 @@ public:
 	virtual ~View();
 	virtual Type getType() = 0;
 
+    virtual void pause();
+    bool isPaused();
+    virtual void resume();
+    
 protected:
     int xStart, yStart, xEnd, yEnd;
 	std::vector<View*> views;
+    bool paused;
     
 };
 

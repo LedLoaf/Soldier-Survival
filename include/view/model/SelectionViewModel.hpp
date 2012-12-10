@@ -22,12 +22,15 @@ public:
 	class SelectableElement;
     
    enum Type {
-        SIMPLE_MENU, WEAPONS
+        SIMPLE_MENU, SIMPLE_PAUSE_MENU, WEAPONS
     };
     
 	SelectionViewModel(Type modelType);
 	virtual ~SelectionViewModel();
 
+    void setViewOrientation(view::View::Orientation orientation);
+    void getViewOrientation();
+    
     std::vector<SelectableElement*> getSelectableElements();
     
 	void setSelected(int positionOfElement);
@@ -73,6 +76,7 @@ public:
 private:
 	std::vector<SelectableElement*> selectableElements;
     Type type;
+    view::View::Orientation orientation;
 };
 
 } /* namespace view */

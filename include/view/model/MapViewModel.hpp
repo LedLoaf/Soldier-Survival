@@ -1,4 +1,3 @@
-
 #ifndef MAP_VIEW_MODEL_HPP_
 #define MAP_VIEW_MODEL_HPP_
 

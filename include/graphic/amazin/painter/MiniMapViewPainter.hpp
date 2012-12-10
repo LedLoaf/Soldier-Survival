@@ -16,7 +16,6 @@ public:
 
 	virtual void init();
 	virtual void update();
-    virtual std::vector<sf::Drawable*> getDrawables();
     
     
 private:

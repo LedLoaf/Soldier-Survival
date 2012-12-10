@@ -3,6 +3,8 @@
 #include <view/window/PauseWindow.hpp>
 #include <game/Application.hpp>
 
+#include "util/SFMLAmazinResource.hpp"
+
 namespace view {
 
 GamePlayWindow::GamePlayWindow(game::LevelDescription* levelDescription) : Window(0, 0, game::Application::getInstance().getDeviceManager()->getScreenWidth(), 
@@ -20,9 +22,6 @@ GamePlayWindow::GamePlayWindow(game::LevelDescription* levelDescription) : Windo
 //      this.player = mapHandler->getPlayer();
     
     this->levelGenerator = new game::LevelGenerator(levelDescription);
-
-    util::SFMLResource::initGamePlayWindowResources();    
-    
     
     initUI();
 }
@@ -48,20 +47,29 @@ void GamePlayWindow::initUI() {
 
 
 void GamePlayWindow::onArrowPressed(util::Key::Arrow arrow) {
-
-    SelectionView* weaponSelectionView = hudView->getWeaponSelectionView();
-	if (arrow == util::Key::UP) {
-		if (weaponSelectionView->hasPreviousElement())
-			weaponSelectionView->selectPreviousElement();
-	} else if (arrow == util::Key::DOWN) {
-		if (weaponSelectionView->hasNextElement())
-			weaponSelectionView->selectNextElement();
-	}
-
+    Window::onArrowPressed(arrow);
+    
+    if (hasSubWindow())
+        subWindow->onArrowPressed(arrow);
+    else {
+        SelectionView* weaponSelectionView = hudView->getWeaponSelectionView();
+        if (arrow == util::Key::UP) {
+            if (weaponSelectionView->hasPreviousElement())
+                weaponSelectionView->selectPreviousElement();
+        } else if (arrow == util::Key::DOWN) {
+            if (weaponSelectionView->hasNextElement())
+                weaponSelectionView->selectNextElement();
+        }
+    }
 }
 
 
 void GamePlayWindow::onEnterPressed() {
+    if (hasSubWindow())
+        subWindow->onEnterPressed();
+    else {
+    
+    }
 //	Util::Action optionAction = selectionView->getSelectedElement()->getAction();
 //
 //	if (optionAction == Util::RUN_LEVEL_SELECTION)
@@ -72,12 +80,27 @@ void GamePlayWindow::onEnterPressed() {
 }
 
 void GamePlayWindow::onEscPressed() {
-	subWindow = new PauseWindow();
-  	game::Application::getInstance().getContext()->setActiveWindow(subWindow);  
+    if (hasSubWindow())
+        subWindow->onEscPressed();
+    else 
+        game::Application::getInstance().getGameEngine()->pauseGame();
+    
 }
 
 View::Type GamePlayWindow::getType() {
     return View::GAME_PLAY_WINDOW;
+}
+
+void GamePlayWindow::pause() {
+    hudView->pause();
+    mapView->pause();
+    miniMapView->pause();
+}
+
+void GamePlayWindow::resume() {
+    hudView->resume();
+    mapView->resume();
+    miniMapView->resume();    
 }
 
 }
