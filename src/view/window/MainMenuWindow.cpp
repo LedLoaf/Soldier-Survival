@@ -7,6 +7,8 @@
 #include <util/Util.hpp>
 #include <util/Resource.hpp>
 
+#include "view/TextView.hpp"
+
 namespace view {
 
 MainMenuWindow::MainMenuWindow() : Window(0, 0, game::Application::getInstance().getDeviceManager()->getScreenWidth(), 
@@ -31,7 +33,8 @@ void MainMenuWindow::initUI() {
 	addView(selectionView);
     
 
-
+    addView(new TextView(0, game::Application::getInstance().getDeviceManager()->getScreenHeight() - 50, 
+            500, game::Application::getInstance().getDeviceManager()->getScreenHeight() - 50, "Soldier: Survival by 34fun team", TextView::SMALL));
 
 }
 
