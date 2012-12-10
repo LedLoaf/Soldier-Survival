@@ -25,7 +25,6 @@ HUDViewPainter::HUDViewPainter(view::HUDViewModel* model) {
 
 
 void HUDViewPainter::init() {
-//	std::for_each (selectableElements.begin(), selectableElements.end(), initSelectableSprite);
     int healthBoxtWidth, healthBoxHeight;
     std::string fontPath;
     int textSize;

@@ -6,6 +6,8 @@
 #include <iostream>
 #include <list>
 
+#include "SelectionView.hpp"
+
 
 namespace view {
 
@@ -16,10 +18,12 @@ public:
     HUDViewModel* getModel();
     
     virtual View::Type getType();
+    
+    SelectionView* getWeaponSelectionView();
 
 private:
 	HUDViewModel* hudViewModel;
-    
+    SelectionView* weaponsSelectionView;
 	
 };
 

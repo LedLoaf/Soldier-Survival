@@ -12,9 +12,11 @@ public:
     Weapon(Type type);
     
     Type getType();
+    int getDamage();
 
 private:
     Type type;
+    int damage;
 };
     
 }

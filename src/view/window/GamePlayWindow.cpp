@@ -40,6 +40,14 @@ void GamePlayWindow::onArrowPressed(util::Key::Arrow arrow) {
 //			selectionView->selectNextElement();
 //	}
 
+    SelectionView* weaponSelectionView = hudView->getWeaponSelectionView();
+	if (arrow == util::Key::UP) {
+		if (weaponSelectionView->hasPreviousElement())
+			weaponSelectionView->selectPreviousElement();
+	} else if (arrow == util::Key::DOWN) {
+		if (weaponSelectionView->hasNextElement())
+			weaponSelectionView->selectNextElement();
+	}
 
 }
 

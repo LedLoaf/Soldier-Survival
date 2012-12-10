@@ -18,7 +18,7 @@ public:
 	virtual void update();
     virtual std::vector<sf::Drawable*> getDrawables();
     
-    std::string getTextFor(Util::Action action);
+    std::string getTextFor(util::Util::Action action);
 
     
     

@@ -40,19 +40,19 @@ bool SelectionViewModel::SelectableElement::isSelected() {
     return selected;
 }
 
-void SelectionViewModel::SelectableElement::setAction(Util::Action action) {
+void SelectionViewModel::SelectableElement::setAction(util::Util::Action action) {
 	this->action = action;
 }
 
 SelectionViewModel::SelectableElement::SelectableElement() {
 }
 
-SelectionViewModel::SelectableElement::SelectableElement(Util::Action action) {
+SelectionViewModel::SelectableElement::SelectableElement(util::Util::Action action) {
     this->action = action;
     this->selected = false;
 }
 
-Util::Action SelectionViewModel::SelectableElement::getAction() {
+util::Util::Action SelectionViewModel::SelectableElement::getAction() {
 	return action;
 }
 
@@ -60,8 +60,8 @@ SelectionViewModel::WeaponSelectableElement::WeaponSelectableElement(game::Weapo
     this->weapon = weapon;
 }
 
-game::Weapon::Type SelectionViewModel::WeaponSelectableElement::getWeaponType() {
-	return weapon->getType();
+game::Weapon* SelectionViewModel::WeaponSelectableElement::getWeapon() {
+	return weapon;
 }
 
 std::vector<SelectionViewModel::SelectableElement*> SelectionViewModel::getSelectableElements() {

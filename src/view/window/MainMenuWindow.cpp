@@ -21,10 +21,10 @@ void MainMenuWindow::initUI() {
 	addView(new ImageView(200, 10, 150, 200, util::Resource::MAIN_MENU_LOGO));    
     
 	selectionView = new SelectionView(200, 200, 200, 500, SelectionViewModel::SIMPLE_MENU);
-    selectionView->addElement(new SelectionViewModel::SelectableElement(Util::RUN_GAME_PLAY));    
-    selectionView->addElement(new SelectionViewModel::SelectableElement(Util::RUN_LEVEL_SELECTION));
-    selectionView->addElement(new SelectionViewModel::SelectableElement(Util::RUN_ABOUT));
-    selectionView->addElement(new SelectionViewModel::SelectableElement(Util::RUN_EXIT));
+    selectionView->addElement(new SelectionViewModel::SelectableElement(util::Util::RUN_GAME_PLAY));    
+    selectionView->addElement(new SelectionViewModel::SelectableElement(util::Util::RUN_LEVEL_SELECTION));
+    selectionView->addElement(new SelectionViewModel::SelectableElement(util::Util::RUN_ABOUT));
+    selectionView->addElement(new SelectionViewModel::SelectableElement(util::Util::RUN_EXIT));
     
     selectionView->selectElement(0);
     
@@ -50,13 +50,13 @@ void MainMenuWindow::onArrowPressed(util::Key::Arrow arrow) {
 
 
 void MainMenuWindow::onEnterPressed() {
-	Util::Action optionAction = selectionView->getSelectedElement()->getAction();
+	util::Util::Action optionAction = selectionView->getSelectedElement()->getAction();
 
-	if (optionAction == Util::RUN_LEVEL_SELECTION)
+	if (optionAction == util::Util::RUN_LEVEL_SELECTION)
 			game::Application::getInstance().getGameEngine()->runLevelSelection();
-    else if(optionAction == Util::RUN_EXIT)
+    else if(optionAction == util::Util::RUN_EXIT)
 			game::Application::getInstance().getGameEngine()->onExitGameRequest();
-    else if(optionAction == Util::RUN_GAME_PLAY)
+    else if(optionAction == util::Util::RUN_GAME_PLAY)
 			game::Application::getInstance().getGameEngine()->runGamePlay(new game::LevelDescription());
 	
 }

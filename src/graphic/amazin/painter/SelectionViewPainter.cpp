@@ -18,7 +18,7 @@
 namespace graphic {
 namespace amazin {
 
-SelectionViewPainter::SelectionViewPainter(view::SelectionViewModel* model, view::View::Type parentViewType) {
+SelectionViewPainter::SelectionViewPainter(view::SelectionViewModel* model) {
 	this->selectionModel = model;
     this->selectableElements = model->getSelectableElements();
     this->parentViewType = parentViewType;
@@ -34,14 +34,27 @@ void SelectionViewPainter::init() {
     int textSize;
     int paddingLeft, paddingTop;
     
-    if (parentViewType == view::View::MAIN_MENU_WINDOW) {
-        elementWidth = 300;
-        elementHeight = 50;
-        fontPath = "resource/graphic/amazin/font/magnum.ttf";
+    switch (selectionModel->getType()) {
+        case view::SelectionViewModel::SIMPLE_MENU :
+            elementWidth = 300;
+            elementHeight = 50;
+            fontPath = "resource/graphic/amazin/font/magnum.ttf";
+
+            textSize = 20;
+
+            paddingLeft = paddingTop = 5;
+            break;
             
-        textSize = 20;
-        
-        paddingLeft = paddingTop = 5;
+        case view::SelectionViewModel::WEAPONS :
+            elementWidth = 300;
+            elementHeight = 20;
+            fontPath = "resource/graphic/amazin/font/magnum.ttf";
+            
+            textSize = 10;
+            
+
+            paddingLeft = paddingTop = 5;
+            break;            
     }
  
     for (int i = 0; i < selectableElements.size(); i++) {
@@ -71,9 +84,12 @@ void SelectionViewPainter::init() {
                 view::SelectionViewModel::WeaponSelectableElement* weaponElement = 
                         dynamic_cast<view::SelectionViewModel::WeaponSelectableElement*>(selectableElements[i]);
 
+                
+                /* weapon image */
+                
                 std::string imgPath;
                 
-                switch (weaponElement->getWeaponType()) {
+                switch (weaponElement->getWeapon()->getType()) {
                     case game::Weapon::KNIFE :
                         imgPath = "resource/graphic/amazin/game_play/img/weapon/knife.jpg";
                 }
@@ -85,12 +101,24 @@ void SelectionViewPainter::init() {
                     std::cout << "Failed to load " << imgPath << std::endl;
                 }
 
-                sf::Sprite* sprite = new sf::Sprite;
-                sprite->SetX(selectionModel->getViewStartPosition()->getX() + paddingLeft);
-                sprite->SetY(selectionModel->getViewStartPosition()->getY() + i * elementHeight + paddingTop);    
-                sprite->SetImage(*image);
+                sf::Sprite* weaponImgSprite = new sf::Sprite;
+                weaponImgSprite->SetX(selectionModel->getViewStartPosition()->getX() + paddingLeft);
+                weaponImgSprite->SetY(selectionModel->getViewStartPosition()->getY() + i * elementHeight + paddingTop);    
+                weaponImgSprite->SetImage(*image);
                 
-                drawables.push_back(sprite);
+                drawables.push_back(weaponImgSprite);
+                
+                /* weapon damage */
+                
+                sf::String* text = new sf::String();
+                text->SetText(util::Util::toString(weaponElement->getWeapon()->getDamage()));
+                // przy text->SetFont(font) segmentation fault - cos zle z plikeim ttf
+                text->SetFont(sf::Font::GetDefaultFont());
+                text->SetSize(textSize);
+                text->SetX(selectionModel->getViewStartPosition()->getX() + weaponImgSprite->GetSize().x + 10);
+                text->SetY(selectionModel->getViewStartPosition()->getY() + i * elementHeight + paddingTop);    
+
+                drawables.push_back(text);                
         }        
     }    
     
@@ -113,15 +141,15 @@ void SelectionViewPainter::update() {
     }    
 }
 
-std::string SelectionViewPainter::getTextFor(Util::Action action) {
+std::string SelectionViewPainter::getTextFor(util::Util::Action action) {
     switch (action) {
-        case Util::RUN_LEVEL_SELECTION :
+        case util::Util::RUN_LEVEL_SELECTION :
             return "level selection";
-        case Util::RUN_ABOUT :
+        case util::Util::RUN_ABOUT :
             return "about";
-        case Util::RUN_EXIT :
+        case util::Util::RUN_EXIT :
             return "exit"; 
-        case Util::RUN_GAME_PLAY :
+        case util::Util::RUN_GAME_PLAY :
             return "play";             
         default:
             return "";

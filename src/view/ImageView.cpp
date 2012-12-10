@@ -7,6 +7,7 @@ namespace view {
 
 ImageView::ImageView(int xStart, int yStart, int xEnd, int yEnd, util::Resource::Type resource) : View(xStart, yStart, xEnd, yEnd) {
     imageViewModel = new ImageViewModel();
+    imageViewModel->setImageResource(resource);
     imageViewModel->setViewPosition(new util::Location::Position(xStart, yStart), new util::Location::Position(xEnd, yEnd));
 }
 

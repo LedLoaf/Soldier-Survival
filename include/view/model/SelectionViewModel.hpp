@@ -40,10 +40,10 @@ public:
 	class SelectableElement {
 	public:
         SelectableElement();
-        SelectableElement(Util::Action action);
+        SelectableElement(util::Util::Action action);
         
-        virtual void setAction(Util::Action action);
-		virtual Util::Action getAction();
+        virtual void setAction(util::Util::Action action);
+		virtual util::Util::Action getAction();
 		void setUnselected();
 		void setSelected();
         bool isSelected();
@@ -52,20 +52,19 @@ public:
         
 	private:
 		bool selected;
-        Util::Action action;
+        util::Util::Action action;
 	};
     
 	class WeaponSelectableElement : public SelectableElement {
 	public:
         WeaponSelectableElement(game::Weapon* weapon);
         
-        game::Weapon::Type getWeaponType();
-
         util::Location::Position getPosition();
+        game::Weapon* getWeapon();
         
 	private:
 		bool selected;
-        Util::Action action;
+        util::Util::Action action;
         game::Weapon* weapon;
 	};    
 
