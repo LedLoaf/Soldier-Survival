@@ -15,6 +15,7 @@ class GamePlayWindow : public Window {
 private:
     HUDView* hudView;
 	MapView* mapView;
+    MiniMapView* miniMapView;
     game::LevelDescription* levelDescription;
     game::LevelGenerator* levelGenerator;
 

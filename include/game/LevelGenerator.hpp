@@ -1,5 +1,5 @@
-#ifndef LEVEL_GENERATOR_DESCRIPTION_H_
-#define LEVEL_GENERATOR_DESCRIPTION_H_
+#ifndef LEVEL_GENERATOR_H_
+#define LEVEL_GENERATOR_H_
 
 #include <object/LevelDescription.hpp>
 

@@ -21,6 +21,16 @@ View::~View() {
 	// TODO Auto-generated destructor stub
 }
 
+util::Location::Position View::getStartPosition() {
+    return util::Location::Position(xStart, yStart);
+}
+
+util::Location::Position View::getEndPosition() {
+    return util::Location::Position(xEnd, yEnd);
+}
+
+util::Location::Position getEndPosition();
+
 bool View::hasViews() {
     if (views.size() > 0)
         return true;

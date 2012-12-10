@@ -10,6 +10,7 @@
 #include <graphic/amazin/painter/SelectionViewPainter.hpp>
 #include <graphic/amazin/painter/ImageViewPainter.hpp> 
 #include <graphic/amazin/painter/HUDViewPainter.hpp>
+#include <graphic/amazin/painter/MiniMapPainter.hpp>
 
 namespace graphic {
 namespace amazin {
@@ -22,7 +23,9 @@ SFMLAbstractViewPainter* SFMLAmazinGraphicEngine::getPainterForView(view::View* 
         case view::View::IMAGE_VIEW :
             return new graphic::amazin::ImageViewPainter(dynamic_cast<view::ImageView*>(view)->getModel(), parentViewType);
         case view::View::HUD_VIEW :
-            return new graphic::amazin::HUDViewPainter(dynamic_cast<view::HUDView*>(view)->getModel());            
+            return new graphic::amazin::HUDViewPainter(dynamic_cast<view::HUDView*>(view)->getModel());     
+        case view::View::MINI_MAP_VIEW :
+            return new graphic::amazin::MiniMapViewPainter(dynamic_cast<view::MiniMapView*>(view)->getModel());             
 	}
 
 

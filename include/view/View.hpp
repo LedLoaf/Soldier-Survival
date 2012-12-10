@@ -16,12 +16,15 @@ namespace view {
 class View {
 public:
 	enum Type {
-		SELECTION_VIEW, IMAGE_VIEW, HUD_VIEW, MAP_VIEW, 
+		SELECTION_VIEW, IMAGE_VIEW, HUD_VIEW, MAP_VIEW, MINI_MAP_VIEW,
         MAIN_MENU_WINDOW, GAME_PLAY_WINDOW
 	};
     
     View(int xStart, int yStart, int xEnd, int yEnd);
 
+    util::Location::Position getStartPosition();
+    util::Location::Position getEndPosition();
+    
     bool hasViews();
     void addView(View* view);
 	std::vector<View*> getViews();

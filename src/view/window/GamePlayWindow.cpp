@@ -21,6 +21,9 @@ GamePlayWindow::GamePlayWindow(game::LevelDescription* levelDescription) : Windo
     
     this->levelGenerator = new game::LevelGenerator(levelDescription);
 
+    util::SFMLResource::initGamePlayWindowResources();    
+    
+    
     initUI();
 }
 
@@ -29,13 +32,18 @@ void GamePlayWindow::initUI() {
     
     hudView = new HUDView(0, 0, game::Application::getInstance().getDeviceManager()->getScreenWidth(), 100);
     hudView->setHUDModel(levelGenerator->getHUDViewModel());
-
 	addView(hudView);
   
     
     mapView = new MapView(0, 0, game::Application::getInstance().getDeviceManager()->getScreenWidth(), 100);
     mapView->setMapModel(levelGenerator->getMapViewModel());
 	addView(mapView);
+    
+    
+    miniMapView = new MiniMapView(hudView->getEndPosition()->getX(), hudView->getStartPosition()->getY(), 
+            game::Application::getInstance().getDeviceManager()->getScreenWidth(), hudView->getStartPosition()->getY());
+    mapView->setMapModel(levelGenerator->getMapViewModel());
+    addView(miniMapView);
 }
 
 
