@@ -38,6 +38,7 @@ void SFMLAbstractGraphicEngine::initWindowPainters(Window* window) {
 	painters.clear();
     
     std::vector<view::View*> views = window->getViews();
+    
     std::vector<view::View*> allViews;
     std::copy(views.begin(), views.end(), std::back_inserter(allViews));
      
@@ -67,7 +68,42 @@ void SFMLAbstractGraphicEngine::initWindowPainters(Window* window) {
         painters.push_back(getPainterForView(*it, window->getType()));
     }
     
-    currentWindowPainting = window;
+    if (window->hasSubWindow()) {
+         std::vector<view::View*> views = window->getSubWindow()->getViews();
+
+         std::vector<view::View*> allViews;
+         std::copy(views.begin(), views.end(), std::back_inserter(allViews));
+
+         int size1 = allViews.size();
+
+         int distance;
+
+         std::vector<view::View*> subViews;
+
+
+         for (int i = 0; i < views.size(); i++) {
+             if (views[i]->hasViews()) {
+                 subViews = views[i]->getViews();
+                     for (int j = 0; j < subViews.size(); j++) 
+                         allViews.push_back(subViews[j]);
+             }
+
+             distance = views[i]->getViews().size();
+
+         }
+
+         int size2 = allViews.size();
+         view::View::Type type;
+
+         for(std::vector<view::View*>::iterator it = allViews.begin(); it != allViews.end(); ++it) {
+             type = (*it)->getType();
+             painters.push_back(getPainterForView(*it, window->getType()));
+         }     
+         
+        currentWindowPainting = window->getSubWindow();
+         
+    } else
+        currentWindowPainting = window;
 }
 
 

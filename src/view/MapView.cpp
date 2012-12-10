@@ -10,11 +10,6 @@ namespace view {
 MapView::MapView(int xStart, int yStart, int xEnd, int yEnd) : View(xStart, yStart, xEnd, yEnd) {
 }
 
-    
-    
-void MapView::generateLevel(game::LevelDescription* levelDescription) {
-	generateMapModel(levelDescription);
-}
 
 void MapView::moveCharacter(game::Character& ch, util::Location::Vector vector) {
 	// getPositionOf() jest generyczna - mozna tam podac np. referencje do danego kafeleku rzeki
@@ -34,20 +29,6 @@ bool canMoveCharacter(util::Location::Vector vector) {
 }
 
 
-void MapView::generateMapModel(game::LevelDescription* levelDescription) {
-	// tworze drogi, rzeki, postacie, itd
-	// wszystko w MapViewModel
-
-	// x, y kafelek - tam umieszczam Enemy
-
-	/*
-	 Character dostaje referencje do tego widoku, zeby mogl sie poruszac
-		kozystajac z metod canMoveCharacter() i moveCharacter()
-	 */
-
-
-//	mapModel.add(x, y, new Enemy(this))
-}
 
 View::Type MapView::getType() {
     return View::MAP_VIEW;

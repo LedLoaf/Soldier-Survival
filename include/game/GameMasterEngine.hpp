@@ -16,8 +16,7 @@ public:
 	void pauseLevel();
 	void resumeLevel();
 	void onLeftArrowPressed();
-
-    void onExitGameRequest();
+    void exitGame();
     
 private:
 	void returnToGame();

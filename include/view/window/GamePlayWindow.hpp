@@ -16,7 +16,7 @@ private:
     HUDView* hudView;
 	MapView* mapView;
     game::LevelDescription* levelDescription;
-    
+    game::LevelGenerator* levelGenerator;
 
 public:
 	GamePlayWindow(game::LevelDescription* levelDescription);
@@ -24,6 +24,7 @@ public:
         
 	virtual void onEnterPressed();
 	virtual void onArrowPressed(util::Key::Arrow arrow);
+    virtual void onEscPressed();
     
 	virtual Type getType();
     

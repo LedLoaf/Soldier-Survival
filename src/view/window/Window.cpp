@@ -4,7 +4,9 @@
 
 namespace view {
 
-Window::Window(int xStart, int yStart, int xEnd, int yEnd) : View(xStart, yStart, xEnd, yEnd) {}
+Window::Window(int xStart, int yStart, int xEnd, int yEnd) : View(xStart, yStart, xEnd, yEnd) {
+    subWindow = NULL;
+}
     
 
 
@@ -18,4 +20,13 @@ bool Window::hasSubWindow() {
 void Window::setSubWindow(Window* window) {
 	subWindow = window;
 }
+
+Window* Window::getSubWindow() {
+	return subWindow;
+}
+
+void Window::onEscPressed() {
+}
+
+
 }

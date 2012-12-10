@@ -31,7 +31,8 @@ void SFMLEventHandler::processEvent() {
 			}
             
         if (Event.Type == sf::Event::Closed)
-                Application::getInstance().getGameEngine()->onExitGameRequest();
+//                Application::getInstance().getGameEngine()->onExitGameRequest();
+                Application::getInstance().getContext()->getActiveWindow()->onEscPressed();
 	}
 
 }

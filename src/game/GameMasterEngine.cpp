@@ -66,15 +66,8 @@ void GameMasterEngine::returnToGame() {
 //	context->setActiveWindow(parentWindow);
 }
 
-void GameMasterEngine::onExitGameRequest() {
-    if (Application::getInstance().getContext()->getActiveWindow()->getType() == view::View::MAIN_MENU_WINDOW)
+void GameMasterEngine::exitGame() {
         Application::getInstance().exit();
-    else if (Application::getInstance().getContext()->getActiveWindow()->getType() == view::View::GAME_PLAY_WINDOW) {
-        // TODO: wyswietlic subwindow i potwierdzic chec wyjscia z gry + ewentualny zapis gry
-        Application::getInstance().exit();
-
-    }
-    
 }
 
 

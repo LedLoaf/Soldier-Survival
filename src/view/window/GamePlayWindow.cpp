@@ -1,5 +1,6 @@
 #include <view/window/Window.hpp>
 #include <view/window/GamePlayWindow.hpp>
+#include <view/window/PauseWindow.hpp>
 #include <game/Application.hpp>
 
 namespace view {
@@ -17,28 +18,28 @@ GamePlayWindow::GamePlayWindow(game::LevelDescription* levelDescription) : Windo
 //		this.miniMapWindow = new MiniMapWindow();
 
 //      this.player = mapHandler->getPlayer();
+    
+    this->levelGenerator = new game::LevelGenerator(levelDescription);
 
     initUI();
 }
 
 
 void GamePlayWindow::initUI() {
-    hudView = new HUDView(0, 0, game::Application::getInstance().getDeviceManager()->getScreenWidth(), 100);
-   
     
+    hudView = new HUDView(0, 0, game::Application::getInstance().getDeviceManager()->getScreenWidth(), 100);
+    hudView->setHUDModel(levelGenerator->getHUDViewModel());
+
 	addView(hudView);
   
+    
+    mapView = new MapView(0, 0, game::Application::getInstance().getDeviceManager()->getScreenWidth(), 100);
+    mapView->setMapModel(levelGenerator->getMapViewModel());
+	addView(mapView);
 }
 
 
 void GamePlayWindow::onArrowPressed(util::Key::Arrow arrow) {
-//	if (arrow == util::Key::UP) {
-//		if (selectionView->hasPreviousElement())
-//			selectionView->selectPreviousElement();
-//	} else if (arrow == util::Key::DOWN) {
-//		if (selectionView->hasNextElement())
-//			selectionView->selectNextElement();
-//	}
 
     SelectionView* weaponSelectionView = hudView->getWeaponSelectionView();
 	if (arrow == util::Key::UP) {
@@ -60,6 +61,11 @@ void GamePlayWindow::onEnterPressed() {
 //    else if(optionAction == Util::RUN_EXIT)
 //			game::Application::getInstance().getGameEngine()->onExitGameRequest();
 	
+}
+
+void GamePlayWindow::onEscPressed() {
+	subWindow = new PauseWindow();
+  	game::Application::getInstance().getContext()->setActiveWindow(subWindow);  
 }
 
 View::Type GamePlayWindow::getType() {

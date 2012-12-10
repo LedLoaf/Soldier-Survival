@@ -55,11 +55,16 @@ void MainMenuWindow::onEnterPressed() {
 	if (optionAction == util::Util::RUN_LEVEL_SELECTION)
 			game::Application::getInstance().getGameEngine()->runLevelSelection();
     else if(optionAction == util::Util::RUN_EXIT)
-			game::Application::getInstance().getGameEngine()->onExitGameRequest();
+			game::Application::getInstance().getGameEngine()->exitGame();
     else if(optionAction == util::Util::RUN_GAME_PLAY)
 			game::Application::getInstance().getGameEngine()->runGamePlay(new game::LevelDescription());
 	
 }
+
+void MainMenuWindow::onEscPressed() {
+    game::Application::getInstance().getGameEngine()->exitGame();
+}
+
 
 View::Type MainMenuWindow::getType() {
     return View::MAIN_MENU_WINDOW;

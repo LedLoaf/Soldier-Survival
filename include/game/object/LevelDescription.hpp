@@ -5,7 +5,8 @@
 namespace game {
 
 class LevelDescription {
-
+    float getEnemyDensity();
+    // statystyki przeciwnikow
 };
 
 }

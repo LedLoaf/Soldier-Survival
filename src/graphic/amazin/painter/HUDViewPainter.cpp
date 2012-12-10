@@ -140,7 +140,7 @@ sf::Sprite* HUDViewPainter::getHealthIndicatorItem(int health) {
 }
 
 
-std::string HUDViewPainter::getTextFor(Util::Action action) {
+std::string HUDViewPainter::getTextFor(util::Util::Action action) {
     switch (action) {
         case Util::RUN_LEVEL_SELECTION :
             return "level selection";

@@ -1,5 +1,5 @@
-#ifndef MAIN_MENU_WINDOW_HPP_
-#define MAIN_MENU_WINDOW_HPP_
+#ifndef PAUSE_WINDOW_HPP_
+#define PAUSE_WINDOW_HPP_
 
 #include <iostream>
 #include <list>
@@ -11,9 +11,9 @@
 
 namespace view {
 
-class MainMenuWindow : public Window {
+class PauseWindow : public Window {
 public:
-	MainMenuWindow();
+	PauseWindow();
 	void initUI();
 
 	virtual void onArrowPressed(util::Key::Arrow arrow);
