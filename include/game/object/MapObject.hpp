@@ -7,7 +7,19 @@ namespace game {
 class MapObject {
 public:
     enum Type {
-        PLAYER, ENEMY_SHOOTER, ENEMY_ABC, GREEN_GRASS, YELLOW_GRASS, RIVER
+        GRASS,
+        SAND,
+        GROUND,
+        WALL,
+        RIVER,
+        BRIDGE,
+        ROAD,
+        TREE,
+        ENEMY_A,
+        ENEMY_B,
+        BOSS,
+        TRADER,
+        PLAYER
     };    
     
 

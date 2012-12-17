@@ -20,9 +20,10 @@ public:
     game::MapObject* getVisibleMapObjectAt(int x, int y); 
     
 	void put(util::Location::Position position, const game::Character& ch);
-//	void put(util::Location::Position position, const game::object::Terrain& terrain);
+	void put(util::Location::Position position, const game::object::Terrain& terrain);
 
     game::Player* getPlayer();
+    
 };
 
 } /* namespace view */
