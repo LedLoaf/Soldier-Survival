@@ -2,6 +2,7 @@
 #include <string>
 
 #include "view/model/MapViewModel.hpp"
+#include "game/object/MapObject.hpp"
 
 namespace util {
 
@@ -14,8 +15,8 @@ SFMLAmazinResource* SFMLAmazinResource::getInstance() {
 	return SFMLAmazinResource::instance;
 }    
     
-sf::Image* SFMLAmazinResource::getImage(view::MapViewModel::Element element) {
-    return imageResourceMap.find(element)->second;
+sf::Image* SFMLAmazinResource::getImage(game::MapObject::Type mapObjectType) {
+    return imageResourceMap.find(mapObjectType)->second;
 }
 
 void SFMLAmazinResource::init() {
@@ -26,8 +27,8 @@ void SFMLAmazinResource::init() {
         std::cout << "Failed to load " << grassYellowPath << std::endl;
     }    
     
-    imageResourceMap.insert(std::pair<view::MapViewModel::Element, sf::Image*>(
-        view::MapViewModel::YELLOW_GRASS, image));
+    imageResourceMap.insert(std::pair<game::MapObject::Type, sf::Image*>(
+        game::MapObject::YELLOW_GRASS, image));
 
     
     
@@ -38,8 +39,8 @@ void SFMLAmazinResource::init() {
         std::cout << "Failed to load " << grassYellowPath << std::endl;
     }    
     
-    imageResourceMap.insert(std::pair<view::MapViewModel::Element, sf::Image*>(
-        view::MapViewModel::GREEN_GRASS, image));    
+    imageResourceMap.insert(std::pair<game::MapObject::Type, sf::Image*>(
+        game::MapObject::GREEN_GRASS, image));    
     
     
 }

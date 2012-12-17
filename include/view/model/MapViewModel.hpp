@@ -10,19 +10,19 @@ namespace view {
 
 class MapViewModel : ViewModel {
 public:
-    enum Element {
-        PLAYER, ENEMY_SHOOTER, ENEMY_ABC, GREEN_GRASS, YELLOW_GRASS, RIVER
-    };    
-    
+
 	void remove(util::Location::Position position, const game::Character& ch);
 //	void remove(util::Location::Position position, const game::Terrain& terrain);
 
 
-	util::Location::Position getPositionOf(const game::Character& ch);
+	util::Location::Position getPositionOf(const game::Character* ch);
 
+    game::MapObject* getVisibleMapObjectAt(int x, int y); 
+    
 	void put(util::Location::Position position, const game::Character& ch);
 //	void put(util::Location::Position position, const game::object::Terrain& terrain);
 
+    game::Player* getPlayer();
 };
 
 } /* namespace view */

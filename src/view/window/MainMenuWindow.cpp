@@ -35,7 +35,6 @@ void MainMenuWindow::initUI() {
 
     addView(new TextView(0, game::Application::getInstance().getDeviceManager()->getScreenHeight() - 50, 
             500, game::Application::getInstance().getDeviceManager()->getScreenHeight() - 50, "Soldier: Survival by 34fun team", TextView::SMALL));
-
 }
 
 
