@@ -18,6 +18,8 @@ public:
     bool canMoveCharacter(util::Location::Vector vector); 
     
     void setMapModel(MapViewModel* mapModel);
+    
+    game::Player* getPlayer();
 };
 
 }

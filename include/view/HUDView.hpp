@@ -14,7 +14,6 @@ namespace view {
 class HUDView : public View {
 public:
     HUDView(int xStart, int yStart, int xEnd, int yEnd);
-    void setHUDModel(HUDViewModel* hudViewModel);
     HUDViewModel* getModel();
     
     virtual View::Type getType();

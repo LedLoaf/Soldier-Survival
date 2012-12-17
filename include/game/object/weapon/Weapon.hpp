@@ -3,19 +3,18 @@
 
 namespace game {
     
-class Weapon {
+class Weapon : public Equipment::EquipmentItem {
 public:
-    enum Type {
-        KNIFE
-    };
     
-    Weapon(Type type);
+    Weapon(Equipment::EquipmentItem::Type type);
     
-    Type getType();
+    Equipment::EquipmentItem::Type getType();
     int getDamage();
 
+    static bool isWeapon(Equipment::EquipmentItem equipmentItem);
+    
 private:
-    Type type;
+    Equipment::EquipmentItem::Type type;
     int damage;
 };
     

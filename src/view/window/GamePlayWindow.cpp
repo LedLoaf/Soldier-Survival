@@ -4,6 +4,7 @@
 #include <game/Application.hpp>
 
 #include "util/SFMLAmazinResource.hpp"
+#include "game/LevelGenerator.hpp"
 
 namespace view {
 
@@ -11,16 +12,6 @@ GamePlayWindow::GamePlayWindow(game::LevelDescription* levelDescription) : Windo
         game::Application::getInstance().getDeviceManager()->getScreenWidth())  { 
     
     this->levelDescription = levelDescription;
-
-//    this->mapView = new MapView(0, 200, game::Application::getInstance().getDeviceManager()->getScreenWidth(), 
-//            game::Application::getInstance().getDeviceManager()->getScreenHeight() - 200);
-//    this->mapView->generateLevel(levelDescription);
-    
-    
-//		this.miniMapWindow = new MiniMapWindow();
-
-//      this.player = mapHandler->getPlayer();
-    
     this->levelGenerator = new game::LevelGenerator(levelDescription);
     
     initUI();
@@ -29,8 +20,7 @@ GamePlayWindow::GamePlayWindow(game::LevelDescription* levelDescription) : Windo
 
 void GamePlayWindow::initUI() {
     
-    hudView = new HUDView(0, 0, game::Application::getInstance().getDeviceManager()->getScreenWidth(), 100);
-    hudView->setHUDModel(levelGenerator->getHUDViewModel());
+    hudView = new HUDView(0, 0, game::Application::getInstance().getDeviceManager()->getScreenWidth(), 100, levelGenerator->getHUDViewModel());
 	addView(hudView);
   
     
@@ -54,11 +44,18 @@ void GamePlayWindow::onArrowPressed(util::Key::Arrow arrow) {
     else {
         SelectionView* weaponSelectionView = hudView->getWeaponSelectionView();
         if (arrow == util::Key::UP) {
-            if (weaponSelectionView->hasPreviousElement())
+            if (weaponSelectionView->hasPreviousElement()) {
                 weaponSelectionView->selectPreviousElement();
+                mapView->getPlayer()->
+                        setCurrentWeapon(dynamic_cast<view::SelectionViewModel::WeaponSelectableElement*>
+                            (weaponSelectionView->getSelectedElement())->getWeapon());
+            }
         } else if (arrow == util::Key::DOWN) {
             if (weaponSelectionView->hasNextElement())
                 weaponSelectionView->selectNextElement();
+                mapView->getPlayer()->
+                        setCurrentWeapon(dynamic_cast<view::SelectionViewModel::WeaponSelectableElement*>
+                            (weaponSelectionView->getSelectedElement())->getWeapon());                
         }
     }
 }

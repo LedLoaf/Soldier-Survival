@@ -1,5 +1,7 @@
 #include <game/object/weapon/Weapon.hpp>
 
+#include "game/object/Equipment.hpp"
+
 namespace game {
     
 Weapon::Weapon(Weapon::Type type) {
@@ -15,6 +17,16 @@ int Weapon::getDamage() {
     return damage;
 }
 
+static bool Weapon::isWeapon(Equipment::EquipmentItem equipmentItem) {
+    switch (equipmentItem->getType()) {
+        case Equipment::EquipmentItem::GUN :
+        return true;
+        case Equipment::EquipmentItem::KNIFE :
+        return true;
+        case Equipment::EquipmentItem::RIFLE :
+        return true;        
+    }
+}
 
 
 }

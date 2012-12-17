@@ -28,6 +28,8 @@ public:
     
     void setWeapons(std::vector<game::Weapon*> weapons);
 
+    void setPlayerEquipment(game::Equipment* equipment);
+    game::Equipment* getPlayerEquipment();
 private:
 
 };
