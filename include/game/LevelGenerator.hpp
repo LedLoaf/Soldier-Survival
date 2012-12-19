@@ -3,6 +3,9 @@
 
 #include <object/LevelDescription.hpp>
 
+#include "object/Player.hpp"
+#include "object/MapObject.hpp"
+
 
 
 namespace game {
@@ -16,17 +19,20 @@ public:
     
 private:
     game::LevelDescription* levelDescription;
+    view::MapViewModel* mapModel;
+    Player* player;
     
     void generateWalls();
     void generateForest();
     void generateRivers();
+    void generatePlayer();
     void placeEnemies();
     void placeBoss();
     void placeNPC();
-    void placePlayer();
-    void placeRandomly(Point *p, int dx, int dy, float density, tileType tt);
-    bool checkClearAround(Point *p, int radius);
-    bool placeRiverOrBridge(Point *p, int bridgeProbability);
+    void placePlayer(Player* player);
+    void placeRandomly(util::Location::Position *p, int dx, int dy, float density, MapObject::Type tt);
+    bool checkClearAround(util::Location::Position *p, int radius);
+    bool placeRiverOrBridge(util::Location::Position *p, int bridgeProbability);
 };
 
 }

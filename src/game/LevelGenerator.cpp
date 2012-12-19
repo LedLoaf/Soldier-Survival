@@ -1,21 +1,28 @@
+#include <math.h>
+
 #include <game/LevelGenerator.hpp>
 #include <game/object/LevelDescription.hpp>
 
 #include "view/model/HUDViewModel.hpp"
+#include "game/object/Obstacle.hpp"
+#include "game/object/MapObject.hpp"
+#include "game/object/Enemy.hpp"
+#include "game/object/Equipment.hpp"
 
 namespace game {
 
 LevelGenerator::LevelGenerator(game::LevelDescription* levelDescription) {
     this->levelDescription = levelDescription;
     
-    mapModel = new view::MapViewModel(levelDescription->getSizeWidth(), levelDescription->getSizeHeight());
+    mapModel = new view::MapViewModel(levelDescription->getMapWidth(), levelDescription->getMapHeight());
     
-    map = new tileType*[height];
-    for (int i = 0; i < height; ++i) {
-        for (int j = 0; j < width; ++j) {
-            mapModel->put(new util::Location::Position(i, j), new game::object::Terrain(GRASS));
-        }
-    }
+    
+//    map = new tileType*[mapModel->getMapHeight()];
+//    for (int i = 0; i < mapModel->getMapHeight(); ++i) {
+//        for (int j = 0; j < mapModel->getMapWidth(); ++j) {
+//            mapModel->put(new util::Location::Position(i, j), new game::MapObject(MapObject::));
+//        }
+//    }
     
 	this->generateWalls();
 	this->generateForest();
@@ -23,14 +30,15 @@ LevelGenerator::LevelGenerator(game::LevelDescription* levelDescription) {
 	this->placeEnemies();
 	this->placeNPC();
 	this->placeBoss();
-	this->placePlayer();
+    
+	this->placePlayer(this->generatePlayer());
 }
 
 void LevelGenerator::generateWalls() {
-    for (int i = 0; i < height; ++i) {
-        for (int j = 0; j < width; ++j) {
-            if (i == 0 || i == height-1 || j == 0 || j == width-1) {
-                mapModel->put(new util::Location::Position(i, j), new game::object::Obstacle(WALL));
+    for (int i = 0; i < mapModel->getMapHeight(); ++i) {
+        for (int j = 0; j < mapModel->getMapWidth(); ++j) {
+            if (i == 0 || i == mapModel->getMapHeight()-1 || j == 0 || j == mapModel->getMapWidth()-1) {
+                mapModel->put(new util::Location::Position(i, j), new game::MapObject(game::MapObject::WALL));
                 //std::cout << i << "," << j << " -> WALL" << std::endl;
             }
         }
@@ -42,101 +50,106 @@ void LevelGenerator::generateForest() {
     
     for (int x = 0; x < cntForests; ++x) {
         
-        Point *p = new Point(rand() % width, rand() % height);
-        int dx = (rand() % 30 + 5) * width;
-        int dy = (rand() % 30 + 5) * height;
-        dx = roundf((float)dx / 100);
-        dy = roundf((float)dy / 100);
+        util::Location::Position *p = new util::Location::Position(rand() % mapModel->getMapWidth(), rand() % mapModel->getMapHeight());
+        int dx = (rand() % 30 + 5) * mapModel->getMapWidth();
+        int dy = (rand() % 30 + 5) * mapModel->getMapHeight();
+        dx = round((float)dx / 100);
+        dy = round((float)dy / 100);
         
-        //std::cout << p->x << "," << p->y << " FIELD: " << dx << "x" << dy << " -> FOREST CENTER" << std::endl;
+        //std::cout << p->getX() << "," << p->getY() << " FIELD: " << dx << "x" << dy << " -> FOREST CENTER" << std::endl;
         
-        this->placeRandomly(p, dx, dy, 0.10, new game::object::Obstacle(TREE));
+        this->placeRandomly(p, dx, dy, 0.10, new MapObject(MapObject::TREE));
         
     }
 }
 
 void LevelGenerator::generateRivers() {
     
-    Point *p;
-    vectorDirection oryginalVector, vector;
-    oryginalVector = vector = (vectorDirection)(rand() % 4);
+    util::Location::Position *p;
+    util::Location::Vector vectorPool[4], oryginalVector, vector;
+    vectorPool[0] = util::Location::Vector::UP;
+    vectorPool[1] = util::Location::Vector::RIGHT;
+    vectorPool[2] = util::Location::Vector::DOWN;
+    vectorPool[3] = util::Location::Vector::LEFT;
     
-    int twistedRiver = rand() % (height/8) + 3;
+    oryginalVector = vector = vectorPool[(rand() % 4)];
+    
+    int twistedRiver = rand() % (mapModel->getMapHeight()/8) + 3;
     
     int bridgeProbability = rand() % 3 + 95;
     
-    if (vector == vdDown) { // topside -> down
-        p = new Point(rand() % (width-2) + 1, 0);
-    } else if (vector == vdLeft) { // rightside -> left
-        p = new Point(width-1, rand() % (height-2) + 1);
-    } else if (vector == vdUp) { // bottomside -> up
-        p = new Point(rand() % (width-2) + 1, height-1);
+    if (vector == util::Location::Vector::DOWN) { // topside -> down
+        p = new util::Location::Position(rand() % (mapModel->getMapWidth()-2) + 1, 0);
+    } else if (vector == util::Location::Vector::LEFT) { // rightside -> left
+        p = new util::Location::Position(mapModel->getMapWidth()-1, rand() % (mapModel->getMapHeight()-2) + 1);
+    } else if (vector == util::Location::Vector::UP) { // bottomside -> up
+        p = new util::Location::Position(rand() % (mapModel->getMapWidth()-2) + 1, mapModel->getMapHeight()-1);
     } else { // leftside -> right
-        p = new Point(0, rand() % (height-2) + 1);
+        p = new util::Location::Position(0, rand() % (mapModel->getMapHeight()-2) + 1);
     }
     
-    mapModel->put(new util::Location::Position(p->x, p->y), new game::object::Obstacle(RIVER));
-    std::cout << "River starts: " << p->x << "," << p->y << std::endl;
+    mapModel->put(new util::Location::Position(p->getX(), p->getY()), new game::MapObject(MapObject::RIVER));
+    std::cout << "River starts: " << p->getX() << "," << p->getY() << std::endl;
     
     bool notEnd = true;
     while (notEnd) {
         int len = rand() % twistedRiver + 3;
-        if (vector == vdDown || vector == vdUp) {
-            len *= height;
+        if (vector == util::Location::Vector::DOWN || vector == util::Location::Vector::UP) {
+            len *= mapModel->getMapHeight();
         } else {
-            len *= width;
+            len *= mapModel->getMapWidth();
         }
-        len = roundf((float)len / 100);
+        len = round((float)len / 100);
         std::cout << "River len: " << len << " direction to " << vector << std::endl;
         
-        if (vector == vdDown) {
-            int sectionLen = p->y + len;
-            for (; p->y <= sectionLen; ++p->y) {
+        if (vector == util::Location::Vector::DOWN) {
+            int sectionLen = p->getY() + len;
+            for (; p->getY() <= sectionLen; ++p->getY()) {
                 notEnd = placeRiverOrBridge(p, bridgeProbability);
             }
-        } else if (vector == vdLeft) {
-            int sectionLen = p->x - len;
-            for (; p->x >= sectionLen; --p->x) {
+        } else if (vector == util::Location::Vector::LEFT) {
+            int sectionLen = p->getX() - len;
+            for (; p->getX() >= sectionLen; --p->getX()) {
                 notEnd = placeRiverOrBridge(p, bridgeProbability);
             }
-        } else if (vector == vdUp) {
-            int sectionLen = p->y - len;
-            for (; p->y >= sectionLen; --p->y) {
+        } else if (vector == util::Location::Vector::UP) {
+            int sectionLen = p->getY() - len;
+            for (; p->getY() >= sectionLen; --p->getY()) {
                 notEnd = placeRiverOrBridge(p, bridgeProbability);
             }
-        } else if (vector == vdRight) {
-            int sectionLen = p->x + len;
-            for (; p->x <= sectionLen; ++p->x) {
+        } else if (vector == util::Location::Vector::RIGHT) {
+            int sectionLen = p->getX() + len;
+            for (; p->getX() <= sectionLen; ++p->getX()) {
                 notEnd = placeRiverOrBridge(p, bridgeProbability);
             }
         }
         
         bool randomReady = false;
         while (!randomReady) {
-            vectorDirection newVector = (vectorDirection)(rand() % 4);
-            if (oryginalVector == vdDown && newVector == vdUp) {
+            util::Location::Vector newVector = vectorPool[(rand() % 4)];
+            if (oryginalVector == util::Location::Vector::DOWN && newVector == util::Location::Vector::UP) {
                 continue;
             }
-            if (oryginalVector == vdLeft && newVector == vdRight) {
+            if (oryginalVector == util::Location::Vector::LEFT && newVector == util::Location::Vector::RIGHT) {
                 continue;
             }
-            if (oryginalVector == vdUp && newVector == vdDown) {
+            if (oryginalVector == util::Location::Vector::UP && newVector == util::Location::Vector::DOWN) {
                 continue;
             }
-            if (oryginalVector == vdRight && newVector == vdLeft) {
+            if (oryginalVector == util::Location::Vector::RIGHT && newVector == util::Location::Vector::LEFT) {
                 continue;
             }
             
-            if (vector == vdDown && newVector == vdUp) {
+            if (vector == util::Location::Vector::DOWN && newVector == util::Location::Vector::UP) {
                 continue;
             }
-            if (vector == vdLeft && newVector == vdRight) {
+            if (vector == util::Location::Vector::LEFT && newVector == util::Location::Vector::RIGHT) {
                 continue;
             }
-            if (vector == vdUp && newVector == vdDown) {
+            if (vector == util::Location::Vector::UP && newVector == util::Location::Vector::DOWN) {
                 continue;
             }
-            if (vector == vdRight && newVector == vdLeft) {
+            if (vector == util::Location::Vector::RIGHT && newVector == util::Location::Vector::LEFT) {
                 continue;
             }
             vector = newVector;
@@ -145,15 +158,23 @@ void LevelGenerator::generateRivers() {
         
         //notEnd = false;
     }
-    std::cout << "River starts: " << p->x << "," << p->y << std::endl;
+    std::cout << "River starts: " << p->getX() << "," << p->getY() << std::endl;
 }
 
-bool LevelGenerator::placeRiverOrBridge(Point *p, int bridgeProbability) {
-    if (p->x >= 0 && p->x < width && p->y >= 0 && p->y < height) {
-        if (p->x >= 1 && p->x < width-1 && p->y >= 1 && p->y < height-1 && rand() % 100 > bridgeProbability) {
-            mapModel->put(new util::Location::Position(p->x, p->y), new game::object::Terrain(BRIDGE));
+Player* LevelGenerator::generatePlayer() {
+    Player* player = new Player(levelDescription->getPlayerEquipment());
+    player->setHealth(levelDescription->getPlayerHealth());
+    // inne rzeczy zwiazane z playerem
+    
+    return player;
+}
+
+bool LevelGenerator::placeRiverOrBridge(util::Location::Position *p, int bridgeProbability) {
+    if (p->getX() >= 0 && p->getX() < mapModel->getMapWidth() && p->getY() >= 0 && p->getY() < mapModel->getMapHeight()) {
+        if (p->getX() >= 1 && p->getX() < mapModel->getMapWidth()-1 && p->getY() >= 1 && p->getY() < mapModel->getMapHeight()-1 && rand() % 100 > bridgeProbability) {
+            mapModel->put(new util::Location::Position(p->getX(), p->getY()), new MapObject(MapObject::BRIDGE));
         } else {
-            mapModel->put(new util::Location::Position(p->x, p->y), new game::object::Obstacle(RIVER));
+            mapModel->put(new util::Location::Position(p->getX(), p->getY()), new MapObject(MapObject::RIVER));
         }
         return true;
     } else {
@@ -166,54 +187,54 @@ void LevelGenerator::placeEnemies() {
     
     for (int x = 0; x < cntEnemies; ++x) {
         
-        Point *p = new Point(rand() % width, rand() % height);
-        int dx = (rand() % 5 + 3) * width;
-        int dy = (rand() % 5 + 3) * height;
-        dx = roundf((float)dx / 100);
-        dy = roundf((float)dy / 100);
+        util::Location::Position *p = new util::Location::Position(rand() % mapModel->getMapWidth(), rand() % mapModel->getMapHeight());
+        int dx = (rand() % 5 + 3) * mapModel->getMapWidth();
+        int dy = (rand() % 5 + 3) * mapModel->getMapHeight();
+        dx = round((float)dx / 100);
+        dy = round((float)dy / 100);
         
-        //std::cout << p->x << "," << p->y << " FIELD: " << dx << "x" << dy << " -> FOREST CENTER" << std::endl;
+        //std::cout << p->getX() << "," << p->getY() << " FIELD: " << dx << "x" << dy << " -> FOREST CENTER" << std::endl;
         
-        this->placeRandomly(p, dx, dy, LevelDescription->getEnemyDensity(), ttEnemy);
+        this->placeRandomly(p, dx, dy, LevelDescription->getEnemyDensity(), new Enemy());
         
     }
 }
 
 void LevelGenerator::placeNPC() {
-    Point *p = new Point();
+    util::Location::Position *p = new util::Location::Position();
     
-    int hh = height/2;
-    int hw = width/2;
-    int dh = height/5;
-    int dw = width/5;
+    int hh = mapModel->getMapHeight()/2;
+    int hw = mapModel->getMapWidth()/2;
+    int dh = mapModel->getMapHeight()/5;
+    int dw = mapModel->getMapWidth()/5;
     
     bool NPCPlaced = false;
     while (!NPCPlaced) {
         std::cout << "NPC Placing" << std::endl;
         
-        p->x = rand() % (2*dw) + hw-dw;
-        p->y = rand() % (2*dh) + hh-dh;
+        p->getX() = rand() % (2*dw) + hw-dw;
+        p->getY() = rand() % (2*dh) + hh-dh;
         
         if (this->checkClearAround(p, 1)) {
-            mapModel->put(new util::Location::Position(p->x, p->y), new game::Character(TRADER));
+            mapModel->put(new util::Location::Position(p->getX(), p->getY()), new Trader());
             NPCPlaced = true;
         }
     }
 }
 
-void LevelGenerator::placePlayer() {
+void LevelGenerator::placePlayer(Player* player) {
     // always left side
-    Point *p = new Point();
+    util::Location::Position *p = new util::Location::Position();
     
     bool playerPlaced = false;
     while (!playerPlaced) {
         std::cout << "Player Placing" << std::endl;
         
-        p->x = rand() % (width / 10) + 2;
-        p->y = rand() % (height - 2) + 2;
+        p->getX() = rand() % (mapModel->getMapWidth() / 10) + 2;
+        p->getY() = rand() % (mapModel->getMapHeight() - 2) + 2;
         
         if (this->checkClearAround(p, 1)) {
-            mapModel->put(new util::Location::Position(p->x, p->y), new game::Character(PLAYER));
+            mapModel->put(new util::Location::Position(p->getX(), p->getY()), player);
             playerPlaced = true;
         }
     }
@@ -221,37 +242,37 @@ void LevelGenerator::placePlayer() {
 
 void LevelGenerator::placeBoss() {
     // always right side
-    Point *p = new Point();
+    util::Location::Position *p = new util::Location::Position();
     
     bool bossPlaced = false;
     while (!bossPlaced) {
         std::cout << "BOSS Placing" << std::endl;
         
-        p->x = width - 2 - rand() % (width / 10);
-        p->y = rand() % (height - 2) + 2;
+        p->getX() = mapModel->getMapWidth() - 2 - rand() % (mapModel->getMapWidth() / 10);
+        p->getY() = rand() % (mapModel->getMapHeight() - 2) + 2;
         
         if (this->checkClearAround(p, 1)) {
-            mapModel->put(new util::Location::Position(p->x, p->y), new game::Character(BOSS));
+            mapModel->put(new util::Location::Position(p->getX(), p->getY()), new Enemy(Enemy::BOSS));
             bossPlaced = true;
         }
     }
 }
 
-bool LevelGenerator::checkClearAround(Point *p, int radius) {
+bool LevelGenerator::checkClearAround(util::Location::Position *p, int radius) {
     
     
-    int max_y = (p->y + radius > width-1) ? width-1 : p->y + radius;
-    int min_y = (p->y - radius < 1) ? 1 : p->y - radius;
-    int max_x = (p->x + radius > height-1) ? height-1 : p->x + radius;
-    int min_x = (p->x - radius < 1) ? 1 : p->x - radius;
+    int max_y = (p->getY() + radius > mapModel->getMapWidth()-1) ? mapModel->getMapWidth()-1 : p->getY() + radius;
+    int min_y = (p->getY() - radius < 1) ? 1 : p->getY() - radius;
+    int max_x = (p->getX() + radius > mapModel->getMapHeight()-1) ? mapModel->getMapHeight()-1 : p->getX() + radius;
+    int min_x = (p->getX() - radius < 1) ? 1 : p->getX() - radius;
     
-    std::cout << "Trying to place! [" << p->x << "," << p->y << "], {" << min_x << "-" << max_x << ", " << min_y << "-" << max_y << "}" << std::endl;
+    std::cout << "Trying to place! [" << p->getX() << "," << p->getY() << "], {" << min_x << "-" << max_x << ", " << min_y << "-" << max_y << "}" << std::endl;
     
     
     for (int i = min_y; i <= max_y; ++i) {
         for (int j = min_x; j <= max_x; ++j) {
             std::cout << "   [" << j << "," << i << "] -> " << this->convertTileTypeToChar(map[j][i]) << std::endl;
-            if (!mapModel->isTypeOfTerrain(i, j)) {
+            if (!MapObject::isTerrain(mapModel->get(i, j)) {
                 return false;
             }
         }
@@ -259,25 +280,27 @@ bool LevelGenerator::checkClearAround(Point *p, int radius) {
     return true;
 }
 
-void LevelGenerator::placeRandomly(Point *p, int dx, int dy, float density, void tt) {
+void LevelGenerator::placeRandomly(util::Location::Position *p, int dx, int dy, float density, void tt) {
     int ttCount = dx*dy;
     ttCount = (float)ttCount * density;
     //ttCount = roundf((float)ttCount / 100);
     std::cout << "dx: " << dx << ", dy: " << dy << " dens: " << density << ", ttCount: " << ttCount << " (" << (ttCount/(dx*dy)) << "%)" << std::endl;
     
-    int x1 = p->x - dx/2;
-    int x2 = p->x + dx/2;
-    int y1 = p->y - dy/2;
-    int y2 = p->y + dy/2;
+    int x1 = p->getX() - dx/2;
+    int x2 = p->getX() + dx/2;
+    int y1 = p->getY() - dy/2;
+    int y2 = p->getY() + dy/2;
     
     //std::cout << "Field: " << x1 << ","  << x2 << ","  << y1 << "," << y2 << std::endl;
     int i = 0, j = 0;
     while (i < ttCount) {
-        Point *ptt = new Point(rand() % dx + p->x - dx/2, rand() % dy + p->y - dy/2);
-        std::cout << j+1 << " Point: " << ptt->x << ","  << ptt->y;
-        if (ptt->x >= 0 && ptt->x < width && ptt->y >= 0 && ptt->y < height) {
+        util::Location::Position *ptt = new util::Location::Position(rand() % dx + p->getX() - dx/2, rand() % dy + p->getY() - dy/2);
+        std::cout << j+1 << " util::Location::Position: " << ptt->x << ","  << ptt->y;
+        if (ptt->x >= 0 && ptt->x < mapModel->getMapWidth() && ptt->y >= 0 && ptt->y < mapModel->getMapHeight()) {
             std::cout << " -> GOOD POSITION!";
-            if (!mapModel->isObjectAt(new util::Location::Position(ptt->x, ptt->y), game::object::Obstacle(WALL) && !mapModel->isObjectAt(new util::Location::Position(ptt->x, ptt->y), game::object::Obstacle(RIVER) && !mapModel->isObjectAt(new util::Location::Position(ptt->x, ptt->y), game::object::Terrain(BRIDGE) && !mapModel->isObjectAt(new util::Location::Position(ptt->x, ptt->y), tt) {
+            if (!MapObject::isWall(mapModel->get(ptt->x, ptt->y)) 
+                    && !MapObject::isRiver(mapModel->get(ptt->x, ptt->y))
+                    && !MapObject::isBridge(mapModel->get(ptt->x, ptt->y))) {
                 std::cout << " -> GOOD TO SET NEW TYPE HERE!";
 
                 mapModel->put(new util::Location::Position(ptt->x, ptt->y), tt);
@@ -300,9 +323,14 @@ void LevelGenerator::placeRandomly(Point *p, int dx, int dy, float density, void
 }
     
 view::HUDViewModel* LevelGenerator::getHUDViewModel() {
-    view::HUDViewModel* hudModel = new view::HUDViewModel();
+    if (player == NULL) {
+        // rzucic wyjatek, ze player nie zostal zainicjalizowany
+        return NULL;
+    }
+    view::HUDViewModel* hudModel = new view::HUDViewModel();  
+    hudModel->setPlayer(player);
     
-    hudModel->setWeapons(levelDescription->getPlayerWeapons());
+    return hudModel;
 }
 
 view::MapViewModel* LevelGenerator::getMapViewModel() {

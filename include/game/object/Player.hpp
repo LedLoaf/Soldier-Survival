@@ -13,10 +13,14 @@ public:
     Player(Equipment* equipment);
     
     Equipment* getEquipment();
+    std::vector<game::Weapon*>* getWeapons();
     
     void setCurrentWeapon(Weapon* weapon) {
         currentWeapon = weapon;
     }
+    
+    void setHealth(int health);
+    int getHealth();
     
     Weapon* getCurrentWeapon();
     

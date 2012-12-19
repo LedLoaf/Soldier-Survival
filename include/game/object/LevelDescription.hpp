@@ -5,26 +5,14 @@
 namespace game {
 
 class LevelDescription {
-    int sizeWidth;
-    int sizeHeight;
-    
-    float enemyDensity; // 0.2
-    int enemyPlacesMin; // 9
-    int enemyPlacesMax; // 20
-    
-    bool enemyTypeKnife;
-    bool enemyTypeGun;
-    bool enemyTypeRifle;
-    
-    bool playerWeaponKnife;
-    bool playerWeaponGun;
-    bool playerWeaponRifle;
+public:
+
     
     /********/
     
     LevelDescription(width, height, enemyDen, enemyMin, enemyMax, enemyKnife, enemyGun, enemyRifle, playerKnife, playerGun, playerRifle) {
-        sizeWidth = width;
-        sizeHeight = height;
+        mapWidth = width;
+        mapHeight = height;
         
         enemyDensity enemyDen;
         enemyPlacesMin = enemyMin;
@@ -39,18 +27,20 @@ class LevelDescription {
         playerWeaponRifle = playerRifle;
     }
     
-    int getSizeWidth() {
-        return sizeWidth;
-    }
-    void setSizeWidth(int sizeWidth) {
-        this->sizeWidth = sizeWidth;
-    }
+    void setPlayerEquipment(Equipment* equipment);
+    Equipment* getPlayerEquipment();
+    
+    void setPlayerHealth(int health);
+    int getPlayerHealth();
+    
+    int getMapWidth();
+    int getMapHeight();
     
     int getSizeHeight() {
-        return sizeHeight;
+        return mapHeight;
     }
-    void setSizeHeight(int sizeHeight) {
-        this->sizeHeight = sizeHeight;
+    void setSizeHeight(int mapHeight) {
+        this->mapHeight = mapHeight;
     }
     
     float getEnemyDensity() {
@@ -116,6 +106,21 @@ class LevelDescription {
         this->playerWeaponRifle = playerWeaponRifle;
     }
 
+private:
+    int mapWidth;
+    int mapHeight;
+    
+    float enemyDensity; // 0.2
+    int enemyPlacesMin; // 9
+    int enemyPlacesMax; // 20
+    
+    bool enemyTypeKnife;
+    bool enemyTypeGun;
+    bool enemyTypeRifle;
+    
+    bool playerWeaponKnife;
+    bool playerWeaponGun;
+    bool playerWeaponRifle;
 };
 
 }

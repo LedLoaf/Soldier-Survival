@@ -6,7 +6,7 @@ namespace util {
 class Location {
 public:
 	enum Vector {
-		TOP_LEFT, TOP_RIGT, TOP, DOWN_LEFT, DOWN_RIGHT, DOWN, LEFT, RIGHT
+		UP_LEFT, UP_RIGT, UP, DOWN_LEFT, DOWN_RIGHT, DOWN, LEFT, RIGHT
 	};
 
 	class Position {

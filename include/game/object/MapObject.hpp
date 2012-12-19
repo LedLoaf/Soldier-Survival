@@ -22,7 +22,14 @@ public:
         PLAYER
     };    
     
-
+    MapObject(Type type);
+    
+    static bool isTerrain(MapObject* mapObject); 
+    static bool isWall(MapObject* mapObject);  
+    static bool isBridge(MapObject* mapObject);  
+    static bool isRiver(MapObject* mapObject);  
+    
+    virtual Type getType();
 
 };
 

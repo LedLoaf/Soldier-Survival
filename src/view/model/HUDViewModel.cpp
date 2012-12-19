@@ -18,4 +18,14 @@ HUDViewModel::~HUDViewModel() {
 	// TODO Auto-generated destructor stub
 }
 
+void HUDViewModel::setPlayer(game::Player* player) {
+    this->player = player;
+    
+    
+}
+
+int HUDViewModel::getPlayerHealth() {
+    return player->getHealth();
+}
+
 } /* namespace view */

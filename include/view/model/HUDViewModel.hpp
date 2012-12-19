@@ -23,15 +23,17 @@ public:
 	HUDViewModel();
 	virtual ~HUDViewModel();
 
-    game::Weapon* getWeapon(int pos);
-    std::vector<game::Weapon*> getWeapons();
+    game::Weapon* getPlayerWeapon(int pos);
+    std::vector<game::Weapon*> getPlayerWeapons();
     
-    void setWeapons(std::vector<game::Weapon*> weapons);
-
+    void setPlayer(game::Player* player);
+    
+    int getPlayerHealth();
+    
     void setPlayerEquipment(game::Equipment* equipment);
     game::Equipment* getPlayerEquipment();
 private:
-
+    game::Player* player;
 };
 
 } /* namespace view */

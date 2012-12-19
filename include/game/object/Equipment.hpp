@@ -7,7 +7,6 @@ namespace game {
     
 class Equipment {
 public:
-    
     std::vector<EquipmentItem>* getItems();
     void addItem(EquipmentItem* item);
 
