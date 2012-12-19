@@ -15,23 +15,30 @@ public:
     int getMapWidth();
     
     
-	void remove(util::Location::Position position, const game::Character& ch);
-//	void remove(util::Location::Position position, const game::Terrain& terrain);
-
+	void remove(int x, int y, const game::Character* ch);
+	void remove(int x, int y, const game::NotMovingMapObject* notMovingMapObject);
 
 	util::Location::Position getPositionOf(const game::Character* ch);
-
     game::MapObject* getVisibleMapObjectAt(int x, int y); 
     
-    // Wojtek, zamien sobie na int x, int y zamiast util::Location::Position jak Ci wygodniej
-	void put(util::Location::Position position, const game::Character& ch);
-	void put(util::Location::Position position, const game::Player& player); // pozycje playera trzymamy w osobnych zmiennych zeby miec szybki dostep
-	void put(util::Location::Position position, const game::Terrain& terrain);
-	void put(util::Location::Position position, const game::Obstacle& obstacle);
+	void put(int x, int y, const game::Character* ch);
+	void put(int x, int y, const game::Player* player);
+	void put(int x, int y, const game::NotMovingMapObject* notMovingMapObject);
     
-    game::MapObject* get(int x, int y);
-
+    game::MapObject* getNotMovingObject(int x, int y);
+    game::Character* getCharacter(int x, int y);
+    
+    bool hasCharacter(int x, int y);
+    
     game::Player* getPlayer();
+    
+private:
+    game::Character** charactersTab;
+    game::NotMovingMapObject** notMovingObjectsTab;
+    
+    int playerPositionX;
+    int playerPositionY;
+    
     
 };
 
