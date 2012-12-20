@@ -14,9 +14,10 @@ public:
     MapView(int xStart, int yStart, int xEnd, int yEnd);
     virtual Type getType();
 
-    void moveCharacter(game::Character& ch, util::Location::Vector vector);
-    bool canMoveCharacter(util::Location::Vector vector); 
-    
+    void moveCharacter(game::Character* ch, util::Location::Vector vector);
+    bool canMoveCharacter(game::Character* ch, util::Location::Vector vector); 
+    bool isPositionInMapArea(util::Location::Position position);
+    bool canCharacterStayOnNMMO(game::MapObject* notMovingMapObject);
     void setMapModel(MapViewModel* mapModel);
     
     game::Player* getPlayer();

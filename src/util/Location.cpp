@@ -18,5 +18,26 @@ int Location::Position::getY() {
 }
 
 
+Location::Position Location::Position::operator+(const Location::Vector vector) {
+    Location::Position newPosition(this);
+ 
+    switch (vector) {
+        case Location::Vector::UP :
+            newPosition.setY(this->getY() + 1);
+            break;
+        case Location::Vector::RIGHT :
+            newPosition.setX(this->getX() + 1);
+            break; 
+        case Location::Vector::DOWN :
+            newPosition.setY(this->getY() - 1);
+            break;
+        case Location::Vector::LEFT :
+            newPosition.setX(this->getX() - 1);
+            break;             
+    }
+    
+    return newPosition;
+}
+
 } /* namespace util */
 

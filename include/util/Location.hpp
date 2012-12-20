@@ -14,6 +14,11 @@ public:
 		Position(int x, int y);
         int getX();
         int getY();
+        
+        void setX(int x);
+        void setY(int y);
+        
+        Location::Position Location::Position::operator+(const Location::Vector vector);
 	private:
 		int x;
 		int y;

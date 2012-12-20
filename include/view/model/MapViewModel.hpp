@@ -19,14 +19,19 @@ public:
 	void remove(int x, int y, const game::NotMovingMapObject* notMovingMapObject);
 
 	util::Location::Position getPositionOf(const game::Character* ch);
-    game::MapObject* getVisibleMapObjectAt(int x, int y); 
+    game::MapObject* getVisibleMapObject(int x, int y); 
+    game::MapObject* getVisibleMapObject(util::Location::Position position); 
+    
     
 	void put(int x, int y, const game::Character* ch);
 	void put(int x, int y, const game::Player* player);
 	void put(int x, int y, const game::NotMovingMapObject* notMovingMapObject);
     
     game::MapObject* getNotMovingObject(int x, int y);
+    game::MapObject* getNotMovingObject(util::Location::Position position);
+    
     game::Character* getCharacter(int x, int y);
+    game::Character* getCharacter(util::Location::Position position);
     
     bool hasCharacter(int x, int y);
     
