@@ -8,6 +8,7 @@ class MapObject {
 public:
     enum Type {
         GRASS,
+        GRASS_GREEN,
         SAND,
         GROUND,
         WALL,

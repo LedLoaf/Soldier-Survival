@@ -4,7 +4,6 @@
 #include <game/object/LevelDescription.hpp>
 
 #include "view/model/HUDViewModel.hpp"
-#include "game/object/Obstacle.hpp"
 #include "game/object/MapObject.hpp"
 #include "game/object/Enemy.hpp"
 #include "game/object/Equipment.hpp"
@@ -272,7 +271,7 @@ bool LevelGenerator::checkClearAround(util::Location::Position *p, int radius) {
     for (int i = min_y; i <= max_y; ++i) {
         for (int j = min_x; j <= max_x; ++j) {
             std::cout << "   [" << j << "," << i << "] -> " << this->convertTileTypeToChar(map[j][i]) << std::endl;
-            if (!MapObject::isTerrain(mapModel->get(i, j)) {
+            if (!MapObject::isTerrain(mapModel->get(i, j))) {
                 return false;
             }
         }

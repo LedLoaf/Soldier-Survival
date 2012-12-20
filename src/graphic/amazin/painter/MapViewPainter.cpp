@@ -88,5 +88,5 @@ MapViewPainter::SubMapManager::updateSubMap() {
 
 
 MapViewPainter::SubMapManager::getElementAt(int x, int y) {   
-    return mapViewModel->getVisibleMapObjectAt()[leftWallPos + x][topWallPos + y];   
+    return mapViewModel->getVisibleMapObject()[leftWallPos + x][topWallPos + y];   
 }

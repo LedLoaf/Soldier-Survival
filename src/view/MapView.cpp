@@ -18,6 +18,7 @@ void MapView::moveCharacter(game::Character* ch, util::Location::Vector vector) 
 
 	mapViewModel->remove(position, ch);
 	mapViewModel->put(ch, position + vector);    
+    ch->setPosition(position);
 }
 
 

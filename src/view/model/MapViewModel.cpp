@@ -12,16 +12,16 @@ MapViewModel::MapViewModel() {
 
 }
 
-game::MapObject* MapViewModel::getVisibleMapObjectAt(int x, int y) {
+game::MapObject* MapViewModel::getVisibleMapObject(int x, int y) {
     //checkIfMapHasPoint(x, y);  throws exception if x > mapWidth ...
     
-    if (hasCharacter(x, y)) 
+    if (hasMapCharacterAt(x, y)) 
         return getCharacter(x, y);
     else 
         return getNotMovingObject(x, y);
 }
 
-bool MapViewModel::hasCharacter(int x, int y) {
+bool MapViewModel::hasMapCharacterAt(int x, int y) {
     if (charactersTab[x][y] == NULL)
         return false;
     return true;

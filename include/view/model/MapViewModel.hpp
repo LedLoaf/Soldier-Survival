@@ -33,7 +33,7 @@ public:
     game::Character* getCharacter(int x, int y);
     game::Character* getCharacter(util::Location::Position position);
     
-    bool hasCharacter(int x, int y);
+    bool hasMapCharacterAt(int x, int y);
     
     game::Player* getPlayer();
     
