@@ -18,7 +18,7 @@ public:
     bool isWarAlreadyStartedBetween(Player* player, Enemy* enemy);
     
     void checkWarsExistance();
-    
+
     
     
 private:

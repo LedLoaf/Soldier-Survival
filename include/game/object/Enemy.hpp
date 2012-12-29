@@ -18,6 +18,7 @@ public:
     void injureUsing(Weapon* weapon);
     
 
+
 private:
     Weapon* weapon;
     

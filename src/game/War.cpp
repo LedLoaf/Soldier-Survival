@@ -1,6 +1,3 @@
-#include <view/window/Window.hpp>
-#include <game/Context.hpp>
-
 #include "game/War.hpp"
 
 namespace game {
@@ -27,6 +24,5 @@ void War::WarExecutor::Run() {
 
     sf::Sleep(0.1f);
 }
-
 
 }

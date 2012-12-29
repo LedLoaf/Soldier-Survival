@@ -1,6 +1,3 @@
-#include <view/window/Window.hpp>
-#include <game/Context.hpp>
-
 #include "game/WarManager.hpp"
 
 namespace game {

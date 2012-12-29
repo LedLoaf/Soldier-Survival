@@ -13,6 +13,7 @@ namespace game {
 class War {
 public:
 	War(Player* player, Enemy* enemy);
+
     
     Enemy* getEnemy();
     Player* getPlayer();
@@ -20,6 +21,7 @@ public:
     void setWarView(view::WarView* warView);
 
     
+
     void start();
     void stop();
     
@@ -39,6 +41,7 @@ private:
     WarExecutor* warExecutor;
     view::WarView* warView;
     
+
 };
 
 }
