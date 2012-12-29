@@ -2,6 +2,7 @@
 #include <SFML/Graphics/Sprite.hpp>
 
 #include <SFML/Graphics/Image.hpp>
+#include <SFML/Graphics/String.hpp>
 
 #include "util/Resource.hpp"
 #include "view/TextView.hpp"
@@ -50,7 +51,7 @@ void TextViewPainter::init() {
 }
 
 
-void ImageViewPainter::update() {   
+void TextViewPainter::update() {   
 }
     
 

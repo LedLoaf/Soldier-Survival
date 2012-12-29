@@ -7,10 +7,6 @@
 
 namespace view {
 
-MapViewModel::MapViewModel() {
-	// TODO Auto-generated constructor stub
-
-}
 
 game::MapObject* MapViewModel::getVisibleMapObject(int x, int y) {
     //checkIfMapHasPoint(x, y);  throws exception if x > mapWidth ...
@@ -31,25 +27,25 @@ game::Character* MapViewModel::getCharacter(int x, int y) {
     return charactersTab[x][y];
 }
 
-void MapViewModel::put(int x, int y, const game::Character* ch) {
+void MapViewModel::put(int x, int y, game::Character* const ch) {
     //checkIfMapHasPoint(x, y);  throws exception if x > mapWidth ...
 
-    charactersTab[x, y] = ch;
+    charactersTab[x][y] = ch;
 }
 
-void MapViewModel::put(int x, int y, const game::Player* player) {
+void MapViewModel::put(int x, int y, game::Player* const player) {
     //checkIfMapHasPoint(x, y);  throws exception if x > mapWidth ...
 
-    charactersTab[x, y] = player;
+    charactersTab[x][y] = player;
     
     playerPositionX = x;
     playerPositionY = y;
 }
 
-void MapViewModel::put(int x, int y, const game::NotMovingMapObject* notMovingMapObject) {
+void MapViewModel::put(int x, int y, game::NotMovingMapObject* const notMovingMapObject ) {
     //checkIfMapHasPoint(x, y);  throws exception if x > mapWidth ...
 
-    notMovingObjectsTab[x, y] = notMovingMapObject;
+    notMovingObjectsTab[x][y] = notMovingMapObject;
 }
 
 void MapViewModel::remove(int x, int y, const game::Character* ch) {

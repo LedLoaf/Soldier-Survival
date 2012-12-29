@@ -2,6 +2,7 @@
 #define SFML_AMAZIN_RESOURCE_HPP_
 
 #include <string>
+#include <map>
 #include <SFML/Graphics/Image.hpp>
 
 #include <view/View.hpp>

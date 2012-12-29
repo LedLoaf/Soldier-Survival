@@ -4,7 +4,9 @@
 #include <view/window/Window.hpp>
 #include <view/MapView.hpp>
 #include <view/HUDView.hpp>
+#include <view/MiniMapView.hpp>
 #include <game/object/LevelDescription.hpp>
+#include <game/LevelGenerator.hpp>
 
 #include <util/Key.hpp>
 

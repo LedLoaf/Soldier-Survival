@@ -17,11 +17,11 @@ View::Type MiniMapView::getType() {
     return View::MINI_MAP_VIEW;
 }
 
-void MiniMapView::setMapModel(MapViewModel* mapModel) {
+void MiniMapView::setMapModel(MiniMapViewModel* mapModel) {
     this->mapViewModel = mapModel;
 }
     
-MapViewModel* MiniMapView::getModel() {
+MiniMapViewModel* MiniMapView::getModel() {
     return this->mapViewModel;
 }
 

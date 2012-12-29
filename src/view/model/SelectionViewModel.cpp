@@ -23,8 +23,8 @@ void SelectionViewModel::setViewOrientation(view::View::Orientation orientation)
     this->orientation = orientation;
 }
 
-void SelectionViewModel::getViewOrientation() {
-    this->orientation;
+view::View::Orientation SelectionViewModel::getViewOrientation() {
+    return this->orientation;
 }
 
 void SelectionViewModel::setUnselected(int positionOfElement) {

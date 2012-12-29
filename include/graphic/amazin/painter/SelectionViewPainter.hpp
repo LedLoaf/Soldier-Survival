@@ -1,6 +1,8 @@
 #ifndef SELECTION_VIEW_PAINTER_HPP_
 #define SELECTION_VIEW_PAINTER_HPP_
 
+#include <SFML/Graphics/Sprite.hpp>
+
 #include <view/View.hpp>
 #include <view/model/SelectionViewModel.hpp>
 #include <graphic/painter/SFMLAbstractViewPainter.hpp>

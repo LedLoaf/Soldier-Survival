@@ -1,7 +1,7 @@
 #ifndef LEVEL_GENERATOR_H_
 #define LEVEL_GENERATOR_H_
 
-#include <object/LevelDescription.hpp>
+#include <game/object/LevelDescription.hpp>
 
 #include "object/Player.hpp"
 #include "object/MapObject.hpp"

@@ -1,7 +1,7 @@
 #ifndef SFML_ABSTRACT_VIEW_PAINTER_HPP_
 #define SFML_ABSTRACT_VIEW_PAINTER_HPP_
 
-#include <SFML/Graphics/Sprite.hpp>
+#include <SFML/Graphics/Drawable.hpp>
 #include <vector>
 
 namespace graphic {

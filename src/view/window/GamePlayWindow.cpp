@@ -91,13 +91,13 @@ View::Type GamePlayWindow::getType() {
 void GamePlayWindow::pause() {
     hudView->pause();
     mapView->pause();
-    miniMapView->pause();
+//    miniMapView->pause();
 }
 
 void GamePlayWindow::resume() {
     hudView->resume();
     mapView->resume();
-    miniMapView->resume();    
+//    miniMapView->resume();    
 }
 
 }

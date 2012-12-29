@@ -6,6 +6,7 @@
 #include <vector>
 #include <iostream>
 
+#include <view/model/ViewModel.hpp>
 #include <game/object/Character.hpp>
 #include <game/object/NotMovingMapObject.hpp>
 #include <game/object/Player.hpp>
@@ -13,7 +14,7 @@
 
 namespace view {
 
-class MapViewModel : ViewModel {
+class MapViewModel : public ViewModel {
 public:
     MapViewModel(int mapWidth, int mapHeight);
     int getMapHeight();
@@ -28,9 +29,9 @@ public:
     game::MapObject* getVisibleMapObject(util::Location::Position position); 
     
     
-	void put(int x, int y, const game::Character* ch);
-	void put(int x, int y, const game::Player* player);
-	void put(int x, int y, const game::NotMovingMapObject* notMovingMapObject);
+	void put(int x, int y, game::Character* const ch);
+	void put(int x, int y, game::Player* const player);
+	void put(int x, int y, game::NotMovingMapObject* const notMovingMapObject);
     
     game::MapObject* getNotMovingObject(int x, int y);
     game::MapObject* getNotMovingObject(util::Location::Position position);
@@ -43,8 +44,8 @@ public:
     game::Player* getPlayer();
     
 private:
-    game::Character** charactersTab;
-    game::NotMovingMapObject** notMovingObjectsTab;
+    game::Character*** charactersTab;
+    game::NotMovingMapObject*** notMovingObjectsTab;
     
     int playerPositionX;
     int playerPositionY;
@@ -53,4 +54,4 @@ private:
 };
 
 } /* namespace view */
-#endif /* SELECTIONVIEWMODEL_HPP_ */
+#endif 

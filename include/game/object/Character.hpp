@@ -3,9 +3,11 @@
 
 #include <util/Location.hpp>
 
+#include <game/object/MapObject.hpp>
+
 namespace game {
     
-class Character {
+class Character : public MapObject {
 public:
     // trzymam pozycję na mapie, żeby przyspieszyć poruszanie się postaci
     // majac postac, wiem gdzie sie znajduje na mapie - nie musze jej ciagle przeszukiwac

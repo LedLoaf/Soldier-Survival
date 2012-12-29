@@ -29,7 +29,7 @@ public:
 	virtual ~SelectionViewModel();
 
     void setViewOrientation(view::View::Orientation orientation);
-    void getViewOrientation();
+    view::View::Orientation getViewOrientation();
     
     std::vector<SelectableElement*> getSelectableElements();
     

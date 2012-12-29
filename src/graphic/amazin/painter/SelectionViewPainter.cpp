@@ -69,11 +69,11 @@ void SelectionViewPainter::init() {
     for (int i = 0; i < selectableElements.size(); i++) {
         sf::Sprite* backgroundSprite = new sf::Sprite();
         
-        if (selectionModel->getViewOrientation() == view::View::Orientation::VERTICAL) {
+        if (selectionModel->getViewOrientation() == view::View::VERTICAL) {
             backgroundSprite->SetX(selectionModel->getViewStartPosition()->getX());
             backgroundSprite->SetY(selectionModel->getViewStartPosition()->getY() + i * elementHeight);            
         }
-        else if (selectionModel->getViewOrientation() == view::View::Orientation::HORIZONTAL) {
+        else if (selectionModel->getViewOrientation() == view::View::HORIZONTAL) {
             backgroundSprite->SetX(selectionModel->getViewStartPosition()->getX() + i * elementWidth);
             backgroundSprite->SetY(selectionModel->getViewStartPosition()->getY());            
         
@@ -86,10 +86,10 @@ void SelectionViewPainter::init() {
         drawables.push_back(backgroundSprite);     
         
         
-        
+        sf::String* text;
         switch (selectionModel->getType()) {
-            case view::SelectionViewModel::SIMPLE_MENU :
-                sf::String* text = new sf::String();
+            case view::SelectionViewModel::SIMPLE_MENU : {
+                text = new sf::String();
                 text->SetText(getTextFor(selectableElements[i]->getAction()));
                 // przy text->SetFont(font) segmentation fault - cos zle z plikeim ttf
                 text->SetFont(sf::Font::GetDefaultFont());
@@ -99,8 +99,9 @@ void SelectionViewPainter::init() {
 
                 drawables.push_back(text);
                 break;
-
-           case view::SelectionViewModel::WEAPONS :
+            }
+           case view::SelectionViewModel::WEAPONS : {
+        
                 view::SelectionViewModel::WeaponSelectableElement* weaponElement = 
                         dynamic_cast<view::SelectionViewModel::WeaponSelectableElement*>(selectableElements[i]);
 
@@ -121,7 +122,7 @@ void SelectionViewPainter::init() {
                     std::cout << "Failed to load " << imgPath << std::endl;
                 }
 
-                sf::Sprite* weaponImgSprite = new sf::Sprite;
+                sf::Sprite* weaponImgSprite = new sf::Sprite();
                 weaponImgSprite->SetX(selectionModel->getViewStartPosition()->getX() + paddingLeft);
                 weaponImgSprite->SetY(selectionModel->getViewStartPosition()->getY() + i * elementHeight + paddingTop);    
                 weaponImgSprite->SetImage(*image);
@@ -130,7 +131,7 @@ void SelectionViewPainter::init() {
                 
                 /* weapon damage */
                 
-                sf::String* text = new sf::String();
+                text = new sf::String();
                 text->SetText(util::Util::toString(weaponElement->getWeapon()->getDamage()));
                 // przy text->SetFont(font) segmentation fault - cos zle z plikeim ttf
                 text->SetFont(sf::Font::GetDefaultFont());
@@ -140,9 +141,9 @@ void SelectionViewPainter::init() {
 
                 drawables.push_back(text);                
                 break;
-                
-           case view::SelectionViewModel::SIMPLE_PAUSE_MENU :
-                sf::String* text = new sf::String();
+           }
+           case view::SelectionViewModel::SIMPLE_PAUSE_MENU : {
+                text = new sf::String();
                 text->SetText(getTextFor(selectableElements[i]->getAction()));
                 // przy text->SetFont(font) segmentation fault - cos zle z plikeim ttf
                 text->SetFont(sf::Font::GetDefaultFont());
@@ -152,12 +153,12 @@ void SelectionViewPainter::init() {
 
                 drawables.push_back(text);
                 break;                
-
+           }
         }
     }
     
 
-    
+   
 }
 
 

@@ -44,7 +44,7 @@ void GameMasterEngine::pauseGame() {
 void GameMasterEngine::resumeGame() {
     Window* activeWindow = Application::getInstance().getContext()->getActiveWindow();
     activeWindow->resume();
-    ~activeWindow->getSubWindow();
+//    ~activeWindow->getSubWindow();
 }
 
 

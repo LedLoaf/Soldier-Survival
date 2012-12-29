@@ -3,7 +3,7 @@
 
 
 #include <view/View.hpp>
-#include <view/model/MapViewModel.hpp>
+#include <view/model/MiniMapViewModel.hpp>
 #include <game/object/LevelDescription.hpp>
 #include <game/object/Character.hpp>
 #include <util/Location.hpp>
@@ -12,15 +12,15 @@ namespace view {
 
 class MiniMapView : public View {
 private:
-	MapViewModel* mapViewModel;
+	MiniMapViewModel* mapViewModel;
 
 public:
     MiniMapView(int xStart, int yStart, int xEnd, int yEnd);
     virtual Type getType();
 
     
-    void setMapModel(MapViewModel* mapModel);
-    MapViewModel* getModel();
+    void setMapModel(MiniMapViewModel* mapModel);
+    MiniMapViewModel* getModel();
 };
 
 
