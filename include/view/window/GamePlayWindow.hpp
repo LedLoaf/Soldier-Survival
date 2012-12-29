@@ -9,6 +9,7 @@
 #include <game/LevelGenerator.hpp>
 
 #include <util/Key.hpp>
+#include <game/WarManager.hpp>
 
 namespace view {
 
@@ -20,6 +21,7 @@ private:
     MiniMapView* miniMapView;
     game::LevelDescription* levelDescription;
     game::LevelGenerator* levelGenerator;
+    game::WarManager* warManager;
 
 public:
 	GamePlayWindow(game::LevelDescription* levelDescription);
@@ -33,6 +35,8 @@ public:
     
     virtual void pause();
     virtual void resume();
+    
+    MapView* getMapView();
     
 };
 

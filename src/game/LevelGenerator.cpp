@@ -1,4 +1,6 @@
 #include <math.h>
+#include <time.h>
+#include <cstdlib>
 
 #include <game/LevelGenerator.hpp>
 #include <game/object/LevelDescription.hpp>
@@ -7,6 +9,7 @@
 #include "game/object/MapObject.hpp"
 #include "game/object/Enemy.hpp"
 #include "game/object/Equipment.hpp"
+#include <util/Location.hpp>
 
 namespace game {
 
@@ -65,11 +68,11 @@ void LevelGenerator::generateForest() {
 void LevelGenerator::generateRivers() {
     
     util::Location::Position *p;
-    util::Location::Vector vectorPool[4], oryginalVector, vector;
-    vectorPool[0] = util::Location::Vector::UP;
-    vectorPool[1] = util::Location::Vector::RIGHT;
-    vectorPool[2] = util::Location::Vector::DOWN;
-    vectorPool[3] = util::Location::Vector::LEFT;
+    util::Location vectorPool[4], oryginalVector, vector;
+    vectorPool[0] = util::Location::UP;
+    vectorPool[1] = util::Location::RIGHT;
+    vectorPool[2] = util::Location::DOWN;
+    vectorPool[3] = util::Location::LEFT;
     
     oryginalVector = vector = vectorPool[(rand() % 4)];
     
@@ -77,11 +80,11 @@ void LevelGenerator::generateRivers() {
     
     int bridgeProbability = rand() % 3 + 95;
     
-    if (vector == util::Location::Vector::DOWN) { // topside -> down
+    if (vector == util::Location::DOWN) { // topside -> down
         p = new util::Location::Position(rand() % (mapModel->getMapWidth()-2) + 1, 0);
-    } else if (vector == util::Location::Vector::LEFT) { // rightside -> left
+    } else if (vector == util::Location::LEFT) { // rightside -> left
         p = new util::Location::Position(mapModel->getMapWidth()-1, rand() % (mapModel->getMapHeight()-2) + 1);
-    } else if (vector == util::Location::Vector::UP) { // bottomside -> up
+    } else if (vector == util::Location::UP) { // bottomside -> up
         p = new util::Location::Position(rand() % (mapModel->getMapWidth()-2) + 1, mapModel->getMapHeight()-1);
     } else { // leftside -> right
         p = new util::Location::Position(0, rand() % (mapModel->getMapHeight()-2) + 1);
@@ -93,7 +96,7 @@ void LevelGenerator::generateRivers() {
     bool notEnd = true;
     while (notEnd) {
         int len = rand() % twistedRiver + 3;
-        if (vector == util::Location::Vector::DOWN || vector == util::Location::Vector::UP) {
+        if (vector == util::Location::DOWN || vector == util::Location::UP) {
             len *= mapModel->getMapHeight();
         } else {
             len *= mapModel->getMapWidth();
@@ -101,22 +104,22 @@ void LevelGenerator::generateRivers() {
         len = round((float)len / 100);
         std::cout << "River len: " << len << " direction to " << vector << std::endl;
         
-        if (vector == util::Location::Vector::DOWN) {
+        if (vector == util::Location::DOWN) {
             int sectionLen = p->getY() + len;
             for (; p->getY() <= sectionLen; ++p->getY()) {
                 notEnd = placeRiverOrBridge(p, bridgeProbability);
             }
-        } else if (vector == util::Location::Vector::LEFT) {
+        } else if (vector == util::Location::LEFT) {
             int sectionLen = p->getX() - len;
             for (; p->getX() >= sectionLen; --p->getX()) {
                 notEnd = placeRiverOrBridge(p, bridgeProbability);
             }
-        } else if (vector == util::Location::Vector::UP) {
+        } else if (vector == util::Location::UP) {
             int sectionLen = p->getY() - len;
             for (; p->getY() >= sectionLen; --p->getY()) {
                 notEnd = placeRiverOrBridge(p, bridgeProbability);
             }
-        } else if (vector == util::Location::Vector::RIGHT) {
+        } else if (vector == util::Location::RIGHT) {
             int sectionLen = p->getX() + len;
             for (; p->getX() <= sectionLen; ++p->getX()) {
                 notEnd = placeRiverOrBridge(p, bridgeProbability);
@@ -125,30 +128,30 @@ void LevelGenerator::generateRivers() {
         
         bool randomReady = false;
         while (!randomReady) {
-            util::Location::Vector newVector = vectorPool[(rand() % 4)];
-            if (oryginalVector == util::Location::Vector::DOWN && newVector == util::Location::Vector::UP) {
+            util::Location newVector = vectorPool[(rand() % 4)];
+            if (oryginalVector == util::Location::DOWN && newVector == util::Location::UP) {
                 continue;
             }
-            if (oryginalVector == util::Location::Vector::LEFT && newVector == util::Location::Vector::RIGHT) {
+            if (oryginalVector == util::Location::LEFT && newVector == util::Location::RIGHT) {
                 continue;
             }
-            if (oryginalVector == util::Location::Vector::UP && newVector == util::Location::Vector::DOWN) {
+            if (oryginalVector == util::Location::UP && newVector == util::Location::DOWN) {
                 continue;
             }
-            if (oryginalVector == util::Location::Vector::RIGHT && newVector == util::Location::Vector::LEFT) {
+            if (oryginalVector == util::Location::RIGHT && newVector == util::Location::LEFT) {
                 continue;
             }
             
-            if (vector == util::Location::Vector::DOWN && newVector == util::Location::Vector::UP) {
+            if (vector == util::Location::DOWN && newVector == util::Location::UP) {
                 continue;
             }
-            if (vector == util::Location::Vector::LEFT && newVector == util::Location::Vector::RIGHT) {
+            if (vector == util::Location::LEFT && newVector == util::Location::RIGHT) {
                 continue;
             }
-            if (vector == util::Location::Vector::UP && newVector == util::Location::Vector::DOWN) {
+            if (vector == util::Location::UP && newVector == util::Location::DOWN) {
                 continue;
             }
-            if (vector == util::Location::Vector::RIGHT && newVector == util::Location::Vector::LEFT) {
+            if (vector == util::Location::RIGHT && newVector == util::Location::LEFT) {
                 continue;
             }
             vector = newVector;
@@ -279,7 +282,7 @@ bool LevelGenerator::checkClearAround(util::Location::Position *p, int radius) {
     return true;
 }
 
-void LevelGenerator::placeRandomly(util::Location::Position *p, int dx, int dy, float density, void tt) {
+void LevelGenerator::placeRandomly(util::Location::Position *p, int dx, int dy, float density, MapObject* tt) {
     int ttCount = dx*dy;
     ttCount = (float)ttCount * density;
     //ttCount = roundf((float)ttCount / 100);
@@ -294,15 +297,17 @@ void LevelGenerator::placeRandomly(util::Location::Position *p, int dx, int dy, 
     int i = 0, j = 0;
     while (i < ttCount) {
         util::Location::Position *ptt = new util::Location::Position(rand() % dx + p->getX() - dx/2, rand() % dy + p->getY() - dy/2);
-        std::cout << j+1 << " util::Location::Position: " << ptt->x << ","  << ptt->y;
-        if (ptt->x >= 0 && ptt->x < mapModel->getMapWidth() && ptt->y >= 0 && ptt->y < mapModel->getMapHeight()) {
+        std::cout << j+1 << " util::Location::Position: " << ptt->getX() << ","  << ptt->getY();
+        if (ptt->getX() >= 0 && ptt->getX() < mapModel->getMapWidth() 
+                && ptt->getY() >= 0 && ptt->getY() < mapModel->getMapHeight()) {
             std::cout << " -> GOOD POSITION!";
-            if (!MapObject::isWall(mapModel->get(ptt->x, ptt->y)) 
-                    && !MapObject::isRiver(mapModel->get(ptt->x, ptt->y))
-                    && !MapObject::isBridge(mapModel->get(ptt->x, ptt->y))) {
+            
+            if (!MapObject::isWall(mapModel->getNotMovingObject(ptt->getX(), ptt->getY())) 
+                    && !MapObject::isRiver(mapModel->getNotMovingObject(ptt->getX(), ptt->getY()))
+                    && !MapObject::isBridge(mapModel->getNotMovingObject(ptt->getX(), ptt->getY()))) {
                 std::cout << " -> GOOD TO SET NEW TYPE HERE!";
 
-                mapModel->put(new util::Location::Position(ptt->x, ptt->y), tt);
+                mapModel->put(ptt->getX(), ptt->getY(), tt);
                 //++i;
             }
         } else {

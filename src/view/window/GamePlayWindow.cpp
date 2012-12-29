@@ -5,6 +5,7 @@
 
 #include "util/SFMLAmazinResource.hpp"
 #include "game/LevelGenerator.hpp"
+#include "game/WarManager.hpp"
 
 namespace view {
 
@@ -13,6 +14,7 @@ GamePlayWindow::GamePlayWindow(game::LevelDescription* levelDescription) : Windo
     
     this->levelDescription = levelDescription;
     this->levelGenerator = new game::LevelGenerator(levelDescription);
+    this->warManager = new game::WarManager();
     
     initUI();
 }
