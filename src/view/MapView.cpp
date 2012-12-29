@@ -10,6 +10,8 @@
 namespace view {
 
 MapView::MapView(int xStart, int yStart, int xEnd, int yEnd) : View(xStart, yStart, xEnd, yEnd) {
+    warView = new WarView();
+
 }
 
 
@@ -36,8 +38,26 @@ bool MapView::canMoveCharacter(game::Character* ch, util::Location::Vector vecto
     if (isPositionInMapArea(chPosition + vector)) {
         
         // Na miejscu gdzie chce sie poruszyc postac stoi juz jakas inna postac
-        if (mapViewModel->getCharacter(chPosition + vector) != NULL) {
+        game::Character* collidingCharacter = mapViewModel->getCharacter(chPosition + vector);
+        if (collidingCharacter != NULL) {
             // kolizja
+            
+            switch (ch->getType()) {
+                
+                // Gracz zderza sie z inna postacia
+                case game::MapObject::PLAYER : {
+            
+                    switch (collidingCharacter->getType()) { 
+                        case game::MapObject::ENEMY_A : {
+                            if (!warManager->isWarAlreadyStartedBetween(ch, collidingCharacter))
+                                warManager->startWar(new game::War(ch, collidingCharacter));
+                        }
+
+                    }
+                }
+                
+            }
+            
             return false;
         } else {
             // canCharacterStayOnNMO(..) mowi nam, czy postac moze stanac na danym kafelku gdzie 

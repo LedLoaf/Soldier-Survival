@@ -11,8 +11,13 @@ class Enemy : public Character {
 public:
 
     void setWeapon(Weapon* weapon);
-    Weapon* gettWeapon();
+    Weapon* getWeapon();
     
+    virtual void startMoving();
+    
+    void injureUsing(Weapon* weapon);
+    
+
 private:
     Weapon* weapon;
     

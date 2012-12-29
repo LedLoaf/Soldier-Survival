@@ -4,7 +4,7 @@
 #include <view/View.hpp>
 #include <iostream>
 
-class TextViewModel; //czenu nie mozna po prostu #include <view/model/TextViewModel.hpp> ?
+class TextViewModel; //czemu nie mozna po prostu #include <view/model/TextViewModel.hpp> ?
 
 namespace view {
 

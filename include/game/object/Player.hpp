@@ -19,10 +19,13 @@ public:
         currentWeapon = weapon;
     }
     
+    Weapon* getCurrentWeapon();
+    
     void setHealth(int health);
     int getHealth();
     
-    Weapon* getCurrentWeapon();
+    
+    void injureUsing(Weapon* weapon);
     
 private:
     Weapon* currentWeapon;

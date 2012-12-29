@@ -14,8 +14,13 @@ public:
     void setPosition(util::Location::Position pos);
     util::Location::Position getPosition();
     
+    virtual void startMoving() = 0;
+    
+    // jakis timer, ktory bedzie ozywial charactera - poruszal go i wykonywal inne akcje
+    
 protected:
     util::Location::Position position;
+    view::MapView* mapView;
 };
     
 }
