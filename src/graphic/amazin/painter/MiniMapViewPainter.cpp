@@ -27,34 +27,36 @@ MiniMapViewPainter::MiniMapViewPainter(view::MiniMapViewModel* model) {
 
 
 void MiniMapViewPainter::init() {
-    numberOfColumns = miniMapViewModel->getNumberOfColumns();
-    numberOfRows = miniMapViewModel->getNumberOfRows();
-    
-    viewWidth = miniMapViewModel->getViewEndPosition()->getX() - miniMapViewModel->getViewStartPosition()->getX();
-    elementWidth = viewWidth / numberOfColumns;
-        
-    sf::Sprite* mapElementSprite;
-    
-    for (int i = 0; i < numberOfRows; i++) {
-        map[i] = new sf::Sprite[numberOfColumns];
-        
-        for (int j = 0; j < numberOfColumns; j++) {
-            mapElementSprite = new sf::Sprite();
-            drawables.push_back(mapElementSprite);
-            
-            map[i][j] = mapElementSprite;
-            map[i][j]->SetPosition(miniMapViewModel->getViewStartPosition()->getX() + elementWidth * i, elementWidth * j + 1);
-        }    
-    }
+//    numberOfColumns = miniMapViewModel->getNumberOfColumns();
+//    numberOfRows = miniMapViewModel->getNumberOfRows();
+//    
+//    viewWidth = miniMapViewModel->getViewEndPosition()->getX() - miniMapViewModel->getViewStartPosition()->getX();
+//    elementWidth = viewWidth / numberOfColumns;
+//        
+//    sf::Sprite* mapElementSprite;
+//    
+//    map = new sf::Sprite*[numberOfRows];
+//    
+//    for (int i = 0; i < numberOfRows; i++) {
+//        map[i] = new sf::Sprite[numberOfColumns];
+//        
+//        for (int j = 0; j < numberOfColumns; j++) {
+//            mapElementSprite = new sf::Sprite();
+//            drawables.push_back(mapElementSprite);
+//            
+//            map[i][j] = mapElementSprite;
+//            map[i][j]->SetPosition(miniMapViewModel->getViewStartPosition()->getX() + elementWidth * i, elementWidth * j + 1);
+//        }    
+//    }
  
 }
 
-virtual void MiniMapViewPainter::update() {
-    for (int i = 0; i < numberOfColumns; i++) {
-        for (int j = 0; j < numberOfRows; j++) {            
-            map[i][j]->SetImage(util::SFMLAmazinResource::getInstance()->getImage(miniMapViewModel->getTopElementAt(i, j)));
-        }    
-    }    
+void MiniMapViewPainter::update() {
+//    for (int i = 0; i < numberOfColumns; i++) {
+//        for (int j = 0; j < numberOfRows; j++) {            
+//            map[i][j]->SetImage(util::SFMLAmazinResource::getInstance()->getImage(miniMapViewModel->getVisibleMapObject(i, j)));
+//        }    
+//    }    
 }
 
 

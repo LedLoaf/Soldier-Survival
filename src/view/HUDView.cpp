@@ -19,11 +19,11 @@ HUDView::HUDView(int xStart, int yStart, int xEnd, int yEnd, HUDViewModel* hudVi
     
     game::Equipment* playerEquipment = this->hudViewModel->getPlayerEquipment();
     
-    std::vector<game::Equipment::EquipmentItem*> equipmentItems = playerEquipment->getItems();
+    std::vector<game::Equipment::EquipmentItem*>* equipmentItems = playerEquipment->getItems();
     for (int i = 0; i < equipmentItems->size(); i++) {
-        if (game::Weapon::isWeapon(equipmentItems[i])) 
+        if (game::Weapon::isWeapon(equipmentItems->at(i)))
             weaponsSelectionView->addElement(new SelectionViewModel::WeaponSelectableElement(
-                    dynamic_cast<game::Weapon*>equipmentItems[i]));    
+                    dynamic_cast<game::Weapon*>(equipmentItems->at(i))));    
             
     }
         

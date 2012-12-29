@@ -2,10 +2,11 @@
 #define SFML_AMAZIN_RESOURCE_HPP_
 
 #include <string>
+#include <SFML/Graphics/Image.hpp>
 
 #include <view/View.hpp>
-
-#include <SFML/Graphics/Image.hpp>
+#include <view/model/MapViewModel.hpp>
+#include <game/object/MapObject.hpp>
 
 namespace util {
 
@@ -13,12 +14,12 @@ class SFMLAmazinResource {
 public:     
 	static SFMLAmazinResource* getInstance();
     
-    sf::Image* getImage(view::MapViewModel::Element element);
+    sf::Image* getImage(game::MapObject::Type mapObjectType);
     
 
 private:
 	static SFMLAmazinResource* instance;
-    std::map<view::MapViewModel::Element, sf::Image*> imageResourceMap;
+    std::map<game::MapObject::Type, sf::Image*> imageResourceMap;
     
     SFMLAmazinResource();    
     void init();

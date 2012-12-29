@@ -2,12 +2,13 @@
 #include <view/model/SelectionViewModel.hpp>
 #include <view/SelectionView.hpp>
 #include <view/ImageView.hpp>
+//#include <view/TextView.hpp>
 #include <game/Application.hpp>
 
 #include <util/Util.hpp>
 #include <util/Resource.hpp>
 
-#include "view/TextView.hpp"
+
 
 namespace view {
 
@@ -33,8 +34,8 @@ void MainMenuWindow::initUI() {
 	addView(selectionView);
     
 
-    addView(new TextView(0, game::Application::getInstance().getDeviceManager()->getScreenHeight() - 50, 
-            500, game::Application::getInstance().getDeviceManager()->getScreenHeight() - 50, "Soldier: Survival by 34fun team", TextView::SMALL));
+//    addView(new TextView(0, game::Application::getInstance().getDeviceManager()->getScreenHeight() - 50, 
+//            500, game::Application::getInstance().getDeviceManager()->getScreenHeight() - 50, "Soldier: Survival by 34fun team", TextView::SMALL));
 }
 
 
@@ -55,11 +56,14 @@ void MainMenuWindow::onEnterPressed() {
 	util::Util::Action optionAction = selectionView->getSelectedElement()->getAction();
 
 	if (optionAction == util::Util::RUN_LEVEL_SELECTION)
-			game::Application::getInstance().getGameEngine()->runLevelSelection();
+		game::Application::getInstance().getGameEngine()->runLevelSelection();
     else if(optionAction == util::Util::RUN_EXIT)
-			game::Application::getInstance().getGameEngine()->exitGame();
-    else if(optionAction == util::Util::RUN_GAME_PLAY)
-			game::Application::getInstance().getGameEngine()->runGamePlay(new game::LevelDescription());
+		game::Application::getInstance().getGameEngine()->exitGame();
+    else if(optionAction == util::Util::RUN_GAME_PLAY) {
+        game::LevelDescription* sampleLevel = new game::LevelDescription(300, 300, 50.5, 20, 
+            50, true, false, true, true, true, false);          
+		game::Application::getInstance().getGameEngine()->runGamePlay(sampleLevel);
+    }
 	
 }
 

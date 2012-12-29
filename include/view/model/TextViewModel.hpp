@@ -1,28 +1,27 @@
-#ifndef TEXT_VIEW_MODEL_HPP
-#define	TEXT_VIEW_MODEL_HPP
+#ifndef TEXT_VIEW_MODEL_HPP_
+#define	TEXT_VIEW_MODEL_HPP_
 
 #include <string>
 #include <view/model/ViewModel.hpp>
-#include <util/Resource.hpp>
+#include <view/TextView.hpp>
 
-namespace view {
+
+namespace view { 
     
-
+    
 class TextViewModel : public ViewModel {
 public:
     TextViewModel();
-    TextViewModel(const ImageViewModel& orig);
-    virtual ~TextViewModel();
 
     void setText(std::string text);
     std::string getText();
     
-    void setTextViewType(view::TextView::TextType type);
-    view::TextView::TextType getTextViewType();
+    void setTextViewType(TextView::TextType type);
+    TextView::TextType getTextViewType();
         
 private:
     std::string text;
-    view::TextView::TextType textType; 
+    TextView::TextType textType; 
 };
 
 }

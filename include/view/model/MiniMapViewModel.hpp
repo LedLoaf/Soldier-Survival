@@ -21,7 +21,8 @@ public:
     int getNumberOfRows();
     
     // element na widoczny dla uzytkownika (na samej gorze)
-    MapViewModel::Element getTopElementAt(int x, int y);
+    game::MapObject* getVisibleMapObject(int x, int y); 
+    game::MapObject* getVisibleMapObject(util::Location::Position position); 
 
 private:
     

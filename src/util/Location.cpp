@@ -1,6 +1,5 @@
 
-#include "util/Location.hpp"
-
+#include <util/Location.hpp>
 
 namespace util {
 
@@ -19,19 +18,19 @@ int Location::Position::getY() {
 
 
 Location::Position Location::Position::operator+(const Location::Vector vector) {
-    Location::Position newPosition(this);
+    Location::Position newPosition(this->getX(), this->getY());
  
     switch (vector) {
-        case Location::Vector::UP :
+        case Location::UP :
             newPosition.setY(this->getY() + 1);
             break;
-        case Location::Vector::RIGHT :
+        case Location::RIGHT :
             newPosition.setX(this->getX() + 1);
             break; 
-        case Location::Vector::DOWN :
+        case Location::DOWN :
             newPosition.setY(this->getY() - 1);
             break;
-        case Location::Vector::LEFT :
+        case Location::LEFT :
             newPosition.setX(this->getX() - 1);
             break;             
     }

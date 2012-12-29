@@ -1,4 +1,3 @@
-#include <game/Application.hpp>
 #include <view/TextView.hpp>
 #include <string>
 
@@ -16,8 +15,8 @@ TextViewModel* TextView::getModel() {
     return this->textViewModel;
 }
 
-view::View::Type ImageView::getType() {
-    return view::View::IMAGE_VIEW;
+view::View::Type TextView::getType() {
+    return view::View::TEXT_VIEW;
 }
 
 }

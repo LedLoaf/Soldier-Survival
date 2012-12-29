@@ -13,7 +13,7 @@
 #include <graphic/amazin/painter/MiniMapViewPainter.hpp>
 #include <graphic/amazin/painter/TextViewPainter.hpp>
 
-#include "view/TextView.hpp"
+#include <view/TextView.hpp>
 
 namespace graphic {
 namespace amazin {

@@ -1,6 +1,7 @@
 #ifndef LEVEL_DESCRIPTION_H_
 #define LEVEL_DESCRIPTION_H_
 
+#include <game/object/Equipment.hpp>
 
 namespace game {
 
@@ -10,11 +11,12 @@ public:
     
     /********/
     
-    LevelDescription(width, height, enemyDen, enemyMin, enemyMax, enemyKnife, enemyGun, enemyRifle, playerKnife, playerGun, playerRifle) {
+    LevelDescription(int width, int height, float enemyDen, int enemyMin, 
+            int enemyMax, bool enemyKnife, bool enemyGun, bool enemyRifle, bool playerKnife, bool playerGun, bool playerRifle) {
         mapWidth = width;
         mapHeight = height;
         
-        enemyDensity enemyDen;
+        enemyDensity = enemyDen;
         enemyPlacesMin = enemyMin;
         enemyPlacesMax = enemyMax;
         

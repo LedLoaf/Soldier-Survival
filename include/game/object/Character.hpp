@@ -1,6 +1,8 @@
 #ifndef CHARACTER_HPP_
 #define CHARACTER_HPP_
 
+#include <util/Location.hpp>
+
 namespace game {
     
 class Character {

@@ -142,11 +142,11 @@ sf::Sprite* HUDViewPainter::getHealthIndicatorItem(int health) {
 
 std::string HUDViewPainter::getTextFor(util::Util::Action action) {
     switch (action) {
-        case Util::RUN_LEVEL_SELECTION :
+        case util::Util::RUN_LEVEL_SELECTION :
             return "level selection";
-        case Util::RUN_ABOUT :
+        case util::Util::RUN_ABOUT :
             return "about";
-        case Util::RUN_EXIT :
+        case util::Util::RUN_EXIT :
             return "exit";            
         default:
             return "";

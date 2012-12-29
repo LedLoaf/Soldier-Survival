@@ -56,7 +56,8 @@ bool View::isPaused() {
 }
 
 void View::resume() {
-    paused = false
+    paused = false;
 }
+
 
 } /* namespace graphic */

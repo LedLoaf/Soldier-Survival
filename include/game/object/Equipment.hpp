@@ -6,11 +6,7 @@
 namespace game {
     
 class Equipment {
-public:
-    std::vector<EquipmentItem>* getItems();
-    void addItem(EquipmentItem* item);
-
-    
+public: 
     class EquipmentItem {
     public:
         enum Type {
@@ -19,6 +15,9 @@ public:
         
         virtual Type getType() = 0;
     };
+    
+    std::vector<EquipmentItem*>* getItems();
+    void addItem(EquipmentItem* item);    
     
 private:
     std::vector<EquipmentItem>* items;

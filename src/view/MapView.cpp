@@ -16,8 +16,10 @@ MapView::MapView(int xStart, int yStart, int xEnd, int yEnd) : View(xStart, ySta
 void MapView::moveCharacter(game::Character* ch, util::Location::Vector vector) {
 	util::Location::Position position = mapViewModel->getPositionOf(ch);
 
-	mapViewModel->remove(position, ch);
-	mapViewModel->put(ch, position + vector);    
+	mapViewModel->remove(position.getX(), position.getY(), ch);
+    
+    util::Location::Position newPosition = position + vector;
+	mapViewModel->put(newPosition.getX(), newPosition.getY(), ch);    
     ch->setPosition(position);
 }
 
@@ -63,8 +65,8 @@ bool MapView::canCharacterStayOnNMMO(game::MapObject* notMovingMapObject) {
 }
 
 bool MapView::isPositionInMapArea(util::Location::Position position) {
-    if (position->getX() > 0 && position->getX() < mapViewModel->getMapWidth() &&
-            position->getY() > 0 && position->getY() < mapViewModel->getMapHeight())
+    if (position.getX() > 0 && position.getX() < mapViewModel->getMapWidth() &&
+            position.getY() > 0 && position.getY() < mapViewModel->getMapHeight())
         return true;
     else
         return false;

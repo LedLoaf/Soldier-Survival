@@ -3,6 +3,7 @@
 
 #include <view/View.hpp>
 #include <graphic/painter/SFMLAbstractViewPainter.hpp>
+#include <view/model/TextViewModel.hpp>
 
 
 namespace graphic {

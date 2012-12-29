@@ -1,10 +1,15 @@
 #ifndef MAP_VIEW_MODEL_HPP_
 #define MAP_VIEW_MODEL_HPP_
 
-#include <game/object/Character.hpp>
+
 #include <util/Util.hpp>
 #include <vector>
 #include <iostream>
+
+#include <game/object/Character.hpp>
+#include <game/object/NotMovingMapObject.hpp>
+#include <game/object/Player.hpp>
+
 
 namespace view {
 

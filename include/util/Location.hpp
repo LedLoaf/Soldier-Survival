@@ -1,5 +1,5 @@
-#ifndef LOCATION_HPP
-#define LOCATION_HPP
+#ifndef LOCATION_HPP_
+#define LOCATION_HPP_
 
 namespace util {
 
@@ -18,7 +18,7 @@ public:
         void setX(int x);
         void setY(int y);
         
-        Location::Position Location::Position::operator+(const Location::Vector vector);
+        Position operator+(const Location::Vector vector);
 	private:
 		int x;
 		int y;

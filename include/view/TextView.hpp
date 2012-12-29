@@ -1,11 +1,10 @@
-#ifndef IMAGE_VIEW_HPP_
-#define IMAGE_VIEW_HPP_
+#ifndef TEXT_VIEW_HPP_
+#define TEXT_VIEW_HPP_
 
 #include <view/View.hpp>
 #include <iostream>
-#include <list>
 
-#include <view/model/ImageViewModel.hpp>
+#include <view/model/TextViewModel.hpp>
 
 
 namespace view {

@@ -13,6 +13,7 @@
 #include <iostream>
 
 #include <view/View.hpp>
+#include <game/object/Player.hpp>
 
 namespace view {
 

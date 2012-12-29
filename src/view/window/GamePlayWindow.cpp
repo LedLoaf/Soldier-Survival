@@ -28,11 +28,11 @@ void GamePlayWindow::initUI() {
     mapView->setMapModel(levelGenerator->getMapViewModel());
 	addView(mapView);
     
-    
-    miniMapView = new MiniMapView(hudView->getEndPosition()->getX(), hudView->getStartPosition()->getY(), 
-            game::Application::getInstance().getDeviceManager()->getScreenWidth(), hudView->getStartPosition()->getY());
-    mapView->setMapModel(levelGenerator->getMapViewModel());
-    addView(miniMapView);
+//    
+//    miniMapView = new MiniMapView(hudView->getEndPosition()->getX(), hudView->getStartPosition()->getY(), 
+//            game::Application::getInstance().getDeviceManager()->getScreenWidth(), hudView->getStartPosition()->getY());
+//    mapView->setMapModel(levelGenerator->getMapViewModel());
+//    addView(miniMapView);
 }
 
 

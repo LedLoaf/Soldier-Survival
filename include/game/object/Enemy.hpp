@@ -2,7 +2,7 @@
 #define ENEMY_HPP_
 
 #include <game/object/Character.hpp>
-#include <weapon/Weapon.hpp>
+#include <game/object/weapon/Weapon.hpp>
 
 
 namespace game {

@@ -2,7 +2,7 @@
 #define MINI_MAP_VIEW_PAINTER_HPP_
 
 #include <view/View.hpp>
-#include <view/model/HUDViewModel.hpp>
+#include <view/model/MiniMapViewModel.hpp>
 #include <graphic/painter/SFMLAbstractViewPainter.hpp>
 
 
