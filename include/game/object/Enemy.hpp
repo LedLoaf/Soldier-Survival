@@ -9,15 +9,14 @@ namespace game {
     
 class Enemy : public Character {
 public:
+    Enemy();
 
     void setWeapon(Weapon* weapon);
     Weapon* getWeapon();
     
-    virtual void startMoving();
-    
     void injureUsing(Weapon* weapon);
     
-
+    bool canSeePlayer();
 
 private:
     Weapon* weapon;
