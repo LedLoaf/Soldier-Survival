@@ -21,6 +21,7 @@ protected:
     class Life : public sf::Thread {
     public:
         Life(int timeOfBirth, int lifetime);
+
         virtual void Run();
         
         bool isTimeToMove();
