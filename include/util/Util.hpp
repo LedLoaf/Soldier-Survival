@@ -19,6 +19,8 @@ public:
 
         return os.str();
     }
+    
+    int static getCurrentTime();
  
 };
 

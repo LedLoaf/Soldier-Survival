@@ -31,6 +31,8 @@ public:
     static bool isRiver(MapObject* mapObject);  
     
     virtual Type getType();
+    
+
 
 };
 

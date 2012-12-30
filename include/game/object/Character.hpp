@@ -9,18 +9,35 @@ namespace game {
     
 class Character : public MapObject {
 public:
-    // trzymam pozycję na mapie, żeby przyspieszyć poruszanie się postaci
-    // majac postac, wiem gdzie sie znajduje na mapie - nie musze jej ciagle przeszukiwac
+
     void setPosition(util::Location::Position pos);
     util::Location::Position getPosition();
     
-    virtual void startMoving() = 0;
+    virtual void startLife();
     
-    // jakis timer, ktory bedzie ozywial charactera - poruszal go i wykonywal inne akcje
     
 protected:
+    
+    class Life : public sf::Thread {
+    public:
+        
+        virtual void Run();
+        
+        bool isTimeToMove();
+        bool isTimeToDie();
+        
+    protected:
+           
+        int lifetime; // -1 oznacza, ze zyje dopuki nie zostanie zabity
+        int timeOfBirth;
+ 
+    };
+    
+    Life* life;
     util::Location::Position position;
     view::MapView* mapView;
+    MovementAI* movementAI;
+    
 };
     
 }
