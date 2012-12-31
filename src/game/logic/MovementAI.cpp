@@ -23,4 +23,6 @@ int MovementAI::getTimeOfLastMove() {
 int MovementAI::getMovingTimeInterval() {
     return movingTimeInterval;
 }
+
+
 }

@@ -2,8 +2,6 @@
 
 namespace view {
 
-MiniMapViewModel::MiniMapViewModel() {
-}
 
 
 

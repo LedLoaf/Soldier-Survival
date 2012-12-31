@@ -100,4 +100,8 @@ void GamePlayWindow::resume() {
 //    miniMapView->resume();    
 }
 
+MapView* GamePlayWindow::getMapView() {
+    return mapView;
+}
+
 }

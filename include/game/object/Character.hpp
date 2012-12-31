@@ -24,7 +24,7 @@ public:
     void setPosition(util::Location::Position pos);
     util::Location::Position getPosition();
     
-    virtual void beginLife();
+    void beginLife();
    
     void setHealth(int health);
     int getHealth();    

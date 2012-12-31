@@ -23,7 +23,7 @@ HUDView::HUDView(int xStart, int yStart, int xEnd, int yEnd, HUDViewModel* hudVi
     for (int i = 0; i < equipmentItems->size(); i++) {
         if (game::Weapon::isWeapon(equipmentItems->at(i)))
             weaponsSelectionView->addElement(new SelectionViewModel::WeaponSelectableElement(
-                    dynamic_cast<game::Weapon*>(equipmentItems->at(i))));    
+                    static_cast<game::Weapon*>(equipmentItems->at(i))));    
             
     }
         

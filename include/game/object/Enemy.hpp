@@ -17,7 +17,7 @@ public:
     void setWeapon(Weapon* weapon);
     Weapon* getWeapon();
     
-    void injureUsing(Weapon* weapon);
+    virtual void injureUsing(Weapon* weapon);
     
     bool canSeePlayer();    
 

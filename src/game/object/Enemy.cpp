@@ -1,5 +1,6 @@
 #include <util/Util.hpp>
 
+#include <game/object/Character.hpp>
 #include <game/object/Enemy.hpp>
 #include <game/logic/EnemyMovementAI.hpp>
 #include <game/logic/EnemyLife.hpp>
@@ -24,5 +25,9 @@ Weapon* Enemy::getWeapon() {
 bool Enemy::canSeePlayer() {
     return false;
 }
+
+void Enemy::injureUsing(Weapon* weapon) {
     
+}
+
 }

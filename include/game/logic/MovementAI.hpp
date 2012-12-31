@@ -12,7 +12,7 @@ public:
     MovementAI(int movingTimeInterval);
     
     virtual void tryToDoNextMove() = 0;
-    virtual void doNextMove(); // ewentualnie potem rozdzielic logike z tryToDoNextMove tutaj
+//    virtual void doNextMove(); // ewentualnie potem rozdzielic logike z tryToDoNextMove tutaj
     
     int getTimeOfLastMove();
     int getMovingTimeInterval();

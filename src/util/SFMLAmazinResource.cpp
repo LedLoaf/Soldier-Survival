@@ -4,10 +4,15 @@
 #include "view/model/MapViewModel.hpp"
 #include "game/object/MapObject.hpp"
 
-//static SFMLAmazinResource* SFMLAmazinResource::instance;
 
 
 namespace util {
+
+SFMLAmazinResource* SFMLAmazinResource::instance;
+
+
+SFMLAmazinResource::SFMLAmazinResource() {
+}  
 
 SFMLAmazinResource* SFMLAmazinResource::getInstance() {
 	if (!SFMLAmazinResource::instance) {

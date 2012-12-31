@@ -17,9 +17,6 @@ namespace view {
 class MiniMapViewModel : public ViewModel {
 public:
     
-	MiniMapViewModel();
-	virtual ~MiniMapViewModel();
-
     int getNumberOfColumns();
     int getNumberOfRows();
     
