@@ -1,30 +1,24 @@
-/* 
- * File:   ImageViewModel.cpp
- * Author: yet1
- * 
- * Created on December 1, 2012, 11:08 PM
- */
-
-#include <view/model/ImageViewModel.hpp>
+#include <view/model/TextViewModel.hpp>
 
 namespace view {
     
-ImageViewModel::ImageViewModel() {
+void TextViewModel::setText(std::string text) {
+    this->text = text;
 }
 
-ImageViewModel::ImageViewModel(const ImageViewModel& orig) {
+std::string TextViewModel::getText() {
+    return text;
 }
 
-ImageViewModel::~ImageViewModel() {
+void TextViewModel::setTextViewType(TextView::TextType type) {
+    this->textType = type;
 }
 
-void ImageViewModel::setImageResource(util::Resource::Type resource) {
-   this->imageResource = resource; 
+TextView::TextType TextViewModel::getTextViewType() {
+    return textType;
 }
+            
 
-util::Resource::Type ImageViewModel::getImageResource() {
-   return this->imageResource;
-}
 
 }
 

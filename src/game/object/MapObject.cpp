@@ -1,8 +1,11 @@
-
-#include "game/object/MapObject.hpp"
+#include <game/object/MapObject.hpp>
 
 
 namespace game {
+    
+MapObject::MapObject(Type type) {
+    this->type = type;
+}
     
 bool MapObject::isTerrain(MapObject* mapObject) {
     if (mapObject->getType() == MapObject::GRASS || MapObject::SAND || MapObject::GROUND || MapObject::ROAD || MapObject::BRIDGE) 
@@ -30,6 +33,10 @@ bool MapObject::isRiver(MapObject* mapObject) {
         return true;
     else
         return false;
+}
+
+MapObject::Type MapObject::getType() {
+    return type;
 }
 
 }

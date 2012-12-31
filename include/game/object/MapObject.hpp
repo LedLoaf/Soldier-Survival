@@ -32,7 +32,8 @@ public:
     
     virtual Type getType();
     
-
+private:
+    Type type;
 
 };
 

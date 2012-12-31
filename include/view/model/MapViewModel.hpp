@@ -7,9 +7,12 @@
 #include <iostream>
 
 #include <view/model/ViewModel.hpp>
-#include <game/object/Character.hpp>
 #include <game/object/NotMovingMapObject.hpp>
-#include <game/object/Player.hpp>
+
+namespace game {
+    class Character;
+    class Player;
+}
 
 
 namespace view {
@@ -24,7 +27,7 @@ public:
 	void remove(int x, int y, const game::Character* ch);
 	void remove(int x, int y, const game::NotMovingMapObject* notMovingMapObject);
 
-	util::Location::Position getPositionOf(const game::Character* ch);
+	util::Location::Position getPositionOf(game::Character* ch);
     game::MapObject* getVisibleMapObject(int x, int y); 
     game::MapObject* getVisibleMapObject(util::Location::Position position); 
     
@@ -49,6 +52,8 @@ private:
     
     int playerPositionX;
     int playerPositionY;
+    
+    int mapWidth, mapHeight;
     
     
 };

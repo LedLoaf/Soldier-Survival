@@ -39,8 +39,6 @@ void GamePlayWindow::initUI() {
 
 
 void GamePlayWindow::onArrowPressed(util::Key::Arrow arrow) {
-    Window::onArrowPressed(arrow);
-    
     if (hasSubWindow())
         subWindow->onArrowPressed(arrow);
     else {

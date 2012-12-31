@@ -1,14 +1,18 @@
 #ifndef WAR_MANAGER_HPP_
 #define WAR_MANAGER_HPP_
 
-#include <view/window/Window.hpp>
-#include <util/Resource.hpp>
+#include <vector>
 
-#include "object/Player.hpp"
-#include "object/Enemy.hpp"
-
+namespace view {
+class MapView;  
+class WarView;
+}
 
 namespace game {
+
+class War;
+class Player;
+class Enemy;
 
 class WarManager {
 public:

@@ -2,21 +2,17 @@
 #include <time.h>
 #include <cstdlib>
 
-#include <game/MovementAI.hpp>
+#include <util/Location.hpp>
+#include "game/logic/FollowMovementAI.hpp"
+
 
 namespace game {
 
-MovementAI::MovementAI(int movingTimeInterval) {
-    mapView = ((view::GamePlayWindow) Application.getContext()->getActiveWindow())->getMapView();
-    this->movingTimeInterval = movingTimeInterval;
+util::Location::Vector* FollowMovementAI::getDirectionsToPlayerFrom(util::Location::Position position) {
+    util::Location::Vector directions[8] =  {util::Location::DOWN, util::Location::UP, util::Location::LEFT, util::Location::DOWN_LEFT,
+                    util::Location::DOWN, util::Location::UP, util::Location::LEFT, util::Location::DOWN_LEFT};
+    
+    return directions;
 }
 
-
-int MovementAI::getTimeOfLastMove() {
-    return timeOfLastMove;
-}
-
-int MovementAI::getMovingTimeInterval() {
-    return movingTimeInterval;
-}
 }

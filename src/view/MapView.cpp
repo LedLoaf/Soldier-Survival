@@ -1,7 +1,12 @@
+#include <cmath>
+
 #include <view/View.hpp>
+#include <view/WarView.hpp>
+
 #include <view/MapView.hpp>
 #include <game/object/LevelDescription.hpp>
 #include <game/object/Character.hpp>
+#include <game/War.hpp>
 
 #include <util/Location.hpp>
 
@@ -10,8 +15,12 @@
 namespace view {
 
 MapView::MapView(int xStart, int yStart, int xEnd, int yEnd) : View(xStart, yStart, xEnd, yEnd) {
-    warView = new WarView();
+    warView = new WarView(0, 0, 10, 10);
 
+}
+
+void MapView::setMapModel(MapViewModel* mapModel) {
+    this->mapViewModel = mapModel;
 }
 
 
@@ -49,8 +58,10 @@ bool MapView::canMoveCharacter(game::Character* ch, util::Location::Vector vecto
             
                     switch (collidingCharacter->getType()) { 
                         case game::MapObject::ENEMY_A : {
-                            if (!warManager->isWarAlreadyStartedBetween(ch, collidingCharacter))
-                                warManager->startWar(new game::War(ch, collidingCharacter));
+                            
+                            
+                            if (!warManager->isWarAlreadyStartedBetween(dynamic_cast<game::Player*>(ch), dynamic_cast<game::Enemy*>(collidingCharacter)))
+                                warManager->startWar(new game::War(dynamic_cast<game::Player*>(ch), dynamic_cast<game::Enemy*>(collidingCharacter)));
                         }
 
                     }
@@ -92,9 +103,33 @@ bool MapView::isPositionInMapArea(util::Location::Position position) {
         return false;
 }
 
+bool MapView::areColliding(game::Character* firstCharacter, game::Character* secondCharacter) {
+    if (MapView::getDistanceBetween(firstCharacter, secondCharacter) == 1)
+        return true;
+    else
+        return false;
+}
+
+int MapView::getDistanceBetween(game::Character* firstCharacter, game::Character* secondCharacter) {
+    util::Location::Position firstCharacterPosition = firstCharacter->getPosition();
+    util::Location::Position secondCharacterPosition = secondCharacter->getPosition();
+    
+    if (fabs(firstCharacterPosition.getX() - secondCharacterPosition.getX()) <= 1 &&
+            fabs(firstCharacterPosition.getY() - secondCharacterPosition.getY()) <= 1)
+        return true;
+    else
+        return false;
+}
+
+game::Player* MapView::getPlayer() {
+    return mapViewModel->getPlayer();
+}
+
 
 View::Type MapView::getType() {
     return View::MAP_VIEW;
 }
+
+
 
 }

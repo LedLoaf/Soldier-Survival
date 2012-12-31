@@ -1,3 +1,5 @@
+#include <cstddef> //do poprawnej kompilacji SFML //(NULL)
+
 #include <graphic/amazin/painter/SelectionViewPainter.hpp>
 #include <graphic/painter/SFMLAbstractViewPainter.hpp>
 #include <view/model/SelectionViewModel.hpp>

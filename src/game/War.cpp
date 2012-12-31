@@ -1,4 +1,7 @@
+#include <SFML/System/Sleep.hpp>
+
 #include "game/War.hpp"
+
 
 namespace game {
 
@@ -10,6 +13,24 @@ War::War(Player* player, Enemy* enemy) {
 void War::start() {
     // w osobnym watku odbieranie zycia przeciwnikowi i playerowi + informowanie warView o efektach 
     warExecutor->Launch();
+}
+
+void War::stop() {
+    // ubij watek
+}
+
+void War::setWarView(view::WarView* warView) {
+    this->warView = warView;
+}
+
+    
+Enemy* War::getEnemy() {
+    return enemy;
+}
+
+
+Player* War::getPlayer() {
+    return player;
 }
 
 

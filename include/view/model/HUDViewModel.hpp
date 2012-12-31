@@ -33,8 +33,10 @@ public:
     
     void setPlayerEquipment(game::Equipment* equipment);
     game::Equipment* getPlayerEquipment();
+    
 private:
     game::Player* player;
+    game::Equipment* playerEquipment;
 };
 
 } /* namespace view */

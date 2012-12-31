@@ -7,11 +7,10 @@
 namespace view {
 
 class WarView : public View {
-private:
-
-
 public:
-    WarView();
+    WarView(int xStart, int yStart, int xEnd, int yEnd);
+    
+    virtual Type getType();
 };
 
 }

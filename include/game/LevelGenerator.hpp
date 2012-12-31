@@ -30,7 +30,7 @@ private:
     Player* generatePlayer();
     void placeEnemies();
     void placeBoss();
-    void placeNPC();
+//    void placeNPC();
     void placePlayer(Player* player);
     void placeRandomly(util::Location::Position *p, int dx, int dy, float density, MapObject* tt);
     bool checkClearAround(util::Location::Position *p, int radius);

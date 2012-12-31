@@ -4,21 +4,36 @@
 
 #include <view/View.hpp>
 #include <view/model/MapViewModel.hpp>
-#include <game/object/Character.hpp>
+
 #include <util/Location.hpp>
 
-namespace view {
+#include <game/WarManager.hpp>
+#include "WarView.hpp"
 
+
+namespace game {
+class MapObject;    
+class Character;
+class Player;
+}
+
+namespace view {
+    
+class WarView;
+    
 class MapView : public View {
 private:
 	// MapViewModel jest doslownie modelem - nie ma zadnej konkretnej logiki, trzyma tylko 2 tablice 2 wymiarowe z mapa
 	MapViewModel* mapViewModel;
     game::WarManager* warManager;
+    view::WarView* warView;
 
 public:
     MapView(int xStart, int yStart, int xEnd, int yEnd);
     virtual Type getType();
 
+    static int getDistanceBetween(game::Character* firstCharacter, game::Character* secondCharacter);
+    
     bool areColliding(game::Character* firstCharacter, game::Character* secondCharacter);
     
     void moveCharacter(game::Character* ch, util::Location::Vector vector);

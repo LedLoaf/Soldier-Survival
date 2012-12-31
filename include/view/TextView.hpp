@@ -4,10 +4,12 @@
 #include <view/View.hpp>
 #include <iostream>
 
-class TextViewModel; //czemu nie mozna po prostu #include <view/model/TextViewModel.hpp> ?
 
 namespace view {
 
+class TextViewModel; 
+    
+    
 class TextView : public View {
 public:
     enum TextType {

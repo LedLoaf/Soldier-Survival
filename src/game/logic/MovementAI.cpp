@@ -2,12 +2,16 @@
 #include <time.h>
 #include <cstdlib>
 
-#include <game/MovementAI.hpp>
+#include <game/Application.hpp>
+#include <game/logic/MovementAI.hpp>
+#include <view/window/GamePlayWindow.hpp>
+#include <view/MapView.hpp>
+
 
 namespace game {
 
 MovementAI::MovementAI(int movingTimeInterval) {
-    mapView = ((view::GamePlayWindow) Application.getContext()->getActiveWindow())->getMapView();
+    mapView = (dynamic_cast<view::GamePlayWindow*>(game::Application::getInstance().getContext()->getActiveWindow()))->getMapView();
     this->movingTimeInterval = movingTimeInterval;
 }
 

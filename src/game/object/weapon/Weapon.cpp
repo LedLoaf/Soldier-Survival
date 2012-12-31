@@ -17,7 +17,7 @@ int Weapon::getDamage() {
     return damage;
 }
 
-static bool Weapon::isWeapon(Equipment::EquipmentItem equipmentItem) {
+bool Weapon::isWeapon(Equipment::EquipmentItem* equipmentItem) {
     switch (equipmentItem->getType()) {
         case Equipment::EquipmentItem::GUN :
         return true;

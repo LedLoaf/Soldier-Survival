@@ -1,10 +1,12 @@
-#ifndef MOVEMENT_AI_HPP_
-#define MOVEMENT_AI_HPP_
+#ifndef MOVEMENTAI_HPP_
+#define MOVEMENTAI_HPP_
 
-
+namespace view {
+class MapView;
+}
 
 namespace game {
-    
+
 class MovementAI {
 public:
     MovementAI(int movingTimeInterval);

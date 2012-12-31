@@ -16,6 +16,13 @@ int Location::Position::getY() {
     return y;
 }
 
+void Location::Position::setX(int x) {
+    this->x = x;
+}
+
+void Location::Position::setY(int y) {
+    this->y = y;
+}
 
 Location::Position Location::Position::operator+(const Location::Vector vector) {
     Location::Position newPosition(this->getX(), this->getY());

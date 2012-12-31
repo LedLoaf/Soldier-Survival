@@ -2,21 +2,25 @@
 #define ENEMY_HPP_
 
 #include <game/object/Character.hpp>
-#include <game/object/weapon/Weapon.hpp>
+
 
 
 namespace game {
-    
+
+class Weapon;
+
+
 class Enemy : public Character {
 public:
-    Enemy();
+    Enemy(MapObject::Type type);
 
     void setWeapon(Weapon* weapon);
     Weapon* getWeapon();
     
     void injureUsing(Weapon* weapon);
     
-    bool canSeePlayer();
+    bool canSeePlayer();    
+
 
 private:
     Weapon* weapon;

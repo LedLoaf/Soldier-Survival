@@ -1,5 +1,14 @@
+#include <util/Location.hpp>
 
-#include "game/logic/EnemyMovementAI.hpp"
+#include <game/logic/EnemyMovementAI.hpp>
+#include <game/logic/FollowMovementAI.hpp>
+#include <game/logic/FreeMovementAI.hpp>
+
+#include <game/object/Enemy.hpp>
+#include <game/object/Player.hpp>
+
+#include <view/MapView.hpp>
+
 
 
 
@@ -11,14 +20,15 @@ EnemyMovementAI::EnemyMovementAI(Enemy* enemy, int movingTimeInterval)  : Moveme
 
 void EnemyMovementAI::tryToDoNextMove() {
     if (enemy->canSeePlayer()) {
-        util::Location::Vector directionsToPlayer[8] = 
+        // 8 elementowa tablica
+        util::Location::Vector* directionsToPlayer = 
                 followAI->getDirectionsToPlayerFrom(enemy->getPosition());
 
         bool moveWasMade = false;
         int i = 0;
         while (!moveWasMade) {
             if (mapView->canMoveCharacter(enemy, directionsToPlayer[i])) {
-                mapView->moveCharacter(enemy, directionsToPlayer[i])
+                mapView->moveCharacter(enemy, directionsToPlayer[i]);
                 moveWasMade = true;
             } else 
                 i++;

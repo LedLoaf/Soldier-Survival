@@ -1,43 +1,45 @@
 #ifndef CHARACTER_HPP_
 #define CHARACTER_HPP_
 
-#include <util/Location.hpp>
+#include <SFML/System/Thread.hpp>
 
+#include <util/Location.hpp>
 #include <game/object/MapObject.hpp>
 
+
+namespace view {
+    class MapView;
+}
+
 namespace game {
+
+class CharacterLife;    
+class MovementAI;
+class Weapon;
     
 class Character : public MapObject {
 public:
-
+    Character(MapObject::Type type);
+    
     void setPosition(util::Location::Position pos);
     util::Location::Position getPosition();
     
-    virtual void startLife();
+    virtual void beginLife();
+   
+    void setHealth(int health);
+    int getHealth();    
     
+
+    virtual void injureUsing(Weapon* weapon);
     
 protected:
     
-    class Life : public sf::Thread {
-    public:
-        Life(int timeOfBirth, int lifetime);
-
-        virtual void Run();
-        
-        bool isTimeToMove();
-        bool isTimeToDie();
-        
-    protected:
-           
-        int lifetime; // -1 oznacza, ze zyje dopuki nie zostanie zabity
-        int timeOfBirth;
- 
-    };
-    
-    Life* life;
+    CharacterLife* life;
     util::Location::Position position;
     view::MapView* mapView;
     MovementAI* movementAI;
+    
+    int health;
     
 };
     

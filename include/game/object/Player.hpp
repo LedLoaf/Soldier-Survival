@@ -1,12 +1,17 @@
 #ifndef PLAYER_HPP_
 #define PLAYER_HPP_
 
+#include <vector>
+
 #include <game/object/Character.hpp>
 
-#include "weapon/Weapon.hpp"
+#include "Equipment.hpp"
 
 
 namespace game {
+
+class Equipment;
+class Weapon;    
     
 class Player : public Character {
 public:
@@ -15,20 +20,15 @@ public:
     Equipment* getEquipment();
     std::vector<game::Weapon*>* getWeapons();
     
-    void setCurrentWeapon(Weapon* weapon) {
-        currentWeapon = weapon;
-    }
+    void setCurrentWeapon(Weapon* weapon);
     
     Weapon* getCurrentWeapon();
-    
-    void setHealth(int health);
-    int getHealth();
-    
     
     void injureUsing(Weapon* weapon);
     
 private:
     Weapon* currentWeapon;
+    Equipment* equipment;
     
 };
     

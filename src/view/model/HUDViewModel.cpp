@@ -24,8 +24,16 @@ void HUDViewModel::setPlayer(game::Player* player) {
     
 }
 
+void HUDViewModel::setPlayerEquipment(game::Equipment* equipment) {
+    playerEquipment = equipment;
+}
+
 int HUDViewModel::getPlayerHealth() {
     return player->getHealth();
+}
+
+game::Equipment* HUDViewModel::getPlayerEquipment() {
+    return playerEquipment;
 }
 
 } /* namespace view */

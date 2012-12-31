@@ -1,41 +1,35 @@
 #include <game/object/Character.hpp>
-
+#include <game/logic/EnemyLife.hpp>
 
 namespace game {
     
-void Character::startLife() {
+Character::Character(MapObject::Type type) : MapObject(type), position(util::Location::Position(-1, -1)) {
+}
+    
+    // virtualna, tak zeby w Player nie rozpoczynac watku
+void Character::beginLife() {
     life->Launch();
 }   
 
-Character::Life::Life(int timeOfBirth, int lifetime) {
-    this->timeOfBirth = timeOfBirth;
-    this->lifetime = lifetime;
+void Character::setPosition(util::Location::Position pos) {
+    position = pos;
 }
 
-void Character::Life::Run() {
-    if (isTimeToMove()) {
-        movementAI->tryToDoNextMove();
-
-    }
-
-    if (isTimeToDie()) {
-
-    }
+util::Location::Position Character::getPosition() {
+    return position;
 }
 
-bool Character::Life::isTimeToMove() {
-    if (util::Util::getCurrentTime() - movementAI->getTimeOfLastMove() > movementAI->getMovingTimeInterval)
-        return true;
-    else
-        return false;
+void Character::setHealth(int health) {
+    this->health = health;
+}
+int Character::getHealth() {
+    return health;
 }
 
-bool Character::Life::isTimeToDie() {
-    if (lifetime > -1) {
-        if (util::Util::getCurrentTime() - timeOfBirth > lifetime)
-            return true;
-    } else 
-        return false;
+
+
+void injureUsing(Weapon* weapon) {
+    
 }
 
 }

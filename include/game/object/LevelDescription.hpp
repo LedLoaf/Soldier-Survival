@@ -30,13 +30,26 @@ public:
     }
     
     void setPlayerEquipment(Equipment* equipment);
-    Equipment* getPlayerEquipment();
     
-    void setPlayerHealth(int health);
-    int getPlayerHealth();
+    Equipment* getPlayerEquipment() {
+        return playerEquipment;
+    }
     
-    int getMapWidth();
-    int getMapHeight();
+    void setPlayerHealth(int health) {
+        this->playerHealth = health;
+    }
+    
+    int getPlayerHealth() {
+        return playerHealth;
+    }
+    
+    int getMapWidth() {
+        return mapWidth;
+    }
+    
+    int getMapHeight() {
+        return mapHeight;
+    }
     
     int getSizeHeight() {
         return mapHeight;
@@ -123,6 +136,10 @@ private:
     bool playerWeaponKnife;
     bool playerWeaponGun;
     bool playerWeaponRifle;
+    
+    
+    int playerHealth;
+    Equipment* playerEquipment;
 };
 
 }

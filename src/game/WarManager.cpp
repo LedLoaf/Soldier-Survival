@@ -1,4 +1,8 @@
+#include <view/MapView.hpp>
+#include <view/WarView.hpp>
+
 #include "game/WarManager.hpp"
+#include <game/War.hpp>
 
 namespace game {
 

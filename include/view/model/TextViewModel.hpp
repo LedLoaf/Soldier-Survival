@@ -11,8 +11,6 @@ namespace view {
     
 class TextViewModel : public ViewModel {
 public:
-    TextViewModel();
-
     void setText(std::string text);
     std::string getText();
     

@@ -13,14 +13,19 @@ public:
             KNIFE, GUN, RIFLE, AMMO
         };
         
-        virtual Type getType() = 0;
+        Type getType() {
+            return type;
+        }
+        
+    private:
+        Type type;
     };
     
     std::vector<EquipmentItem*>* getItems();
     void addItem(EquipmentItem* item);    
     
 private:
-    std::vector<EquipmentItem>* items;
+    std::vector<EquipmentItem*>* items;
 };
     
 }

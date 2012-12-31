@@ -1,15 +1,14 @@
-#ifndef ENEMY_MOVEMENTAI_HPP_
-#define ENEMY_MOVEMENTAI_HPP_
+#ifndef ENEMY_MOVEMENT_AI_HPP_
+#define ENEMY_MOVEMENT_AI_HPP_
 
 #include <game/logic/MovementAI.hpp>
-#include <game/logic/FollowMovementAI.hpp>
-#include <game/logic/FreeMovementAI.hpp>
-
-#include "object/Character.hpp"
-#include <util/Location.hpp>
-
 
 namespace game {
+
+class Player;
+class Enemy;
+class FollowMovementAI;
+class FreeMovementAI;
 
 class EnemyMovementAI : public MovementAI {
 public:

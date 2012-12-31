@@ -1,20 +1,32 @@
 #ifndef MAP_VIEW_PAINTER_HPP_
 #define MAP_VIEW_PAINTER_HPP_
 
-#include <view/View.hpp>
-#include <view/model/MapViewModel.hpp>
-#include <graphic/painter/SFMLAbstractViewPainter.hpp>
-
 #include <vector>
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/System.hpp>
+
+
+#include <util/Key.hpp>
+#include <view/View.hpp>
+#include <graphic/painter/SFMLAbstractViewPainter.hpp>
+
+
+namespace view {
+class ImageViewModel;
+class MapViewModel;
+}
+
+namespace game {
+class MapObject;
+class Player;
+}
 
 namespace graphic {
 namespace amazin {
 
 class MapViewPainter : public SFMLAbstractViewPainter {
 public:
-	MapViewPainter(view::ImageViewModel* model, view::View::Type parentViewType);
+	MapViewPainter(view::MapViewModel* model, view::View::Type parentViewType);
     
 
 	virtual void init();
@@ -32,6 +44,8 @@ public:
     
 
 private:
+    class SubMapManager;
+    
 	view::MapViewModel* mapViewModel;
     std::vector< std::vector<sf::Sprite*> > mapElementSprites; 
     
@@ -43,7 +57,7 @@ private:
     
     class SubMapManager {
     public:
-        SubMapManager(view::MapViewModel* model);
+        SubMapManager(view::MapViewModel* model, int subMapWidth, int subMapHeight, int playerToWallSpace);
         void setSubMapWidth(int width);
         void setSubMapHeight(int height);
         void updateSubMap();
@@ -74,31 +88,29 @@ private:
                     case util::Key::UP:
                         afterWallPos -= subMapHeight - playerToWallSpace;    
                         break;
-                    case util::Key::UP:
-                        afterWallPos += subMapHeight - playerToWallSpace;       
-                        break;
                 }
             }
             
         private:
             util::Key::Arrow direction;            
-            int currentWallPos;            
+            int* currentWallPos;            
             int afterWallPos;
             int wallPos;
+            int subMapWidth;
+            int subMapHeight;      
+            int playerToWallSpace;
+            
             
             virtual void Run() {
 
                 for (int i = 0; i < fabs(afterWallPos - wallPos); ++i)
-                switch (direction) {
-                     case util::Key::LEFT || util::Key::UP:
+                    if (direction == util::Key::LEFT || util::Key::UP)
                         *currentWallPos--;
-                        break;
-                     case util::Key::RIGHT || util::Key::DOWN:
+                    else
                         *currentWallPos++;
-                        break;                        
-                }
+
                 
-                sf::Sleep(0.1f);
+                    sf::Sleep(0.1f);
 
             }
         };

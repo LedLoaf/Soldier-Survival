@@ -1,3 +1,5 @@
+#include <cstddef> //do poprawnej kompilacji SFML //(NULL)
+
 #include <graphic/amazin/painter/MapViewPainter.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 
@@ -7,6 +9,8 @@
 #include "util/Resource.hpp"
 #include "util/SFMLAmazinResource.hpp"
 #include "util/Key.hpp"
+#include "game/object/Character.hpp"
+#include <game/object/Player.hpp>
 
 #include <string>
 #include <iostream>
@@ -23,12 +27,13 @@ MapViewPainter::MapViewPainter(view::MapViewModel* model, view::View::Type paren
     
 
 void MapViewPainter::init() {
-    subMapWidth = 50;
-    subMapHeight = 50;
+    int subMapWidth = 50;
+    int subMapHeight = 50;
+    int playerToWallSpace = 5;
     
     elementSize = 10;
     
-    SubMapManager* subMapManager = SubMapManager(mapViewModel, subMapWidth, subMapHeight);
+    SubMapManager* subMapManager = new SubMapManager(mapViewModel, subMapWidth, subMapHeight, playerToWallSpace);
     // rysuje 50 na 50 kafelkow
     subMapManager->setSubMapWidth(subMapWidth);
     subMapManager->setSubMapHeight(subMapHeight);
@@ -47,7 +52,7 @@ void MapViewPainter::init() {
 void MapViewPainter::update() {   
     for (int i = 0; i < subMapWidth; i++) {
         for (int j = 0; i < subMapHeight; j++) {
-            mapElementSprites[i][j].setImage(util::SFMLAmazinResource::getInstance()->getImage(subMapManager->getElementAt(i, j)));
+            mapElementSprites[i][j]->SetImage(*util::SFMLAmazinResource::getInstance()->getImage(subMapManager->getElementAt(i, j)->getType()));
         }        
     }
     
@@ -62,7 +67,7 @@ MapViewPainter::SubMapManager::SubMapManager(view::MapViewModel* model, int subM
     this->player = model->getPlayer();
     this->mapViewModel = model;
     
-    util::Location::Position playerPos = model->getPositionOf(player);
+    util::Location::Position playerPos = model->getPlayer()->getPosition();
     leftWallPos = playerPos.getX() - playerToWallSpace;
     if (leftWallPos <= 0)
         leftWallPos = model->getPositionOf(player).getX();
@@ -72,21 +77,32 @@ MapViewPainter::SubMapManager::SubMapManager(view::MapViewModel* model, int subM
         leftWallPos = playerPos.getX();    
 }
 
-MapViewPainter::SubMapManager::updateSubMap() {
+void MapViewPainter::SubMapManager::setSubMapWidth(int width) {
+    subMapWidth = width;
+}
+
+void MapViewPainter::SubMapManager::setSubMapHeight(int height) {
+    subMapHeight = height;
+}
+
+void MapViewPainter::SubMapManager::updateSubMap() {
     int playerPosX = mapViewModel->getPositionOf(player).getX();
     
     if (playerPosX - leftWallPos == playerToWallSpace) {
-        SmoothlyMoveSubmapThread smoothlyMoveSubmapThread = new SmoothlyMoveSubmapThread(&leftWallPos, util::Key::LEFT);
+        SmoothlyMoveSubmapThread* smoothlyMoveSubmapThread = new SmoothlyMoveSubmapThread(&leftWallPos, util::Key::LEFT);
         smoothlyMoveSubmapThread->Launch();
         
     } else if (playerPosX - leftWallPos == playerToWallSpace) {
-        SmoothlyMoveSubmapThread smoothlyMoveSubmapThread = new SmoothlyMoveSubmapThread(&leftWallPos, util::Key::RIGHT);
+        SmoothlyMoveSubmapThread* smoothlyMoveSubmapThread = new SmoothlyMoveSubmapThread(&leftWallPos, util::Key::RIGHT);
         smoothlyMoveSubmapThread->Launch();
         
     }
 }
 
 
-MapViewPainter::SubMapManager::getElementAt(int x, int y) {   
-    return mapViewModel->getVisibleMapObject()[leftWallPos + x][topWallPos + y];   
+game::MapObject* MapViewPainter::SubMapManager::getElementAt(int x, int y) {   
+    return mapViewModel->getVisibleMapObject(leftWallPos + x, topWallPos + y);   
+}
+
+}
 }

@@ -4,8 +4,10 @@
 #include <view/window/Window.hpp>
 #include <util/Resource.hpp>
 
+#include <view/WarView.hpp>
 #include "object/Player.hpp"
 #include "object/Enemy.hpp"
+
 
 
 namespace game {
@@ -33,13 +35,16 @@ private:
         
         Weapon* playerWeapon;
         Weapon* enemyWeapon;
+        Player* player;
+        Enemy* enemy;        
     };    
 
 	view::Window* activeWindow;
-    Player* player;
-    Enemy* enemy;
+
     WarExecutor* warExecutor;
     view::WarView* warView;
+    Player* player;
+    Enemy* enemy;      
     
 
 };
