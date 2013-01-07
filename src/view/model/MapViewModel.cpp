@@ -4,13 +4,19 @@
 #include "game/object/Player.hpp"
 #include "game/object/MapObject.hpp"
 #include "game/object/NotMovingMapObject.hpp"
+#include "view/MapView.hpp"
 
 namespace view {
 
 MapViewModel::MapViewModel(int mapWidth, int mapHeight) {
     this->mapWidth = mapWidth;
     this->mapHeight = mapHeight;
-}    
+    
+    allocateCharactersTab();
+    allocateNotMovingObjectsTab();
+}   
+
+
 
 game::MapObject* MapViewModel::getVisibleMapObject(int x, int y) {
     //checkIfMapHasPoint(x, y);  throws exception if x > mapWidth ...
@@ -77,7 +83,7 @@ void MapViewModel::put(int x, int y, game::NotMovingMapObject* const notMovingMa
 void MapViewModel::remove(int x, int y, const game::Character* ch) {
     //checkIfMapHasPoint(x, y);  throws exception if x > mapWidth ...
 
-    charactersTab[x, y] = NULL;
+    charactersTab[x][y] = NULL;
 }
 
 void MapViewModel::remove(int x, int y, const game::NotMovingMapObject* notMovingMapObject) {
@@ -97,6 +103,18 @@ int MapViewModel::getMapHeight() {
 
 int MapViewModel::getMapWidth() {
     return mapHeight;
+}
+
+void MapViewModel::allocateCharactersTab() {
+    charactersTab = new game::Character**[mapWidth];
+    for (int i = 0; i < mapWidth; i++)
+        charactersTab[i] = new game::Character*[mapHeight];
+}
+
+void MapViewModel::allocateNotMovingObjectsTab() {
+    notMovingObjectsTab = new game::NotMovingMapObject**[mapWidth];
+    for (int i = 0; i < mapWidth; i++)
+        notMovingObjectsTab[i] = new game::NotMovingMapObject*[mapHeight];
 }
 
 } /* namespace view */

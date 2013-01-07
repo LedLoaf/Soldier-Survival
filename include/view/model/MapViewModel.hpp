@@ -55,6 +55,9 @@ private:
     
     int mapWidth, mapHeight;
     
+    void allocateCharactersTab();
+    void allocateNotMovingObjectsTab();
+    
     
 };
 

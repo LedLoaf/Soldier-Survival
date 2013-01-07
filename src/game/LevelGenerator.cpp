@@ -107,22 +107,22 @@ void LevelGenerator::generateRivers() {
         int p_x = p->getX();
         if (vector == util::Location::DOWN) {
             int sectionLen = p->getY() + len;
-            for (sectionLen; p->getY() <= sectionLen; ++p_y) {
+            for (sectionLen; p_y <= sectionLen; ++p_y) {
                 notEnd = placeRiverOrBridge(p, bridgeProbability);
             }
         } else if (vector == util::Location::LEFT) {
             int sectionLen = p->getX() - len;
-            for (sectionLen; p->getX() >= sectionLen; --p_x) {
+            for (sectionLen; p_x >= sectionLen; --p_x) {
                 notEnd = placeRiverOrBridge(p, bridgeProbability);
             }
         } else if (vector == util::Location::UP) {
             int sectionLen = p->getY() - len;
-            for (sectionLen; p->getY() >= sectionLen; --p_y) {
+            for (sectionLen; p_y >= sectionLen; --p_y) {
                 notEnd = placeRiverOrBridge(p, bridgeProbability);
             }
         } else if (vector == util::Location::RIGHT) {
             int sectionLen = p->getX() + len;
-            for (sectionLen; p->getX() <= sectionLen; ++p_x) {
+            for (sectionLen; p_x <= sectionLen; ++p_x) {
                 notEnd = placeRiverOrBridge(p, bridgeProbability);
             }
         }
@@ -302,7 +302,8 @@ void LevelGenerator::placeRandomly(util::Location::Position *p, int dx, int dy, 
                 && ptt->getY() >= 0 && ptt->getY() < mapModel->getMapHeight()) {
             std::cout << " -> GOOD POSITION!";
             
-            if (!MapObject::isWall(mapModel->getNotMovingObject(ptt->getX(), ptt->getY())) 
+            
+            if (mapModel->getNotMovingObject(ptt->getX(), ptt->getY()) != NULL && !MapObject::isWall(mapModel->getNotMovingObject(ptt->getX(), ptt->getY())) 
                     && !MapObject::isRiver(mapModel->getNotMovingObject(ptt->getX(), ptt->getY()))
                     && !MapObject::isBridge(mapModel->getNotMovingObject(ptt->getX(), ptt->getY()))) {
                 std::cout << " -> GOOD TO SET NEW TYPE HERE!";
