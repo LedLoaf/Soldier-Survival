@@ -24,12 +24,20 @@ public:
         enemyTypeGun = enemyGun;
         enemyTypeRifle = enemyRifle;
         
+        /*
         playerWeaponKnife = playerKnife;
         playerWeaponGun = playerGun;
         playerWeaponRifle = playerRifle;
+        */
+        
+        if (playerKnife) playerEquipment->addItem(KNIFE);
+        if (playerGun) playerEquipment->addItem(GUN);
+        if (playerRifle) playerEquipment->addItem(RIFLE);
     }
     
-    void setPlayerEquipment(Equipment* equipment);
+    void setPlayerEquipment(Equipment* equipment) {
+        playerEquipment = equipment;
+    }
     
     Equipment* getPlayerEquipment() {
         return playerEquipment;
@@ -92,7 +100,7 @@ public:
     void setEnemyTypeGun(bool enemyTypeGun) {
         this->enemyTypeGun = enemyTypeGun;
     }
-    
+/*
     bool getEnemyTypeRifle() {
         return enemyTypeRifle;
     }
@@ -120,7 +128,7 @@ public:
     void setPlayerWeaponRifle(bool playerWeaponRifle) {
         this->playerWeaponRifle = playerWeaponRifle;
     }
-
+*/
 private:
     int mapWidth;
     int mapHeight;
@@ -133,10 +141,11 @@ private:
     bool enemyTypeGun;
     bool enemyTypeRifle;
     
+    /*
     bool playerWeaponKnife;
     bool playerWeaponGun;
     bool playerWeaponRifle;
-    
+    */
     
     int playerHealth;
     Equipment* playerEquipment;

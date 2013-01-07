@@ -10,3 +10,7 @@
 *.lai
 *.la
 *.a
+
+# System Files
+*.DS_Store
+*thumbs.db
