@@ -10,7 +10,7 @@ public:
     class EquipmentItem {
     public:
         enum Type {
-            KNIFE, GUN, RIFLE, AMMO
+            KNIFE, GUN, RIFLE
         };
         
         Type getType() {

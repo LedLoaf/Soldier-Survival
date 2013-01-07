@@ -20,12 +20,7 @@ HUDViewModel::~HUDViewModel() {
 
 void HUDViewModel::setPlayer(game::Player* player) {
     this->player = player;
-    
-    
-}
-
-void HUDViewModel::setPlayerEquipment(game::Equipment* equipment) {
-    playerEquipment = equipment;
+    playerEquipment = player->getPlayerEquipment();
 }
 
 int HUDViewModel::getPlayerHealth() {

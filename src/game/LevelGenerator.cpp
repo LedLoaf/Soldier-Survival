@@ -167,7 +167,6 @@ void LevelGenerator::generateRivers() {
 Player* LevelGenerator::generatePlayer() {
     Player* player = new Player(levelDescription->getPlayerEquipment());
     player->setHealth(levelDescription->getPlayerHealth());
-    // inne rzeczy zwiazane z playerem
     
     return player;
 }
@@ -345,7 +344,7 @@ view::HUDViewModel* LevelGenerator::getHUDViewModel() {
     }
     view::HUDViewModel* hudModel = new view::HUDViewModel();  
     hudModel->setPlayer(player);
-    
+
     return hudModel;
 }
 
