@@ -24,15 +24,17 @@ public:
         enemyTypeGun = enemyGun;
         enemyTypeRifle = enemyRifle;
         
+        playerEquipment = new Equipment();
+        
         /*
         playerWeaponKnife = playerKnife;
         playerWeaponGun = playerGun;
         playerWeaponRifle = playerRifle;
         */
         
-        if (playerKnife) playerEquipment->addItem(KNIFE);
-        if (playerGun) playerEquipment->addItem(GUN);
-        if (playerRifle) playerEquipment->addItem(RIFLE);
+        if (playerKnife) playerEquipment->addItem(new Equipment::EquipmentItem(Equipment::EquipmentItem::KNIFE));
+        if (playerGun) playerEquipment->addItem(new Equipment::EquipmentItem(Equipment::EquipmentItem::GUN));
+        if (playerRifle) playerEquipment->addItem(new Equipment::EquipmentItem(Equipment::EquipmentItem::RIFLE));
     }
     
     void setPlayerEquipment(Equipment* equipment) {

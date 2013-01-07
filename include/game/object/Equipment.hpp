@@ -13,13 +13,17 @@ public:
             KNIFE, GUN, RIFLE
         };
         
+        EquipmentItem(Type type);
+        
         Type getType() {
             return type;
         }
         
-    private:
+    protected:
         Type type;
     };
+    
+    Equipment();
     
     std::vector<EquipmentItem*>* getItems();
     void addItem(EquipmentItem* item);    
