@@ -9,9 +9,9 @@
 
 namespace view {
 
-GamePlayWindow::GamePlayWindow(game::LevelDescription* levelDescription) : Window(0, 0, game::Application::getInstance().getDeviceManager()->getScreenWidth(), 
+GamePlayWindow::GamePlayWindow(game::LevelDescription* levelDescription) : mapView(NULL), Window(0, 0, game::Application::getInstance().getDeviceManager()->getScreenWidth(), 
         game::Application::getInstance().getDeviceManager()->getScreenWidth())  { 
-    
+
     this->levelDescription = levelDescription;
     this->levelGenerator = new game::LevelGenerator(levelDescription);
     this->warManager = new game::WarManager();
@@ -22,12 +22,12 @@ GamePlayWindow::GamePlayWindow(game::LevelDescription* levelDescription) : Windo
 
 void GamePlayWindow::initUI() {
     
-    hudView = new HUDView(0, 0, game::Application::getInstance().getDeviceManager()->getScreenWidth(), 100, levelGenerator->getHUDViewModel());
-	addView(hudView);
+//    hudView = new HUDView(0, 0, game::Application::getInstance().getDeviceManager()->getScreenWidth(), 100, levelGenerator->getHUDViewModel());
+//	addView(hudView);
   
     
     mapView = new MapView(0, 0, game::Application::getInstance().getDeviceManager()->getScreenWidth(), 100);
-    mapView->setMapModel(levelGenerator->getMapViewModel());
+    mapView->setModel(levelGenerator->getMapViewModel());
 	addView(mapView);
     
 //    
@@ -101,6 +101,10 @@ void GamePlayWindow::resume() {
 }
 
 MapView* GamePlayWindow::getMapView() {
+    mapView = NULL;
+    
+    if (mapView == NULL)
+        return NULL;
     return mapView;
 }
 

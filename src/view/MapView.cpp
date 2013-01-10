@@ -19,8 +19,12 @@ MapView::MapView(int xStart, int yStart, int xEnd, int yEnd) : View(xStart, ySta
 
 }
 
-void MapView::setMapModel(MapViewModel* mapModel) {
+void MapView::setModel(MapViewModel* mapModel) {
     this->mapViewModel = mapModel;
+}
+
+MapViewModel* MapView::getModel() {
+    return mapViewModel;
 }
 
 

@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include <game/object/MapObject.hpp>
 
 

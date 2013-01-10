@@ -19,12 +19,20 @@ namespace graphic {
 namespace amazin {
 
 
-MapViewPainter::MapViewPainter(view::MapViewModel* model, view::View::Type parentViewType) {
+MapViewPainter::MapViewPainter(view::MapViewModel* model) {
     this->mapViewModel = model;
     
+    allocateMapElementSprites();
+    
     init();
+    
 }
     
+void MapViewPainter::allocateMapElementSprites() {
+    mapElementSprites = new sf::Sprite**[mapViewModel->getMapWidth()];
+    for (int i = 0; i < mapViewModel->getMapWidth(); i++)
+        mapElementSprites[i] = new sf::Sprite*[mapViewModel->getMapHeight()];    
+}
 
 void MapViewPainter::init() {
     int subMapWidth = 50;

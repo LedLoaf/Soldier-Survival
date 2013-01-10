@@ -14,6 +14,7 @@ MapViewModel::MapViewModel(int mapWidth, int mapHeight) {
     
     allocateCharactersTab();
     allocateNotMovingObjectsTab();
+    initMapObjectsTabs();
 }   
 
 
@@ -109,12 +110,25 @@ void MapViewModel::allocateCharactersTab() {
     charactersTab = new game::Character**[mapWidth];
     for (int i = 0; i < mapWidth; i++)
         charactersTab[i] = new game::Character*[mapHeight];
+    
+    for (int x = 0; x < mapWidth; x++) 
+        for (int y = 0; y < mapHeight; y++) 
+            charactersTab[x][y] = NULL;
 }
 
 void MapViewModel::allocateNotMovingObjectsTab() {
     notMovingObjectsTab = new game::NotMovingMapObject**[mapWidth];
     for (int i = 0; i < mapWidth; i++)
         notMovingObjectsTab[i] = new game::NotMovingMapObject*[mapHeight];
+    
+}
+
+void MapViewModel::initMapObjectsTabs() {
+    for (int x = 0; x < mapWidth; x++) 
+        for (int y = 0; y < mapHeight; y++) {
+            charactersTab[x][y] = NULL;   
+            notMovingObjectsTab[x][y] = NULL;
+        }
 }
 
 } /* namespace view */

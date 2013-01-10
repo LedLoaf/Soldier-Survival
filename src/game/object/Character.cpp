@@ -27,7 +27,6 @@ int Character::getHealth() {
 }
 
 
-
 void Character::injureUsing(Weapon* weapon) {
     
 }

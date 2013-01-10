@@ -31,6 +31,7 @@ private:
 public:
     MapView(int xStart, int yStart, int xEnd, int yEnd);
     virtual Type getType();
+    MapViewModel* getModel();
 
     static int getDistanceBetween(game::Character* firstCharacter, game::Character* secondCharacter);
     
@@ -42,7 +43,7 @@ public:
     bool isPositionInMapArea(util::Location::Position position);
     bool canCharacterStayOnNMMO(game::MapObject* notMovingMapObject);
     
-    void setMapModel(MapViewModel* mapModel);
+    void setModel(MapViewModel* mapModel);
     void setWarManager(game::WarManager* warManager);
     
     game::Player* getPlayer();

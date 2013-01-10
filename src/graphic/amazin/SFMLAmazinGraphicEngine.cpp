@@ -6,6 +6,7 @@
 #include <view/ImageView.hpp>
 #include <view/HUDView.hpp>
 #include <view/MiniMapView.hpp>
+#include <view/MapView.hpp>
 //#include <view/TextView.hpp>
 
 #include <graphic/painter/SFMLAbstractViewPainter.hpp>
@@ -13,6 +14,9 @@
 #include <graphic/amazin/painter/ImageViewPainter.hpp> 
 #include <graphic/amazin/painter/HUDViewPainter.hpp>
 #include <graphic/amazin/painter/MiniMapViewPainter.hpp>
+
+
+#include "graphic/amazin/painter/MapViewPainter.hpp"
 //#include <graphic/amazin/painter/TextViewPainter.hpp>
 
 
@@ -30,8 +34,12 @@ SFMLAbstractViewPainter* SFMLAmazinGraphicEngine::getPainterForView(view::View* 
 //            return new graphic::amazin::TextViewPainter(dynamic_cast<view::TextView*>(view)->getModel());    
         case view::View::HUD_VIEW :
             return new graphic::amazin::HUDViewPainter(dynamic_cast<view::HUDView*>(view)->getModel());     
+        case view::View::MAP_VIEW :
+            return new graphic::amazin::MapViewPainter(dynamic_cast<view::MapView*>(view)->getModel());              
         case view::View::MINI_MAP_VIEW :
-            return new graphic::amazin::MiniMapViewPainter(dynamic_cast<view::MiniMapView*>(view)->getModel());             
+            return new graphic::amazin::MiniMapViewPainter(dynamic_cast<view::MiniMapView*>(view)->getModel());  
+        default:
+            return NULL; // rzucac wyjatek
 	}
 
 

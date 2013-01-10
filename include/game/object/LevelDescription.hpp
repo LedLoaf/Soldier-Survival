@@ -7,10 +7,6 @@ namespace game {
 
 class LevelDescription {
 public:
-
-    
-    /********/
-    
     LevelDescription(int width, int height, float enemyDen, int enemyMin, 
             int enemyMax, bool enemyKnife, bool enemyGun, bool enemyRifle, bool playerKnife, bool playerGun, bool playerRifle) {
         mapWidth = width;
@@ -24,13 +20,9 @@ public:
         enemyTypeGun = enemyGun;
         enemyTypeRifle = enemyRifle;
         
-        playerEquipment = new Equipment();
+        playerHealth = 100;
         
-        /*
-        playerWeaponKnife = playerKnife;
-        playerWeaponGun = playerGun;
-        playerWeaponRifle = playerRifle;
-        */
+        playerEquipment = new Equipment();
         
         if (playerKnife) playerEquipment->addItem(new Equipment::EquipmentItem(Equipment::EquipmentItem::KNIFE));
         if (playerGun) playerEquipment->addItem(new Equipment::EquipmentItem(Equipment::EquipmentItem::GUN));

@@ -27,6 +27,7 @@ private:
     void generateWalls();
     void generateForest();
     void generateRivers();
+    void generateGround();
     Player* generatePlayer();
     void placeEnemies();
     void placeBoss();

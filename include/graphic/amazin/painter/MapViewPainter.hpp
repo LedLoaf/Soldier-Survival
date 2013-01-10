@@ -26,12 +26,14 @@ namespace amazin {
 
 class MapViewPainter : public SFMLAbstractViewPainter {
 public:
-	MapViewPainter(view::MapViewModel* model, view::View::Type parentViewType);
-    
+	MapViewPainter(view::MapViewModel* model);
+
 
 	virtual void init();
 	virtual void update();
     
+    void allocateMapElementSprites();
+
     /*
      SubMapManager odpowiada za dostarczanie wycinka mapy, ktory ma byc 
      * malowany przez MapViewPainter
@@ -47,7 +49,7 @@ private:
     class SubMapManager;
     
 	view::MapViewModel* mapViewModel;
-    std::vector< std::vector<sf::Sprite*> > mapElementSprites; 
+    sf::Sprite*** mapElementSprites; 
     
     int subMapWidth;
     int subMapHeight;

@@ -57,6 +57,7 @@ private:
     
     void allocateCharactersTab();
     void allocateNotMovingObjectsTab();
+    void initMapObjectsTabs();
     
     
 };

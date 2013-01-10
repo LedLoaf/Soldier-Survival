@@ -1,6 +1,4 @@
-
 #include <util/Location.hpp>
-
 #include <view/model/ViewModel.hpp>
 
 

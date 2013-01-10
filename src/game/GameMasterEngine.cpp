@@ -11,8 +11,7 @@ using namespace view;
 namespace game {
 
 void GameMasterEngine::run() {
-	MainMenuWindow *mainMenuWindow = new MainMenuWindow();
-	Application::getInstance().getContext()->setActiveWindow(mainMenuWindow);
+    MainMenuWindow *mainMenuWindow = new MainMenuWindow();
 }
 
 void GameMasterEngine::runLevelSelection() {
@@ -29,9 +28,7 @@ void GameMasterEngine::runGamePlay(LevelDescription* levelDescription) {
 //	// okno wyboru levelu jest niszczone
 //	~context->getActiveWindow();
 //
-    
     GamePlayWindow *gamePlayWindow = new GamePlayWindow(levelDescription);
-	Application::getInstance().getContext()->setActiveWindow(gamePlayWindow);  
 }
 
 
