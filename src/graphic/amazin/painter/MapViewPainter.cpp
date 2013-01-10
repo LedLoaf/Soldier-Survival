@@ -22,36 +22,36 @@ namespace amazin {
 MapViewPainter::MapViewPainter(view::MapViewModel* model) {
     this->mapViewModel = model;
     
-    allocateMapElementSprites();
-    
     init();
-    
 }
     
-void MapViewPainter::allocateMapElementSprites() {
-    mapElementSprites = new sf::Sprite**[mapViewModel->getMapWidth()];
-    for (int i = 0; i < mapViewModel->getMapWidth(); i++)
-        mapElementSprites[i] = new sf::Sprite*[mapViewModel->getMapHeight()];    
+void MapViewPainter::allocateMapElementSprites(int subMapWidth, int subMapHeight) {
+    mapElementSprites = new sf::Sprite**[subMapWidth];
+    for (int i = 0; i < subMapWidth; i++)
+        mapElementSprites[i] = new sf::Sprite*[subMapHeight];    
 }
 
 void MapViewPainter::init() {
-    int subMapWidth = 50;
-    int subMapHeight = 50;
+    subMapWidth = 50;
+    subMapHeight = 50;
     int playerToWallSpace = 5;
     
     elementSize = 10;
     
-    SubMapManager* subMapManager = new SubMapManager(mapViewModel, subMapWidth, subMapHeight, playerToWallSpace);
+    subMapManager = new SubMapManager(mapViewModel, subMapWidth, subMapHeight, playerToWallSpace);
     // rysuje 50 na 50 kafelkow
     subMapManager->setSubMapWidth(subMapWidth);
     subMapManager->setSubMapHeight(subMapHeight);
     
+    allocateMapElementSprites(subMapWidth, subMapHeight);
+    
     
     for (int i = 0; i < subMapWidth; i++) {
-        for (int j = 0; i < subMapHeight; j++) {
+        for (int j = 0; j < subMapHeight; j++) {
             sf::Sprite* element = new sf::Sprite();
             element->SetPosition(i * elementSize, j * elementSize);
             mapElementSprites[i][j] = element;
+            drawables.push_back(mapElementSprites[i][j]);
         }        
     }    
 }
@@ -59,8 +59,9 @@ void MapViewPainter::init() {
 
 void MapViewPainter::update() {   
     for (int i = 0; i < subMapWidth; i++) {
-        for (int j = 0; i < subMapHeight; j++) {
-            mapElementSprites[i][j]->SetImage(*util::SFMLAmazinResource::getInstance()->getImage(subMapManager->getElementAt(i, j)->getType()));
+        for (int j = 0; j < subMapHeight; j++) {
+            std::cout << "MapViewPainter::update() mapElementSprites[ " << i << " ]" << "[ " << j << " ]" << std::endl;
+            mapElementSprites[i][j]->SetImage(*(util::SFMLAmazinResource::getInstance()->getImage(subMapManager->getElementAt(i, j)->getType())));
         }        
     }
     
@@ -109,6 +110,10 @@ void MapViewPainter::SubMapManager::updateSubMap() {
 
 
 game::MapObject* MapViewPainter::SubMapManager::getElementAt(int x, int y) {   
+    std::cout << "mapViewModel->getVisibleMapObject(" << this->leftWallPos + x << ", " << this->topWallPos + y << ")" << std::endl;
+    std::cout << "MapObjectType: " << util::Util::getNameOfMapObjectType(
+            mapViewModel->getVisibleMapObject(leftWallPos + x, topWallPos + y)->getType()) << std::endl;
+    
     return mapViewModel->getVisibleMapObject(leftWallPos + x, topWallPos + y);   
 }
 

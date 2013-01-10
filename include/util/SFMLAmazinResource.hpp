@@ -21,6 +21,7 @@ public:
 private:
 	static SFMLAmazinResource* instance;
     std::map<game::MapObject::Type, sf::Image*> imageResourceMap;
+    sf::Image* imageNotFound;
     
     SFMLAmazinResource();    
     void init();

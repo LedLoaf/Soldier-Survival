@@ -25,7 +25,13 @@ SFMLAmazinResource* SFMLAmazinResource::getInstance() {
     
 sf::Image* SFMLAmazinResource::getImage(game::MapObject::Type mapObjectType) {
     // TODO: scaling of images
-    return imageResourceMap.find(mapObjectType)->second;
+    std::map<game::MapObject::Type, sf::Image*>::iterator  imageResourceMapIterator;
+    imageResourceMapIterator = imageResourceMap.find(mapObjectType);
+    
+    if (imageResourceMapIterator != imageResourceMap.end())
+        return imageResourceMapIterator->second;
+    else
+        return imageNotFound;
 }
 
 void SFMLAmazinResource::init() {
@@ -39,6 +45,12 @@ void SFMLAmazinResource::init() {
 //    imageResourceMap.insert(std::pair<game::MapObject::Type, sf::Image*>(
 //        game::MapObject::YELLOW_GRASS, image));
 
+    
+    std::string imageNotFoundPath = "resource/graphic/amazin/game_play/img/tiles/image_not_found.png";
+    
+    imageNotFound = new sf::Image();
+    if (!imageNotFound->LoadFromFile(imageNotFoundPath))
+        std::cout << "Failed to load " << imageNotFoundPath << std::endl;    
     
 /* NotMovingMapObjects */   
     

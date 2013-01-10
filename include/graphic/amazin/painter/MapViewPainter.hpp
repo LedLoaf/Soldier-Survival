@@ -32,7 +32,7 @@ public:
 	virtual void init();
 	virtual void update();
     
-    void allocateMapElementSprites();
+    void allocateMapElementSprites(int subMapWidth, int subMapHeight);
 
     /*
      SubMapManager odpowiada za dostarczanie wycinka mapy, ktory ma byc 

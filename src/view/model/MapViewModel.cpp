@@ -35,6 +35,8 @@ bool MapViewModel::hasMapCharacterAt(int x, int y) {
 }
 
 game::Character* MapViewModel::getCharacter(int x, int y) {
+//    std::cout << "MapViewModel::getCharacter(" << x << ", " << y << "):" << std::endl;
+    
     return charactersTab[x][y];
 }
 
