@@ -1,5 +1,6 @@
 #include <util/SFMLAmazinResource.hpp>
 #include <string>
+#include <iostream>
 
 #include "view/model/MapViewModel.hpp"
 #include "game/object/MapObject.hpp"
@@ -24,9 +25,11 @@ SFMLAmazinResource* SFMLAmazinResource::getInstance() {
 }    
     
 sf::Image* SFMLAmazinResource::getImage(game::MapObject::Type mapObjectType) {
-    // TODO: scaling of images
-    std::map<game::MapObject::Type, sf::Image*>::iterator  imageResourceMapIterator;
+//    std::cout << "SFMLAmazinResource::getImage()" << std::endl;
+    
+    std::map<game::MapObject::Type, sf::Image*>::iterator imageResourceMapIterator;
     imageResourceMapIterator = imageResourceMap.find(mapObjectType);
+    
     
     if (imageResourceMapIterator != imageResourceMap.end())
         return imageResourceMapIterator->second;
@@ -35,22 +38,12 @@ sf::Image* SFMLAmazinResource::getImage(game::MapObject::Type mapObjectType) {
 }
 
 void SFMLAmazinResource::init() {
-//    std::string grassYellowPath = "resource/graphic/amazin/game_play/img/grass_yellow.jpg";
-//    
-//    sf::Image* image = new sf::Image();
-//    if (!image->LoadFromFile(grassYellowPath)) {
-//        std::cout << "Failed to load " << grassYellowPath << std::endl;
-//    }    
-//    
-//    imageResourceMap.insert(std::pair<game::MapObject::Type, sf::Image*>(
-//        game::MapObject::YELLOW_GRASS, image));
-
-    
-    std::string imageNotFoundPath = "resource/graphic/amazin/game_play/img/tiles/image_not_found.png";
+    std::string imageNotFoundPath = "resource/graphic/amazin/game_play/img/tiles/image_not_found.jpg";
     
     imageNotFound = new sf::Image();
     if (!imageNotFound->LoadFromFile(imageNotFoundPath))
         std::cout << "Failed to load " << imageNotFoundPath << std::endl;    
+    
     
 /* NotMovingMapObjects */   
     
@@ -59,6 +52,7 @@ void SFMLAmazinResource::init() {
     sf::Image* grassImage = new sf::Image();
     if (!grassImage->LoadFromFile(grassGreenPath))
         std::cout << "Failed to load " << grassGreenPath << std::endl;
+    
     
     imageResourceMap.insert(std::pair<game::MapObject::Type, sf::Image*>(
         game::MapObject::GRASS_GREEN, grassImage)); 

@@ -1,7 +1,7 @@
 #include <game/SFMLEventHandler.hpp>
 #include <game/Application.hpp>
 
-#include "util/Key.hpp"
+#include <util/Location.hpp>
 
 using namespace game;
 
@@ -13,16 +13,16 @@ void SFMLEventHandler::processEvent() {
 
 			switch(Event.Key.Code) {
 				case sf::Key::Left :
-					Application::getInstance().getContext()->getActiveWindow()->onArrowPressed(util::Key::LEFT);
+					Application::getInstance().getContext()->getActiveWindow()->onArrowPressed(util::Location::LEFT);
 					break;
 				case sf::Key::Right :
-					Application::getInstance().getContext()->getActiveWindow()->onArrowPressed(util::Key::RIGHT);
+					Application::getInstance().getContext()->getActiveWindow()->onArrowPressed(util::Location::RIGHT);
 					break;      
 				case sf::Key::Up :
-					Application::getInstance().getContext()->getActiveWindow()->onArrowPressed(util::Key::UP);
+					Application::getInstance().getContext()->getActiveWindow()->onArrowPressed(util::Location::UP);
 					break;        
 				case sf::Key::Down :
-					Application::getInstance().getContext()->getActiveWindow()->onArrowPressed(util::Key::DOWN);
+					Application::getInstance().getContext()->getActiveWindow()->onArrowPressed(util::Location::DOWN);
 					break;         
                     
 				case sf::Key::Return :

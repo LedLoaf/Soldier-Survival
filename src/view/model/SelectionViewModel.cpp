@@ -16,7 +16,8 @@ SelectionViewModel::SelectionViewModel(Type modelType) {
 }
 
 SelectionViewModel::~SelectionViewModel() {
-	// TODO Auto-generated destructor stub
+	for (int i = 0; i < selectableElements.size(); i++)
+        delete selectableElements[i];
 }
 
 void SelectionViewModel::setViewOrientation(view::View::Orientation orientation) {
@@ -35,6 +36,7 @@ void SelectionViewModel::setSelected(int positionOfElement) {
 	selectableElements.at(positionOfElement)->setSelected();
 
 }
+
 
 void SelectionViewModel::SelectableElement::setSelected() {
 	selected = true;
@@ -66,6 +68,10 @@ util::Util::Action SelectionViewModel::SelectableElement::getAction() {
 
 SelectionViewModel::WeaponSelectableElement::WeaponSelectableElement(game::Weapon* weapon) : SelectionViewModel::SelectableElement() {
     this->weapon = weapon;
+}
+
+SelectionViewModel::WeaponSelectableElement::~WeaponSelectableElement() {
+    delete weapon;
 }
 
 game::Weapon* SelectionViewModel::WeaponSelectableElement::getWeapon() {

@@ -14,9 +14,10 @@ namespace view {
 class MainMenuWindow : public Window {
 public:
 	MainMenuWindow();
+    virtual ~MainMenuWindow();
 	void initUI();
 
-	virtual void onArrowPressed(util::Key::Arrow arrow);
+	virtual void onArrowPressed(util::Location::Vector vector);
 	virtual void onEnterPressed() ;
     virtual void onEscPressed();
 

@@ -3,6 +3,11 @@
 
 
 namespace view {
+    
+ViewModel::~ViewModel() {
+    delete startPosition;
+    delete endPosition;
+}
 
 util::Location::Position* ViewModel::getViewStartPosition() {
     return startPosition;

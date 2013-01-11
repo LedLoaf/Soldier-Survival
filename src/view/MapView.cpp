@@ -21,6 +21,7 @@ MapView::MapView(int xStart, int yStart, int xEnd, int yEnd) : View(xStart, ySta
 
 void MapView::setModel(MapViewModel* mapModel) {
     this->mapViewModel = mapModel;
+    this->mapViewModel->setViewPosition(new util::Location::Position(xStart, yStart), new util::Location::Position(xEnd, yEnd));
 }
 
 MapViewModel* MapView::getModel() {
@@ -30,12 +31,18 @@ MapViewModel* MapView::getModel() {
 
 void MapView::moveCharacter(game::Character* ch, util::Location::Vector vector) {
 	util::Location::Position position = mapViewModel->getPositionOf(ch);
-
 	mapViewModel->remove(position.getX(), position.getY(), ch);
     
     util::Location::Position newPosition = position + vector;
 	mapViewModel->put(newPosition.getX(), newPosition.getY(), ch);    
-    ch->setPosition(position);
+}
+
+
+void MapView::moveCharacter(game::Player* player, util::Location::Vector vector) {
+	mapViewModel->remove(player->getPosition().getX(), player->getPosition().getY(), player);
+    
+    util::Location::Position newPosition = player->getPosition() + vector;
+	mapViewModel->put(newPosition.getX(), newPosition.getY(), player);    
 }
 
 

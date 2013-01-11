@@ -19,7 +19,7 @@ void SFMLAbstractGraphicEngine::display() {
 
 	//  display
 	displayGraphicFromPainters();    
-}
+    }
 
 
 void SFMLAbstractGraphicEngine::updatePainters() {

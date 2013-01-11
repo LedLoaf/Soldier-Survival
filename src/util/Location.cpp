@@ -2,17 +2,17 @@
 #include <util/Location.hpp>
 
 namespace util {
-
+    
 Location::Position::Position(int x, int y) {
     this->x = x;
     this->y = y;
 }
 
-int Location::Position::getX() {
+int Location::Position::getX() const {
     return x;
 }
 
-int Location::Position::getY() {
+int Location::Position::getY() const {
     return y;
 }
 
@@ -29,13 +29,13 @@ Location::Position Location::Position::operator+(const Location::Vector vector) 
  
     switch (vector) {
         case Location::UP :
-            newPosition.setY(this->getY() + 1);
+            newPosition.setY(this->getY() - 1);
             break;
         case Location::RIGHT :
             newPosition.setX(this->getX() + 1);
             break; 
         case Location::DOWN :
-            newPosition.setY(this->getY() - 1);
+            newPosition.setY(this->getY() + 1);
             break;
         case Location::LEFT :
             newPosition.setX(this->getX() - 1);
@@ -44,6 +44,7 @@ Location::Position Location::Position::operator+(const Location::Vector vector) 
     
     return newPosition;
 }
+
 
 } /* namespace util */
 

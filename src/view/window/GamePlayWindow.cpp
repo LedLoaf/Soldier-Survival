@@ -26,7 +26,8 @@ void GamePlayWindow::initUI() {
 //	addView(hudView);
   
     
-    mapView = new MapView(0, 0, game::Application::getInstance().getDeviceManager()->getScreenWidth(), 100);
+    mapView = new MapView(0, 100, game::Application::getInstance().getDeviceManager()->getScreenWidth(), 
+            game::Application::getInstance().getDeviceManager()->getScreenHeight());
     mapView->setModel(levelGenerator->getMapViewModel());
 	addView(mapView);
     
@@ -38,26 +39,31 @@ void GamePlayWindow::initUI() {
 }
 
 
-void GamePlayWindow::onArrowPressed(util::Key::Arrow arrow) {
+void GamePlayWindow::onArrowPressed(util::Location::Vector vector) {
     if (hasSubWindow())
-        subWindow->onArrowPressed(arrow);
+        subWindow->onArrowPressed(vector);
     else {
-        SelectionView* weaponSelectionView = hudView->getWeaponSelectionView();
-        if (arrow == util::Key::UP) {
-            if (weaponSelectionView->hasPreviousElement()) {
-                weaponSelectionView->selectPreviousElement();
-                mapView->getPlayer()->
-                        setCurrentWeapon(dynamic_cast<view::SelectionViewModel::WeaponSelectableElement*>
-                            (weaponSelectionView->getSelectedElement())->getWeapon());
-            }
-        } else if (arrow == util::Key::DOWN) {
-            if (weaponSelectionView->hasNextElement())
-                weaponSelectionView->selectNextElement();
-                mapView->getPlayer()->
-                        setCurrentWeapon(dynamic_cast<view::SelectionViewModel::WeaponSelectableElement*>
-                            (weaponSelectionView->getSelectedElement())->getWeapon());                
-        }
+        mapView->moveCharacter(mapView->getPlayer(), vector);
     }
+    
+    
+//    else {
+//        SelectionView* weaponSelectionView = hudView->getWeaponSelectionView();
+//        if (arrow == util::Key::UP) {
+//            if (weaponSelectionView->hasPreviousElement()) {
+//                weaponSelectionView->selectPreviousElement();
+//                mapView->getPlayer()->
+//                        setCurrentWeapon(dynamic_cast<view::SelectionViewModel::WeaponSelectableElement*>
+//                            (weaponSelectionView->getSelectedElement())->getWeapon());
+//            }
+//        } else if (arrow == util::Key::DOWN) {
+//            if (weaponSelectionView->hasNextElement())
+//                weaponSelectionView->selectNextElement();
+//                mapView->getPlayer()->
+//                        setCurrentWeapon(dynamic_cast<view::SelectionViewModel::WeaponSelectableElement*>
+//                            (weaponSelectionView->getSelectedElement())->getWeapon());                
+//        }
+//    }
 }
 
 

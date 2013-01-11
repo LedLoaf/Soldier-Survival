@@ -15,7 +15,6 @@ void GameMasterEngine::run() {
 }
 
 void GameMasterEngine::runLevelSelection() {
-  
 }
 
 /*
@@ -24,10 +23,9 @@ void GameMasterEngine::runLevelSelection() {
 	Metoda wywolywana po wyborze levelu w menu
 */
 void GameMasterEngine::runGamePlay(LevelDescription* levelDescription) {
-
 //	// okno wyboru levelu jest niszczone
-//	~context->getActiveWindow();
-//
+	delete Application::getInstance().getContext()->getActiveWindow();
+    
     GamePlayWindow *gamePlayWindow = new GamePlayWindow(levelDescription);
 }
 
@@ -35,7 +33,7 @@ void GameMasterEngine::runGamePlay(LevelDescription* levelDescription) {
 void GameMasterEngine::pauseGame() {
     Window* activeWindow = Application::getInstance().getContext()->getActiveWindow();
     activeWindow->pause();
-    activeWindow->setSubWindow(new PauseWindow());
+//    activeWindow->setSubWindow(new PauseWindow());
 }
 
 void GameMasterEngine::resumeGame() {

@@ -43,6 +43,7 @@ public:
 	class SelectableElement {
 	public:
         SelectableElement();
+        
         SelectableElement(util::Util::Action action);
         
         virtual void setAction(util::Util::Action action);
@@ -61,6 +62,7 @@ public:
 	class WeaponSelectableElement : public SelectableElement {
 	public:
         WeaponSelectableElement(game::Weapon* weapon);
+        ~WeaponSelectableElement();
         
         util::Location::Position getPosition();
         game::Weapon* getWeapon();

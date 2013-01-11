@@ -6,6 +6,7 @@
 #include <game/Application.hpp>
 
 #include <util/Util.hpp>
+#include <util/Location.hpp>
 #include <util/Resource.hpp>
 
 
@@ -15,6 +16,11 @@ namespace view {
 MainMenuWindow::MainMenuWindow() : Window(0, 0, game::Application::getInstance().getDeviceManager()->getScreenWidth(), 
         game::Application::getInstance().getDeviceManager()->getScreenWidth())  { 
     initUI();
+}
+
+MainMenuWindow::~MainMenuWindow() {
+    delete selectionView;
+    delete selectionViewModel;
 }
 
 
@@ -39,11 +45,11 @@ void MainMenuWindow::initUI() {
 }
 
 
-void MainMenuWindow::onArrowPressed(util::Key::Arrow arrow) {
-	if (arrow == util::Key::UP) {
+void MainMenuWindow::onArrowPressed(util::Location::Vector vector) {
+	if (vector == util::Location::UP) {
 		if (selectionView->hasPreviousElement())
 			selectionView->selectPreviousElement();
-	} else if (arrow == util::Key::DOWN) {
+	} else if (vector == util::Location::DOWN) {
 		if (selectionView->hasNextElement())
 			selectionView->selectNextElement();
 	}

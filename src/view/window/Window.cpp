@@ -9,6 +9,10 @@ Window::Window(int xStart, int yStart, int xEnd, int yEnd) : View(xStart, yStart
     subWindow = NULL;
     game::Application::getInstance().getContext()->setActiveWindow(this);
 }
+
+Window::~Window() {
+    delete subWindow;
+}
     
 
 

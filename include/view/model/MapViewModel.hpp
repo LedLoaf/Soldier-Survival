@@ -2,12 +2,13 @@
 #define MAP_VIEW_MODEL_HPP_
 
 
-#include <util/Util.hpp>
 #include <vector>
 #include <iostream>
 
 #include <view/model/ViewModel.hpp>
 #include <game/object/NotMovingMapObject.hpp>
+#include <util/Util.hpp>
+#include <util/Location.hpp>
 
 namespace game {
     class Character;
@@ -33,7 +34,7 @@ public:
     
     
 	void put(int x, int y, game::Character* const ch);
-	void put(int x, int y, game::Player* const player);
+    void put(int x, int y, game::Player* const player);
 	void put(int x, int y, game::NotMovingMapObject* const notMovingMapObject);
     
     game::MapObject* getNotMovingObject(int x, int y);
@@ -46,9 +47,13 @@ public:
     
     game::Player* getPlayer();
     
+    void setDirectionOfLastPlayerMove(util::Location::Vector vector);
+    util::Location::Vector getDirectionOfLastPlayerMove();    
+    
 private:
     game::Character*** charactersTab;
     game::NotMovingMapObject*** notMovingObjectsTab;
+    util::Location::Vector lastDirectionOfPlayerMove;
     
     int playerPositionX;
     int playerPositionY;

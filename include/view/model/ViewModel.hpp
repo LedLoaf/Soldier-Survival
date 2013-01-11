@@ -8,6 +8,8 @@ namespace view {
 
 class ViewModel {
 public:
+    virtual ~ViewModel();
+    
     util::Location::Position* getViewStartPosition();
     util::Location::Position* getViewEndPosition();
     

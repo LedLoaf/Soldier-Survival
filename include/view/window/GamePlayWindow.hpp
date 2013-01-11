@@ -28,7 +28,7 @@ public:
 	void initUI();
         
 	virtual void onEnterPressed();
-	virtual void onArrowPressed(util::Key::Arrow arrow);
+	virtual void onArrowPressed(util::Location::Vector vector);
     virtual void onEscPressed();
     
 	virtual Type getType();

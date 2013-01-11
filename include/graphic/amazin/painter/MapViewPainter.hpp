@@ -9,11 +9,14 @@
 #include <util/Key.hpp>
 #include <view/View.hpp>
 #include <graphic/painter/SFMLAbstractViewPainter.hpp>
+#include <view/model/MapViewModel.hpp>
 
+namespace util {
+    class SFMLAmazinResource;
+}
 
 namespace view {
 class ImageViewModel;
-class MapViewModel;
 }
 
 namespace game {
@@ -23,6 +26,8 @@ class Player;
 
 namespace graphic {
 namespace amazin {
+    
+sf::Mutex GlobalMutex;
 
 class MapViewPainter : public SFMLAbstractViewPainter {
 public:
@@ -53,9 +58,11 @@ private:
     
     int subMapWidth;
     int subMapHeight;
-    int elementSize;
+    int elementWidth;
+    int elementHeight;
     
     SubMapManager* subMapManager;
+    util::SFMLAmazinResource* sfmlAmazinResource;
     
     class SubMapManager {
     public:
@@ -65,55 +72,79 @@ private:
         void updateSubMap();
         game::MapObject* getElementAt(int x, int y);
         
+        static int leftWallPos;
+        static int topWallPos;
+        
     private:
-        int subMapWidth;
-        int subMapHeight;    
+        static int subMapWidth;
+        static int subMapHeight;    
         int playerToWallSpace;
-        int leftWallPos;
-        int topWallPos;
         game::Player* player;
         view::MapViewModel* mapViewModel;        
+        static bool mapIsUpdating;
         
-        class SmoothlyMoveSubmapThread : public sf::Thread {
+        class SmoothlyMoveSubmapWallThread : public sf::Thread {
         public:
-            SmoothlyMoveSubmapThread(int* currentWallPos, util::Key::Arrow direction) {
+            SmoothlyMoveSubmapWallThread(view::MapViewModel* mapViewModel, int* currentWallPos, int playerToWallSpace, util::Key::Arrow direction) {
+                this->mapModel = mapViewModel;
                 this->direction = direction;
                 this->wallPos = *currentWallPos;
+                this->currentWallPos = currentWallPos;
+                this->playerToWallSpace = playerToWallSpace;
                 
                 switch (direction) {
                     case util::Key::LEFT:
-                        afterWallPos -= subMapWidth - playerToWallSpace;
+                        maxAfterWallPos = leftWallPos - subMapWidth / 2;
+                        if (maxAfterWallPos < 0)
+                            maxAfterWallPos = 0;
                         break;
                     case util::Key::RIGHT:
-                        afterWallPos += subMapWidth - playerToWallSpace; 
+                        maxAfterWallPos = leftWallPos + subMapWidth / 2; 
+                        if (maxAfterWallPos > mapViewModel->getMapHeight())
+                            maxAfterWallPos = mapViewModel->getMapHeight();
                         break;
                     case util::Key::UP:
-                        afterWallPos -= subMapHeight - playerToWallSpace;    
+                        maxAfterWallPos = topWallPos - playerToWallSpace; 
+                        if (maxAfterWallPos < 0)
+                            maxAfterWallPos = 0;
                         break;
+                    case util::Key::DOWN:
+                        maxAfterWallPos = topWallPos + playerToWallSpace; 
+                        if (maxAfterWallPos > mapViewModel->getMapHeight())
+                            maxAfterWallPos = mapViewModel->getMapHeight();
+                        break;                        
+                        
                 }
             }
             
         private:
             util::Key::Arrow direction;            
             int* currentWallPos;            
-            int afterWallPos;
+            int maxAfterWallPos;
             int wallPos;
-            int subMapWidth;
-            int subMapHeight;      
             int playerToWallSpace;
-            
+            view::MapViewModel* mapModel;
             
             virtual void Run() {
-
-                for (int i = 0; i < fabs(afterWallPos - wallPos); ++i)
-                    if (direction == util::Key::LEFT || util::Key::UP)
-                        *currentWallPos--;
-                    else
-                        *currentWallPos++;
-
-                
+                mapIsUpdating = true;
+//                std::cout << "maxAfterWallPos: " << maxAfterWallPos << ", wallPos: " << wallPos << std::endl;
+                for (int i = 0; i < fabs(maxAfterWallPos - wallPos); ++i) {
+                    GlobalMutex.Lock();
+                    
+                    if (direction == util::Key::LEFT && leftWallPos > maxAfterWallPos && leftWallPos > 0)
+                        leftWallPos--;
+                    else if (direction == util::Key::RIGHT && leftWallPos < maxAfterWallPos && leftWallPos < mapModel->getMapWidth() - subMapWidth)
+                        leftWallPos++;
+                    else if (direction == util::Key::DOWN && topWallPos < maxAfterWallPos && topWallPos < mapModel->getMapHeight() + subMapHeight)
+                        topWallPos++;
+                    else if (direction == util::Key::UP && topWallPos > 0)
+                        topWallPos--;
+                    
+                    GlobalMutex.Unlock();
+                    
                     sf::Sleep(0.1f);
-
+                }
+                mapIsUpdating = false;
             }
         };
         

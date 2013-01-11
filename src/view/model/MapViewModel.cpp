@@ -1,6 +1,6 @@
 #include <view/model/MapViewModel.hpp>
 
-#include "util/Location.hpp"
+#include <util/Location.hpp>
 #include "game/object/Player.hpp"
 #include "game/object/MapObject.hpp"
 #include "game/object/NotMovingMapObject.hpp"
@@ -8,7 +8,7 @@
 
 namespace view {
 
-MapViewModel::MapViewModel(int mapWidth, int mapHeight) {
+MapViewModel::MapViewModel(int mapWidth, int mapHeight) : lastDirectionOfPlayerMove(util::Location::NOWHERE) {
     this->mapWidth = mapWidth;
     this->mapHeight = mapHeight;
     
@@ -63,8 +63,8 @@ void MapViewModel::put(int x, int y, game::Character* const ch) {
     charactersTab[x][y] = ch;
     
     ch->setPosition(util::Location::Position(x, y));
-    
 }
+
 
 void MapViewModel::put(int x, int y, game::Player* const player) {
     //checkIfMapHasPoint(x, y);  throws exception if x > mapWidth ...
@@ -72,9 +72,19 @@ void MapViewModel::put(int x, int y, game::Player* const player) {
     charactersTab[x][y] = player;
     
     player->setPosition(util::Location::Position(x, y));
-    
     playerPositionX = x;
     playerPositionY = y;
+}
+
+
+
+
+void MapViewModel::setDirectionOfLastPlayerMove(util::Location::Vector vector) {
+    this->lastDirectionOfPlayerMove = vector;
+}
+
+util::Location::Vector MapViewModel::getDirectionOfLastPlayerMove() {
+    return lastDirectionOfPlayerMove;
 }
 
 void MapViewModel::put(int x, int y, game::NotMovingMapObject* const notMovingMapObject ) {
@@ -107,6 +117,8 @@ int MapViewModel::getMapHeight() {
 int MapViewModel::getMapWidth() {
     return mapHeight;
 }
+
+
 
 void MapViewModel::allocateCharactersTab() {
     charactersTab = new game::Character**[mapWidth];

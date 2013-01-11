@@ -38,6 +38,7 @@ public:
     bool areColliding(game::Character* firstCharacter, game::Character* secondCharacter);
     
     void moveCharacter(game::Character* ch, util::Location::Vector vector);
+    void moveCharacter(game::Player* player, util::Location::Vector vector);
 
     bool canMoveCharacter(game::Character* ch, util::Location::Vector vector); 
     bool isPositionInMapArea(util::Location::Position position);
@@ -45,6 +46,8 @@ public:
     
     void setModel(MapViewModel* mapModel);
     void setWarManager(game::WarManager* warManager);
+    
+
     
     game::Player* getPlayer();
 };
