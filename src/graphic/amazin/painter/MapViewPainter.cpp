@@ -123,44 +123,40 @@ void MapViewPainter::SubMapManager::setSubMapHeight(int height) {
 }
 
 void MapViewPainter::SubMapManager::updateSubMap() {
-    int playerPosX = mapViewModel->getPositionOf(player).getX();
-    int playerPosY = mapViewModel->getPositionOf(player).getY();
-    
-    int distanceToRightWall = leftWallPos + subMapWidth - playerPosX;
-    int distanceToBottomWall = topWallPos + subMapWidth - playerPosY;
-    
-    std::cout << "leftWallPos: " << leftWallPos << ", playerPosX: " << playerPosX << std::endl;
-    
-    // przesun pionowa sciane submapy w lewo
-    if (playerPosX - leftWallPos < playerToWallSpace) {
-        if (!mapIsUpdating) {
-            SmoothlyMoveSubmapWallThread* smoothlyMoveSubmapThread = new SmoothlyMoveSubmapWallThread(mapViewModel, 
-                    &leftWallPos, playerToWallSpace, util::Key::LEFT);
-            smoothlyMoveSubmapThread->Launch();
+    if (!mapIsUpdating) {
+        int playerPosX = mapViewModel->getPositionOf(player).getX();
+        int playerPosY = mapViewModel->getPositionOf(player).getY();
+
+        int distanceToRightWall = leftWallPos + subMapWidth - playerPosX;
+        int distanceToBottomWall = topWallPos + subMapWidth - playerPosY;
+
+        std::cout << "leftWallPos: " << leftWallPos << ", playerPosX: " << playerPosX << std::endl;
+
+        // przesun pionowa sciane submapy w lewo
+        if (playerPosX - leftWallPos < playerToWallSpace && leftWallPos > 0) {
+                SmoothlyMoveSubmapWallThread* smoothlyMoveSubmapThread = new SmoothlyMoveSubmapWallThread(mapViewModel, 
+                        &leftWallPos, playerToWallSpace, util::Key::LEFT);
+                smoothlyMoveSubmapThread->Launch();
+
+        } //  przesun pionowa sciane submapy w prawo
+        else if (distanceToRightWall < playerToWallSpace && leftWallPos + subMapWidth < mapViewModel->getMapWidth()) {
+                SmoothlyMoveSubmapWallThread* smoothlyMoveSubmapThread = new SmoothlyMoveSubmapWallThread(mapViewModel, 
+                        &leftWallPos, playerToWallSpace, util::Key::RIGHT);
+                smoothlyMoveSubmapThread->Launch();
         }
-        
-    } //  przesun pionowa sciane submapy w prawo
-    else if (distanceToRightWall < playerToWallSpace) {
-        if (!mapIsUpdating) {
-            SmoothlyMoveSubmapWallThread* smoothlyMoveSubmapThread = new SmoothlyMoveSubmapWallThread(mapViewModel, 
-                    &leftWallPos, playerToWallSpace, util::Key::RIGHT);
-            smoothlyMoveSubmapThread->Launch();
-        }   
-    }
-    else if (playerPosY - topWallPos < playerToWallSpace) {
-        if (!mapIsUpdating) {
-            SmoothlyMoveSubmapWallThread* smoothlyMoveSubmapThread = new SmoothlyMoveSubmapWallThread(mapViewModel, 
-                    &topWallPos, playerToWallSpace, util::Key::UP);
-            smoothlyMoveSubmapThread->Launch();
-        }   
-    } 
-    else if (distanceToBottomWall < playerToWallSpace) {
-        if (!mapIsUpdating) {
+        else if (playerPosY - topWallPos < playerToWallSpace && topWallPos > 0) {
+                SmoothlyMoveSubmapWallThread* smoothlyMoveSubmapThread = new SmoothlyMoveSubmapWallThread(mapViewModel, 
+                        &topWallPos, playerToWallSpace, util::Key::UP);
+                smoothlyMoveSubmapThread->Launch();
+        } 
+        else if (distanceToBottomWall < playerToWallSpace && topWallPos + subMapHeight < mapViewModel->getMapHeight()) {
+
             SmoothlyMoveSubmapWallThread* smoothlyMoveSubmapThread = new SmoothlyMoveSubmapWallThread(mapViewModel, 
                     &topWallPos, playerToWallSpace, util::Key::DOWN);
             smoothlyMoveSubmapThread->Launch();
-        }   
-    }        
+             
+        }      
+}
 }
 
 
