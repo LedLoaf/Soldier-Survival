@@ -9,6 +9,9 @@
 
 #include <view/MapView.hpp>
 
+#include "game/Application.hpp"
+#include "view/window/GamePlayWindow.hpp"
+
 
 
 
@@ -19,14 +22,16 @@ EnemyMovementAI::EnemyMovementAI(Enemy* enemy, int movingTimeInterval)  : Moveme
 }
 
 void EnemyMovementAI::tryToDoNextMove() {
+    mapView = dynamic_cast<view::GamePlayWindow*>(Application::getInstance().getContext()->getActiveWindow())->getMapView();
+    
     if (enemy->canSeePlayer()) {
         // 8 elementowa tablica
         util::Location::Vector* directionsToPlayer = 
-                followAI->getDirectionsToPlayerFrom(enemy->getPosition());
+                followAI->getDirectionsToCharacter(mapView->getPlayer()->getPosition(), enemy->getPosition());
 
         bool moveWasMade = false;
         int i = 0;
-        while (!moveWasMade) {
+        while (!moveWasMade && i < 8) {
             if (mapView->canMoveCharacter(enemy, directionsToPlayer[i])) {
                 mapView->moveCharacter(enemy, directionsToPlayer[i]);
                 moveWasMade = true;

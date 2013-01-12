@@ -28,23 +28,38 @@ Location::Position Location::Position::operator+(const Location::Vector vector) 
     Location::Position newPosition(this->getX(), this->getY());
  
     switch (vector) {
+        case Location::LEFT :
+            newPosition.setX(this->getX() - 1);
+            break;            
+        case Location::UP_LEFT :
+            newPosition.setX(this->getX() - 1);
+            newPosition.setY(this->getY() - 1);
+            break;        
         case Location::UP :
             newPosition.setY(this->getY() - 1);
             break;
+        case Location::UP_RIGHT :
+            newPosition.setX(this->getX() + 1);
+            newPosition.setY(this->getY() - 1);
+            break;             
         case Location::RIGHT :
             newPosition.setX(this->getX() + 1);
             break; 
+        case Location::DOWN_RIGHT :
+            newPosition.setX(this->getX() + 1);
+            newPosition.setY(this->getY() + 1);
+            break;             
         case Location::DOWN :
             newPosition.setY(this->getY() + 1);
             break;
-        case Location::LEFT :
+        case Location::DOWN_LEFT :
             newPosition.setX(this->getX() - 1);
-            break;             
+            newPosition.setY(this->getY() + 1);
+            break;            
     }
     
     return newPosition;
 }
-
 
 } /* namespace util */
 

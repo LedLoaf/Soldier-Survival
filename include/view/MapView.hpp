@@ -23,7 +23,6 @@ class WarView;
     
 class MapView : public View {
 private:
-	// MapViewModel jest doslownie modelem - nie ma zadnej konkretnej logiki, trzyma tylko 2 tablice 2 wymiarowe z mapa
 	MapViewModel* mapViewModel;
     game::WarManager* warManager;
 
@@ -32,7 +31,7 @@ public:
     virtual Type getType();
     MapViewModel* getModel();
 
-    static int getDistanceBetween(game::Character* firstCharacter, game::Character* secondCharacter);
+    static int getDistanceBetween(util::Location::Position firstCharacterPosition, util::Location::Position secondCharacterPosition);
     
     bool areColliding(game::Character* firstCharacter, game::Character* secondCharacter);
     
@@ -48,6 +47,7 @@ public:
     
     void startWar(game::War* war);
     
+    void beginCharactersLife();
 
     
     game::Player* getPlayer();

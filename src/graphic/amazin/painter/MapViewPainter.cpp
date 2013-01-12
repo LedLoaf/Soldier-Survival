@@ -151,7 +151,6 @@ void MapViewPainter::SubMapManager::updateSubMap() {
             smoothlyMoveSubmapThread->Launch();
     } 
     else if (distanceToBottomWall < playerToWallSpace && topWallPos + subMapHeight < mapViewModel->getMapHeight()) {
-
         SmoothlyMoveSubmapWallThread* smoothlyMoveSubmapThread = new SmoothlyMoveSubmapWallThread(mapViewModel, 
                 &topWallPos, playerToWallSpace, util::Key::DOWN);
         smoothlyMoveSubmapThread->Launch();

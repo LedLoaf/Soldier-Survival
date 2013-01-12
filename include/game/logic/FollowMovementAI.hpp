@@ -7,7 +7,8 @@ namespace game {
     
 class FollowMovementAI {
 public:
-    util::Location::Vector* getDirectionsToPlayerFrom(util::Location::Position position);
+    util::Location::Vector* getDirectionsToCharacter(util::Location::Position characterPosition, 
+        util::Location::Position startPosition);
 };
 
 }

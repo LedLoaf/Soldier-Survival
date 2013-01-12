@@ -10,15 +10,8 @@ namespace game {
 CharacterLife::CharacterLife(int timeOfBirth, int lifetime) {
     this->timeOfBirth = timeOfBirth;
     this->lifetime = lifetime;
+    this->stillAlive = true;
 }
-
-void CharacterLife::Run() {
-
-    if (isTimeToDie()) {
-
-    }
-}
-
 
 
 bool CharacterLife::isTimeToDie() {

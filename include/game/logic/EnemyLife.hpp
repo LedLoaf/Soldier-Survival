@@ -7,18 +7,18 @@
 
 namespace game {
     
-class MovementAI;    
+class EnemyMovementAI;    
     
 class EnemyLife : public CharacterLife {
 public:
-    EnemyLife(int timeOfBirth, int lifetime);
+    EnemyLife(int timeOfBirth, int lifetime, EnemyMovementAI* movementAI);
 
     virtual void Run();
 
 protected:
     bool isTimeToMove();
 
-    MovementAI* movementAI;
+    EnemyMovementAI* movementAI;
     int lifetime; // -1 oznacza, ze zyje dopuki nie zostanie zabity
     int timeOfBirth;
 

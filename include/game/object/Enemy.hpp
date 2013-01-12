@@ -3,16 +3,19 @@
 
 #include <game/object/Character.hpp>
 
-
+namespace view {
+class MapViewModel;    
+}
 
 namespace game {
 
 class Weapon;
+class EnemyMovementAI;
 
 
 class Enemy : public Character {
 public:
-    Enemy(MapObject::Type type);
+    Enemy(MapObject::Type type, view::MapViewModel* mapViewModel);
 
     void setWeapon(Weapon* weapon);
     Weapon* getWeapon();
@@ -25,6 +28,7 @@ public:
 
 private:
     Weapon* weapon;
+    EnemyMovementAI* movementAI;
     
 };
     

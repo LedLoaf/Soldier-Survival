@@ -137,7 +137,7 @@ private:
                         leftWallPos--;
                     else if (direction == util::Key::RIGHT && leftWallPos < maxAfterWallPos && leftWallPos < mapModel->getMapWidth() - subMapWidth)
                         leftWallPos++;
-                    else if (direction == util::Key::DOWN && topWallPos < maxAfterWallPos && topWallPos < mapModel->getMapHeight() + subMapHeight)
+                    else if (direction == util::Key::DOWN && topWallPos < maxAfterWallPos && topWallPos < mapModel->getMapHeight() - subMapHeight)
                         topWallPos++;
                     else if (direction == util::Key::UP && topWallPos > maxAfterWallPos && topWallPos > 0)
                         topWallPos--;

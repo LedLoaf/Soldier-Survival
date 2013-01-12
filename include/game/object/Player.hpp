@@ -7,6 +7,9 @@
 
 #include "Equipment.hpp"
 
+namespace view {
+class MapViewModel;    
+}
 
 namespace game {
 
@@ -15,7 +18,7 @@ class Weapon;
     
 class Player : public Character {
 public:
-    Player(Equipment* equipment);
+    Player(Equipment* equipment, view::MapViewModel* mapViewModel);
     
     Equipment* getEquipment();
     std::vector<game::Weapon*>* getWeapons();

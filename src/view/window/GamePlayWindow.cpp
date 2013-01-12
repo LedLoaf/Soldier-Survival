@@ -27,8 +27,17 @@ void GamePlayWindow::initUI() {
     
     mapView = new MapView(0, 100, game::Application::getInstance().getDeviceManager()->getScreenWidth(), 
             game::Application::getInstance().getDeviceManager()->getScreenHeight());
-    mapView->setModel(levelGenerator->getMapViewModel());
+    
+    MapViewModel* mapViewModel = levelGenerator->getMapViewModel();
+    mapViewModel->setMapView(mapView);
+    
+    mapView->setModel(mapViewModel);
+    
+    mapView->beginCharactersLife();
+
+    
 	addView(mapView);
+    
     
 //    
 //    miniMapView = new MiniMapView(hudView->getEndPosition()->getX(), hudView->getStartPosition()->getY(), 
@@ -107,10 +116,6 @@ void GamePlayWindow::resume() {
 }
 
 MapView* GamePlayWindow::getMapView() {
-    mapView = NULL;
-    
-    if (mapView == NULL)
-        return NULL;
     return mapView;
 }
 

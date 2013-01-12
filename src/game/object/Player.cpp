@@ -4,12 +4,12 @@
 #include "game/object/Player.hpp"
 #include <game/object/Equipment.hpp>
 #include "game/object/weapon/Weapon.hpp"
-
+#include <view/model/MapViewModel.hpp>
 
 
 namespace game {
 
-Player::Player(Equipment* equipment) : Character(MapObject::PLAYER) {
+Player::Player(Equipment* equipment, view::MapViewModel* mapViewModel) : Character(MapObject::PLAYER, mapViewModel) {
     this->equipment = equipment;
     
     if (hasAnyWeapons())

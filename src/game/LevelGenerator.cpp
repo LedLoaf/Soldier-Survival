@@ -178,7 +178,7 @@ void LevelGenerator::generateRivers() {
 }
 
 Player* LevelGenerator::generatePlayer() {
-    Player* player = new Player(levelDescription->getPlayerEquipment());
+    Player* player = new Player(levelDescription->getPlayerEquipment(), mapModel);
     player->setHealth(levelDescription->getPlayerHealth());
     
     return player;
@@ -210,7 +210,7 @@ void LevelGenerator::placeEnemies() {
         
         //std::cout << p->getX() << "," << p->getY() << " FIELD: " << dx << "x" << dy << " -> FOREST CENTER" << std::endl;
         
-        this->placeRandomly(p, dx, dy, levelDescription->getEnemyDensity(), new Enemy(MapObject::ENEMY_A));
+        this->placeRandomly(p, dx, dy, levelDescription->getEnemyDensity(), new Enemy(MapObject::ENEMY_A, mapModel));
         
     }
 }
@@ -250,7 +250,7 @@ void LevelGenerator::placePlayer(Player* player) {
         
         if (this->checkClearAround(new util::Location::Position(x, y), 1)) {
             mapModel->put(x, y, player);
-            mapModel->put(x+1, y+1, new Enemy(MapObject::ENEMY_A));
+            mapModel->put(x+1, y+1, new Enemy(MapObject::ENEMY_A, mapModel));
             
             playerPlaced = true;
         }
@@ -269,7 +269,7 @@ void LevelGenerator::placeBoss() {
         y = rand() % (mapModel->getMapHeight() - 2) + 2;
         
         if (this->checkClearAround(new util::Location::Position(x, y), 1)) {
-            mapModel->put(x, y, new Enemy(MapObject::BOSS));
+            mapModel->put(x, y, new Enemy(MapObject::BOSS, mapModel));
             bossPlaced = true;
         }
     }

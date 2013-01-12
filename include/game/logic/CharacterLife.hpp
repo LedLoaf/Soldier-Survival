@@ -9,11 +9,12 @@ class CharacterLife : public sf::Thread {
 public:
     CharacterLife(int timeOfBirth, int lifetime);
 
-    virtual void Run();
+    virtual void Run() = 0;
 
 protected:
     int lifetime; // -1 oznacza, ze zyje dopuki nie zostanie zabity
     int timeOfBirth;
+    bool stillAlive;
 
     bool isTimeToDie();
 };

@@ -8,7 +8,8 @@
 
 
 namespace view {
-    class MapView;
+class MapViewModel;
+class MapView;
 }
 
 namespace game {
@@ -19,10 +20,13 @@ class Weapon;
     
 class Character : public MapObject {
 public:
-    Character(MapObject::Type type);
+    Character(MapObject::Type type, view::MapViewModel* mapViewModel);
     
     void setPosition(util::Location::Position pos);
     util::Location::Position getPosition();
+    
+    view::MapViewModel* getMapModel();
+    view::MapView* getMapView();
     
     void beginLife();
    
@@ -32,12 +36,10 @@ public:
     virtual void injureUsing(Weapon* weapon);
     
 protected:
-    
+    view::MapView* mapView;
+    view::MapViewModel* mapViewModel;
     CharacterLife* life;
     util::Location::Position position;
-    view::MapView* mapView;
-    MovementAI* movementAI;
-    
     int health;
     
 };

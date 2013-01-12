@@ -17,6 +17,8 @@ namespace game {
 
 
 namespace view {
+    
+class MapView;    
 
 class MapViewModel : public ViewModel {
 public:
@@ -24,6 +26,8 @@ public:
     int getMapHeight();
     int getMapWidth();
     
+    void setMapView(MapView* mapView);
+    MapView* getMapView();
     
 	void remove(int x, int y, const game::Character* ch);
 	void remove(int x, int y, const game::NotMovingMapObject* notMovingMapObject);
@@ -51,6 +55,7 @@ public:
     util::Location::Vector getDirectionOfLastPlayerMove();    
     
 private:
+    MapView* mapView;
     game::Character*** charactersTab;
     game::NotMovingMapObject*** notMovingObjectsTab;
     util::Location::Vector lastDirectionOfPlayerMove;

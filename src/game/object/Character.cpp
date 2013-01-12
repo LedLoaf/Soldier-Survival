@@ -1,13 +1,25 @@
 #include <game/object/Character.hpp>
 #include <game/logic/EnemyLife.hpp>
+#include <view/model/MapViewModel.hpp>
+
 
 namespace game {
     
-Character::Character(MapObject::Type type) : MapObject(type), position(util::Location::Position(-1, -1)) {
+Character::Character(MapObject::Type type, view::MapViewModel* mapViewModel) : MapObject(type), mapViewModel(mapViewModel),
+        position(util::Location::Position(-1, -1)) {
+}
+
+view::MapViewModel* Character::getMapModel() {
+    return mapViewModel;
+}
+
+view::MapView* Character::getMapView() {
+    return mapView;
 }
     
     // virtualna, tak zeby w Player nie rozpoczynac watku
 void Character::beginLife() {
+    mapView = mapViewModel->getMapView();
     life->Launch();
 }   
 

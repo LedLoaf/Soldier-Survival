@@ -17,6 +17,13 @@ MapViewModel::MapViewModel(int mapWidth, int mapHeight) : lastDirectionOfPlayerM
     initMapObjectsTabs();
 }   
 
+void MapViewModel::setMapView(MapView* mapView) {
+    this->mapView = mapView;
+}
+
+MapView* MapViewModel::getMapView() {
+    this->mapView;
+}
 
 
 game::MapObject* MapViewModel::getVisibleMapObject(int x, int y) {

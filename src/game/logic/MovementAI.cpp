@@ -2,6 +2,7 @@
 #include <time.h>
 #include <cstdlib>
 
+#include <util/Util.hpp>
 #include <game/Application.hpp>
 #include <game/logic/MovementAI.hpp>
 #include <view/window/GamePlayWindow.hpp>
@@ -11,8 +12,8 @@
 namespace game {
 
 MovementAI::MovementAI(int movingTimeInterval) {
-    mapView = (dynamic_cast<view::GamePlayWindow*>(game::Application::getInstance().getContext()->getActiveWindow()))->getMapView();
     this->movingTimeInterval = movingTimeInterval;
+    this->timeOfLastMove = util::Util::getCurrentTime();
 }
 
 

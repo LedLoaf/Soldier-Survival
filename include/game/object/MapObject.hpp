@@ -32,7 +32,7 @@ public:
     
     virtual Type getType();
     
-private:
+protected:
     Type type;
 
 };

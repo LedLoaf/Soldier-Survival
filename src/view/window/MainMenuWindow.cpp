@@ -23,6 +23,10 @@ MainMenuWindow::~MainMenuWindow() {
     selectionView = NULL;
     delete view;
     
+    view = mainMenuLogo;
+    mainMenuLogo = NULL;
+    delete view;    
+    
     ViewModel* viewModel = selectionViewModel;
     selectionViewModel = NULL;
 //    delete viewModel;
@@ -30,9 +34,8 @@ MainMenuWindow::~MainMenuWindow() {
 
 
 void MainMenuWindow::initUI() {
-//    std::string logoPath =
-   
-	addView(new ImageView(200, 10, 150, 200, util::Resource::MAIN_MENU_LOGO));    
+    mainMenuLogo = new ImageView(200, 10, 150, 200, util::Resource::MAIN_MENU_LOGO);
+	addView(mainMenuLogo);    
     
 	selectionView = new SelectionView(200, 200, 200, 500, SelectionViewModel::SIMPLE_MENU);
     selectionView->addElement(new SelectionViewModel::SelectableElement(util::Util::RUN_GAME_PLAY));    

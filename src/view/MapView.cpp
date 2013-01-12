@@ -28,6 +28,17 @@ MapViewModel* MapView::getModel() {
     return mapViewModel;
 }
 
+void MapView::beginCharactersLife() {
+//    for (int i = 0; i < mapViewModel->getMapWidth(); i++) {
+//        for (int j = 0; j < mapViewModel->getMapHeight(); j++) {
+//            if (mapViewModel->getCharacter(i, j) != NULL && mapViewModel->getCharacter(i, j)->getType() == game::MapObject::ENEMY_A)
+//                mapViewModel->getCharacter(i, j)->beginLife();
+//        }        
+//    }
+    
+    mapViewModel->getCharacter(mapViewModel->getPlayer()->getPosition().getX() + 1, 
+            mapViewModel->getPlayer()->getPosition().getY() + 1)->beginLife();
+}
 
 void MapView::moveCharacter(game::Character* ch, util::Location::Vector vector) {
 	util::Location::Position position = mapViewModel->getPositionOf(ch);
@@ -125,21 +136,15 @@ bool MapView::isPositionInMapArea(util::Location::Position position) {
 }
 
 bool MapView::areColliding(game::Character* firstCharacter, game::Character* secondCharacter) {
-    if (MapView::getDistanceBetween(firstCharacter, secondCharacter) == 1)
+    if (MapView::getDistanceBetween(firstCharacter->getPosition(), secondCharacter->getPosition()) == 1)
         return true;
     else
         return false;
 }
 
-int MapView::getDistanceBetween(game::Character* firstCharacter, game::Character* secondCharacter) {
-    util::Location::Position firstCharacterPosition = firstCharacter->getPosition();
-    util::Location::Position secondCharacterPosition = secondCharacter->getPosition();
-    
-    if (fabs(firstCharacterPosition.getX() - secondCharacterPosition.getX()) <= 1 &&
-            fabs(firstCharacterPosition.getY() - secondCharacterPosition.getY()) <= 1)
-        return true;
-    else
-        return false;
+int MapView::getDistanceBetween(util::Location::Position firstCharacterPosition, util::Location::Position secondCharacterPosition) {
+    return pow( pow(firstCharacterPosition.getX() - secondCharacterPosition.getX(), 2) +
+        pow(firstCharacterPosition.getY() - secondCharacterPosition.getY(), 2), 1.0/2 );
 }
 
 game::Player* MapView::getPlayer() {

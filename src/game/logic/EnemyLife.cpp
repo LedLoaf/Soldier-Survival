@@ -1,25 +1,35 @@
 #include <math.h>
 #include <time.h>
 #include <cstdlib>
+
+#include <SFML/System/Sleep.hpp>
+
 #include "game/logic/EnemyLife.hpp"
 #include <game/logic/CharacterLife.hpp>
 #include <game/logic/MovementAI.hpp>
+#include <game/logic/EnemyMovementAI.hpp>
 
 #include <util/Util.hpp>
 
 namespace game {
 
-EnemyLife::EnemyLife(int timeOfBirth, int lifetime) : CharacterLife(timeOfBirth, lifetime) {
+EnemyLife::EnemyLife(int timeOfBirth, int lifetime, EnemyMovementAI* movementAI) : CharacterLife(timeOfBirth, lifetime) {
+    this->movementAI = movementAI;
 }
 
 void EnemyLife::Run() {
-    if (isTimeToMove()) {
-        movementAI->tryToDoNextMove();
+    while (stillAlive) {
+//        if (isTimeToMove()) {
+            movementAI->tryToDoNextMove();
 
-    }
+//        }
 
-    if (isTimeToDie()) {
+        
+        if (isTimeToDie()) {
 
+        }
+            
+        sf::Sleep(0.8f);            
     }
 }
 

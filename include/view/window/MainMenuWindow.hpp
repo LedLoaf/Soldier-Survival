@@ -6,10 +6,13 @@
 
 #include <view/View.hpp>
 #include <view/window/Window.hpp>
-#include <view/SelectionView.hpp>
 #include <util/Key.hpp>
 
 namespace view {
+    
+class SelectionView;
+class SelectionViewModel;
+class ImageView;
 
 class MainMenuWindow : public Window {
 public:
@@ -27,6 +30,8 @@ public:
 private:
 	SelectionViewModel* selectionViewModel;
 	SelectionView* selectionView;
+    
+    ImageView* mainMenuLogo;
 
 };
 
