@@ -1,6 +1,9 @@
 #include <vector>
 #include <algorithm>
 
+#include <SFML/System/Mutex.hpp>
+#include <SFML/System/Sleep.hpp>
+
 #include <view/MapView.hpp>
 #include <view/WarView.hpp>
 
@@ -9,7 +12,8 @@
 
 namespace game {
 
-WarManager::WarManager() {
+WarManager::WarManager(view::MapView* mapView) {
+    this->mapView = mapView;
     this->shouldCheckWarsExistance = true;
     Launch();
 }    
@@ -22,7 +26,11 @@ WarManager::~WarManager() {
 
 void WarManager::Run() {
     while(shouldCheckWarsExistance) {
+        GlobalMutex.Lock();
         checkWarsExistance();
+        GlobalMutex.Unlock();
+        
+        sf::Sleep(0.01f);
     }
 }
     
@@ -45,7 +53,7 @@ void WarManager::checkWarsExistance() {
         player = war->getPlayer();
 
         if (!mapView->areColliding(player, enemy)) {
-            stopWar(war);
+            mapView->stopWar(war);
             return;
         }
 
@@ -56,15 +64,19 @@ void WarManager::startWar(War* war) {
     std::cout << "WarManager::startWar()" << std::endl;
     
     war->start();
-
+    
+    GlobalMutex.Lock();
     existingWars.push_back(war);
+    GlobalMutex.Unlock();
 }
 
 void WarManager::stopWar(War* war) {
     war->stop();
 
+    stopWarMutex.Lock();
     existingWars.erase(std::find(existingWars.begin(), existingWars.end(), war));
     delete war;
+    stopWarMutex.Unlock();
 }
 
 }

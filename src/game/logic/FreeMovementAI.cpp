@@ -9,7 +9,7 @@
 namespace game {
 
 util::Location::Vector FreeMovementAI::getRandomDirection() {
-    srand(time(NULL));
+    srand(time(0));
 
     util::Location::Vector directions[8] =  {util::Location::DOWN, util::Location::UP, util::Location::LEFT, util::Location::DOWN_LEFT,
                     util::Location::DOWN, util::Location::UP, util::Location::LEFT, util::Location::DOWN_LEFT};

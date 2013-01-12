@@ -2,6 +2,7 @@
 #define WAR_MANAGER_HPP_
 
 #include <SFML/System/Thread.hpp>
+#include <SFML/System/Mutex.hpp>
 #include <vector>
 
 namespace view {
@@ -17,7 +18,7 @@ class Enemy;
 
 class WarManager : public sf::Thread {
 public:
-    WarManager();
+    WarManager(view::MapView* mapView);
     ~WarManager();
 	void startWar(War* war);
     void stopWar(War* war);
@@ -36,6 +37,9 @@ private:
     view::MapView* mapView;
     view::WarView* warView;
     bool shouldCheckWarsExistance;
+    sf::Mutex GlobalMutex;
+    sf::Mutex stopWarMutex;
+    
 
 };
 

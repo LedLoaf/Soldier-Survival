@@ -15,7 +15,7 @@
 namespace view {
 
 MapView::MapView(int xStart, int yStart, int xEnd, int yEnd) : View(xStart, yStart, xEnd, yEnd) {
-    this->warManager = new game::WarManager();
+    this->warManager = new game::WarManager(this);
 
 }
 
@@ -38,6 +38,8 @@ void MapView::beginCharactersLife() {
     
     mapViewModel->getCharacter(mapViewModel->getPlayer()->getPosition().getX() + 1, 
             mapViewModel->getPlayer()->getPosition().getY() + 1)->beginLife();
+    mapViewModel->getCharacter(mapViewModel->getPlayer()->getPosition().getX() + 2, 
+            mapViewModel->getPlayer()->getPosition().getY() + 2)->beginLife();    
 }
 
 void MapView::moveCharacter(game::Character* ch, util::Location::Vector vector) {
@@ -116,6 +118,11 @@ void MapView::startWar(game::War* war) {
     warManager->startWar(war);
 }
 
+void MapView::stopWar(game::War* war) {
+    removeView(war->getWarView());
+    warManager->stopWar(war);
+}
+
 bool MapView::canCharacterStayOnNMMO(game::MapObject* notMovingMapObject) {
     if (game::MapObject::isTerrain(notMovingMapObject))
         return true;
@@ -136,6 +143,8 @@ bool MapView::isPositionInMapArea(util::Location::Position position) {
 }
 
 bool MapView::areColliding(game::Character* firstCharacter, game::Character* secondCharacter) {
+//    std::cout << "MapView::getDistanceBetween(): " 
+//            << MapView::getDistanceBetween(firstCharacter->getPosition(), secondCharacter->getPosition()) << std::endl;
     if (MapView::getDistanceBetween(firstCharacter->getPosition(), secondCharacter->getPosition()) == 1)
         return true;
     else

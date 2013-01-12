@@ -20,8 +20,8 @@ WarViewPainter::WarViewPainter(view::WarViewModel* warViewModel) {
 void WarViewPainter::init() {    
     
     enemyHealthIndicator = new sf::Sprite();
-    enemyHealthIndicator->SetX(10);
-    enemyHealthIndicator->SetY(3);
+    enemyHealthIndicator->SetX(100);
+    enemyHealthIndicator->SetY(30);
     enemyHealthIndicator->SetColor(sf::Color::Red);
     enemyHealthIndicator->SetX(warViewModel->getEnemyPosition().getX());
     enemyHealthIndicator->SetY(warViewModel->getEnemyPosition().getY() - 15);    
@@ -32,7 +32,7 @@ void WarViewPainter::init() {
 
 
 void WarViewPainter::update() {   
-    enemyHealthIndicator->Resize(warViewModel->getEnemyHealth() / 10, enemyHealthIndicator->GetSize().y);
+    //enemyHealthIndicator->Resize(warViewModel->getEnemyHealth() / 10, enemyHealthIndicator->GetSize().y);
 }
     
 

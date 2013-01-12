@@ -46,6 +46,7 @@ public:
     void setWarManager(game::WarManager* warManager);
     
     void startWar(game::War* war);
+    void stopWar(game::War* war);
     
     void beginCharactersLife();
 

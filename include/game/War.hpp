@@ -21,6 +21,8 @@ public:
     Player* getPlayer();
     
     void setWarView(view::WarView* warView);
+    view::WarView* getWarView();
+    
     view::WarViewModel* getWarModel();
     
 
@@ -48,7 +50,8 @@ private:
     WarExecutor* warExecutor;
     view::WarView* warView;
     Player* player;
-    Enemy* enemy;      
+    Enemy* enemy;     
+    static bool warIsHappening;
     
 
 };

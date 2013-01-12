@@ -6,9 +6,8 @@
 namespace game {
     
 Weapon::Weapon(EquipmentItem::Type type) : EquipmentItem(type) {
-    damage = 350;
+    damage = Weapon::getDamageFor(type);
 }
-
 
 int Weapon::getDamage() {
     return damage;
@@ -17,12 +16,25 @@ int Weapon::getDamage() {
 bool Weapon::isWeapon(Equipment::EquipmentItem* equipmentItem) {
     switch (equipmentItem->getType()) {
         case Equipment::EquipmentItem::GUN :
-        return true;
+            return true;
         case Equipment::EquipmentItem::KNIFE :
-        return true;
+            return true;
         case Equipment::EquipmentItem::RIFLE :
-        return true;        
+            return true;        
     }
+}
+
+int Weapon::getDamageFor(Equipment::EquipmentItem::Type weaponType) {
+    switch (weaponType) {
+        case Equipment::EquipmentItem::GUN :
+            return 30;
+        case Equipment::EquipmentItem::KNIFE :
+            return 15;
+        case Equipment::EquipmentItem::RIFLE :
+            return 40;  
+        default:
+            return 0;
+    }    
 }
 
 Weapon* Weapon::getWeaponFor(MapObject::Type characterType) {

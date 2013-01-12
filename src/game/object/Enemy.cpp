@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include <util/Util.hpp>
 
 #include <game/object/Character.hpp>
@@ -42,7 +44,9 @@ bool Enemy::canSeePlayer() {
 }
 
 void Enemy::injureUsing(Weapon* weapon) {
+    std::cout << "Enemy::injureUsing(), getDamage(): " << weapon->getDamage() << std::endl;
     
+    health -= weapon->getDamage();
 }
 
 }

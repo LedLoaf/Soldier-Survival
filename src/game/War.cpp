@@ -4,6 +4,8 @@
 #include <view/View.hpp>
 
 namespace game {
+    
+bool War::warIsHappening;    
 
 War::War(Player* player, Enemy* enemy) {
     this->player = player;
@@ -31,11 +33,12 @@ view::WarViewModel* War::getWarModel() {
 }
  
 void War::start() {
-    // w osobnym watku odbieranie zycia przeciwnikowi i playerowi + informowanie warView o efektach 
+    warIsHappening = true;
     warExecutor->Launch();
 }
 
 void War::stop() {
+    warIsHappening = false;
     warExecutor->Terminate();
 }
 
@@ -43,6 +46,9 @@ void War::setWarView(view::WarView* warView) {
     this->warView = warView;
 }
 
+view::WarView* War::getWarView() {
+    return warView;
+}
     
 Enemy* War::getEnemy() {
     return enemy;
@@ -58,15 +64,16 @@ War::WarExecutor::WarExecutor(War* war) {
 }
 
 void War::WarExecutor::Run() {
-    
-    war->getPlayer()->injureUsing(war->getEnemy()->getWeapon());
-    
-    if (war->getPlayer()->hasAnyWeapons())
-        war->getEnemy()->injureUsing(war->getPlayer()->getCurrentWeapon());
-        
+    while (warIsHappening) {
+        war->getPlayer()->injureUsing(war->getEnemy()->getWeapon());
+
+        if (war->getPlayer()->hasAnyWeapons())
+            war->getEnemy()->injureUsing(war->getPlayer()->getCurrentWeapon());
 
 
-    sf::Sleep(0.1f);
+
+        sf::Sleep(0.1f);
+    }
 }
 
 }

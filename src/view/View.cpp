@@ -1,9 +1,4 @@
-/*
- * View.cpp
- *
- *  Created on: Nov 20, 2012
- *      Author: yet1
- */
+#include <algorithm>
 
 #include <view/View.hpp>
 
@@ -42,7 +37,19 @@ bool View::hasViews() {
 
 
 void View::addView(View* view) {
+    int size = views.size();
 	views.push_back(view);
+}
+
+void View::removeView(View* view) {
+    View *v = view;
+    
+    for (int i = 0; i < views.size(); i++)
+        if (views[i] == view)
+            views.erase(views.begin() + i);
+    
+    
+    view = NULL;
 }
 
 std::vector<View*> View::getViews() {

@@ -31,6 +31,8 @@ public:
     
     bool hasViews();
     void addView(View* view);
+    void removeView(View* view);
+    
 	std::vector<View*> getViews();
     
 	virtual ~View();

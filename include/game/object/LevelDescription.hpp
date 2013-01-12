@@ -3,6 +3,8 @@
 
 #include <game/object/Equipment.hpp>
 
+#include "weapon/Weapon.hpp"
+
 namespace game {
 
 class LevelDescription {
@@ -24,9 +26,9 @@ public:
         
         playerEquipment = new Equipment();
         
-        if (playerKnife) playerEquipment->addItem(new Equipment::EquipmentItem(Equipment::EquipmentItem::KNIFE));
-        if (playerGun) playerEquipment->addItem(new Equipment::EquipmentItem(Equipment::EquipmentItem::GUN));
-        if (playerRifle) playerEquipment->addItem(new Equipment::EquipmentItem(Equipment::EquipmentItem::RIFLE));
+        if (playerKnife) playerEquipment->addItem(new game::Weapon(Equipment::EquipmentItem::KNIFE));
+        if (playerGun) playerEquipment->addItem(new game::Weapon(Equipment::EquipmentItem::GUN));
+        if (playerRifle) playerEquipment->addItem(new game::Weapon(Equipment::EquipmentItem::RIFLE));
     }
     
     void setPlayerEquipment(Equipment* equipment) {

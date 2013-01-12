@@ -251,6 +251,7 @@ void LevelGenerator::placePlayer(Player* player) {
         if (this->checkClearAround(new util::Location::Position(x, y), 1)) {
             mapModel->put(x, y, player);
             mapModel->put(x+1, y+1, new Enemy(MapObject::ENEMY_A, mapModel));
+            mapModel->put(x+2, y+2, new Enemy(MapObject::ENEMY_A, mapModel));
             
             playerPlaced = true;
         }
