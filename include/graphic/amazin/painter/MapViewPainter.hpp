@@ -27,7 +27,7 @@ class Player;
 namespace graphic {
 namespace amazin {
     
-sf::Mutex GlobalMutex;
+
 
 class MapViewPainter : public SFMLAbstractViewPainter {
 public:
@@ -63,6 +63,7 @@ private:
     
     SubMapManager* subMapManager;
     util::SFMLAmazinResource* sfmlAmazinResource;
+    
     
     class SubMapManager {
     public:
@@ -124,26 +125,29 @@ private:
             int wallPos;
             int playerToWallSpace;
             view::MapViewModel* mapModel;
+            sf::Mutex GlobalMutex;
             
             virtual void Run() {
                 mapIsUpdating = true;
 //                std::cout << "maxAfterWallPos: " << maxAfterWallPos << ", wallPos: " << wallPos << std::endl;
-                for (int i = 0; i < fabs(maxAfterWallPos - wallPos); ++i) {
-                    GlobalMutex.Lock();
-                    
+                GlobalMutex.Lock();
+                
+                while (true) {
                     if (direction == util::Key::LEFT && leftWallPos > maxAfterWallPos && leftWallPos > 0)
                         leftWallPos--;
                     else if (direction == util::Key::RIGHT && leftWallPos < maxAfterWallPos && leftWallPos < mapModel->getMapWidth() - subMapWidth)
                         leftWallPos++;
                     else if (direction == util::Key::DOWN && topWallPos < maxAfterWallPos && topWallPos < mapModel->getMapHeight() + subMapHeight)
                         topWallPos++;
-                    else if (direction == util::Key::UP && topWallPos > 0)
+                    else if (direction == util::Key::UP && topWallPos > maxAfterWallPos && topWallPos > 0)
                         topWallPos--;
-                    
-                    GlobalMutex.Unlock();
+                    else
+                        break;
                     
                     sf::Sleep(0.1f);
                 }
+                GlobalMutex.Unlock();
+                
                 mapIsUpdating = false;
             }
         };

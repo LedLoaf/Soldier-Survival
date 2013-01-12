@@ -26,7 +26,6 @@ private:
 	// MapViewModel jest doslownie modelem - nie ma zadnej konkretnej logiki, trzyma tylko 2 tablice 2 wymiarowe z mapa
 	MapViewModel* mapViewModel;
     game::WarManager* warManager;
-    view::WarView* warView;
 
 public:
     MapView(int xStart, int yStart, int xEnd, int yEnd);
@@ -46,6 +45,8 @@ public:
     
     void setModel(MapViewModel* mapModel);
     void setWarManager(game::WarManager* warManager);
+    
+    void startWar(game::War* war);
     
 
     

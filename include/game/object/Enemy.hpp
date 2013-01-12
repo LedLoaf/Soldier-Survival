@@ -21,6 +21,7 @@ public:
     
     bool canSeePlayer();    
 
+    
 
 private:
     Weapon* weapon;

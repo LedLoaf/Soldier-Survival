@@ -11,6 +11,18 @@ namespace game {
 
 Player::Player(Equipment* equipment) : Character(MapObject::PLAYER) {
     this->equipment = equipment;
+    
+    if (hasAnyWeapons())
+        this->currentWeapon = getWeapons()->at(0);        
+    else
+        this->currentWeapon = NULL;
+}
+
+
+bool Player::hasAnyWeapons() {
+    if (getWeapons()->size() > 0) 
+        return true;
+    return false;
 }
 
 Equipment* Player::getEquipment() {

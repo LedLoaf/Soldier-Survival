@@ -20,8 +20,8 @@ public:
     Equipment* getEquipment();
     std::vector<game::Weapon*>* getWeapons();
     
+    bool hasAnyWeapons();
     void setCurrentWeapon(Weapon* weapon);
-    
     Weapon* getCurrentWeapon();
     
     void injureUsing(Weapon* weapon);

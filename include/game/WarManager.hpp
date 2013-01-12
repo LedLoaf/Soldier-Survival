@@ -1,6 +1,7 @@
 #ifndef WAR_MANAGER_HPP_
 #define WAR_MANAGER_HPP_
 
+#include <SFML/System/Thread.hpp>
 #include <vector>
 
 namespace view {
@@ -14,8 +15,10 @@ class War;
 class Player;
 class Enemy;
 
-class WarManager {
+class WarManager : public sf::Thread {
 public:
+    WarManager();
+    ~WarManager();
 	void startWar(War* war);
     void stopWar(War* war);
    
@@ -26,10 +29,14 @@ public:
     
     
 private:
+    virtual void Run();    
+
     std::vector<War*> existingWars;
     
     view::MapView* mapView;
     view::WarView* warView;
+    bool shouldCheckWarsExistance;
+
 };
 
 }

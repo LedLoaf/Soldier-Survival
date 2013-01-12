@@ -20,6 +20,7 @@ public:
     
     TextViewModel* getModel();
 	virtual Type getType();
+    virtual bool hasEmptyModel();
     
         
 private:

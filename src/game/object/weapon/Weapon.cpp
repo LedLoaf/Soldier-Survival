@@ -1,6 +1,7 @@
 #include <game/object/weapon/Weapon.hpp>
 
 #include "game/object/Equipment.hpp"
+#include "game/object/MapObject.hpp"
 
 namespace game {
     
@@ -22,6 +23,10 @@ bool Weapon::isWeapon(Equipment::EquipmentItem* equipmentItem) {
         case Equipment::EquipmentItem::RIFLE :
         return true;        
     }
+}
+
+Weapon* Weapon::getWeaponFor(MapObject::Type characterType) {
+    return new Weapon(Equipment::EquipmentItem::GUN);
 }
 
 

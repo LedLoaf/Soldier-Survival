@@ -1,3 +1,4 @@
+#include <view/model/ViewModel.hpp>
 #include <view/SelectionView.hpp>
 #include <util/Location.hpp>
 
@@ -68,5 +69,8 @@ void SelectionView::selectElement(int pos) {
         selectionModel->setSelected(pos);
 }
 
+view::ViewModel* SelectionView::getViewModel() {
+    return selectionModel;
+}
 
 }

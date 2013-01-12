@@ -8,6 +8,7 @@
 
 
 #include <game/Application.hpp>
+#include <map>
 
 using namespace view;
 
@@ -16,116 +17,59 @@ namespace graphic {
 
 void SFMLAbstractGraphicEngine::display() {
 	updatePainters();
-
-	//  display
 	displayGraphicFromPainters();    
-    }
+}
 
 
 void SFMLAbstractGraphicEngine::updatePainters() {
-	if (!isPaintingCurrentWindow())
-		initWindowPainters(game::Application::getInstance().getContext()->getActiveWindow());
-
-    for(std::vector<SFMLAbstractViewPainter*>::iterator it = painters.begin(); it != painters.end(); ++it) {
-        (*it)->update();
-    }
+    deleteUnusedWindowPainters();
+	updateWindowPainters(game::Application::getInstance().getContext()->getActiveWindow());
     
+    for (std::map<view::View*, graphic::SFMLAbstractViewPainter*>::const_iterator it = viewPainterMap.begin(); 
+            it != viewPainterMap.end(); ++it) 
+        it->second->update();
 }
 
+void SFMLAbstractGraphicEngine::deleteUnusedWindowPainters() {
 
-void SFMLAbstractGraphicEngine::initWindowPainters(Window* window) {
-    renderWindow->Clear(sf::Color::Black);
-	painters.clear();
-    
-    std::vector<view::View*> views = window->getViews();
-    
-    std::vector<view::View*> allViews;
-    std::copy(views.begin(), views.end(), std::back_inserter(allViews));
-     
-    int size1 = allViews.size();
-
-    int distance;
-    
-    std::vector<view::View*> subViews;
-    
-    
-    for (int i = 0; i < views.size(); i++) {
-        if (views[i]->hasViews()) {
-            subViews = views[i]->getViews();
-                for (int j = 0; j < subViews.size(); j++) 
-                    allViews.push_back(subViews[j]);
+    for (std::map<view::View*, graphic::SFMLAbstractViewPainter*>::iterator it = viewPainterMap.begin(); 
+            it != viewPainterMap.end(); ++it) {
+        if (it->first == NULL) {
+            delete it->second;
+            viewPainterMap.erase(it);
+            
+            renderWindow->Clear(sf::Color::Black);
         }
-        
-        distance = views[i]->getViews().size();
             
     }
     
-    int size2 = allViews.size();
-    view::View::Type type;
-    
-    for(std::vector<view::View*>::iterator it = allViews.begin(); it != allViews.end(); ++it) {
-        type = (*it)->getType();
-        painters.push_back(getPainterForView(*it, window->getType()));
-    }
-    
-    if (window->hasSubWindow()) {
-         std::vector<view::View*> views = window->getSubWindow()->getViews();
-
-         std::vector<view::View*> allViews;
-         std::copy(views.begin(), views.end(), std::back_inserter(allViews));
-
-         int size1 = allViews.size();
-
-         int distance;
-
-         std::vector<view::View*> subViews;
-
-
-         for (int i = 0; i < views.size(); i++) {
-             if (views[i]->hasViews()) {
-                 subViews = views[i]->getViews();
-                     for (int j = 0; j < subViews.size(); j++) 
-                         allViews.push_back(subViews[j]);
-             }
-
-             distance = views[i]->getViews().size();
-
-         }
-
-         int size2 = allViews.size();
-         view::View::Type type;
-
-         for(std::vector<view::View*>::iterator it = allViews.begin(); it != allViews.end(); ++it) {
-             type = (*it)->getType();
-             painters.push_back(getPainterForView(*it, window->getType()));
-         }     
-         
-        currentWindowPainting = window->getSubWindow();
-         
-    } else
-        currentWindowPainting = window;
 }
 
+void SFMLAbstractGraphicEngine::addNewViewPainter(view::View* view, view::View::Type parentViewType) {
+    if (viewPainterMap.find(view) == viewPainterMap.end()) {
+        SFMLAbstractViewPainter* viewPainter = getPainterForView(view, parentViewType);
+        viewPainterMap.insert(std::pair<view::View*, graphic::SFMLAbstractViewPainter*>(
+            view, viewPainter));       
+    }
+}
 
-bool SFMLAbstractGraphicEngine::isPaintingCurrentWindow() {
-	if (currentWindowPainting == game::Application::getInstance().getContext()->getActiveWindow())
-		return true;
-	return false;
+void SFMLAbstractGraphicEngine::updateWindowPainters(Window* window) {
+    for (int i = 0; i < window->getViews().size(); i++) {
+        addNewViewPainter(window->getViews()[i], window->getViews()[i]->getType());
+            
+        for (int j = 0; j < window->getViews()[i]->getViews().size(); j++) 
+            addNewViewPainter(window->getViews()[i]->getViews()[j], window->getViews()[i]->getViews()[j]->getType());
+    }
 }
 
 
 void SFMLAbstractGraphicEngine::displayGraphicFromPainters() {
-    std::vector<sf::Drawable*> drawables;
-  
+    for (std::map<view::View*, graphic::SFMLAbstractViewPainter*>::const_iterator it = viewPainterMap.begin(); 
+            it != viewPainterMap.end(); ++it) 
+        for (int i = 0; i < it->second->getDrawables().size(); i++)
+            renderWindow->Draw(*it->second->getDrawables()[i]);
+            
 
-    for(std::vector<SFMLAbstractViewPainter*>::iterator it = painters.begin(); it != painters.end(); ++it) {
-        
-        drawables = (*it)->getDrawables();        
-        for(int i = 0; i < drawables.size(); i++)
-            renderWindow->Draw(*drawables[i]);
-        
-    }
-    
     renderWindow->Display();
 }
 

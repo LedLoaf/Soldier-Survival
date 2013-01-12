@@ -14,7 +14,6 @@ GamePlayWindow::GamePlayWindow(game::LevelDescription* levelDescription) : mapVi
 
     this->levelDescription = levelDescription;
     this->levelGenerator = new game::LevelGenerator(levelDescription);
-    this->warManager = new game::WarManager();
     
     initUI();
 }
@@ -43,6 +42,7 @@ void GamePlayWindow::onArrowPressed(util::Location::Vector vector) {
     if (hasSubWindow())
         subWindow->onArrowPressed(vector);
     else {
+        if (mapView->canMoveCharacter(mapView->getPlayer(), vector))
         mapView->moveCharacter(mapView->getPlayer(), vector);
     }
     
@@ -95,7 +95,7 @@ View::Type GamePlayWindow::getType() {
 }
 
 void GamePlayWindow::pause() {
-    hudView->pause();
+//    hudView->pause();
     mapView->pause();
 //    miniMapView->pause();
 }

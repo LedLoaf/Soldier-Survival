@@ -15,7 +15,7 @@
 namespace view {
 
 MapView::MapView(int xStart, int yStart, int xEnd, int yEnd) : View(xStart, yStart, xEnd, yEnd) {
-    warView = new WarView(0, 0, 10, 10);
+    this->warManager = new game::WarManager();
 
 }
 
@@ -71,8 +71,10 @@ bool MapView::canMoveCharacter(game::Character* ch, util::Location::Vector vecto
                         case game::MapObject::ENEMY_A : {
                             
                             
-                            if (!warManager->isWarAlreadyStartedBetween(dynamic_cast<game::Player*>(ch), dynamic_cast<game::Enemy*>(collidingCharacter)))
-                                warManager->startWar(new game::War(dynamic_cast<game::Player*>(ch), dynamic_cast<game::Enemy*>(collidingCharacter)));
+                            if (!warManager->isWarAlreadyStartedBetween(
+                                    dynamic_cast<game::Player*>(ch), dynamic_cast<game::Enemy*>(collidingCharacter)))
+                                startWar(new game::War(dynamic_cast<game::Player*>(ch), dynamic_cast<game::Enemy*>(collidingCharacter)));
+                                
                         }
 
                     }
@@ -93,6 +95,14 @@ bool MapView::canMoveCharacter(game::Character* ch, util::Location::Vector vecto
         return false;
     
     
+}
+
+void MapView::startWar(game::War* war) {
+    view::WarView* warView = new view::WarView(war->getWarModel());
+    war->setWarView(warView);
+    addView(warView);
+    
+    warManager->startWar(war);
 }
 
 bool MapView::canCharacterStayOnNMMO(game::MapObject* notMovingMapObject) {

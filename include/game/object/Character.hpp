@@ -29,7 +29,6 @@ public:
     void setHealth(int health);
     int getHealth();    
     
-
     virtual void injureUsing(Weapon* weapon);
     
 protected:

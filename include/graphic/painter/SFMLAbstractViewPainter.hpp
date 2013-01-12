@@ -4,6 +4,10 @@
 #include <SFML/Graphics/Drawable.hpp>
 #include <vector>
 
+namespace view {
+    class ViewModel;
+};
+
 namespace graphic {
 
 class SFMLAbstractViewPainter {
@@ -14,7 +18,6 @@ public:
 	virtual void update() = 0;
 
 	virtual std::vector<sf::Drawable*> getDrawables();
-
 protected:
     std::vector<sf::Drawable*> drawables;
     view::View::Type parentViewType;

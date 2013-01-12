@@ -17,6 +17,7 @@
 
 
 #include "graphic/amazin/painter/MapViewPainter.hpp"
+#include "graphic/amazin/painter/WarViewPainter.hpp"
 //#include <graphic/amazin/painter/TextViewPainter.hpp>
 
 
@@ -38,8 +39,8 @@ SFMLAbstractViewPainter* SFMLAmazinGraphicEngine::getPainterForView(view::View* 
             return new graphic::amazin::MapViewPainter(dynamic_cast<view::MapView*>(view)->getModel());              
         case view::View::MINI_MAP_VIEW :
             return new graphic::amazin::MiniMapViewPainter(dynamic_cast<view::MiniMapView*>(view)->getModel());  
-        default:
-            return NULL; // rzucac wyjatek
+        case view::View::WAR_VIEW :
+            return new graphic::amazin::WarViewPainter(dynamic_cast<view::WarView*>(view)->getModel());  
 	}
 
 

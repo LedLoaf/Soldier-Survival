@@ -20,4 +20,11 @@ view::View::Type TextView::getType() {
     return view::View::TEXT_VIEW;
 }
 
+
+bool TextView::hasEmptyModel() {
+    if (textViewModel == NULL)
+        return true;
+    else
+        return false;
+}
 }

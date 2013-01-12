@@ -2,6 +2,7 @@
 #define WEAPON_HPP_
 
 #include <game/object/Equipment.hpp>
+#include <game/object/MapObject.hpp>
 
 namespace game {
     
@@ -13,7 +14,7 @@ public:
     int getDamage();
 
     static bool isWeapon(Equipment::EquipmentItem* equipmentItem);
-    
+    static Weapon* getWeaponFor(MapObject::Type characterType);
 private:
     int damage;
 };

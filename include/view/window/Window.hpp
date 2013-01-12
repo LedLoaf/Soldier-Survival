@@ -8,6 +8,8 @@
 #include <util/Key.hpp>
 #include <util/Location.hpp>
 
+
+
 namespace view {
 
 class Window : public view::View {
@@ -23,13 +25,14 @@ public:
 	virtual void onArrowPressed(util::Location::Vector vector) = 0;
 	virtual void onEnterPressed() = 0;
     virtual void onEscPressed();
-    
+    void addUnusedView(view::View* unusedView);
+    std::vector<view::View*>* getUnusedViews();
     
 
 protected:
 //	WindowModel model;
 	Window* subWindow;
-
+    std::vector<view::View>* unusedViews;
 };
 
 }

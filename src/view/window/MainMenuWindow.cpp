@@ -19,8 +19,13 @@ MainMenuWindow::MainMenuWindow() : Window(0, 0, game::Application::getInstance()
 }
 
 MainMenuWindow::~MainMenuWindow() {
-    delete selectionView;
-    delete selectionViewModel;
+    View* view = selectionView;
+    selectionView = NULL;
+    delete view;
+    
+    ViewModel* viewModel = selectionViewModel;
+    selectionViewModel = NULL;
+//    delete viewModel;
 }
 
 

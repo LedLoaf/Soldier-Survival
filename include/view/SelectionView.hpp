@@ -9,6 +9,8 @@
 
 namespace view {
 
+class ViewModel;    
+    
 class SelectionView : public View {
 public:
 
@@ -29,6 +31,7 @@ public:
     SelectionViewModel* getModel();
     
     void addElement(SelectionViewModel::SelectableElement* element);
+    virtual view::ViewModel* getViewModel();
     
     
 

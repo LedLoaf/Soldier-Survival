@@ -7,6 +7,8 @@
 
 #include <view/View.hpp>
 
+#include "game/Application.hpp"
+
 namespace view {
 
 View::View(int xStart, int yStart, int xEnd, int yEnd) {

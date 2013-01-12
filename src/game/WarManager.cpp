@@ -1,3 +1,6 @@
+#include <vector>
+#include <algorithm>
+
 #include <view/MapView.hpp>
 #include <view/WarView.hpp>
 
@@ -6,6 +9,23 @@
 
 namespace game {
 
+WarManager::WarManager() {
+    this->shouldCheckWarsExistance = true;
+    Launch();
+}    
+
+WarManager::~WarManager() {
+    shouldCheckWarsExistance = false;
+    Terminate();
+    // TODO: reszta czyszczenia
+}
+
+void WarManager::Run() {
+    while(shouldCheckWarsExistance) {
+        checkWarsExistance();
+    }
+}
+    
 bool WarManager::isWarAlreadyStartedBetween(Player* player, Enemy* enemy) {
     for (std::vector<War*>::iterator it = existingWars.begin(); it != existingWars.end(); ++it)
         if ((*it)->getEnemy() == enemy)
@@ -20,19 +40,21 @@ void WarManager::checkWarsExistance() {
     War* war;
 
     for (std::vector<War*>::iterator it = existingWars.begin(); it != existingWars.end(); ++it) {
-        war = (*it);
+        war = *it;
         enemy = war->getEnemy(); 
         player = war->getPlayer();
 
         if (!mapView->areColliding(player, enemy)) {
             stopWar(war);
+            return;
         }
 
     }
 }
 
 void WarManager::startWar(War* war) {
-    war->setWarView(warView);
+    std::cout << "WarManager::startWar()" << std::endl;
+    
     war->start();
 
     existingWars.push_back(war);
@@ -41,7 +63,8 @@ void WarManager::startWar(War* war) {
 void WarManager::stopWar(War* war) {
     war->stop();
 
-    existingWars.push_back(war);
+    existingWars.erase(std::find(existingWars.begin(), existingWars.end(), war));
+    delete war;
 }
 
 }
