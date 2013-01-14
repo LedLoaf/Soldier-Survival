@@ -42,6 +42,17 @@ void MapView::beginCharactersLife() {
             mapViewModel->getPlayer()->getPosition().getY() + 2)->beginLife();    
 }
 
+void MapView::showDeathOf(game::Character* ch) {
+    mapViewModel->remove(ch->getPosition().getX(), ch->getPosition().getY(), ch);
+    mapViewModel->put(ch->getPosition().getX(), ch->getPosition().getY(), 
+            new game::NotMovingMapObject(game::MapObject::getDyingMapObjectFor(ch->getType())));
+}
+
+void MapView::buryCharacter(game::Character * ch) {
+    mapViewModel->put(ch->getPosition().getX(), ch->getPosition().getY(),  
+            new game::NotMovingMapObject(game::MapObject::GRASS));    
+}
+
 void MapView::moveCharacter(game::Character* ch, util::Location::Vector vector) {
 	util::Location::Position position = mapViewModel->getPositionOf(ch);
 	mapViewModel->remove(position.getX(), position.getY(), ch);

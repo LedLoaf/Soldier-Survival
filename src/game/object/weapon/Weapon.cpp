@@ -27,11 +27,11 @@ bool Weapon::isWeapon(Equipment::EquipmentItem* equipmentItem) {
 int Weapon::getDamageFor(Equipment::EquipmentItem::Type weaponType) {
     switch (weaponType) {
         case Equipment::EquipmentItem::GUN :
-            return 30;
+            return 3;
         case Equipment::EquipmentItem::KNIFE :
-            return 15;
+            return 1;
         case Equipment::EquipmentItem::RIFLE :
-            return 40;  
+            return 4;  
         default:
             return 0;
     }    

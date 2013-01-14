@@ -26,16 +26,16 @@ HUDViewPainter::HUDViewPainter(view::HUDViewModel* model) {
 
 
 void HUDViewPainter::init() {
-    int healthBoxtWidth, healthBoxHeight;
+    int healthBoxtWidth, healthBoxHeight, moneyBoxtWidth, moneyBoxHeight;
     std::string fontPath;
-    int textSize;
+    int labelsSize;
     int paddingLeft, paddingTop;
     
     healthBoxtWidth = 100;
-    healthBoxHeight = 50;
+    healthBoxHeight = 25;
     fontPath = "resource/graphic/amazin/font/magnum.ttf";
 
-    textSize = 20;
+    labelsSize = 15;
 
     paddingLeft = paddingTop = 5;
     
@@ -48,118 +48,89 @@ void HUDViewPainter::init() {
     healthBoxSprite->SetColor(sf::Color::Green);    
     
     drawables.push_back(healthBoxSprite);
+
     
-    for (int i = 0; i < 10; i++)
-        healthIndicatorSprites.push_back(getHealthIndicatorItem(i));
-    
-    /* Experience */
-    
-    sf::Sprite* experienceBoxSprite = new sf::Sprite();
-    experienceBoxSprite->Resize(healthBoxtWidth, healthBoxHeight);
-    experienceBoxSprite->SetX(healthBoxSprite->GetPosition().x);
-    experienceBoxSprite->SetY(healthBoxSprite->GetPosition().y + healthBoxSprite->GetSize().y);
-    experienceBoxSprite->SetColor(sf::Color::Cyan);    
-    
-    drawables.push_back(experienceBoxSprite);   
-    
-    
-    
-//    sf::Font font;
-//    if (!font.LoadFromFile(fontPath, 50)) {
-//        // throw exception. error
-//    }    
+    labelsSize = 15;
+
+    sf::Font font;
+    if (!font.LoadFromFile(fontPath, 50)) {
+        // throw exception. error
+    }    
 
 
-//        sf::String* text = new sf::String();
-//        text->SetText(getTextFor(selectableElements[i]->getAction()));
-//        // przy text->SetFont(font) segmentation fault - cos zle z plikeim ttf
-//        text->SetFont(sf::Font::GetDefaultFont());
-//        text->SetSize(textSize);
-//        text->SetX(selectionModel->getViewStartPosition()->getX() + paddingLeft);
-//        text->SetY(selectionModel->getViewStartPosition()->getY() + i * elementHeight + paddingTop);
+    sf::String* healthLabel = new sf::String();
+    healthLabel->SetStyle(sf::String::Bold);
+    healthLabel->SetText(std::string("Health:"));
+    healthLabel->SetFont(sf::Font::GetDefaultFont());
+    healthLabel->SetSize(labelsSize);
+    healthLabel->SetX(healthBoxSprite->GetPosition().x);
+    healthLabel->SetY(healthBoxSprite->GetPosition().y);
 
+    drawables.push_back(healthLabel);
+    
+    healthValueLabel = new sf::String();
+    healthValueLabel->SetStyle(sf::String::Bold);
+    healthValueLabel->SetText(std::string(""));
+    healthValueLabel->SetFont(sf::Font::GetDefaultFont());
+    healthValueLabel->SetSize(labelsSize);
+    healthValueLabel->SetX(healthLabel->GetPosition().x + healthLabel->GetSize() + 30);
+    healthValueLabel->SetY(healthLabel->GetPosition().y);
+
+    drawables.push_back(healthValueLabel);        
+    
+    
+    
+    /* Money */
+    
+    moneyBoxtWidth = 100;
+    moneyBoxHeight = 25;
+    
+    sf::Sprite* moneyBoxSprite = new sf::Sprite();
+    moneyBoxSprite->Resize(healthBoxtWidth, healthBoxHeight);
+    moneyBoxSprite->SetX(healthBoxSprite->GetPosition().x);
+    moneyBoxSprite->SetY(healthBoxSprite->GetPosition().y + healthBoxSprite->GetSize().y);
+    moneyBoxSprite->SetColor(sf::Color::Magenta);    
+    
+    drawables.push_back(moneyBoxSprite);
+    
+    labelsSize = 15;
+
+
+    sf::String* moneyLabel = new sf::String();
+    moneyLabel->SetStyle(sf::String::Bold);
+    moneyLabel->SetText(std::string("Money:"));
+    moneyLabel->SetFont(sf::Font::GetDefaultFont());
+    moneyLabel->SetSize(labelsSize);
+    moneyLabel->SetX(moneyBoxSprite->GetPosition().x);
+    moneyLabel->SetY(moneyBoxSprite->GetPosition().y);
+
+    drawables.push_back(moneyLabel);    
+    
+    moneyValueLabel = new sf::String();
+    moneyValueLabel->SetStyle(sf::String::Bold);
+    moneyValueLabel->SetText(std::string(" "));
+    moneyValueLabel->SetFont(sf::Font::GetDefaultFont());
+    moneyValueLabel->SetSize(labelsSize);
+    moneyValueLabel->SetX(moneyLabel->GetPosition().x + moneyLabel->GetSize() + 30);
+    moneyValueLabel->SetY(moneyLabel->GetPosition().y);
+
+    drawables.push_back(moneyValueLabel);     
 
        
 }
 
 
 void HUDViewPainter::update() {
-//	std::for_each (selectableElements.begin(), selectableElements.end(), updateSelectableSprite);
-    
-//    for(std::vector<view::SelectionViewModel::SelectableElement*>::iterator it = selectableElements.begin(); it != selectableElements.end(); ++it) {
-////        element = (view::SelectionViewModel::SelectableElement*) it;
-//        sf::Sprite* selectableSprite = selectableSpritesMap.find(*it)->second;
-//
-//        if ((*it)->isSelected())
-//            selectableSprite->SetColor(sf::Color::Red);
-//        else
-//            selectableSprite->SetColor(sf::Color::Green);
-//    }    
-    
-//    int health = hudViewModel->getPlayerHealth();
-    int health = 2;
-    
-    setHealthIndicator(health);
+    setHealthValueLabel();
+    setMoneyValueLabel();
 }
 
-void HUDViewPainter::setHealthIndicator(int health) {
-    // TODO: MAX_PLAYER_HEALTH brane z Player
-    int currentHealth = healthIndicatorSprites.size();
-    
-    if (currentHealth > health) {
-        for (int i = currentHealth - health; i > 0; i--) {
-            healthIndicatorSprites.pop_back();
-        }
-    } else {
-        for (int i = health - currentHealth; i > 0; i--) 
-            healthIndicatorSprites.push_back(getHealthIndicatorItem(health));
-    }
+void HUDViewPainter::setHealthValueLabel() {
+    healthValueLabel->SetText(util::Util::toString(hudViewModel->getPlayerHealth()));
 }
 
-sf::Sprite* HUDViewPainter::getHealthIndicatorItem(int health) {
-    int indicatorWidth = 5;
-    int indicatorHeight = 20;
-    
-    sf::Sprite* redIndicatorSprite = new sf::Sprite();
-    redIndicatorSprite->Resize(indicatorWidth, indicatorHeight);
-    redIndicatorSprite->SetX(healthBoxSprite->GetPosition().x + indicatorWidth);
-    redIndicatorSprite->SetY(healthBoxSprite->GetPosition().y);
-    redIndicatorSprite->SetColor(sf::Color::Red);     
-    
-    sf::Sprite* yellow2IndicatorSprite = new sf::Sprite();
-    yellow2IndicatorSprite->Resize(indicatorWidth, indicatorHeight);
-    yellow2IndicatorSprite->SetX(healthBoxSprite->GetPosition().x + indicatorWidth * 2);
-    yellow2IndicatorSprite->SetY(healthBoxSprite->GetPosition().y);
-    yellow2IndicatorSprite->SetColor(sf::Color::Yellow);       
-    
-    switch (health) {
-        case 1:
-            return redIndicatorSprite;
-        default:
-            return yellow2IndicatorSprite;
-    }
-}
-
-
-std::string HUDViewPainter::getTextFor(util::Util::Action action) {
-    switch (action) {
-        case util::Util::RUN_LEVEL_SELECTION :
-            return "level selection";
-        case util::Util::RUN_ABOUT :
-            return "about";
-        case util::Util::RUN_EXIT :
-            return "exit";            
-        default:
-            return "";
-    }
-}
-
-std::vector<sf::Drawable*> HUDViewPainter::getDrawables() {
-    int size = healthIndicatorSprites.size();
-    drawables.insert(drawables.end(), healthIndicatorSprites.begin(), healthIndicatorSprites.end());
-
-    
-	return drawables;
+void HUDViewPainter::setMoneyValueLabel() {
+//    moneyValueLabel->SetText(std::string(""));
 }
 
 }

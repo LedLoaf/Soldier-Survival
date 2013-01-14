@@ -1,7 +1,7 @@
 #include <game/object/Character.hpp>
 #include <game/logic/EnemyLife.hpp>
 #include <view/model/MapViewModel.hpp>
-
+#include <game/object/MapObject.hpp>
 
 namespace game {
     
@@ -22,6 +22,10 @@ void Character::beginLife() {
     mapView = mapViewModel->getMapView();
     life->Launch();
 }   
+
+void Character::endLife() {
+    life->die();
+}
 
 void Character::setPosition(util::Location::Position pos) {
     position = pos;

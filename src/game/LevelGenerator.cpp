@@ -35,7 +35,8 @@ LevelGenerator::LevelGenerator(game::LevelDescription* levelDescription) {
 //	this->placeNPC();
 	this->placeBoss();
     
-	this->placePlayer(this->generatePlayer());
+    this->generatePlayer();
+	this->placePlayer();
 }
 
 void LevelGenerator::generateWalls() {
@@ -177,11 +178,9 @@ void LevelGenerator::generateRivers() {
 //    std::cout << "River starts: " << p->getX() << "," << p->getY() << std::endl;
 }
 
-Player* LevelGenerator::generatePlayer() {
-    Player* player = new Player(levelDescription->getPlayerEquipment(), mapModel);
+void LevelGenerator::generatePlayer() {
+    player = new Player(levelDescription->getPlayerEquipment(), mapModel);
     player->setHealth(levelDescription->getPlayerHealth());
-    
-    return player;
 }
 
 bool LevelGenerator::placeRiverOrBridge(util::Location::Position *p, int bridgeProbability) {
@@ -237,7 +236,7 @@ void LevelGenerator::placeEnemies() {
 //    }
 //}
 
-void LevelGenerator::placePlayer(Player* player) {
+void LevelGenerator::placePlayer() {
     // always left side
     int x, y;
     

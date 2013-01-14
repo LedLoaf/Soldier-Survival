@@ -4,14 +4,19 @@
 #include <SFML/System/Thread.hpp>
 
 namespace game {
+
+class Character;    
     
 class CharacterLife : public sf::Thread {
 public:
-    CharacterLife(int timeOfBirth, int lifetime);
+    CharacterLife(Character* ch, int timeOfBirth, int lifetime);
 
     virtual void Run() = 0;
 
+    void die();
+    
 protected:
+    Character* character;
     int lifetime; // -1 oznacza, ze zyje dopuki nie zostanie zabity
     int timeOfBirth;
     bool stillAlive;

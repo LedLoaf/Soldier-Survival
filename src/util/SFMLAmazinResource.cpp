@@ -171,6 +171,14 @@ void SFMLAmazinResource::init() {
     imageResourceMap.insert(std::pair<game::MapObject::Type, sf::Image*>(
 		game::MapObject::ENEMY_A, enemyAImage)); 
 
+    std::string deadEnemyAPath = "resource/graphic/amazin/game_play/img/tiles/ground.png";
+    
+    sf::Image* deadEnemyImage = new sf::Image();
+    if (!deadEnemyImage->LoadFromFile(deadEnemyAPath))
+        std::cout << "Failed to load " << deadEnemyAPath << std::endl;
+       
+    imageResourceMap.insert(std::pair<game::MapObject::Type, sf::Image*>(
+		game::MapObject::DEAD_ENEMY_A, deadEnemyImage));     
 
     std::string enemy2Path = "resource/graphic/amazin/game_play/img/tiles/enemy3.png";
     

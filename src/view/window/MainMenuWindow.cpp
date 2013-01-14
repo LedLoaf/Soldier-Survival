@@ -74,8 +74,8 @@ void MainMenuWindow::onEnterPressed() {
     else if(optionAction == util::Util::RUN_EXIT)
 		game::Application::getInstance().getGameEngine()->exitGame();
     else if(optionAction == util::Util::RUN_GAME_PLAY) {
-        game::LevelDescription* sampleLevel = new game::LevelDescription(300, 300, 50.5, 20, 
-            50, true, false, true, true, true, false);          
+        game::LevelDescription* sampleLevel = new game::LevelDescription(300, 300, 0.2, 9, 
+            20, true, false, true, true, true, false);          
 		game::Application::getInstance().getGameEngine()->runGamePlay(sampleLevel);
     }
 	

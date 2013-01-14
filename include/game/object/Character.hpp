@@ -29,7 +29,8 @@ public:
     view::MapView* getMapView();
     
     void beginLife();
-   
+    void endLife();
+    
     void setHealth(int health);
     int getHealth();    
     

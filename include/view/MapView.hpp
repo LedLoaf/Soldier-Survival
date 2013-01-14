@@ -51,6 +51,9 @@ public:
     void beginCharactersLife();
 
     
+    void showDeathOf(game::Character* ch);
+    void buryCharacter(game::Character * ch);
+    
     game::Player* getPlayer();
 };
 

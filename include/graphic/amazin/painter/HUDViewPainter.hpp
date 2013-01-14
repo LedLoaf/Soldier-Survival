@@ -5,6 +5,9 @@
 #include <view/model/HUDViewModel.hpp>
 #include <graphic/painter/SFMLAbstractViewPainter.hpp>
 
+namespace sf {
+class String;    
+}
 
 namespace graphic {
 namespace amazin {
@@ -13,26 +16,25 @@ class HUDViewPainter : public SFMLAbstractViewPainter {
 public:
 	HUDViewPainter(view::HUDViewModel* model);
     
-
 	virtual void init();
 	virtual void update();
-    virtual std::vector<sf::Drawable*> getDrawables();
     
-    std::string getTextFor(util::Util::Action action);
 
     
     
 private:
+    void setMoneyValueLabel();
+    void setHealthValueLabel();
+    
     void setHealthIndicator(int health);    
     sf::Sprite* getHealthIndicatorItem(int health);
     
     
 	view::HUDViewModel* hudViewModel;
-
     sf::Sprite* healthBoxSprite;
     
-    std::vector<sf::Drawable*> healthIndicatorSprites;
-    
+    sf::String* moneyValueLabel;
+    sf::String* healthValueLabel;
 };
 
 }

@@ -17,6 +17,7 @@ public:
         ROAD,
         TREE,
         ENEMY_A,
+        DEAD_ENEMY_A,
         ENEMY_B,
         BOSS,
         TRADER,
@@ -29,6 +30,8 @@ public:
     static bool isWall(MapObject* mapObject);  
     static bool isBridge(MapObject* mapObject);  
     static bool isRiver(MapObject* mapObject);  
+    
+    static Type getDyingMapObjectFor(Type type);
     
     virtual Type getType();
     

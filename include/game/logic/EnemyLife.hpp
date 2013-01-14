@@ -11,7 +11,7 @@ class EnemyMovementAI;
     
 class EnemyLife : public CharacterLife {
 public:
-    EnemyLife(int timeOfBirth, int lifetime, EnemyMovementAI* movementAI);
+    EnemyLife(Character* ch, int timeOfBirth, int lifetime, EnemyMovementAI* movementAI);
 
     virtual void Run();
 

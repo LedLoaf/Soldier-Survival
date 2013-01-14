@@ -16,7 +16,7 @@ namespace game {
 
 Enemy::Enemy(MapObject::Type type, view::MapViewModel* mapViewModel) : Character(type, mapViewModel) {
     movementAI = new game::EnemyMovementAI(this, 100); // co 100ms bedzie sie poruszac    
-    life = new EnemyLife(util::Util::getCurrentTime(), -1, movementAI);
+    life = new EnemyLife(this, util::Util::getCurrentTime(), -1, movementAI);
     
     
     this->weapon = game::Weapon::getWeaponFor(type);
@@ -47,6 +47,9 @@ void Enemy::injureUsing(Weapon* weapon) {
     std::cout << "Enemy::injureUsing(), getDamage(): " << weapon->getDamage() << std::endl;
     
     health -= weapon->getDamage();
+    
+    if (health <= 0)
+        endLife();
 }
 
 }

@@ -41,4 +41,13 @@ MapObject::Type MapObject::getType() {
     return type;
 }
 
+MapObject::Type MapObject::getDyingMapObjectFor(Type type) {
+    switch (type) {
+        case ENEMY_A:
+            return DEAD_ENEMY_A;
+        default:
+            return DEAD_ENEMY_A;
+    }
+}
+
 }

@@ -52,7 +52,7 @@ Weapon* Player::getCurrentWeapon() {
 }
 
 void Player::injureUsing(Weapon* weapon) {
-    
+    health -= weapon->getDamage();
 }
     
 }

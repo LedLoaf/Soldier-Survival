@@ -21,8 +21,8 @@ GamePlayWindow::GamePlayWindow(game::LevelDescription* levelDescription) : mapVi
 
 void GamePlayWindow::initUI() {
     
-//    hudView = new HUDView(0, 0, game::Application::getInstance().getDeviceManager()->getScreenWidth(), 100, levelGenerator->getHUDViewModel());
-//	addView(hudView);
+    hudView = new HUDView(0, 0, game::Application::getInstance().getDeviceManager()->getScreenWidth(), 100, levelGenerator->getHUDViewModel());
+	addView(hudView);
   
     
     mapView = new MapView(0, 100, game::Application::getInstance().getDeviceManager()->getScreenWidth(), 
