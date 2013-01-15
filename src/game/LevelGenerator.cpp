@@ -37,6 +37,16 @@ LevelGenerator::LevelGenerator(game::LevelDescription* levelDescription) {
     
     this->generatePlayer();
 	this->placePlayer();
+        
+        
+        /*
+        for (int i = 0; i < mapModel->getMapHeight(); i++) {
+            for (int j = 0; j < mapModel->getMapWidth(); j++) {
+                std::cout << mapModel->getVisibleMapObject(i, j)->getType();
+            }   
+            std::cout << std::endl; 
+        }
+        */    
 }
 
 void LevelGenerator::generateWalls() {
@@ -51,19 +61,19 @@ void LevelGenerator::generateWalls() {
 }
 
 void LevelGenerator::generateForest() {
-    int cntForests = rand() % 5 + 6;
+    int cntForests = rand() % 5 + 12;
     
     for (int x = 0; x < cntForests; ++x) {
-        
+        //std::cout << "getMapWidth" << mapModel->getMapWidth() << ", getMapHeight " << mapModel->getMapHeight() << std::endl;
         util::Location::Position *p = new util::Location::Position(rand() % mapModel->getMapWidth(), rand() % mapModel->getMapHeight());
-        int dx = (rand() % 30 + 5) * mapModel->getMapWidth();
-        int dy = (rand() % 30 + 5) * mapModel->getMapHeight();
+        int dx = (rand() % 50 + 5) * mapModel->getMapWidth();
+        int dy = (rand() % 50 + 5) * mapModel->getMapHeight();
         dx = round((float)dx / 100);
         dy = round((float)dy / 100);
         
         //std::cout << p->getX() << "," << p->getY() << " FIELD: " << dx << "x" << dy << " -> FOREST CENTER" << std::endl;
         
-        this->placeRandomly(p, dx, dy, 0.10, new NotMovingMapObject(MapObject::TREE));
+        this->placeRandomly(p, dx, dy, 0.04, new NotMovingMapObject(MapObject::TREE));
         
     }
 }
@@ -202,8 +212,8 @@ void LevelGenerator::placeEnemies() {
     for (int x = 0; x < cntEnemies; ++x) {
         
         util::Location::Position *p = new util::Location::Position(rand() % mapModel->getMapWidth(), rand() % mapModel->getMapHeight());
-        int dx = (rand() % 5 + 3) * mapModel->getMapWidth();
-        int dy = (rand() % 5 + 3) * mapModel->getMapHeight();
+        int dx = (rand() % 16 + 8) * mapModel->getMapWidth();
+        int dy = (rand() % 16 + 8) * mapModel->getMapHeight();
         dx = round((float)dx / 100);
         dy = round((float)dy / 100);
         
@@ -301,7 +311,7 @@ void LevelGenerator::placeRandomly(util::Location::Position *p, int dx, int dy, 
     int ttCount = dx*dy;
     ttCount = (float)ttCount * density;
     //ttCount = roundf((float)ttCount / 100);
-//    std::cout << "dx: " << dx << ", dy: " << dy << " dens: " << density << ", ttCount: " << ttCount << " (" << (ttCount/(dx*dy)) << "%)" << std::endl;
+    //std::cout << "dx: " << dx << ", dy: " << dy << " dens: " << density << ", ttCount: " << ttCount << " (" << (ttCount/(dx*dy)) << "%)" << std::endl;
     
     int x1 = p->getX() - dx/2;
     int x2 = p->getX() + dx/2;
@@ -312,21 +322,23 @@ void LevelGenerator::placeRandomly(util::Location::Position *p, int dx, int dy, 
     int i = 0, j = 0;
     while (i < ttCount) {
         util::Location::Position *ptt = new util::Location::Position(rand() % dx + p->getX() - dx/2, rand() % dy + p->getY() - dy/2);
-//        std::cout << j+1 << " util::Location::Position: " << ptt->getX() << ","  << ptt->getY();
+        //std::cout << j+1 << " util::Location::Position: " << ptt->getX() << ","  << ptt->getY();
         if (ptt->getX() >= 0 && ptt->getX() < mapModel->getMapWidth() 
                 && ptt->getY() >= 0 && ptt->getY() < mapModel->getMapHeight()) {
-//            std::cout << " -> GOOD POSITION!";
             
-            
-            if (mapModel->getNotMovingObject(ptt->getX(), ptt->getY()) != NULL && !MapObject::isWall(mapModel->getNotMovingObject(ptt->getX(), ptt->getY())) 
+            if (mapModel->getNotMovingObject(ptt->getX(), ptt->getY()) == NULL || (!MapObject::isWall(mapModel->getNotMovingObject(ptt->getX(), ptt->getY())) 
                     && !MapObject::isRiver(mapModel->getNotMovingObject(ptt->getX(), ptt->getY()))
-                    && !MapObject::isBridge(mapModel->getNotMovingObject(ptt->getX(), ptt->getY()))) {
-//                std::cout << " -> GOOD TO SET NEW TYPE HERE!";
-
+                    && !MapObject::isBridge(mapModel->getNotMovingObject(ptt->getX(), ptt->getY())))) {
                 switch (tt->getType()) {
-                    case game::MapObject::GRASS || game::MapObject::GRASS_GREEN || game::MapObject::GROUND || game::MapObject::WALL ||
-                        game::MapObject::GROUND || game::MapObject::RIVER || game::MapObject::ROAD || game::MapObject::SAND :
-                        
+                    case game::MapObject::GRASS:
+                    case game::MapObject::GRASS_GREEN:
+                    case game::MapObject::GROUND:
+                    case game::MapObject::WALL:
+                    case game::MapObject::RIVER:
+                    case game::MapObject::TREE:
+                    case game::MapObject::ROAD:
+                    case game::MapObject::SAND:
+                        if (tt->getType() == game::MapObject::TREE) std::cout<<"tree!\n";
                         mapModel->put(ptt->getX(), ptt->getY(), dynamic_cast<game::NotMovingMapObject*>(tt));
                         break;
                     case game::MapObject::PLAYER :
