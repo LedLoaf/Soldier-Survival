@@ -21,7 +21,8 @@ public:
         ENEMY_B,
         BOSS,
         TRADER,
-        PLAYER
+        PLAYER,
+        BOMB
     };    
     
     MapObject(Type type);

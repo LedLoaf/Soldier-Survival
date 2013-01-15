@@ -57,6 +57,13 @@ void PauseWindow::onEscPressed() {
     game::Application::getInstance().getGameEngine()->resumeGame();
 }
 
+void PauseWindow::onCharacterPressed(char c) {
+    
+}
+
+void PauseWindow::onSpacePressed() {
+    
+}
 
 View::Type PauseWindow::getType() {
     return View::PAUSE_WINDOW;

@@ -75,6 +75,14 @@ void GamePlayWindow::onArrowPressed(util::Location::Vector vector) {
 //    }
 }
 
+void GamePlayWindow::onCharacterPressed(char c) {
+
+}
+
+void GamePlayWindow::onSpacePressed() {
+    if (!mapView->checkIfBombHasBeenPlanted())
+        mapView->tryToPlantBomb();
+}
 
 void GamePlayWindow::onEnterPressed() {
     if (hasSubWindow())

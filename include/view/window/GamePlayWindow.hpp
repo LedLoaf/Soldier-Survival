@@ -30,6 +30,8 @@ public:
 	virtual void onEnterPressed();
 	virtual void onArrowPressed(util::Location::Vector vector);
     virtual void onEscPressed();
+    virtual void onCharacterPressed(char c);
+    virtual void onSpacePressed();
     
 	virtual Type getType();
     

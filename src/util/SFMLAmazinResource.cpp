@@ -4,6 +4,7 @@
 
 #include "view/model/MapViewModel.hpp"
 #include "game/object/MapObject.hpp"
+#include "game/object/Equipment.hpp"
 
 
 
@@ -37,7 +38,13 @@ sf::Image* SFMLAmazinResource::getImage(game::MapObject::Type mapObjectType) {
         return imageNotFound;
 }
 
+
 void SFMLAmazinResource::init() {
+    initEquipmentItemImages();
+    initMapObjectImages();
+}
+
+void SFMLAmazinResource::initMapObjectImages() {
     std::string imageNotFoundPath = "resource/graphic/amazin/game_play/img/tiles/image_not_found.jpg";
     
     imageNotFound = new sf::Image();
@@ -46,6 +53,16 @@ void SFMLAmazinResource::init() {
     
     
 /* NotMovingMapObjects */   
+    
+	std::string bombAPath = "resource/graphic/amazin/game_play/img/tiles/enemy5.png";
+    
+    sf::Image* bombAImage = new sf::Image();
+    if (!bombAImage->LoadFromFile(bombAPath))
+        std::cout << "Failed to load " << bombAPath << std::endl;
+    
+    imageResourceMap.insert(std::pair<game::MapObject::Type, sf::Image*>(
+        game::MapObject::BOMB, bombAImage)); 
+
     
     std::string grassGreenPath = "resource/graphic/amazin/game_play/img/tiles/grass.png";
     
@@ -129,6 +146,8 @@ void SFMLAmazinResource::init() {
     imageResourceMap.insert(std::pair<game::MapObject::Type, sf::Image*>(
 		game::MapObject::SAND, sandImage));
 
+    
+  
 
 /* Characters */
     
@@ -191,5 +210,7 @@ void SFMLAmazinResource::init() {
 }
 
 
+void SFMLAmazinResource::initEquipmentItemImages() {  
+}
 
 }

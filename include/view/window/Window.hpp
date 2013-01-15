@@ -25,6 +25,9 @@ public:
 	virtual void onArrowPressed(util::Location::Vector vector) = 0;
 	virtual void onEnterPressed() = 0;
     virtual void onEscPressed();
+    virtual void onCharacterPressed(char c);
+    virtual void onSpacePressed();
+    
     void addUnusedView(view::View* unusedView);
     std::vector<view::View*>* getUnusedViews();
     

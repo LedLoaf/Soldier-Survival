@@ -85,6 +85,13 @@ void MainMenuWindow::onEscPressed() {
     game::Application::getInstance().getGameEngine()->exitGame();
 }
 
+void MainMenuWindow::onCharacterPressed(char c) {
+    
+}
+
+void MainMenuWindow::onSpacePressed() {
+    
+}
 
 View::Type MainMenuWindow::getType() {
     return View::MAIN_MENU_WINDOW;

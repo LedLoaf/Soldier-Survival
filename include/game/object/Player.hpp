@@ -15,6 +15,7 @@ namespace game {
 
 class Equipment;
 class Weapon;    
+class Bomb;
     
 class Player : public Character {
 public:
@@ -26,6 +27,9 @@ public:
     bool hasAnyWeapons();
     void setCurrentWeapon(Weapon* weapon);
     Weapon* getCurrentWeapon();
+    
+    Bomb* getBomb();
+    int hasBomb();
     
     void injureUsing(Weapon* weapon);
     
