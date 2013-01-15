@@ -1,9 +1,12 @@
 #ifndef MINI_MAP_VIEW_PAINTER_HPP_
 #define MINI_MAP_VIEW_PAINTER_HPP_
 
+#include <util/SFMLAmazinResource.hpp>
+
 #include <view/View.hpp>
 #include <view/model/MiniMapViewModel.hpp>
 #include <graphic/painter/SFMLAbstractViewPainter.hpp>
+
 
 
 namespace graphic {
@@ -19,10 +22,16 @@ public:
     
     
 private:
+    void allocateMapElementSprites(int mapViewRowsNo, int mapViewColumnsNo);
+    
+    sf::Sprite*** mapElementSprites;     
+    util::SFMLAmazinResource* sfmlAmazinResource;
+    
     view::MiniMapViewModel* miniMapViewModel;
-    sf::Sprite** map;
+    view::MapViewModel* mapViewModel;
+    
     int numberOfColumns, numberOfRows;
-    float viewWidth, elementWidth;
+    int elementWidth, elementHeight;
 };
 
 }

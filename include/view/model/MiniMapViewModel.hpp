@@ -11,21 +11,18 @@ namespace game {
 #include <view/View.hpp>
 #include <util/Util.hpp>
 
+#include "MapViewModel.hpp"
+
 
 namespace view {
 
 class MiniMapViewModel : public ViewModel {
 public:
-    
-    int getNumberOfColumns();
-    int getNumberOfRows();
-    
-    // element na widoczny dla uzytkownika (na samej gorze)
-    game::MapObject* getVisibleMapObject(int x, int y); 
-    game::MapObject* getVisibleMapObject(util::Location::Position position); 
+    void setMapViewModel(view::MapViewModel* mapViewModel);
+    view::MapViewModel* getMapViewModel();
 
 private:
-    
+    MapViewModel* mapViewModel;
 };
 
 } /* namespace view */

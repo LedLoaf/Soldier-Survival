@@ -1,4 +1,5 @@
 #include <cstddef> //do poprawnej kompilacji SFML //(NULL)
+#include <iostream>
 
 #include <graphic/amazin/painter/MapViewPainter.hpp>
 #include <SFML/Graphics/Sprite.hpp>
@@ -11,6 +12,7 @@
 #include "util/Key.hpp"
 #include <util/Location.hpp>
 #include "game/object/Character.hpp"
+#include "view/model/MiniMapViewModel.hpp"
 #include <game/object/Player.hpp>
 
 #include <string>
@@ -28,8 +30,8 @@ int MapViewPainter::SubMapManager::subMapHeight;
 
 
 
-MapViewPainter::MapViewPainter(view::MapViewModel* model) {
-    this->mapViewModel = model;
+MapViewPainter::MapViewPainter(view::MapViewModel* mapModel) {
+    this->mapViewModel = mapModel;
     this->sfmlAmazinResource = util::SFMLAmazinResource::getInstance();
     init();
 }
@@ -47,6 +49,8 @@ void MapViewPainter::init() {
     
     elementWidth = mapViewWidth / subMapWidth;
     elementHeight = mapViewHeight / subMapHeight;
+    
+    std::cout << elementWidth << ", " << elementHeight;
     
     subMapManager = new SubMapManager(mapViewModel, subMapWidth, subMapHeight, playerToWallSpace);
 
@@ -77,7 +81,10 @@ void MapViewPainter::update() {
         for (int j = 0; j < subMapHeight; j++) {
             game::MapObject::Type elementType = subMapManager->getElementAt(i, j)->getType();
             
-            elementImage = sfmlAmazinResource->getImage(elementType);
+            if (elementType == game::MapObject::BOMB) {
+                
+            } else 
+                elementImage = sfmlAmazinResource->getImage(elementType);
 
             mapElementSprites[i][j]->SetImage(*(elementImage));
             mapElementSprites[i][j]->Resize(elementWidth, elementHeight);

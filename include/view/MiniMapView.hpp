@@ -12,14 +12,15 @@ namespace view {
 
 class MiniMapView : public View {
 private:
-	MiniMapViewModel* mapViewModel;
+	MiniMapViewModel* miniMapViewModel;
+    MapViewModel* mapViewModel;
 
 public:
     MiniMapView(int xStart, int yStart, int xEnd, int yEnd);
     virtual Type getType();
 
     
-    void setMapModel(MiniMapViewModel* mapModel);
+    void setMapModel(MapViewModel* mapModel);
     MiniMapViewModel* getModel();
 };
 

@@ -23,44 +23,59 @@ namespace amazin {
 
 MiniMapViewPainter::MiniMapViewPainter(view::MiniMapViewModel* model) {
 	this->miniMapViewModel = model;
-
+    this->mapViewModel = miniMapViewModel->getMapViewModel();
+    this->sfmlAmazinResource = util::SFMLAmazinResource::getInstance();
 	init();
 }
 
-
 void MiniMapViewPainter::init() {
-//    numberOfColumns = miniMapViewModel->getNumberOfColumns();
-//    numberOfRows = miniMapViewModel->getNumberOfRows();
-//    
-//    viewWidth = miniMapViewModel->getViewEndPosition()->getX() - miniMapViewModel->getViewStartPosition()->getX();
-//    elementWidth = viewWidth / numberOfColumns;
-//        
-//    sf::Sprite* mapElementSprite;
-//    
-//    map = new sf::Sprite*[numberOfRows];
-//    
-//    for (int i = 0; i < numberOfRows; i++) {
-//        map[i] = new sf::Sprite[numberOfColumns];
-//        
-//        for (int j = 0; j < numberOfColumns; j++) {
-//            mapElementSprite = new sf::Sprite();
-//            drawables.push_back(mapElementSprite);
-//            
-//            map[i][j] = mapElementSprite;
-//            map[i][j]->SetPosition(miniMapViewModel->getViewStartPosition()->getX() + elementWidth * i, elementWidth * j + 1);
-//        }    
-//    }
- 
+    int miniMapViewWidth = miniMapViewModel->getViewEndPosition()->getX() - miniMapViewModel->getViewStartPosition()->getX();
+    int miniMapViewHeight = miniMapViewModel->getViewEndPosition()->getY() - miniMapViewModel->getViewStartPosition()->getY();    
+    
+    numberOfRows = mapViewModel->getMapWidth();
+    numberOfColumns = mapViewModel->getMapHeight();
+    
+    
+    elementWidth = miniMapViewWidth / numberOfRows;
+    elementHeight = miniMapViewHeight / numberOfColumns;
+    
+
+    
+    allocateMapElementSprites(numberOfRows, numberOfColumns);
+}
+    
+void MiniMapViewPainter::allocateMapElementSprites(int mapViewRowsNo, int mapViewColumnsNo) {
+    mapElementSprites = new sf::Sprite**[mapViewRowsNo];
+    for (int i = 0; i < mapViewRowsNo; i++) {
+        mapElementSprites[i] = new sf::Sprite*[mapViewColumnsNo];
+        
+        for (int j = 0; j < mapViewColumnsNo; j++) {
+            sf::Sprite* element = new sf::Sprite();
+            element->SetPosition(miniMapViewModel->getViewStartPosition()->getX() + i * elementWidth, 
+                    miniMapViewModel->getViewStartPosition()->getY() + j * elementHeight);
+            
+            mapElementSprites[i][j] = element;
+            drawables.push_back(mapElementSprites[i][j]);
+        }            
+        
+    }
 }
 
-void MiniMapViewPainter::update() {
-//    for (int i = 0; i < numberOfColumns; i++) {
-//        for (int j = 0; j < numberOfRows; j++) {            
-//            map[i][j]->SetImage(util::SFMLAmazinResource::getInstance()->getImage(miniMapViewModel->getVisibleMapObject(i, j)));
-//        }    
-//    }    
-}
+void MiniMapViewPainter::update() {   
+    sf::Image* elementImage;
+    for (int i = 0; i < numberOfRows; i++) {
+        for (int j = 0; j < numberOfColumns; j++) {
+            game::MapObject::Type elementType = mapViewModel->getVisibleMapObject(i, j)->getType();
+            
+            elementImage = sfmlAmazinResource->getImage(elementType);
 
+            mapElementSprites[i][j]->SetImage(*(elementImage));
+            mapElementSprites[i][j]->Resize(elementWidth, elementHeight);
+            
+
+        }        
+    }
+}
 
 
 }
