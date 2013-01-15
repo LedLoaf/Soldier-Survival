@@ -76,6 +76,7 @@ void MapViewPainter::update() {
     for (int i = 0; i < subMapWidth; i++) {
         for (int j = 0; j < subMapHeight; j++) {
             game::MapObject::Type elementType = subMapManager->getElementAt(i, j)->getType();
+            
             elementImage = sfmlAmazinResource->getImage(elementType);
 
             mapElementSprites[i][j]->SetImage(*(elementImage));

@@ -34,5 +34,13 @@ Window* Window::getSubWindow() {
 void Window::onEscPressed() {
 }
 
+void Window::onCharacterPressed(char c) {
+    
+}
+
+void Window::onSpacePressed() {
+    
+}
+
 
 }

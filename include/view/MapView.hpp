@@ -9,12 +9,15 @@
 
 #include <game/WarManager.hpp>
 #include "WarView.hpp"
+#include <game/object/weapon/Bomb.hpp>
 
 
 namespace game {
 class MapObject;    
 class Character;
 class Player;
+
+class BombManager;
 }
 
 namespace view {
@@ -25,6 +28,7 @@ class MapView : public View {
 private:
 	MapViewModel* mapViewModel;
     game::WarManager* warManager;
+    game::BombManager* bombManager;
 
 public:
     MapView(int xStart, int yStart, int xEnd, int yEnd);
@@ -48,6 +52,11 @@ public:
     void startWar(game::War* war);
     void stopWar(game::War* war);
     
+    void tryToPlantBomb();
+    void putBomb(util::Location::Position position, game::Bomb* bomb);
+    void removeBomb(util::Location::Position position);
+    bool checkIfBombHasBeenPlanted();
+    
     void beginCharactersLife();
 
     
@@ -55,6 +64,9 @@ public:
     void buryCharacter(game::Character * ch);
     
     game::Player* getPlayer();
+
+private:
+    util::Location::Position* getPlaceToPlantBomb();
 };
 
 }

@@ -21,10 +21,14 @@ public:
 private:
 	static SFMLAmazinResource* instance;
     std::map<game::MapObject::Type, sf::Image*> imageResourceMap;
+    std::map<game::MapObject::Type, sf::Image*> equipmentItemImageResourceMap;
     sf::Image* imageNotFound;
     
     SFMLAmazinResource();    
     void init();
+    
+    void initMapObjectImages();
+    void initEquipmentItemImages();
 
 };
 

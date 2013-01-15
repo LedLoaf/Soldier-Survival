@@ -2,6 +2,7 @@
 #include <game/logic/EnemyLife.hpp>
 #include <view/model/MapViewModel.hpp>
 #include <game/object/MapObject.hpp>
+#include <game/object/weapon/Weapon.hpp>
 
 namespace game {
     
@@ -44,7 +45,7 @@ int Character::getHealth() {
 
 
 void Character::injureUsing(Weapon* weapon) {
-    
+   
 }
 
 

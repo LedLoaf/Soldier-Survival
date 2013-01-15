@@ -118,11 +118,11 @@ util::Location::Position MapViewModel::getPositionOf(game::Character* ch) {
 
 
 int MapViewModel::getMapHeight() {
-    return mapWidth;
+    return mapHeight;
 }
 
 int MapViewModel::getMapWidth() {
-    return mapHeight;
+    return mapWidth;
 }
 
 

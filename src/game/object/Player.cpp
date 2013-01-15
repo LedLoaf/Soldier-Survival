@@ -5,6 +5,7 @@
 #include "game/object/Player.hpp"
 #include <game/object/Equipment.hpp>
 #include "game/object/weapon/Weapon.hpp"
+#include "game/object/weapon/Bomb.hpp"
 #include <view/model/MapViewModel.hpp>
 
 
@@ -51,8 +52,21 @@ Weapon* Player::getCurrentWeapon() {
     return currentWeapon;
 }
 
+Bomb* Player::getBomb() {
+    return new Bomb(Equipment::EquipmentItem::BOMB_A, 5, 3);
+}
+
+int Player::hasBomb() {
+    return true;
+}
+
 void Player::injureUsing(Weapon* weapon) {
+    std::cout << "Character::injureUsing(), getDamage(): " << weapon->getDamage() << std::endl;
+    
     health -= weapon->getDamage();
+    
+    if (health <= 0)
+        endLife();     
 }
     
 }

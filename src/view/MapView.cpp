@@ -11,11 +11,13 @@
 #include <util/Location.hpp>
 
 #include "game/object/MapObject.hpp"
+#include "game/BombManager.hpp"
 
 namespace view {
 
 MapView::MapView(int xStart, int yStart, int xEnd, int yEnd) : View(xStart, yStart, xEnd, yEnd) {
     this->warManager = new game::WarManager(this);
+    this->bombManager = new game::BombManager(this);
 
 }
 
@@ -132,6 +134,42 @@ void MapView::startWar(game::War* war) {
 void MapView::stopWar(game::War* war) {
     removeView(war->getWarView());
     warManager->stopWar(war);
+}
+
+util::Location::Position* MapView::getPlaceToPlantBomb() {
+    util::Location::Position playerPosition = getPlayer()->getPosition();
+
+    for (int x = playerPosition.getX() - 1; x < playerPosition.getX() + 1; x++)
+        for (int y = playerPosition.getY() - 1; y < playerPosition.getY() + 1; y++)
+            if (x > 0 && x < mapViewModel->getMapWidth() && y > 0 && y < mapViewModel->getMapHeight())
+                if (game::MapObject::isTerrain(mapViewModel->getVisibleMapObject(x, y)))
+                    return new util::Location::Position(x, y);
+
+    return NULL;        
+}
+
+void MapView::tryToPlantBomb() {
+    util::Location::Position* placeToPlantBomb = getPlaceToPlantBomb();
+    
+    if (getPlayer()->hasBomb() && placeToPlantBomb != NULL) {
+        bombManager->plantBomb(getPlaceToPlantBomb(), getPlayer()->getBomb());
+    }
+}
+
+void MapView::putBomb(util::Location::Position position, game::Bomb* bomb) {
+    mapViewModel->put(position.getX(), position.getY(), 
+            new game::NotMovingMapObject(game::MapObject::BOMB));    
+}
+
+void MapView::removeBomb(util::Location::Position position) {
+    mapViewModel->put(position.getX(), position.getY(), 
+            new game::NotMovingMapObject(game::MapObject::GRASS));    
+}
+
+bool MapView::checkIfBombHasBeenPlanted() {
+    if (bombManager->checkIfBombHasBeenPlanted())
+        return true;
+    return false;
 }
 
 bool MapView::canCharacterStayOnNMMO(game::MapObject* notMovingMapObject) {

@@ -16,7 +16,8 @@ public:
     static bool isWeapon(Equipment::EquipmentItem* equipmentItem);
     static int getDamageFor(Equipment::EquipmentItem::Type weaponType);
     static Weapon* getWeaponFor(MapObject::Type characterType);
-private:
+    
+protected:
     int damage;
 };
     
