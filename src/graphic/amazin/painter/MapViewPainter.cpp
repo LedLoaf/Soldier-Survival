@@ -80,11 +80,8 @@ void MapViewPainter::update() {
     for (int i = 0; i < subMapWidth; i++) {
         for (int j = 0; j < subMapHeight; j++) {
             game::MapObject::Type elementType = subMapManager->getElementAt(i, j)->getType();
-            
-            if (elementType == game::MapObject::BOMB) {
-                
-            } else 
-                elementImage = sfmlAmazinResource->getImage(elementType);
+
+            elementImage = sfmlAmazinResource->getImage(elementType);
 
             mapElementSprites[i][j]->SetImage(*(elementImage));
             mapElementSprites[i][j]->Resize(elementWidth, elementHeight);
