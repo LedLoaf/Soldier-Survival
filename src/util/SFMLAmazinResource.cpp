@@ -54,7 +54,7 @@ void SFMLAmazinResource::initMapObjectImages() {
     
 /* NotMovingMapObjects */   
     
-	std::string bombAPath = "resource/graphic/amazin/game_play/img/tiles/enemy5.png";
+	std::string bombAPath = "resource/graphic/amazin/game_play/img/tiles/bomb.png";
     
     sf::Image* bombAImage = new sf::Image();
     if (!bombAImage->LoadFromFile(bombAPath))
@@ -190,7 +190,7 @@ void SFMLAmazinResource::initMapObjectImages() {
     imageResourceMap.insert(std::pair<game::MapObject::Type, sf::Image*>(
 		game::MapObject::ENEMY_A, enemyAImage)); 
 
-    std::string deadEnemyAPath = "resource/graphic/amazin/game_play/img/tiles/ground.png";
+    std::string deadEnemyAPath = "resource/graphic/amazin/game_play/img/tiles/enemy2_dead.png";
     
     sf::Image* deadEnemyImage = new sf::Image();
     if (!deadEnemyImage->LoadFromFile(deadEnemyAPath))

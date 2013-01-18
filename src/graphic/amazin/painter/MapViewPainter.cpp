@@ -84,11 +84,13 @@ void MapViewPainter::update() {
             elementImage = sfmlAmazinResource->getImage(elementType);
 
             mapElementSprites[i][j]->SetImage(*(elementImage));
-            mapElementSprites[i][j]->Resize(elementWidth, elementHeight);
+//            mapElementSprites[i][j]->Resize(elementWidth, elementHeight);
+//            mapElementSprites[i][j]->
             
 
         }        
     }
+    
     
     subMapManager->updateSubMap();
 }

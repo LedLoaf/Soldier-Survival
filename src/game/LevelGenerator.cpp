@@ -338,7 +338,7 @@ void LevelGenerator::placeRandomly(util::Location::Position *p, int dx, int dy, 
                     case game::MapObject::TREE:
                     case game::MapObject::ROAD:
                     case game::MapObject::SAND:
-                        if (tt->getType() == game::MapObject::TREE) std::cout<<"tree!\n";
+                        // if (tt->getType() == game::MapObject::TREE) std::cout<<"tree!\n";
                         mapModel->put(ptt->getX(), ptt->getY(), dynamic_cast<game::NotMovingMapObject*>(tt));
                         break;
                     case game::MapObject::PLAYER :
