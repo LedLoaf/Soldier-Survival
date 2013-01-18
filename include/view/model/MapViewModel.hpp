@@ -13,6 +13,7 @@
 namespace game {
     class Character;
     class Player;
+    class Ground;
 }
 
 
@@ -40,14 +41,19 @@ public:
 	void put(int x, int y, game::Character* const ch);
     void put(int x, int y, game::Player* const player);
 	void put(int x, int y, game::NotMovingMapObject* const notMovingMapObject);
+    void put(int x, int y, game::Ground* const ground);
+
+    game::Character* getCharacter(int x, int y);
+    game::Character* getCharacter(util::Location::Position position);    
     
     game::MapObject* getNotMovingObject(int x, int y);
     game::MapObject* getNotMovingObject(util::Location::Position position);
     
-    game::Character* getCharacter(int x, int y);
-    game::Character* getCharacter(util::Location::Position position);
+    game::Ground* getGround(int x, int y);        
+    game::Ground* getGround(util::Location::Position position);   
     
     bool hasMapCharacterAt(int x, int y);
+    bool hasNotMovingObjectAt(int x, int y);
     
     game::Player* getPlayer();
     
@@ -58,6 +64,7 @@ private:
     MapView* mapView;
     game::Character*** charactersTab;
     game::NotMovingMapObject*** notMovingObjectsTab;
+    game::Ground*** groundTab;
     util::Location::Vector lastDirectionOfPlayerMove;
     
     int playerPositionX;
@@ -67,6 +74,7 @@ private:
     
     void allocateCharactersTab();
     void allocateNotMovingObjectsTab();
+    void allocateGroundTab();
     void initMapObjectsTabs();
     
     

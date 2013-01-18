@@ -42,5 +42,24 @@ void Window::onSpacePressed() {
     
 }
 
+void Window::addUnusedView(view::View* unusedView) {
+    unusedViews.push_back(unusedView);
+}
+
+bool Window::hasUnusedViews() {
+    if (unusedViews.size() > 0)
+        return true;
+    else
+        return false;
+}
+
+void Window::clearUnusedViews() {
+    unusedViews.clear();
+}
+
+std::vector<view::View*> Window::getUnusedViews() {
+    return unusedViews;
+}
+
 
 }

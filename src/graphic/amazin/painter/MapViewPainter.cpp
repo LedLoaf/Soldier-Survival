@@ -1,5 +1,7 @@
 #include <cstddef> //do poprawnej kompilacji SFML //(NULL)
 #include <iostream>
+#include <string>
+
 
 #include <graphic/amazin/painter/MapViewPainter.hpp>
 #include <SFML/Graphics/Sprite.hpp>
@@ -15,8 +17,10 @@
 #include "view/model/MiniMapViewModel.hpp"
 #include <game/object/Player.hpp>
 
-#include <string>
-#include <iostream>
+#include <game/object/MapObject.hpp>
+#include <game/object/Ground.hpp>
+#include <game/object/NotMovingMapObject.hpp>
+#include <game/object/Character.hpp>
 
 namespace graphic {
 namespace amazin {
@@ -55,21 +59,37 @@ void MapViewPainter::init() {
     subMapManager = new SubMapManager(mapViewModel, subMapWidth, subMapHeight, playerToWallSpace);
 
     
-    allocateMapElementSprites(subMapWidth, subMapHeight);
+    allocateAllMapElementSprites(subMapWidth, subMapHeight);
 }
     
-void MapViewPainter::allocateMapElementSprites(int subMapWidth, int subMapHeight) {
-    mapElementSprites = new sf::Sprite**[subMapWidth];
+void MapViewPainter::allocateAllMapElementSprites(int subMapWidth, int subMapHeight) {
+    groundSprites = new sf::Sprite**[subMapWidth];
+    notMovingMapObjectSprites = new sf::Sprite**[subMapWidth];
+    characterSprites = new sf::Sprite**[subMapWidth];
+    
     for (int i = 0; i < subMapWidth; i++) {
-        mapElementSprites[i] = new sf::Sprite*[subMapHeight];
+        groundSprites[i] = new sf::Sprite*[subMapHeight];
+        notMovingMapObjectSprites[i] = new sf::Sprite*[subMapHeight];
+        characterSprites[i] = new sf::Sprite*[subMapHeight];
         
         for (int j = 0; j < subMapHeight; j++) {
-            sf::Sprite* element = new sf::Sprite();
-            element->SetPosition(mapViewModel->getViewStartPosition()->getX() + i * elementWidth, 
+            sf::Sprite* groundSprite = new sf::Sprite();
+            groundSprite->SetPosition(mapViewModel->getViewStartPosition()->getX() + i * elementWidth, 
                     mapViewModel->getViewStartPosition()->getY() + j * elementHeight);
+            groundSprites[i][j] = groundSprite;
+            drawables.push_back(groundSprites[i][j]);
             
-            mapElementSprites[i][j] = element;
-            drawables.push_back(mapElementSprites[i][j]);
+            sf::Sprite* notMovingMapObjectSprite = new sf::Sprite();
+            notMovingMapObjectSprite->SetPosition(mapViewModel->getViewStartPosition()->getX() + i * elementWidth, 
+                    mapViewModel->getViewStartPosition()->getY() + j * elementHeight);
+            notMovingMapObjectSprites[i][j] = notMovingMapObjectSprite;
+            drawables.push_back(notMovingMapObjectSprites[i][j]);  
+            
+            sf::Sprite* characterSprite = new sf::Sprite();
+            characterSprite->SetPosition(mapViewModel->getViewStartPosition()->getX() + i * elementWidth, 
+                    mapViewModel->getViewStartPosition()->getY() + j * elementHeight);
+            characterSprites[i][j] = characterSprite;
+            drawables.push_back(characterSprites[i][j]);              
         }            
         
     }
@@ -79,15 +99,32 @@ void MapViewPainter::update() {
     sf::Image* elementImage;
     for (int i = 0; i < subMapWidth; i++) {
         for (int j = 0; j < subMapHeight; j++) {
-            game::MapObject::Type elementType = subMapManager->getElementAt(i, j)->getType();
-
+            game::MapObject::Type elementType;
+            
+            elementType = subMapManager->getGroundMapObjectAt(i, j)->getType();
             elementImage = sfmlAmazinResource->getImage(elementType);
 
-            mapElementSprites[i][j]->SetImage(*(elementImage));
-//            mapElementSprites[i][j]->Resize(elementWidth, elementHeight);
-//            mapElementSprites[i][j]->
+            groundSprites[i][j]->SetImage(*(elementImage));
+            groundSprites[i][j]->Resize(elementWidth, elementHeight);
             
+            if (subMapManager->getNotMovingMapObjectAt(i, j) != NULL) {
+                elementType = subMapManager->getNotMovingMapObjectAt(i, j)->getType();
+                elementImage = sfmlAmazinResource->getImage(elementType);
 
+                notMovingMapObjectSprites[i][j]->SetImage(*(elementImage));
+                notMovingMapObjectSprites[i][j]->Resize(elementWidth, elementHeight);
+            } else
+                notMovingMapObjectSprites[i][j]->Resize(1, 1);  
+
+            
+            if (subMapManager->getCharacterAt(i, j) != NULL) {
+                elementType = subMapManager->getCharacterAt(i, j)->getType();
+                elementImage = sfmlAmazinResource->getImage(elementType);
+                
+                characterSprites[i][j]->SetImage(*(elementImage));
+                characterSprites[i][j]->Resize(elementWidth, elementHeight);                     
+            } else
+                characterSprites[i][j]->Resize(1, 1);                     
         }        
     }
     
@@ -166,13 +203,19 @@ void MapViewPainter::SubMapManager::updateSubMap() {
 }
 
 
-game::MapObject* MapViewPainter::SubMapManager::getElementAt(int x, int y) {   
-//    std::cout << "mapViewModel->getVisibleMapObject(" << this->leftWallPos + x << ", " << this->topWallPos + y << ")" << std::endl;
-//    std::cout << "MapObjectType: " << util::Util::getNameOfMapObjectType(
-//            mapViewModel->getVisibleMapObject(leftWallPos + x, topWallPos + y)->getType()) << std::endl;
-    
-    return mapViewModel->getVisibleMapObject(leftWallPos + x, topWallPos + y);   
+game::MapObject* MapViewPainter::SubMapManager::getGroundMapObjectAt(int x, int y) {
+    return mapViewModel->getGround(leftWallPos + x, topWallPos + y);
 }
 
+game::MapObject* MapViewPainter::SubMapManager::getNotMovingMapObjectAt(int x, int y) {
+    return mapViewModel->getNotMovingObject(leftWallPos + x, topWallPos + y);
 }
+
+game::MapObject* MapViewPainter::SubMapManager::getCharacterAt(int x, int y) {
+    return mapViewModel->getCharacter(leftWallPos + x, topWallPos + y);
+}
+
+
+}
+
 }

@@ -19,13 +19,10 @@ MainMenuWindow::MainMenuWindow() : Window(0, 0, game::Application::getInstance()
 }
 
 MainMenuWindow::~MainMenuWindow() {
-    View* view = selectionView;
-    selectionView = NULL;
-    delete view;
+    addUnusedView(selectionView);
+    delete selectionView;
     
-    view = mainMenuLogo;
-    mainMenuLogo = NULL;
-    delete view;    
+    delete mainMenuLogo;
     
     ViewModel* viewModel = selectionViewModel;
     selectionViewModel = NULL;

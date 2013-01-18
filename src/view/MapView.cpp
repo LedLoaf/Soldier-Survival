@@ -112,7 +112,8 @@ bool MapView::canMoveCharacter(game::Character* ch, util::Location::Vector vecto
         } else {
             // canCharacterStayOnNMO(..) mowi nam, czy postac moze stanac na danym kafelku gdzie 
             // znajduje sie jakis obiekt nie poruszajacy sie - trawa, rzeka, skala, droga itd
-            if (!canCharacterStayOnNMMO(mapViewModel->getNotMovingObject(chPosition + vector)))
+            util::Location::Position nextPosition = chPosition + vector;
+            if (mapViewModel->hasNotMovingObjectAt(nextPosition.getX(), nextPosition.getY()) && !canCharacterStayOnNMMO(mapViewModel->getNotMovingObject(chPosition + vector)))
                 return false;
             return true;
         }

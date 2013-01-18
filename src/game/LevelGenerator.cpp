@@ -7,6 +7,7 @@
 
 #include "view/model/HUDViewModel.hpp"
 #include "game/object/MapObject.hpp"
+#include <game/object/Ground.hpp>
 #include "game/object/Enemy.hpp"
 #include "game/object/Equipment.hpp"
 #include <util/Location.hpp>
@@ -81,8 +82,7 @@ void LevelGenerator::generateForest() {
 void LevelGenerator::generateGround() {
     for (int x = 0; x < mapModel->getMapWidth(); x++) {
         for (int y = 0; y < mapModel->getMapHeight(); y++) {
-            if (mapModel->getVisibleMapObject(x, y) == NULL)
-                mapModel->put(x, y, new game::NotMovingMapObject(MapObject::GRASS));
+                mapModel->put(x, y, new game::Ground(MapObject::GRASS));
         }
     }
 }

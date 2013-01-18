@@ -38,11 +38,17 @@ sf::Image* SFMLAmazinResource::getImage(game::MapObject::Type mapObjectType) {
         return imageNotFound;
 }
 
+sf::Image* SFMLAmazinResource::getTransparentImage() {
+    return transparentImage;
+}
+
 
 void SFMLAmazinResource::init() {
     initEquipmentItemImages();
     initMapObjectImages();
+    initSpecialImages();
 }
+
 
 void SFMLAmazinResource::initMapObjectImages() {
     std::string imageNotFoundPath = "resource/graphic/amazin/game_play/img/tiles/image_not_found.jpg";
@@ -213,4 +219,11 @@ void SFMLAmazinResource::initMapObjectImages() {
 void SFMLAmazinResource::initEquipmentItemImages() {  
 }
 
+void SFMLAmazinResource::initSpecialImages() {
+    std::string transparentImagePath = "resource/graphic/amazin/game_play/img/tiles/transparent.png";
+    
+    transparentImage = new sf::Image();
+    if (!transparentImage->LoadFromFile(transparentImagePath))
+        std::cout << "Failed to load " << transparentImagePath << std::endl;    
+}
 }

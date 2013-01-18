@@ -3,11 +3,14 @@
 
 #include <map>
 
-#include <view/window/Window.hpp>
 #include <view/View.hpp>
 #include <graphic/painter/SFMLAbstractViewPainter.hpp>
 
 #include <SFML/Graphics/RenderWindow.hpp>
+
+namespace view {
+class Window;    
+}
 
 namespace graphic {
 
@@ -25,7 +28,7 @@ private:
 	virtual SFMLAbstractViewPainter* getPainterForView(view::View* view, view::View::Type parentViewType) = 0;
     
     void addNewViewPainter(view::View* view, view::View::Type parentViewType);
-    void deleteUnusedWindowPainters();
+    void deleteUnusedWindowPainters(view::Window* window);
     
     std::map<view::View*, graphic::SFMLAbstractViewPainter*> viewPainterMap;    
     std::vector<SFMLAbstractViewPainter*> painters;

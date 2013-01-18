@@ -1,3 +1,5 @@
+#include <cstddef> //do poprawnej kompilacji SFML //(NULL)
+
 #include <game/GameMasterEngine.hpp>
 #include <game/object/LevelDescription.hpp>
 #include <view/window/MainMenuWindow.hpp>
@@ -23,10 +25,14 @@ void GameMasterEngine::runLevelSelection() {
 	Metoda wywolywana po wyborze levelu w menu
 */
 void GameMasterEngine::runGamePlay(LevelDescription* levelDescription) {
-//	// okno wyboru levelu jest niszczone
-	delete Application::getInstance().getContext()->getActiveWindow();
-    
+    Window* previouslyActiveWindow = Application::getInstance().getContext()->getActiveWindow();
     GamePlayWindow *gamePlayWindow = new GamePlayWindow(levelDescription);
+    
+    for (int i = 0; i < previouslyActiveWindow->getViews().size(); i++)
+        gamePlayWindow->addUnusedView(previouslyActiveWindow->getViews()[i]);
+    
+//	// okno wyboru levelu jest niszczone
+	delete previouslyActiveWindow;
 }
 
 

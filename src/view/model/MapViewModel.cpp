@@ -5,6 +5,7 @@
 #include "game/object/MapObject.hpp"
 #include "game/object/NotMovingMapObject.hpp"
 #include "view/MapView.hpp"
+#include "game/object/Ground.hpp"
 
 namespace view {
 
@@ -14,6 +15,7 @@ MapViewModel::MapViewModel(int mapWidth, int mapHeight) : lastDirectionOfPlayerM
     
     allocateCharactersTab();
     allocateNotMovingObjectsTab();
+    allocateGroundTab();
     initMapObjectsTabs();
 }   
 
@@ -31,12 +33,20 @@ game::MapObject* MapViewModel::getVisibleMapObject(int x, int y) {
     
     if (hasMapCharacterAt(x, y)) 
         return getCharacter(x, y);
-    else 
+    else if (hasNotMovingObjectAt(x, y))
         return getNotMovingObject(x, y);
+    else 
+        return getGround(x, y);
 }
 
 bool MapViewModel::hasMapCharacterAt(int x, int y) {
     if (charactersTab[x][y] == NULL)
+        return false;
+    return true;
+}
+
+bool MapViewModel::hasNotMovingObjectAt(int x, int y) {
+    if (notMovingObjectsTab[x][y] == NULL)
         return false;
     return true;
 }
@@ -63,6 +73,14 @@ game::MapObject* MapViewModel::getNotMovingObject(util::Location::Position posit
     return getNotMovingObject(position.getX(), position.getY());
 }
 
+game::Ground* MapViewModel::getGround(int x, int y) {
+    return groundTab[x][y];
+}
+
+game::Ground* MapViewModel::getGround(util::Location::Position position) {
+    return getGround(position.getX(), position.getY());
+}
+
 
 void MapViewModel::put(int x, int y, game::Character* const ch) {
     //checkIfMapHasPoint(x, y);  throws exception if x > mapWidth ...
@@ -83,7 +101,15 @@ void MapViewModel::put(int x, int y, game::Player* const player) {
     playerPositionY = y;
 }
 
+void MapViewModel::put(int x, int y, game::NotMovingMapObject* const notMovingMapObject ) {
+    //checkIfMapHasPoint(x, y);  throws exception if x > mapWidth ...
 
+    notMovingObjectsTab[x][y] = notMovingMapObject;
+}
+
+void MapViewModel::put(int x, int y, game::Ground* const ground ) {
+    groundTab[x][y] = ground;
+}
 
 
 void MapViewModel::setDirectionOfLastPlayerMove(util::Location::Vector vector) {
@@ -94,11 +120,7 @@ util::Location::Vector MapViewModel::getDirectionOfLastPlayerMove() {
     return lastDirectionOfPlayerMove;
 }
 
-void MapViewModel::put(int x, int y, game::NotMovingMapObject* const notMovingMapObject ) {
-    //checkIfMapHasPoint(x, y);  throws exception if x > mapWidth ...
 
-    notMovingObjectsTab[x][y] = notMovingMapObject;
-}
 
 void MapViewModel::remove(int x, int y, const game::Character* ch) {
     //checkIfMapHasPoint(x, y);  throws exception if x > mapWidth ...
@@ -141,6 +163,13 @@ void MapViewModel::allocateNotMovingObjectsTab() {
     notMovingObjectsTab = new game::NotMovingMapObject**[mapWidth];
     for (int i = 0; i < mapWidth; i++)
         notMovingObjectsTab[i] = new game::NotMovingMapObject*[mapHeight];
+    
+}
+
+void MapViewModel::allocateGroundTab() {
+    groundTab = new game::Ground**[mapWidth];
+    for (int i = 0; i < mapWidth; i++)
+        groundTab[i] = new game::Ground*[mapHeight];
     
 }
 

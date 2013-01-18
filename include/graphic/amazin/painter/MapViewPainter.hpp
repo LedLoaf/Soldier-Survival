@@ -37,7 +37,7 @@ public:
 	virtual void init();
 	virtual void update();
     
-    void allocateMapElementSprites(int subMapWidth, int subMapHeight);
+    void allocateAllMapElementSprites(int subMapWidth, int subMapHeight);
 
     /*
      SubMapManager odpowiada za dostarczanie wycinka mapy, ktory ma byc 
@@ -55,6 +55,9 @@ private:
     
 	view::MapViewModel* mapViewModel;
     sf::Sprite*** mapElementSprites; 
+    sf::Sprite*** groundSprites; 
+    sf::Sprite*** notMovingMapObjectSprites;
+    sf::Sprite*** characterSprites;
     
     int subMapWidth;
     int subMapHeight;
@@ -71,7 +74,9 @@ private:
         void setSubMapWidth(int width);
         void setSubMapHeight(int height);
         void updateSubMap();
-        game::MapObject* getElementAt(int x, int y);
+        game::MapObject* getGroundMapObjectAt(int x, int y);
+        game::MapObject* getNotMovingMapObjectAt(int x, int y);
+        game::MapObject* getCharacterAt(int x, int y);
         
         static int leftWallPos;
         static int topWallPos;

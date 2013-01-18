@@ -1,3 +1,5 @@
+#include <cstddef> //do poprawnej kompilacji SFML //(NULL)
+
 #include <graphic/SFMLAbstractGraphicEngine.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Drawable.hpp>

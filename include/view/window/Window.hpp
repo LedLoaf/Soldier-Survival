@@ -29,13 +29,15 @@ public:
     virtual void onSpacePressed();
     
     void addUnusedView(view::View* unusedView);
-    std::vector<view::View*>* getUnusedViews();
+    void clearUnusedViews();
+    bool hasUnusedViews();
+    std::vector<view::View*> getUnusedViews();
     
 
 protected:
 //	WindowModel model;
 	Window* subWindow;
-    std::vector<view::View>* unusedViews;
+    std::vector<view::View*> unusedViews;
 };
 
 }
