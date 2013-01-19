@@ -15,6 +15,7 @@ namespace game {
 Player::Player(Equipment* equipment, view::MapViewModel* mapViewModel) : Character(MapObject::PLAYER, mapViewModel) {
     this->life = new CharacterLife(this, util::Util::getCurrentTime(), -1);
     this->equipment = equipment;
+    this->experience = 0;
     
     if (hasAnyWeapons())
         this->currentWeapon = getWeapons()->at(0);        
@@ -71,4 +72,12 @@ void Player::injureUsing(Weapon* weapon) {
         endLife();     
 }
     
+int Player::getExperiencePoints() {
+    return experience;
+}
+
+void Player::addExperiencePoints(int points) {
+    experience += points;
+}
+
 }

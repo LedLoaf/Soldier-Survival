@@ -86,22 +86,20 @@ bool MapView::canMoveCharacter(game::Character* ch, util::Location::Vector vecto
     
     util::Location::Position chPosition = ch->getPosition();
     
-    // sprawdzamy, czy nie chcemy sie poruszyc poza mape
     if (isPositionInMapArea(chPosition + vector)) {
         
         // Na miejscu gdzie chce sie poruszyc postac stoi juz jakas inna postac
         game::Character* collidingCharacter = mapViewModel->getCharacter(chPosition + vector);
         if (collidingCharacter != NULL) {
-            // kolizja
             
+            // kto sie zderza
             switch (ch->getType()) {
                 
-                // Gracz zderza sie z inna postacia
                 case game::MapObject::PLAYER : {
             
+                    // z kim sie zderza
                     switch (collidingCharacter->getType()) { 
                         case game::MapObject::ENEMY_A : {
-                            
                             
                             if (!warManager->isWarAlreadyStartedBetween(
                                     dynamic_cast<game::Player*>(ch), dynamic_cast<game::Enemy*>(collidingCharacter)))

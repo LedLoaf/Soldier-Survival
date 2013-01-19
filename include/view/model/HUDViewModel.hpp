@@ -35,6 +35,7 @@ public:
     void setPlayer(game::Player* player);
     
     int getPlayerHealth();
+    int getPlayerExperiencePoints();
     
     void setPlayerEquipment(game::Equipment* equipment);
     game::Equipment* getPlayerEquipment();

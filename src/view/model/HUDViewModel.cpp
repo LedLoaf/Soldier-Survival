@@ -22,6 +22,9 @@ void HUDViewModel::setCurrentWeaponForPlayer(game::Weapon* weapon) {
     player->setCurrentWeapon(weapon);
 }
 
+int HUDViewModel::getPlayerExperiencePoints() {
+    return player->getExperiencePoints();
+}
 
 int HUDViewModel::getPlayerHealth() {
     return player->getHealth();

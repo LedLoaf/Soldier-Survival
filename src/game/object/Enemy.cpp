@@ -10,7 +10,10 @@
 
 #include <game/object/weapon/Weapon.hpp>
 
+#include <view/window/GamePlayWindow.hpp>
 #include "view/MapView.hpp"
+#include "game/Application.hpp"
+#include "view/window/GamePlayWindow.hpp"
 
 namespace game {
 
@@ -50,6 +53,12 @@ void Enemy::injureUsing(Weapon* weapon) {
     
     if (health <= 0)
         endLife();
+    
+    // TODO: jak bedzie czas, zamienic na wzorzec Subscriber - Publisher
+    Player* player = dynamic_cast<view::GamePlayWindow*>(Application::getInstance().getContext()->getActiveWindow())->getMapView()->getPlayer();
+    // TODO: jakos sensowniej przyznawac te punkty doswiadczenia ;). Moze od szybkosci zabicia, itp.
+    player->addExperiencePoints(weapon->getDamage() * 10 * (util::Util::getCurrentTime() % 3)); 
+    
 }
 
 }

@@ -89,7 +89,7 @@ void HUDViewPainter::setHealthValueLabel() {
 }
 
 void HUDViewPainter::setMoneyValueLabel() {
-    experienceValue->SetText(std::string("660"));
+    experienceValue->SetText(util::Util::toString(hudViewModel->getPlayerExperiencePoints()));
 }
 
 }

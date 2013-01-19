@@ -32,10 +32,13 @@ public:
     int hasBomb();
     
     void injureUsing(Weapon* weapon);
-    
+ 
+    int getExperiencePoints();
+    void addExperiencePoints(int points);
 private:
     Weapon* currentWeapon;
     Equipment* equipment;
+    int experience;
     
 };
     
