@@ -27,6 +27,11 @@ void SFMLAbstractGraphicEngine::updatePainters() {
     deleteUnusedWindowPainters(game::Application::getInstance().getContext()->getActiveWindow());
 	updateWindowPainters(game::Application::getInstance().getContext()->getActiveWindow());
     
+    if (game::Application::getInstance().getContext()->getActiveWindow()->hasSubWindow()) {
+        deleteUnusedWindowPainters(game::Application::getInstance().getContext()->getActiveWindow()->getSubWindow());
+        updateWindowPainters(game::Application::getInstance().getContext()->getActiveWindow()->getSubWindow());        
+    }
+    
     for (std::map<view::View*, graphic::SFMLAbstractViewPainter*>::const_iterator it = viewPainterMap.begin(); 
             it != viewPainterMap.end(); ++it) {
             renderWindow->Clear(sf::Color::Black);

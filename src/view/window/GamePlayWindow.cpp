@@ -107,8 +107,11 @@ void GamePlayWindow::onEnterPressed() {
 void GamePlayWindow::onEscPressed() {
     if (hasSubWindow())
         subWindow->onEscPressed();
-    else 
-        game::Application::getInstance().getGameEngine()->pauseGame();
+    else {
+        pause();
+        PauseWindow* pauseWindow = new PauseWindow(this);
+        subWindow = pauseWindow;
+    }
     
 }
 

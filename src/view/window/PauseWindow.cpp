@@ -9,11 +9,12 @@
 
 namespace view {
 
-PauseWindow::PauseWindow() : Window(game::Application::getInstance().getDeviceManager()->getScreenWidth() / 2, 
+PauseWindow::PauseWindow(Window* parentWindow) : Window(game::Application::getInstance().getDeviceManager()->getScreenWidth() / 2, 
         game::Application::getInstance().getDeviceManager()->getScreenHeight() / 2, 
         game::Application::getInstance().getDeviceManager()->getScreenWidth() + 100, 
         game::Application::getInstance().getDeviceManager()->getScreenHeight() + 100)  { 
     
+    this->parentWindow = parentWindow;
     initUI();
 }
 
@@ -30,11 +31,11 @@ void PauseWindow::initUI() {
 
 }
 
-void PauseWindow::onArrowPressed(util::Key::Arrow arrow) {
-	if (arrow == util::Key::LEFT) {
+void PauseWindow::onArrowPressed(util::Location::Vector vector) {
+	if (vector == util::Location::LEFT) {
 		if (selectionView->hasPreviousElement())
 			selectionView->selectPreviousElement();
-	} else if (arrow == util::Key::RIGHT) {
+	} else if (vector == util::Location::RIGHT) {
 		if (selectionView->hasNextElement())
 			selectionView->selectNextElement();
 	}
@@ -54,6 +55,8 @@ void PauseWindow::onEnterPressed() {
 }
 
 void PauseWindow::onEscPressed() {
+    parentWindow->setSubWindow(NULL);
+    
     game::Application::getInstance().getGameEngine()->resumeGame();
 }
 

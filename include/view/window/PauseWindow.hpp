@@ -13,10 +13,10 @@ namespace view {
 
 class PauseWindow : public Window {
 public:
-	PauseWindow();
+	PauseWindow(Window* parentWindow);
 	void initUI();
 
-	virtual void onArrowPressed(util::Key::Arrow arrow);
+	virtual void onArrowPressed(util::Location::Vector vector);
 	virtual void onEnterPressed() ;
     virtual void onEscPressed();
     virtual void onCharacterPressed(char c);

@@ -7,6 +7,7 @@ namespace view {
 
 Window::Window(int xStart, int yStart, int xEnd, int yEnd) : View(xStart, yStart, xEnd, yEnd) {
     subWindow = NULL;
+    parentWindow = NULL;
     game::Application::getInstance().getContext()->setActiveWindow(this);
 }
 
@@ -14,10 +15,16 @@ Window::~Window() {
     delete subWindow;
 }
     
+Window* Window::getParentWindow() {
+    return parentWindow;
+}
 
+Window* Window::setParentWindow(Window* parentWindow) {
+    this->parentWindow = parentWindow;
+}
 
 bool Window::hasSubWindow() {
-	if (subWindow)
+	if (subWindow != NULL)
 		return true;
 	else
 		return false;

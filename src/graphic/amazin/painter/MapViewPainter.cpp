@@ -51,8 +51,8 @@ void MapViewPainter::init() {
     
     int playerToWallSpace = 5;
     
-    elementWidth = mapViewWidth / subMapWidth;
-    elementHeight = mapViewHeight / subMapHeight;
+    elementWidth = 40;
+    elementHeight = 25;
     
     std::cout << elementWidth << ", " << elementHeight;
     

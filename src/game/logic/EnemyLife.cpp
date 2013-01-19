@@ -7,6 +7,7 @@
 #include "game/logic/EnemyLife.hpp"
 #include "game/Application.hpp"
 #include "view/window/GamePlayWindow.hpp"
+#include "game/object/Enemy.hpp"
 #include <game/logic/CharacterLife.hpp>
 #include <game/logic/MovementAI.hpp>
 #include <game/logic/EnemyMovementAI.hpp>
@@ -21,6 +22,8 @@ EnemyLife::EnemyLife(Character* ch, int timeOfBirth, int lifetime, EnemyMovement
 
 void EnemyLife::Run() {
     while (stillAlive) {
+        if (isPaused)
+            continue;        
 //        if (isTimeToMove()) {
             movementAI->tryToDoNextMove();
 
@@ -43,6 +46,7 @@ void EnemyLife::Run() {
     
     mapView->buryCharacter(character);
 }
+
 
 bool EnemyLife::isTimeToMove() {
     if ((util::Util::getCurrentTime() - movementAI->getTimeOfLastMove()) > movementAI->getMovingTimeInterval())

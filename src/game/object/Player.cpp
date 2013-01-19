@@ -6,12 +6,14 @@
 #include <game/object/Equipment.hpp>
 #include "game/object/weapon/Weapon.hpp"
 #include "game/object/weapon/Bomb.hpp"
+#include "game/logic/CharacterLife.hpp"
 #include <view/model/MapViewModel.hpp>
 
 
 namespace game {
 
 Player::Player(Equipment* equipment, view::MapViewModel* mapViewModel) : Character(MapObject::PLAYER, mapViewModel) {
+    this->life = new CharacterLife(this, util::Util::getCurrentTime(), -1);
     this->equipment = equipment;
     
     if (hasAnyWeapons())

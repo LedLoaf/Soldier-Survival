@@ -5,6 +5,8 @@
 #include <game/logic/CharacterLife.hpp>
 #include <util/Util.hpp>
 
+#include "game/object/Character.hpp"
+
 namespace game {
 
 CharacterLife::CharacterLife(Character* ch, int timeOfBirth, int lifetime) {
@@ -12,8 +14,23 @@ CharacterLife::CharacterLife(Character* ch, int timeOfBirth, int lifetime) {
     this->timeOfBirth = timeOfBirth;
     this->lifetime = lifetime;
     this->stillAlive = true;
+    this->isPaused = false;
 }
 
+void CharacterLife::Run() {
+}
+
+void CharacterLife::pause() {
+    pauseMutex.Lock();
+    isPaused = true;
+    pauseMutex.Unlock();
+}
+
+void CharacterLife::resume() {
+    pauseMutex.Lock();
+    isPaused = false;
+    pauseMutex.Unlock();
+}
 
 bool CharacterLife::isTimeToDie() {
     if (lifetime > -1) {

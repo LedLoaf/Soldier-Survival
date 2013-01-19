@@ -65,6 +65,9 @@ public:
     
     game::Player* getPlayer();
 
+    virtual void pause();
+    virtual void resume();
+    
 private:
     util::Location::Position* getPlaceToPlantBomb();
 };

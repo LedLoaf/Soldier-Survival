@@ -43,9 +43,16 @@ void GameMasterEngine::pauseGame() {
 }
 
 void GameMasterEngine::resumeGame() {
-    Window* activeWindow = Application::getInstance().getContext()->getActiveWindow();
-    activeWindow->resume();
-//    ~activeWindow->getSubWindow();
+    PauseWindow* pauseWindow = dynamic_cast<view::PauseWindow*>(Application::getInstance().getContext()->getActiveWindow());
+    Application::getInstance().getContext()->setActiveWindow(pauseWindow->getParentWindow());
+    
+    
+    for (int i = 0; i < pauseWindow->getViews().size(); i++)           
+        Application::getInstance().getContext()->getActiveWindow()->addUnusedView(pauseWindow->getViews()[i]);
+    delete pauseWindow;
+    
+    
+    Application::getInstance().getContext()->getActiveWindow()->resume();
 }
 
 

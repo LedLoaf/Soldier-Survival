@@ -24,6 +24,14 @@ void Character::beginLife() {
     life->Launch();
 }   
 
+void Character::pauseLife() {
+    life->pause();
+}
+
+void Character::resumeLife() {
+    life->resume();
+}
+
 void Character::endLife() {
     life->die();
 }

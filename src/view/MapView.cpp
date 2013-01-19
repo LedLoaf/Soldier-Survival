@@ -210,6 +210,23 @@ game::Player* MapView::getPlayer() {
     return mapViewModel->getPlayer();
 }
 
+void MapView::pause() {
+    for (int i = 0; i < mapViewModel->getMapWidth(); i++) 
+        for (int j = 0; j < mapViewModel->getMapHeight(); j++) {
+            game::Character* ch = mapViewModel->getCharacter(i, j);
+            if (ch != NULL)
+                ch->pauseLife();
+        }
+}
+
+void MapView::resume() {
+    for (int i = 0; i < mapViewModel->getMapWidth(); i++) 
+        for (int j = 0; j < mapViewModel->getMapHeight(); j++) {
+            game::Character* ch = mapViewModel->getCharacter(i, j);
+            if (ch != NULL)
+                ch->resumeLife();
+        }
+}
 
 View::Type MapView::getType() {
     return View::MAP_VIEW;
