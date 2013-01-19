@@ -64,27 +64,40 @@ void SelectionViewPainter::init() {
             textSize = 10;
             
 
-            paddingLeft = paddingTop = 5;
+            paddingLeft = 10;
+            paddingTop = 0;
             break;            
     }
  
     for (int i = 0; i < selectableElements.size(); i++) {
+        int borderWidth = 2;
+        sf::Sprite* borderSprite = new sf::Sprite();
         sf::Sprite* backgroundSprite = new sf::Sprite();
         
         if (selectionModel->getViewOrientation() == view::View::VERTICAL) {
-            backgroundSprite->SetX(selectionModel->getViewStartPosition()->getX());
-            backgroundSprite->SetY(selectionModel->getViewStartPosition()->getY() + i * elementHeight);            
+            borderSprite->SetX(selectionModel->getViewStartPosition()->getX());
+            borderSprite->SetY(selectionModel->getViewStartPosition()->getY() + i * elementHeight);
+            
+            backgroundSprite->SetX(selectionModel->getViewStartPosition()->getX() + borderWidth);
+            backgroundSprite->SetY(selectionModel->getViewStartPosition()->getY() + borderWidth + i * elementHeight);            
         }
         else if (selectionModel->getViewOrientation() == view::View::HORIZONTAL) {
             backgroundSprite->SetX(selectionModel->getViewStartPosition()->getX() + i * elementWidth);
             backgroundSprite->SetY(selectionModel->getViewStartPosition()->getY());            
         
         }
-            
-        backgroundSprite->Resize(elementWidth, elementHeight);
+
+        std::cout << "select: " << elementWidth << ", " << elementHeight << std::endl;
+        
+        borderSprite->Resize(elementWidth, elementHeight);
+        borderSprite->SetColor(sf::Color::Magenta);        
+        
+        backgroundSprite->Resize(elementWidth - borderWidth*2, elementHeight - borderWidth*2);
         backgroundSprite->SetColor(sf::Color::Green);
      
         selectableSpritesMap.insert(std::pair<view::SelectionViewModel::SelectableElement*, sf::Sprite*>(selectableElements[i], backgroundSprite));
+        
+        drawables.push_back(borderSprite);             
         drawables.push_back(backgroundSprite);     
         
         
@@ -114,7 +127,14 @@ void SelectionViewPainter::init() {
                 
                 switch (weaponElement->getWeapon()->getType()) {
                     case game::Weapon::KNIFE :
-                        imgPath = "resource/graphic/amazin/game_play/img/weapon/knife.jpg";
+                        imgPath = "resource/graphic/amazin/game_play/img/weapon/knife.png";
+                        break;
+                    case game::Weapon::SWORD :
+                        imgPath = "resource/graphic/amazin/game_play/img/weapon/sword.png";
+                        break;
+                    case game::Weapon::AX :
+                        imgPath = "resource/graphic/amazin/game_play/img/weapon/ax.png";     
+                        break;
                 }
 
                 // wskaznik, bo inaczej zostanie zniszczony

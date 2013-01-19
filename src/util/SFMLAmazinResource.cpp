@@ -60,7 +60,7 @@ void SFMLAmazinResource::initMapObjectImages() {
     
 /* NotMovingMapObjects */   
     
-	std::string bombAPath = "resource/graphic/amazin/game_play/img/tiles/bomb.png";
+	std::string bombAPath = "resource/graphic/amazin/game_play/img/weapon/bomb.png";
     
     sf::Image* bombAImage = new sf::Image();
     if (!bombAImage->LoadFromFile(bombAPath))

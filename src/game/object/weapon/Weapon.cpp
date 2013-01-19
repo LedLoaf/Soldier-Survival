@@ -15,22 +15,22 @@ int Weapon::getDamage() {
 
 bool Weapon::isWeapon(Equipment::EquipmentItem* equipmentItem) {
     switch (equipmentItem->getType()) {
-        case Equipment::EquipmentItem::GUN :
+        case Equipment::EquipmentItem::SWORD :
             return true;
         case Equipment::EquipmentItem::KNIFE :
             return true;
-        case Equipment::EquipmentItem::RIFLE :
+        case Equipment::EquipmentItem::AX :
             return true;        
     }
 }
 
 int Weapon::getDamageFor(Equipment::EquipmentItem::Type weaponType) {
     switch (weaponType) {
-        case Equipment::EquipmentItem::GUN :
+        case Equipment::EquipmentItem::SWORD :
             return 3;
         case Equipment::EquipmentItem::KNIFE :
             return 1;
-        case Equipment::EquipmentItem::RIFLE :
+        case Equipment::EquipmentItem::AX :
             return 4;  
         default:
             return 0;
@@ -38,7 +38,7 @@ int Weapon::getDamageFor(Equipment::EquipmentItem::Type weaponType) {
 }
 
 Weapon* Weapon::getWeaponFor(MapObject::Type characterType) {
-    return new Weapon(Equipment::EquipmentItem::GUN);
+    return new Weapon(Equipment::EquipmentItem::SWORD);
 }
 
 

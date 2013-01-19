@@ -2,7 +2,7 @@
 #include <view/model/SelectionViewModel.hpp>
 #include <view/SelectionView.hpp>
 #include <view/ImageView.hpp>
-//#include <view/TextView.hpp>
+#include <view/TextView.hpp>
 #include <game/Application.hpp>
 
 #include <util/Util.hpp>
@@ -34,6 +34,7 @@ void MainMenuWindow::initUI() {
     mainMenuLogo = new ImageView(200, 10, 150, 200, util::Resource::MAIN_MENU_LOGO);
 	addView(mainMenuLogo);    
     
+    
 	selectionView = new SelectionView(200, 200, 200, 500, SelectionViewModel::SIMPLE_MENU);
     selectionView->addElement(new SelectionViewModel::SelectableElement(util::Util::RUN_GAME_PLAY));    
     selectionView->addElement(new SelectionViewModel::SelectableElement(util::Util::RUN_LEVEL_SELECTION));
@@ -45,8 +46,8 @@ void MainMenuWindow::initUI() {
 	addView(selectionView);
     
 
-//    addView(new TextView(0, game::Application::getInstance().getDeviceManager()->getScreenHeight() - 50, 
-//            500, game::Application::getInstance().getDeviceManager()->getScreenHeight() - 50, "Soldier: Survival by 34fun team", TextView::SMALL));
+    addView(new TextView(0, game::Application::getInstance().getDeviceManager()->getScreenHeight() - 50, 
+            500, game::Application::getInstance().getDeviceManager()->getScreenHeight() - 50, "Soldier: Survival by 34fun team", TextView::SMALL));
 }
 
 
@@ -72,7 +73,7 @@ void MainMenuWindow::onEnterPressed() {
 		game::Application::getInstance().getGameEngine()->exitGame();
     else if(optionAction == util::Util::RUN_GAME_PLAY) {
         game::LevelDescription* sampleLevel = new game::LevelDescription(300, 300, 0.005, 9, 
-            20, true, false, true, true, true, false);          
+            20, true, false, true, true, true, true);          
 		game::Application::getInstance().getGameEngine()->runGamePlay(sampleLevel);
     }
 	

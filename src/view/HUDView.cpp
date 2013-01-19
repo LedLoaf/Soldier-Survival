@@ -1,6 +1,7 @@
 #include <view/SelectionView.hpp>
 #include <view/HUDView.hpp>
 #include <view/ImageView.hpp>
+#include <view/TextView.hpp>
 #include <util/Location.hpp>
 
 #include <game/object/weapon/Weapon.hpp>
@@ -14,7 +15,9 @@ HUDView::HUDView(int xStart, int yStart, int xEnd, int yEnd, HUDViewModel* hudVi
     this->hudViewModel = hudViewModel;
     this->hudViewModel->setViewPosition(new util::Location::Position(xStart, yStart), new util::Location::Position(xEnd, yEnd));
 
-    weaponsSelectionView = new SelectionView(100, 0, 300, 100, view::SelectionViewModel::WEAPONS);
+    addView(new TextView(100, 0, 300, 40, "Hand weapons", TextView::MIDDLE));
+
+    weaponsSelectionView = new SelectionView(100, 30, 300, yEnd, view::SelectionViewModel::WEAPONS);
     
     
     game::Equipment* playerEquipment = this->hudViewModel->getPlayerEquipment();
@@ -39,9 +42,26 @@ View::Type HUDView::getType() {
     return view::View::HUD_VIEW;
 }
 
+void HUDView::switchToPreviousWeapon() {
+    if (weaponsSelectionView->hasPreviousElement()) {
+        weaponsSelectionView->selectPreviousElement();
+    }
+}
+
+void HUDView::switchToNextWeapon() {
+    if (weaponsSelectionView->hasNextElement()) {
+        weaponsSelectionView->selectNextElement();
+        hudViewModel->setCurrentWeaponForPlayer(
+            dynamic_cast<SelectionViewModel::WeaponSelectableElement*>(weaponsSelectionView->getSelectedElement())->getWeapon());
+    }    
+}
 
 SelectionView* HUDView::getWeaponSelectionView() {
-    return this->weaponsSelectionView;
+    if (weaponsSelectionView->hasNextElement()) {
+        weaponsSelectionView->selectNextElement();    
+        hudViewModel->setCurrentWeaponForPlayer(
+            dynamic_cast<SelectionViewModel::WeaponSelectableElement*>(weaponsSelectionView->getSelectedElement())->getWeapon());        
+    }
 };
 
 void HUDView::pause() {

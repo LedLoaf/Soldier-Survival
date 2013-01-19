@@ -25,16 +25,14 @@ TextViewPainter::TextViewPainter(view::TextViewModel* textViewModel) {
 void TextViewPainter::init() {    
     std::string fontPath;
     int textSize;
-    int paddingLeft, paddingTop;
     
     switch (textModel->getTextViewType()) {
         case view::TextView::SMALL :
             fontPath = "resource/graphic/amazin/font/magnum.ttf";
-
             textSize = 10;
-
-            paddingLeft = paddingTop = 5;
             break;
+        case view::TextView::MIDDLE :
+            textSize = 20;
     }
 
     
@@ -46,8 +44,7 @@ void TextViewPainter::init() {
     text->SetY(textModel->getViewStartPosition()->getY());    
 
     drawables.push_back(text);
-    
-
+   
 }
 
 

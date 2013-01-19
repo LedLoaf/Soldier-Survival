@@ -1,4 +1,6 @@
 #include <view/model/HUDViewModel.hpp>
+#include <game/object/Player.hpp>
+#include <game/object/weapon/Weapon.hpp>
 
 namespace view {
 
@@ -15,6 +17,11 @@ void HUDViewModel::setPlayer(game::Player* player) {
     this->player = player;
     playerEquipment = player->getEquipment();
 }
+
+void HUDViewModel::setCurrentWeaponForPlayer(game::Weapon* weapon) {
+    player->setCurrentWeapon(weapon);
+}
+
 
 int HUDViewModel::getPlayerHealth() {
     return player->getHealth();

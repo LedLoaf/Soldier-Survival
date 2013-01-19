@@ -36,9 +36,9 @@ void GamePlayWindow::initUI() {
     mapView->beginCharactersLife();
 	addView(mapView);
     
-    
-//    miniMapView = new MiniMapView(hudView->getEndPosition().getX(), hudView->getStartPosition().getY(), 
-//            game::Application::getInstance().getDeviceManager()->getScreenWidth(), hudView->getStartPosition().getY());
+  /* 100 x 100*/  
+//    miniMapView = new MiniMapView(game::Application::getInstance().getDeviceManager()->getScreenWidth() - hudView->getStartPosition().getY(), 
+//            hudView->getStartPosition().getY(), game::Application::getInstance().getDeviceManager()->getScreenWidth(), hudView->getEndPosition().getY());
 //    miniMapView->setMapModel(mapViewModel);
 //    addView(miniMapView);    
 
@@ -74,7 +74,14 @@ void GamePlayWindow::onArrowPressed(util::Location::Vector vector) {
 }
 
 void GamePlayWindow::onCharacterPressed(char c) {
-
+    switch (c) {
+        case 's':
+            hudView->switchToNextWeapon();
+            break;
+        case 'w':
+            hudView->switchToPreviousWeapon();
+            break;
+    }
 }
 
 void GamePlayWindow::onSpacePressed() {

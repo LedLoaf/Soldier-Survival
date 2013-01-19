@@ -9,6 +9,7 @@ TextView::TextView(int xStart, int yStart, int xEnd, int yEnd, std::string text,
     textViewModel = new TextViewModel();
     textViewModel->setText(text);
     textViewModel->setTextViewType(type);
+    textViewModel->setViewPosition(new util::Location::Position(xStart, yStart), new util::Location::Position(xEnd, yEnd));
 }
 
 

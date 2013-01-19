@@ -15,6 +15,10 @@
 #include <view/View.hpp>
 #include <game/object/Player.hpp>
 
+namespace game {
+class Weapon;    
+}
+
 namespace view {
 
 class HUDViewModel : public ViewModel {
@@ -24,6 +28,7 @@ public:
 	HUDViewModel();
 	virtual ~HUDViewModel();
 
+    void setCurrentWeaponForPlayer(game::Weapon* weapon);
     game::Weapon* getPlayerWeapon(int pos);
     std::vector<game::Weapon*> getPlayerWeapons();
     

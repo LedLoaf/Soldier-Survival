@@ -36,7 +36,7 @@ std::vector<game::Weapon*>* Player::getWeapons() {
     
     for(std::vector<Equipment::EquipmentItem*>::iterator it = equipment->getItems()->begin(); it != equipment->getItems()->end(); ++it) {
         switch ((*it)->getType()) {
-            case Equipment::EquipmentItem::GUN || Equipment::EquipmentItem::KNIFE || Equipment::EquipmentItem::RIFLE:
+            case Equipment::EquipmentItem::SWORD || Equipment::EquipmentItem::KNIFE || Equipment::EquipmentItem::AX:
                 weapons->push_back((Weapon*)(*it));
         }        
     }

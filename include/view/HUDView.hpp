@@ -16,10 +16,14 @@ public:
     HUDView(int xStart, int yStart, int xEnd, int yEnd, HUDViewModel* hudViewModel);
     HUDViewModel* getModel();
     
+    
     virtual View::Type getType();
     
     virtual void pause();
     virtual void resume();
+    
+    void switchToPreviousWeapon();
+    void switchToNextWeapon();
     
     SelectionView* getWeaponSelectionView();
 

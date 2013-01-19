@@ -7,7 +7,7 @@
 #include <view/HUDView.hpp>
 #include <view/MiniMapView.hpp>
 #include <view/MapView.hpp>
-//#include <view/TextView.hpp>
+#include <view/TextView.hpp>
 
 #include <graphic/painter/SFMLAbstractViewPainter.hpp>
 #include <graphic/amazin/painter/SelectionViewPainter.hpp>
@@ -18,7 +18,7 @@
 
 #include "graphic/amazin/painter/MapViewPainter.hpp"
 #include "graphic/amazin/painter/WarViewPainter.hpp"
-//#include <graphic/amazin/painter/TextViewPainter.hpp>
+#include <graphic/amazin/painter/TextViewPainter.hpp>
 
 
 namespace graphic {
@@ -31,8 +31,8 @@ SFMLAbstractViewPainter* SFMLAmazinGraphicEngine::getPainterForView(view::View* 
             return new graphic::amazin::SelectionViewPainter(dynamic_cast<view::SelectionView*>(view)->getModel());
         case view::View::IMAGE_VIEW :
             return new graphic::amazin::ImageViewPainter(dynamic_cast<view::ImageView*>(view)->getModel(), parentViewType);
-//        case view::View::TEXT_VIEW :
-//            return new graphic::amazin::TextViewPainter(dynamic_cast<view::TextView*>(view)->getModel());    
+        case view::View::TEXT_VIEW :
+            return new graphic::amazin::TextViewPainter(dynamic_cast<view::TextView*>(view)->getModel());    
         case view::View::HUD_VIEW :
             return new graphic::amazin::HUDViewPainter(dynamic_cast<view::HUDView*>(view)->getModel());     
         case view::View::MAP_VIEW :

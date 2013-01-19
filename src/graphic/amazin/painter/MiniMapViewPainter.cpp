@@ -39,7 +39,7 @@ void MiniMapViewPainter::init() {
     elementWidth = miniMapViewWidth / numberOfRows;
     elementHeight = miniMapViewHeight / numberOfColumns;
     
-
+    std::cout << "MiniMapViewPainter::init(): " << "elementWidth: " << elementWidth << "elementHeight: " << elementHeight << std::endl;
     
     allocateMapElementSprites(numberOfRows, numberOfColumns);
 }

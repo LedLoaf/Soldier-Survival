@@ -13,7 +13,7 @@ class TextViewModel;
 class TextView : public View {
 public:
     enum TextType {
-        SMALL
+        SMALL, MIDDLE
     };
     
     TextView(int xStart, int yStart, int xEnd, int yEnd, std::string text, TextView::TextType type);

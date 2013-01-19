@@ -30,6 +30,12 @@ void SFMLEventHandler::processEvent() {
                 case sf::Key::Space :
                     Application::getInstance().getContext()->getActiveWindow()->onSpacePressed();
                     break;
+                case sf::Key::W :
+                    Application::getInstance().getContext()->getActiveWindow()->onCharacterPressed('w');
+                    break;
+                case sf::Key::S :
+                    Application::getInstance().getContext()->getActiveWindow()->onCharacterPressed('s');
+                    break;                   
 			}
             
         if (Event.Type == sf::Event::Closed)
