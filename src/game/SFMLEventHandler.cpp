@@ -30,11 +30,11 @@ void SFMLEventHandler::processEvent() {
                 case sf::Key::Space :
                     Application::getInstance().getContext()->getActiveWindow()->onSpacePressed();
                     break;
-                case sf::Key::W :
-                    Application::getInstance().getContext()->getActiveWindow()->onCharacterPressed('w');
+                case sf::Key::F :
+                    Application::getInstance().getContext()->getActiveWindow()->onCharacterPressed('f');
                     break;
-                case sf::Key::S :
-                    Application::getInstance().getContext()->getActiveWindow()->onCharacterPressed('s');
+                case sf::Key::V :
+                    Application::getInstance().getContext()->getActiveWindow()->onCharacterPressed('v');
                     break;  
                 case sf::Key::Q :
                     Application::getInstance().getContext()->getActiveWindow()->onCharacterPressed('q');

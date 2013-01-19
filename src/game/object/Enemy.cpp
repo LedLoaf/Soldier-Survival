@@ -44,7 +44,7 @@ bool Enemy::canSeePlayer() {
 }
 
 void Enemy::injureUsing(Weapon* weapon) {
-    std::cout << "Enemy::injureUsing(), getDamage(): " << weapon->getDamage() << std::endl;
+//    std::cout << "Enemy::injureUsing(), getDamage(): " << weapon->getDamage() << std::endl;
     
     health -= weapon->getDamage();
     

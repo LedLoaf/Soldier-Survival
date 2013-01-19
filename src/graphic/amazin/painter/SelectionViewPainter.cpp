@@ -87,8 +87,6 @@ void SelectionViewPainter::init() {
         
         }
 
-        std::cout << "select: " << elementWidth << ", " << elementHeight << std::endl;
-        
         borderSprite->Resize(elementWidth, elementHeight);
         borderSprite->SetColor(sf::Color::Magenta);        
         

@@ -33,8 +33,8 @@ private:
 	view::HUDViewModel* hudViewModel;
     sf::Sprite* healthBoxSprite;
     
-    sf::String* moneyValueLabel;
-    sf::String* healthValueLabel;
+    sf::String* healthValue;
+    sf::String* experienceValue;
 };
 
 }

@@ -15,9 +15,9 @@ HUDView::HUDView(int xStart, int yStart, int xEnd, int yEnd, HUDViewModel* hudVi
     this->hudViewModel = hudViewModel;
     this->hudViewModel->setViewPosition(new util::Location::Position(xStart, yStart), new util::Location::Position(xEnd, yEnd));
 
-    addView(new TextView(100, 0, 300, 40, "Hand weapons", TextView::MIDDLE));
+    addView(new TextView(120, 0, 300, 40, "Hand weapons", TextView::MIDDLE));
 
-    weaponsSelectionView = new SelectionView(100, 30, 300, yEnd, view::SelectionViewModel::WEAPONS);
+    weaponsSelectionView = new SelectionView(120, 30, 300, yEnd, view::SelectionViewModel::WEAPONS);
     
     
     game::Equipment* playerEquipment = this->hudViewModel->getPlayerEquipment();

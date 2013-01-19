@@ -26,95 +26,54 @@ HUDViewPainter::HUDViewPainter(view::HUDViewModel* model) {
 
 
 void HUDViewPainter::init() {
-    int healthBoxtWidth, healthBoxHeight, moneyBoxtWidth, moneyBoxHeight;
-    std::string fontPath;
-    int labelsSize;
-    int paddingLeft, paddingTop;
+    int margin = 5;
+    int labelsTextSize = 20;
     
-    healthBoxtWidth = 100;
-    healthBoxHeight = 25;
-    fontPath = "resource/graphic/amazin/font/magnum.ttf";
-
-    labelsSize = 15;
-
-    paddingLeft = paddingTop = 5;
+    // health 
     
-    /* Health */
-    
-    healthBoxSprite = new sf::Sprite();
-    healthBoxSprite->Resize(healthBoxtWidth, healthBoxHeight);
-    healthBoxSprite->SetX(hudViewModel->getViewStartPosition()->getX());
-    healthBoxSprite->SetY(hudViewModel->getViewStartPosition()->getY());
-    healthBoxSprite->SetColor(sf::Color::Green);    
-    
-    drawables.push_back(healthBoxSprite);
-
-    
-    labelsSize = 15;
-
-    sf::Font font;
-    if (!font.LoadFromFile(fontPath, 50)) {
-        // throw exception. error
-    }    
-
-
     sf::String* healthLabel = new sf::String();
-    healthLabel->SetStyle(sf::String::Bold);
-    healthLabel->SetText(std::string("Health:"));
+    healthLabel->SetText("Health");
     healthLabel->SetFont(sf::Font::GetDefaultFont());
-    healthLabel->SetSize(labelsSize);
-    healthLabel->SetX(healthBoxSprite->GetPosition().x);
-    healthLabel->SetY(healthBoxSprite->GetPosition().y);
+    healthLabel->SetSize(labelsTextSize);
+    healthLabel->SetX(hudViewModel->getViewStartPosition()->getX());
+    healthLabel->SetY(hudViewModel->getViewStartPosition()->getY());    
 
-    drawables.push_back(healthLabel);
+    drawables.push_back(healthLabel);    
     
-    healthValueLabel = new sf::String();
-    healthValueLabel->SetStyle(sf::String::Bold);
-    healthValueLabel->SetText(std::string(""));
-    healthValueLabel->SetFont(sf::Font::GetDefaultFont());
-    healthValueLabel->SetSize(labelsSize);
-    healthValueLabel->SetX(healthLabel->GetPosition().x + healthLabel->GetSize() + 30);
-    healthValueLabel->SetY(healthLabel->GetPosition().y);
+    healthValue = new sf::String();
+    healthValue->SetStyle(sf::String::Bold);
+    healthValue->SetColor(sf::Color::Red);    
+    healthValue->SetText("70");
+    healthValue->SetFont(sf::Font::GetDefaultFont());
+    healthValue->SetSize(labelsTextSize);
+    healthValue->SetX(hudViewModel->getViewStartPosition()->getX());
+    healthValue->SetY(hudViewModel->getViewStartPosition()->getY() + labelsTextSize + margin);    
 
-    drawables.push_back(healthValueLabel);        
+    drawables.push_back(healthValue);        
     
+    // money 
     
-    
-    /* Money */
-    
-    moneyBoxtWidth = 100;
-    moneyBoxHeight = 25;
-    
-    sf::Sprite* moneyBoxSprite = new sf::Sprite();
-    moneyBoxSprite->Resize(healthBoxtWidth, healthBoxHeight);
-    moneyBoxSprite->SetX(healthBoxSprite->GetPosition().x);
-    moneyBoxSprite->SetY(healthBoxSprite->GetPosition().y + healthBoxSprite->GetSize().y);
-    moneyBoxSprite->SetColor(sf::Color::Magenta);    
-    
-    drawables.push_back(moneyBoxSprite);
-    
-    labelsSize = 15;
+    sf::String* experienceLabel = new sf::String();
+    experienceLabel->SetText("Experience");
+    experienceLabel->SetFont(sf::Font::GetDefaultFont());
+    experienceLabel->SetSize(labelsTextSize);
+    experienceLabel->SetX(hudViewModel->getViewStartPosition()->getX());
+    experienceLabel->SetY(healthValue->GetPosition().y + labelsTextSize + margin);    
 
-
-    sf::String* moneyLabel = new sf::String();
-    moneyLabel->SetStyle(sf::String::Bold);
-    moneyLabel->SetText(std::string("Money:"));
-    moneyLabel->SetFont(sf::Font::GetDefaultFont());
-    moneyLabel->SetSize(labelsSize);
-    moneyLabel->SetX(moneyBoxSprite->GetPosition().x);
-    moneyLabel->SetY(moneyBoxSprite->GetPosition().y);
-
-    drawables.push_back(moneyLabel);    
+    drawables.push_back(experienceLabel);    
     
-    moneyValueLabel = new sf::String();
-    moneyValueLabel->SetStyle(sf::String::Bold);
-    moneyValueLabel->SetText(std::string(" "));
-    moneyValueLabel->SetFont(sf::Font::GetDefaultFont());
-    moneyValueLabel->SetSize(labelsSize);
-    moneyValueLabel->SetX(moneyLabel->GetPosition().x + moneyLabel->GetSize() + 30);
-    moneyValueLabel->SetY(moneyLabel->GetPosition().y);
+    
+    experienceValue = new sf::String();
+    experienceValue->SetStyle(sf::String::Bold);
+    experienceValue->SetColor(sf::Color::Yellow);
+    experienceValue->SetText("553");
+    experienceValue->SetFont(sf::Font::GetDefaultFont());
+    experienceValue->SetSize(labelsTextSize);
+    experienceValue->SetX(hudViewModel->getViewStartPosition()->getX());
+    experienceValue->SetY(experienceLabel->GetPosition().y + labelsTextSize + margin);    
 
-    drawables.push_back(moneyValueLabel);     
+    drawables.push_back(experienceValue);         
+    
 
        
 }
@@ -126,11 +85,11 @@ void HUDViewPainter::update() {
 }
 
 void HUDViewPainter::setHealthValueLabel() {
-    healthValueLabel->SetText(util::Util::toString(hudViewModel->getPlayerHealth()));
+    healthValue->SetText(util::Util::toString(hudViewModel->getPlayerHealth()));
 }
 
 void HUDViewPainter::setMoneyValueLabel() {
-//    moneyValueLabel->SetText(std::string(""));
+    experienceValue->SetText(std::string("660"));
 }
 
 }

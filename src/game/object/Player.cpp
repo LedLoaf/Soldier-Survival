@@ -63,7 +63,7 @@ int Player::hasBomb() {
 }
 
 void Player::injureUsing(Weapon* weapon) {
-    std::cout << "Character::injureUsing(), getDamage(): " << weapon->getDamage() << std::endl;
+//    std::cout << "Character::injureUsing(), getDamage(): " << weapon->getDamage() << std::endl;
     
     health -= weapon->getDamage();
     

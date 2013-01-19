@@ -79,10 +79,10 @@ void GamePlayWindow::onArrowPressed(util::Location::Vector vector) {
 
 void GamePlayWindow::onCharacterPressed(char c) {
     switch (c) {
-        case 'b':
+        case 'f':
             hudView->switchToNextWeapon();
             break;
-        case 'g':
+        case 'v':
             hudView->switchToPreviousWeapon();
             break;
         case 'q':
