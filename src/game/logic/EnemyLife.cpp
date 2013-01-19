@@ -4,6 +4,9 @@
 
 #include <SFML/System/Sleep.hpp>
 
+#include <view/View.hpp>
+#include <view/window/GamePlayWindow.hpp>
+
 #include "game/logic/EnemyLife.hpp"
 #include "game/Application.hpp"
 #include "view/window/GamePlayWindow.hpp"
@@ -21,9 +24,15 @@ EnemyLife::EnemyLife(Character* ch, int timeOfBirth, int lifetime, EnemyMovement
 }
 
 void EnemyLife::Run() {
+    pauseMutex.Lock();
     while (stillAlive) {
-        if (isPaused)
-            continue;        
+        if (isPaused) 
+            continue; 
+        
+        // TODO: Zamienic ponizsze wyrazenie na cos elegantszego. Problem: race condition przy dostepie do isPaused
+        if (Application::getInstance().getContext()->getActiveWindow()->getType() != view::View::GAME_PLAY_WINDOW)
+            continue;
+        
 //        if (isTimeToMove()) {
             movementAI->tryToDoNextMove();
 
@@ -36,7 +45,7 @@ void EnemyLife::Run() {
             
         sf::Sleep(0.8f);            
     }
-
+    pauseMutex.Unlock();
     // die
     // do poprawy takie branie wskaznika do map view
     view::MapView* mapView = dynamic_cast<view::GamePlayWindow*>(game::Application::getInstance().getContext()->getActiveWindow())->getMapView();

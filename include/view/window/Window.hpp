@@ -16,9 +16,6 @@ class Window : public view::View {
 public:
     Window(int xStart, int yStart, int xEnd, int yEnd);
     virtual ~Window();
-
-    Window* getParentWindow();
-    Window* setParentWindow(Window* parentWindow);
     
 	bool hasSubWindow();
 	void setSubWindow(Window* window);
@@ -40,7 +37,6 @@ public:
 protected:
 //	WindowModel model;
 	Window* subWindow;
-    Window* parentWindow;
     std::vector<view::View*> unusedViews;
 };
 

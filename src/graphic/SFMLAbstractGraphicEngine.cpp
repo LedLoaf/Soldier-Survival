@@ -54,7 +54,7 @@ void SFMLAbstractGraphicEngine::deleteUnusedWindowPainters(Window* window) {
             }
         }
         window->clearUnusedViews();
-        renderWindow->Clear(sf::Color::Black);
+//        renderWindow->Clear(sf::Color::Black);
     }
     
 //

@@ -17,6 +17,8 @@
 
 #include <graphic/amazin/painter/MiniMapViewPainter.hpp>
 
+#include "game/object/Player.hpp"
+
 
 namespace graphic {
 namespace amazin {
@@ -39,7 +41,8 @@ void MiniMapViewPainter::init() {
     elementWidth = miniMapViewWidth / numberOfRows;
     elementHeight = miniMapViewHeight / numberOfColumns;
     
-    std::cout << "MiniMapViewPainter::init(): " << "elementWidth: " << elementWidth << "elementHeight: " << elementHeight << std::endl;
+    std::cout << "MiniMapViewPainter::init(): " << "elementWidth: " << elementWidth << "elementHeight: " << elementHeight 
+            << "miniMapWidth: " << miniMapViewWidth << ", miniMapHeight: " << miniMapViewHeight << std::endl;
     
     allocateMapElementSprites(numberOfRows, numberOfColumns);
 }
@@ -67,7 +70,7 @@ void MiniMapViewPainter::update() {
         for (int j = 0; j < numberOfColumns; j++) {
             game::MapObject::Type elementType = mapViewModel->getVisibleMapObject(i, j)->getType();
             
-            elementImage = sfmlAmazinResource->getImage(elementType);
+            elementImage = getImage(elementType);
 
             mapElementSprites[i][j]->SetImage(*(elementImage));
             mapElementSprites[i][j]->Resize(elementWidth, elementHeight);
@@ -75,6 +78,13 @@ void MiniMapViewPainter::update() {
 
         }        
     }
+}
+
+sf::Image* MiniMapViewPainter::getImage(game::MapObject::Type mapObjectType) {
+    if (mapObjectType == game::MapObject::PLAYER)
+        return sfmlAmazinResource->getRedDot();
+    else 
+        return sfmlAmazinResource->getImage(mapObjectType);
 }
 
 

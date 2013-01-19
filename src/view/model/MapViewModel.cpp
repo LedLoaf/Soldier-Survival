@@ -16,8 +16,13 @@ MapViewModel::MapViewModel(int mapWidth, int mapHeight) : lastDirectionOfPlayerM
     allocateCharactersTab();
     allocateNotMovingObjectsTab();
     allocateGroundTab();
+    
     initMapObjectsTabs();
 }   
+
+MapViewModel::~MapViewModel() {
+    deallocateAllMapObjects();    
+}
 
 void MapViewModel::setMapView(MapView* mapView) {
     this->mapView = mapView;
@@ -178,6 +183,15 @@ void MapViewModel::initMapObjectsTabs() {
         for (int y = 0; y < mapHeight; y++) {
             charactersTab[x][y] = NULL;   
             notMovingObjectsTab[x][y] = NULL;
+        }
+}
+
+void MapViewModel::deallocateAllMapObjects() {
+    for (int x = 0; x < mapWidth; x++) 
+        for (int y = 0; y < mapHeight; y++) {
+            delete charactersTab[x][y];
+            delete notMovingObjectsTab[x][y];
+            delete groundTab[x][y];
         }
 }
 

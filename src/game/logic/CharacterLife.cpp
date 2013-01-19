@@ -21,15 +21,11 @@ void CharacterLife::Run() {
 }
 
 void CharacterLife::pause() {
-    pauseMutex.Lock();
     isPaused = true;
-    pauseMutex.Unlock();
 }
 
 void CharacterLife::resume() {
-    pauseMutex.Lock();
     isPaused = false;
-    pauseMutex.Unlock();
 }
 
 bool CharacterLife::isTimeToDie() {

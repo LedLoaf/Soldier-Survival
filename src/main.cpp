@@ -1,8 +1,5 @@
 #include <cstddef> //do poprawnej kompilacji SFML //(NULL)
 
-
-
-
 #include <game/Application.hpp>
 #include <game/GameMasterEngine.hpp>
 #include <graphic/amazin/SFMLAmazinGraphicEngine.hpp>

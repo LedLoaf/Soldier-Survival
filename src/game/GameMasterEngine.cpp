@@ -13,7 +13,20 @@ using namespace view;
 namespace game {
 
 void GameMasterEngine::run() {
+    Window* previouslyActiveWindow = Application::getInstance().getContext()->getActiveWindow();    
     MainMenuWindow *mainMenuWindow = new MainMenuWindow();
+    
+    if (previouslyActiveWindow != NULL) {
+        
+        for (int i = 0; i < previouslyActiveWindow->getViews().size(); i++) {
+            mainMenuWindow->addUnusedView(previouslyActiveWindow->getViews()[i]);      
+            for (int j = 0; j < previouslyActiveWindow->getViews()[i]->getViews().size(); j++)
+                mainMenuWindow->addUnusedView(previouslyActiveWindow->getViews()[i]->getViews()[j]);
+        }
+        
+        delete previouslyActiveWindow;
+    }
+    
 }
 
 void GameMasterEngine::runLevelSelection() {
@@ -39,7 +52,6 @@ void GameMasterEngine::runGamePlay(LevelDescription* levelDescription) {
 void GameMasterEngine::pauseGame() {
     Window* activeWindow = Application::getInstance().getContext()->getActiveWindow();
     activeWindow->pause();
-//    activeWindow->setSubWindow(new PauseWindow());
 }
 
 void GameMasterEngine::resumeGame() {
@@ -56,16 +68,7 @@ void GameMasterEngine::resumeGame() {
 }
 
 
-
-// Wywolywana np. po nacisnieciu 'powrot do gry' w oknie dialogowym przedstawiajacym pause
 void GameMasterEngine::returnToGame() {
-//	Window activeWindow = context->getActiveWindow();
-//
-//	Window parentWindow = activeWindow->getParent(); // tutaj teraz bedzie np. GamePlayWindow
-//
-//	~activeWindow(); // niszcze okno dialogowe przedstawiajace pause
-//
-//	context->setActiveWindow(parentWindow);
 }
 
 void GameMasterEngine::exitGame() {

@@ -16,6 +16,7 @@ public:
 	static SFMLAmazinResource* getInstance();
     
     sf::Image* getImage(game::MapObject::Type mapObjectType);
+    sf::Image* getRedDot();
     sf::Image* getTransparentImage();
     
 
@@ -25,6 +26,7 @@ private:
     std::map<game::MapObject::Type, sf::Image*> equipmentItemImageResourceMap;
     sf::Image* imageNotFound;
     sf::Image* transparentImage;
+    sf::Image* redDot;
     
     SFMLAmazinResource();    
     void init();

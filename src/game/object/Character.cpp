@@ -10,6 +10,10 @@ Character::Character(MapObject::Type type, view::MapViewModel* mapViewModel) : M
         position(util::Location::Position(-1, -1)) {
 }
 
+Character::~Character() {
+    
+}
+
 view::MapViewModel* Character::getMapModel() {
     return mapViewModel;
 }
@@ -52,8 +56,7 @@ int Character::getHealth() {
 }
 
 
-void Character::injureUsing(Weapon* weapon) {
-   
+void Character::injureUsing(Weapon* weapon) {   
 }
 
 

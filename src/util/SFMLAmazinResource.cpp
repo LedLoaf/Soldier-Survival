@@ -215,8 +215,11 @@ void SFMLAmazinResource::initMapObjectImages() {
 		game::MapObject::ENEMY_B, enemyBImage)); 
 }
 
+sf::Image* SFMLAmazinResource::getRedDot() {
+    return redDot;
+}
 
-void SFMLAmazinResource::initEquipmentItemImages() {  
+void SFMLAmazinResource::initEquipmentItemImages() {     
 }
 
 void SFMLAmazinResource::initSpecialImages() {
@@ -224,6 +227,13 @@ void SFMLAmazinResource::initSpecialImages() {
     
     transparentImage = new sf::Image();
     if (!transparentImage->LoadFromFile(transparentImagePath))
-        std::cout << "Failed to load " << transparentImagePath << std::endl;    
+        std::cout << "Failed to load " << transparentImagePath << std::endl;   
+    
+    std::string redDotPath = "resource/graphic/amazin/game_play/img/tiles/red_dot.png";
+    
+    redDot = new sf::Image();
+    if (!redDot->LoadFromFile(redDotPath))
+        std::cout << "Failed to load " << redDotPath << std::endl;   
+    
 }
 }

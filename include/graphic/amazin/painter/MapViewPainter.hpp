@@ -54,7 +54,6 @@ private:
     class SubMapManager;
     
 	view::MapViewModel* mapViewModel;
-    sf::Sprite*** mapElementSprites; 
     sf::Sprite*** groundSprites; 
     sf::Sprite*** notMovingMapObjectSprites;
     sf::Sprite*** characterSprites;

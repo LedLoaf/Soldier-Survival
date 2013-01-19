@@ -20,6 +20,7 @@ public:
 	virtual void init();
 	virtual void update();
     
+    sf::Image* getImage(game::MapObject::Type mapObjectType);
     
 private:
     void allocateMapElementSprites(int mapViewRowsNo, int mapViewColumnsNo);

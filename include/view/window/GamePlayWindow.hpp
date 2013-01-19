@@ -18,13 +18,12 @@ class GamePlayWindow : public Window {
 private:
     HUDView* hudView;
 	MapView* mapView;
-    MiniMapView* miniMapView;
     game::LevelDescription* levelDescription;
     game::LevelGenerator* levelGenerator;
-    game::WarManager* warManager;
 
 public:
 	GamePlayWindow(game::LevelDescription* levelDescription);
+    ~GamePlayWindow();
 	void initUI();
         
 	virtual void onEnterPressed();

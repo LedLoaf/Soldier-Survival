@@ -32,6 +32,7 @@ private:
 
 public:
     MapView(int xStart, int yStart, int xEnd, int yEnd);
+    ~MapView();
     virtual Type getType();
     MapViewModel* getModel();
 

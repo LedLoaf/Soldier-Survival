@@ -21,6 +21,7 @@ class Weapon;
 class Character : public MapObject {
 public:
     Character(MapObject::Type type, view::MapViewModel* mapViewModel);
+    ~Character();
     
     void setPosition(util::Location::Position pos);
     util::Location::Position getPosition();

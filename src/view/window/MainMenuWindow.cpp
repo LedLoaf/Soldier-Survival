@@ -84,7 +84,11 @@ void MainMenuWindow::onEscPressed() {
 }
 
 void MainMenuWindow::onCharacterPressed(char c) {
-    
+    switch (c) {
+        case 'q':
+            game::Application::getInstance().getGameEngine()->exitGame();
+            break;    
+    }
 }
 
 void MainMenuWindow::onSpacePressed() {

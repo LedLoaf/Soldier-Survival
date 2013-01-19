@@ -19,6 +19,13 @@ GamePlayWindow::GamePlayWindow(game::LevelDescription* levelDescription) : mapVi
     initUI();
 }
 
+GamePlayWindow::~GamePlayWindow() {
+    delete hudView;
+	delete mapView;
+    delete levelDescription;
+    delete levelGenerator;
+}
+
 
 void GamePlayWindow::initUI() {
     
@@ -37,10 +44,7 @@ void GamePlayWindow::initUI() {
 	addView(mapView);
     
   /* 100 x 100*/  
-//    miniMapView = new MiniMapView(game::Application::getInstance().getDeviceManager()->getScreenWidth() - hudView->getStartPosition().getY(), 
-//            hudView->getStartPosition().getY(), game::Application::getInstance().getDeviceManager()->getScreenWidth(), hudView->getEndPosition().getY());
-//    miniMapView->setMapModel(mapViewModel);
-//    addView(miniMapView);    
+
 
 }
 
@@ -75,12 +79,18 @@ void GamePlayWindow::onArrowPressed(util::Location::Vector vector) {
 
 void GamePlayWindow::onCharacterPressed(char c) {
     switch (c) {
-        case 's':
+        case 'b':
             hudView->switchToNextWeapon();
             break;
-        case 'w':
+        case 'g':
             hudView->switchToPreviousWeapon();
             break;
+        case 'q':
+            game::Application::getInstance().getGameEngine()->exitGame();
+            break;                 
+//        case 'm':
+//            game::Application::getInstance().getGameEngine()->run();
+//            break;            
     }
 }
 

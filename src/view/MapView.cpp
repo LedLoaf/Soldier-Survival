@@ -21,6 +21,12 @@ MapView::MapView(int xStart, int yStart, int xEnd, int yEnd) : View(xStart, ySta
 
 }
 
+MapView::~MapView() {
+	delete mapViewModel;
+    delete warManager;
+    delete bombManager;    
+}
+
 void MapView::setModel(MapViewModel* mapModel) {
     this->mapViewModel = mapModel;
     this->mapViewModel->setViewPosition(new util::Location::Position(xStart, yStart), new util::Location::Position(xEnd, yEnd));

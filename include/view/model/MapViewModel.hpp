@@ -24,6 +24,7 @@ class MapView;
 class MapViewModel : public ViewModel {
 public:
     MapViewModel(int mapWidth, int mapHeight);
+    ~MapViewModel();
     int getMapHeight();
     int getMapWidth();
     
@@ -75,6 +76,9 @@ private:
     void allocateCharactersTab();
     void allocateNotMovingObjectsTab();
     void allocateGroundTab();
+    
+    void deallocateAllMapObjects();
+    
     void initMapObjectsTabs();
     
     
