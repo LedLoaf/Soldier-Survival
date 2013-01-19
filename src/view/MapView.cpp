@@ -84,12 +84,12 @@ bool MapView::canMoveCharacter(game::Character* ch, util::Location::Vector vecto
     // czy nie wyjde poza mape
     // czy na miejscu nie ma przeszkody lub innego charactera
     
-    util::Location::Position chPosition = ch->getPosition();
+    util::Location::Position nextPosition = ch->getPosition() + vector;
     
-    if (isPositionInMapArea(chPosition + vector)) {
+    if (isPositionInMapArea(nextPosition)) {
         
         // Na miejscu gdzie chce sie poruszyc postac stoi juz jakas inna postac
-        game::Character* collidingCharacter = mapViewModel->getCharacter(chPosition + vector);
+        game::Character* collidingCharacter = mapViewModel->getCharacter(nextPosition);
         if (collidingCharacter != NULL) {
             
             // kto sie zderza
@@ -116,8 +116,8 @@ bool MapView::canMoveCharacter(game::Character* ch, util::Location::Vector vecto
         } else {
             // canCharacterStayOnNMO(..) mowi nam, czy postac moze stanac na danym kafelku gdzie 
             // znajduje sie jakis obiekt nie poruszajacy sie - trawa, rzeka, skala, droga itd
-            util::Location::Position nextPosition = chPosition + vector;
-            if (mapViewModel->hasNotMovingObjectAt(nextPosition.getX(), nextPosition.getY()) && !canCharacterStayOnNMMO(mapViewModel->getNotMovingObject(chPosition + vector)))
+            if (mapViewModel->hasNotMovingObjectAt(nextPosition.getX(), 
+                    nextPosition.getY()) && !canCharacterStayOnNMMO(mapViewModel->getNotMovingObject(nextPosition)))
                 return false;
             return true;
         }
@@ -186,6 +186,8 @@ bool MapView::canCharacterStayOnNMMO(game::MapObject* notMovingMapObject) {
         return false;
     if (game::MapObject::isWall(notMovingMapObject))
         return false;        
+    if (notMovingMapObject->getType() == game::MapObject::TREE)
+        return false;            
 }
 
 bool MapView::isPositionInMapArea(util::Location::Position position) {

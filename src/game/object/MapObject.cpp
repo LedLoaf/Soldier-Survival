@@ -10,7 +10,8 @@ MapObject::MapObject(Type type) {
 }
     
 bool MapObject::isTerrain(MapObject* mapObject) {
-    if (mapObject->getType() == MapObject::GRASS || MapObject::SAND || MapObject::GROUND || MapObject::ROAD || MapObject::BRIDGE) 
+    if (mapObject->getType() == MapObject::GRASS || mapObject->getType() == MapObject::SAND || 
+            mapObject->getType() == MapObject::GROUND || mapObject->getType() == MapObject::ROAD || mapObject->getType() == MapObject::BRIDGE) 
         return true;
     else
         return false;
