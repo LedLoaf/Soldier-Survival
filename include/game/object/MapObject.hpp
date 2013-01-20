@@ -7,6 +7,8 @@ namespace game {
 class MapObject {
 public:
     enum Type {
+        HEALTH_PACK,
+        FOOD,
         GRASS,
         GRASS_GREEN,
         SAND,

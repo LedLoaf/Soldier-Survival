@@ -59,6 +59,25 @@ void SFMLAmazinResource::initMapObjectImages() {
     
     
 /* NotMovingMapObjects */   
+
+	std::string healthPackAPath = "resource/graphic/amazin/game_play/img/tiles/first_aid.png";
+    
+    sf::Image* healthPackAImage = new sf::Image();
+    if (!healthPackAImage->LoadFromFile(healthPackAPath))
+        std::cout << "Failed to load " << healthPackAPath << std::endl;
+    
+    imageResourceMap.insert(std::pair<game::MapObject::Type, sf::Image*>(
+        game::MapObject::HEALTH_PACK, healthPackAImage));     
+    
+    
+	std::string foodPath = "resource/graphic/amazin/game_play/img/tiles/first_aid.png";
+    
+    sf::Image* foodImage = new sf::Image();
+    if (!foodImage->LoadFromFile(healthPackAPath))
+        std::cout << "Failed to load " << healthPackAPath << std::endl;
+    
+    imageResourceMap.insert(std::pair<game::MapObject::Type, sf::Image*>(
+        game::MapObject::FOOD, foodImage));    
     
 	std::string bombAPath = "resource/graphic/amazin/game_play/img/weapon/bomb.png";
     

@@ -35,6 +35,7 @@ public:
     virtual void endLife();
     
     void setHealth(int health);
+    void addHealth(int health);
     int getHealth();    
     
     virtual void injureUsing(Weapon* weapon);

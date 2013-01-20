@@ -106,13 +106,11 @@ bool MapView::canMoveCharacter(game::Character* ch, util::Location::Vector vecto
                     // z kim sie zderza
                     switch (collidingCharacter->getType()) { 
                         case game::MapObject::ENEMY_A : {
-                            
                             if (!warManager->isWarAlreadyStartedBetween(
                                     dynamic_cast<game::Player*>(ch), dynamic_cast<game::Enemy*>(collidingCharacter)))
                                 startWar(new game::War(dynamic_cast<game::Player*>(ch), dynamic_cast<game::Enemy*>(collidingCharacter)));
-                                
+                            break;
                         }
-
                     }
                 }
                 
@@ -139,6 +137,15 @@ bool MapView::canMoveCharacter(game::Character* ch, util::Location::Vector vecto
             
             return false;
         } else {
+            if (mapViewModel->hasNotMovingObjectAt(nextPosition.getX(), nextPosition.getY()) && 
+                    (mapViewModel->getNotMovingObject(nextPosition)->getType() == game::MapObject::HEALTH_PACK ||
+                     mapViewModel->getNotMovingObject(nextPosition)->getType() == game::MapObject::FOOD)) {
+                getPlayer()->addHealth(35);
+                mapViewModel->remove(nextPosition.getX(), nextPosition.getY(), 
+                        dynamic_cast<game::NotMovingMapObject*>(mapViewModel->getNotMovingObject(nextPosition.getX(), nextPosition.getY())));
+            }
+                
+            
             // canCharacterStayOnNMO(..) mowi nam, czy postac moze stanac na danym kafelku gdzie 
             // znajduje sie jakis obiekt nie poruszajacy sie - trawa, rzeka, skala, droga itd
             if (mapViewModel->hasNotMovingObjectAt(nextPosition.getX(), 

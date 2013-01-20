@@ -44,7 +44,7 @@ LevelGenerator::LevelGenerator(game::LevelDescription* levelDescription) {
     
     this->generatePlayer();
 	this->placePlayer();
-        
+    this->placeHealthPacks();
         
         /*
         for (int i = 0; i < mapModel->getMapHeight(); i++) {
@@ -492,6 +492,22 @@ bool LevelGenerator::checkClearAround(util::Location::Position *p, int radius) {
     return true;
 }
 
+void LevelGenerator::placeHealthPacks() {
+    int numberOfHealthPacks = 20;
+    util::Location::Position* position;
+    
+    MapObject::Type healthPackTypes[2] = {MapObject::HEALTH_PACK, MapObject::FOOD};
+    
+    int i = 0;
+    while (i < numberOfHealthPacks) {
+        position = new util::Location::Position(rand() % mapModel->getMapWidth(), rand() % mapModel->getMapHeight());
+        if (checkClearAround(position, 1)) {
+            mapModel->put(position->getX(), position->getY(), new NotMovingMapObject(healthPackTypes[rand() % 2]));
+            i++;
+        }
+    }    
+}
+
 void LevelGenerator::placeRandomly(util::Location::Position *p, int dx, int dy, float density, MapObject* tt) {
     int ttCount = dx*dy;
     ttCount = (float)ttCount * density;
@@ -529,8 +545,11 @@ void LevelGenerator::placeRandomly(util::Location::Position *p, int dx, int dy, 
                     case game::MapObject::PLAYER :
                         mapModel->put(ptt->getX(), ptt->getY(), dynamic_cast<game::Player*>(tt));
                         break; 
-                    case game::MapObject::ENEMY_A || game::MapObject::ENEMY_B || game::MapObject::ENEMY_C || 
-                            game::MapObject::ENEMY_D || game::MapObject::ENEMY_E:
+                    case game::MapObject::ENEMY_A:
+                    case game::MapObject::ENEMY_B:
+                    case game::MapObject::ENEMY_C:
+                    case game::MapObject::ENEMY_D:
+                    case game::MapObject::ENEMY_E:
                         mapModel->put(ptt->getX(), ptt->getY(), dynamic_cast<game::Enemy*>(tt));
                         break;
                     default:

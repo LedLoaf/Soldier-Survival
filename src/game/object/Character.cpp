@@ -54,6 +54,11 @@ util::Location::Position Character::getPosition() {
 void Character::setHealth(int health) {
     this->health = health;
 }
+
+void Character::addHealth(int health) {
+    this->health += health;
+}
+
 int Character::getHealth() {
     return health;
 }

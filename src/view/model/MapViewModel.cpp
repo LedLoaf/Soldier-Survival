@@ -136,7 +136,7 @@ void MapViewModel::remove(int x, int y, const game::Character* ch) {
 void MapViewModel::remove(int x, int y, const game::NotMovingMapObject* notMovingMapObject) {
     //checkIfMapHasPoint(x, y);  throws exception if x > mapWidth ...
 
-    notMovingObjectsTab[x, y] = NULL;
+    notMovingObjectsTab[x][y] = NULL;
 }
 
 util::Location::Position MapViewModel::getPositionOf(game::Character* ch) {

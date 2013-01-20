@@ -40,6 +40,7 @@ private:
     bool checkClearAround(util::Location::Position *p, int radius);
     bool placeRiverOrBridge(util::Location::Position *p, int bridgeProbability);
     bool placePath(util::Location::Position *p);
+    void placeHealthPacks();
 };
 
 }

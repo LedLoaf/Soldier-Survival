@@ -39,22 +39,27 @@ bool Enemy::canSeePlayer() {
     
     switch (type) {
         case MapObject::ENEMY_A:
-            if (distance < 6)
+            if (distance < 4)
                 return true;
+            break;
         case MapObject::ENEMY_B:
             if (distance < 2)
                 return true;
+            break;
         case MapObject::ENEMY_C:
             if (distance < 3)
                 return true;  
+            break;
         case MapObject::ENEMY_D:
-            if (distance < 8)
+            if (distance < 3)
                 return true;
+            break;
         case MapObject::ENEMY_E:
-                return true;            
+                return true; 
         default:
                 return false;                
     }
+    return false;
 }
 
 void Enemy::injureUsing(Weapon* weapon) {
