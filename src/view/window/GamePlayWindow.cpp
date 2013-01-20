@@ -1,3 +1,4 @@
+#include <view/ImageView.hpp>
 #include <view/window/Window.hpp>
 #include <view/window/GamePlayWindow.hpp>
 #include <view/window/PauseWindow.hpp>
@@ -31,6 +32,9 @@ void GamePlayWindow::initUI() {
     
     hudView = new HUDView(0, 0, game::Application::getInstance().getDeviceManager()->getScreenWidth(), 100, levelGenerator->getHUDViewModel());
 	addView(hudView);
+    
+	addView(new ImageView(game::Application::getInstance().getDeviceManager()->getScreenWidth() - 200, 0, 
+            100, game::Application::getInstance().getDeviceManager()->getScreenWidth(), util::Resource::GAME_PLAY_LOGO));        
   
     
     mapView = new MapView(0, 100, game::Application::getInstance().getDeviceManager()->getScreenWidth(), 

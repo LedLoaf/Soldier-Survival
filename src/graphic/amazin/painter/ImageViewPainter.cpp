@@ -25,7 +25,11 @@ void ImageViewPainter::init() {
     
     switch (imageViewModel->getImageResource()) {
         case util::Resource::MAIN_MENU_LOGO :
-            imgPath = "resource/graphic/amazin/main_menu/img/game_logo.jpg";
+            imgPath = "resource/graphic/amazin/main_menu/img/game_logo.png";
+            break;
+        case util::Resource::GAME_PLAY_LOGO :
+            imgPath = "resource/graphic/amazin/game_play/img/game_play_logo.png";    
+            break;
     }
     
     // wskaznik, bo inaczej zostanie zniszczony

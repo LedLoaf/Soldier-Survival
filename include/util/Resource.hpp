@@ -14,7 +14,7 @@ public:
     class GamePlayResourceManager;
     
     enum Type {
-        MAIN_MENU_LOGO
+        MAIN_MENU_LOGO, GAME_PLAY_LOGO
     };
     
     virtual std::string getPath(Resource::Type resourcePath) = 0;
