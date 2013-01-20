@@ -1,6 +1,8 @@
 #ifndef MAP_VIEW_HPP_
 #define MAP_VIEW_HPP_
 
+#include <SFML/System/Thread.hpp>
+#include <SFML/System/Mutex.hpp>
 
 #include <view/View.hpp>
 #include <view/model/MapViewModel.hpp>
@@ -25,14 +27,20 @@ namespace view {
 class WarView;
     
 class MapView : public View {
+
+    friend class CharactersAnimator;
+
 private:
 	MapViewModel* mapViewModel;
     game::WarManager* warManager;
     game::BombManager* bombManager;
+    sf::Mutex mapViewModelMutex;
 
 public:
+    
     MapView(int xStart, int yStart, int xEnd, int yEnd);
     ~MapView();
+    
     virtual Type getType();
     MapViewModel* getModel();
 
@@ -71,6 +79,19 @@ public:
     
 private:
     util::Location::Position* getPlaceToPlantBomb();
+    
+    class CharactersAnimator : public sf::Thread {
+    public:
+        CharactersAnimator(MapView* mapView);
+        virtual void Run();
+        bool stillWorking();
+    private:
+        MapView* mapView;
+        MapViewModel* mapViewModel;
+        bool isWorking;
+    };
+    
+    
 };
 
 }

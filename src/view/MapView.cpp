@@ -1,5 +1,9 @@
 #include <cmath>
 
+#include <SFML/System/Thread.hpp>
+#include <SFML/System/Sleep.hpp>
+#include <SFML/System/Mutex.hpp>
+
 #include <view/View.hpp>
 #include <view/WarView.hpp>
 
@@ -37,12 +41,10 @@ MapViewModel* MapView::getModel() {
 }
 
 void MapView::beginCharactersLife() {
-    for (int i = 0; i < mapViewModel->getMapWidth(); i++) {
-        for (int j = 0; j < mapViewModel->getMapHeight(); j++) {
-            if (mapViewModel->getCharacter(i, j) != NULL && game::MapObject::isEnemy(mapViewModel->getCharacter(i, j )))
-                mapViewModel->getCharacter(i, j)->beginLife();
-        }        
-    }
+    CharactersAnimator* charactersAnimator = new CharactersAnimator(this);
+    charactersAnimator->Launch();
+    while (charactersAnimator->stillWorking())
+        continue;
 //    
 //    mapViewModel->getCharacter(mapViewModel->getPlayer()->getPosition().getX() + 1, 
 //            mapViewModel->getPlayer()->getPosition().getY() + 1)->beginLife();
@@ -68,19 +70,23 @@ void MapView::buryCharacter(game::Character * ch) {
 }
 
 void MapView::moveCharacter(game::Character* ch, util::Location::Vector vector) {
+    mapViewModelMutex.Lock();
 	util::Location::Position position = mapViewModel->getPositionOf(ch);
 	mapViewModel->remove(position.getX(), position.getY(), ch);
     
     util::Location::Position newPosition = position + vector;
-	mapViewModel->put(newPosition.getX(), newPosition.getY(), ch);    
+	mapViewModel->put(newPosition.getX(), newPosition.getY(), ch);   
+    mapViewModelMutex.Unlock();
 }
 
 
 void MapView::moveCharacter(game::Player* player, util::Location::Vector vector) {
+    mapViewModelMutex.Lock();
 	mapViewModel->remove(player->getPosition().getX(), player->getPosition().getY(), player);
     
     util::Location::Position newPosition = player->getPosition() + vector;
 	mapViewModel->put(newPosition.getX(), newPosition.getY(), player);    
+    mapViewModelMutex.Unlock();
 }
 
 
@@ -194,13 +200,17 @@ void MapView::tryToPlantBomb() {
 }
 
 void MapView::putBomb(util::Location::Position position, game::Bomb* bomb) {
+    mapViewModelMutex.Lock();
     mapViewModel->put(position.getX(), position.getY(), 
             new game::NotMovingMapObject(game::MapObject::BOMB));    
+    mapViewModelMutex.Unlock();
 }
 
 void MapView::removeBomb(util::Location::Position position) {
+    mapViewModelMutex.Lock();
     mapViewModel->put(position.getX(), position.getY(), 
-            new game::NotMovingMapObject(game::MapObject::GRASS));    
+            new game::NotMovingMapObject(game::MapObject::GRASS));
+    mapViewModelMutex.Unlock();  
 }
 
 bool MapView::checkIfBombHasBeenPlanted() {
@@ -270,6 +280,34 @@ View::Type MapView::getType() {
     return View::MAP_VIEW;
 }
 
+MapView::CharactersAnimator::CharactersAnimator(MapView* mapView) {
+    this->mapView = mapView;
+    this->mapViewModel = mapView->getModel();
+    this->isWorking = true;
+}
 
+void MapView::CharactersAnimator::Run() {
+    for (int i = 0; i < mapViewModel->getMapWidth(); i++) {
+        for (int j = 0; j < mapViewModel->getMapHeight(); j++) {
+            mapView->mapViewModelMutex.Lock();
+
+            if (mapViewModel->getCharacter(i, j) != NULL && game::MapObject::isEnemy(mapViewModel->getCharacter(i, j )))
+                if (!mapViewModel->getCharacter(i, j)->isAlive()) {
+                    mapViewModel->getCharacter(i, j)->beginLife();
+                    std::cout << "MapView::CharactersAnimator::Run(): animating one more character" << std::endl;
+                }
+            mapView->mapViewModelMutex.Unlock();
+            
+            //sf::Sleep(0.000000001f);
+        }        
+    }    
+    isWorking = false;
+    std::cout << "MapView::CharactersAnimator::Run(): end" << std::endl;
+    
+}
+
+bool MapView::CharactersAnimator::stillWorking() {
+    return isWorking;
+}
 
 }

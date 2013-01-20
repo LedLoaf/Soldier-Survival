@@ -23,8 +23,13 @@ EnemyLife::EnemyLife(Character* ch, int timeOfBirth, int lifetime, EnemyMovement
     this->movementAI = movementAI;
 }
 
+EnemyLife::~EnemyLife() {
+    stillAlive = false;
+    Terminate();
+    delete movementAI;
+}
+
 void EnemyLife::Run() {
-    pauseMutex.Lock();
     while (stillAlive) {
         if (isPaused) 
             continue; 
@@ -45,7 +50,6 @@ void EnemyLife::Run() {
             
         sf::Sleep(0.8f);            
     }
-    pauseMutex.Unlock();
     // die
     // do poprawy takie branie wskaznika do map view
     view::MapView* mapView = dynamic_cast<view::GamePlayWindow*>(game::Application::getInstance().getContext()->getActiveWindow())->getMapView();

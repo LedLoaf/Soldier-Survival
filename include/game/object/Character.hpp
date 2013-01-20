@@ -29,6 +29,7 @@ public:
     view::MapViewModel* getMapModel();
     view::MapView* getMapView();
     
+    bool isAlive();
     void beginLife();
     void pauseLife();
     void resumeLife();
@@ -46,6 +47,7 @@ protected:
     CharacterLife* life;
     util::Location::Position position;
     int health;
+    bool alive;
     
 };
     

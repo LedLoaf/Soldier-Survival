@@ -11,10 +11,11 @@ namespace game {
     
 Character::Character(MapObject::Type type, view::MapViewModel* mapViewModel) : MapObject(type), mapViewModel(mapViewModel),
         position(util::Location::Position(-1, -1)) {
+    alive = false;
 }
 
 Character::~Character() {
-    
+    delete life;
 }
 
 view::MapViewModel* Character::getMapModel() {
@@ -25,22 +26,29 @@ view::MapView* Character::getMapView() {
     return mapView;
 }
     
+bool Character::isAlive() {
+    return alive;
+}
     // virtualna, tak zeby w Player nie rozpoczynac watku
 void Character::beginLife() {
     mapView = mapViewModel->getMapView();
     life->Launch();
+    alive = true;
 }   
 
 void Character::pauseLife() {
     life->pause();
+    alive = false;
 }
 
 void Character::resumeLife() {
     life->resume();
+    alive = true;
 }
 
 void Character::endLife() {
     life->die();
+    alive = false;
 }
 
 void Character::setPosition(util::Location::Position pos) {
