@@ -29,7 +29,7 @@ HUDView::HUDView(int xStart, int yStart, int xEnd, int yEnd, HUDViewModel* hudVi
                     static_cast<game::Weapon*>(equipmentItems->at(i))));    
             
     }
-        
+    weaponsSelectionView->selectElement(0);
     
     addView(weaponsSelectionView);
 }    

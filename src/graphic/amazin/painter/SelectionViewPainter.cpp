@@ -61,7 +61,7 @@ void SelectionViewPainter::init() {
             elementHeight = 20;
             fontPath = "resource/graphic/amazin/font/magnum.ttf";
             
-            textSize = 10;
+            textSize = 15;
             
 
             paddingLeft = 10;
@@ -150,13 +150,27 @@ void SelectionViewPainter::init() {
                 drawables.push_back(weaponImgSprite);
                 
                 /* weapon damage */
+
+                sf::String* damageLabel = new sf::String();
+                damageLabel->SetStyle(sf::String::Bold);
+                damageLabel->SetColor(sf::Color::Black);
+                damageLabel->SetText("damage: ");
+                // przy text->SetFont(font) segmentation fault - cos zle z plikeim ttf
+                damageLabel->SetFont(sf::Font::GetDefaultFont());
+                damageLabel->SetSize(textSize);
+                damageLabel->SetX(selectionModel->getViewStartPosition()->getX() + weaponImgSprite->GetSize().x + 30);
+                damageLabel->SetY(selectionModel->getViewStartPosition()->getY() + i * elementHeight + paddingTop);  
+                
+                drawables.push_back(damageLabel); 
                 
                 text = new sf::String();
+                text->SetStyle(sf::String::Bold);
+                text->SetColor(sf::Color::Black);
                 text->SetText(util::Util::toString(weaponElement->getWeapon()->getDamage()));
                 // przy text->SetFont(font) segmentation fault - cos zle z plikeim ttf
                 text->SetFont(sf::Font::GetDefaultFont());
                 text->SetSize(textSize);
-                text->SetX(selectionModel->getViewStartPosition()->getX() + weaponImgSprite->GetSize().x + 10);
+                text->SetX(selectionModel->getViewStartPosition()->getX() + weaponImgSprite->GetSize().x + 90);
                 text->SetY(selectionModel->getViewStartPosition()->getY() + i * elementHeight + paddingTop);    
 
                 drawables.push_back(text);                

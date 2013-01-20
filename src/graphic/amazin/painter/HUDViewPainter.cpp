@@ -74,8 +74,6 @@ void HUDViewPainter::init() {
 
     drawables.push_back(experienceValue);         
     
-
-       
 }
 
 

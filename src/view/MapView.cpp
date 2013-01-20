@@ -116,6 +116,25 @@ bool MapView::canMoveCharacter(game::Character* ch, util::Location::Vector vecto
                     }
                 }
                 
+                case game::MapObject::ENEMY_A : 
+                case game::MapObject::ENEMY_B :
+                case game::MapObject::ENEMY_C : 
+                case game::MapObject::ENEMY_D :
+                case game::MapObject::ENEMY_E : {
+            
+                    // z kim sie zderza
+                    switch (collidingCharacter->getType()) { 
+                        case game::MapObject::PLAYER : {
+                            
+                            if (!warManager->isWarAlreadyStartedBetween(
+                                    dynamic_cast<game::Player*>(collidingCharacter), dynamic_cast<game::Enemy*>(ch)))
+                                startWar(new game::War(dynamic_cast<game::Player*>(collidingCharacter), dynamic_cast<game::Enemy*>(ch)));
+                                
+                        }
+
+                    }
+                }                
+                
             }
             
             return false;

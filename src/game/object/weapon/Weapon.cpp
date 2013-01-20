@@ -9,7 +9,7 @@ Weapon::Weapon(EquipmentItem::Type type) : EquipmentItem(type) {
     damage = Weapon::getDamageFor(type);
 }
 
-int Weapon::getDamage() {
+float Weapon::getDamage() {
     return damage;
 }
 
@@ -24,10 +24,12 @@ bool Weapon::isWeapon(Equipment::EquipmentItem* equipmentItem) {
     }
 }
 
-int Weapon::getDamageFor(Equipment::EquipmentItem::Type weaponType) {
+float Weapon::getDamageFor(Equipment::EquipmentItem::Type weaponType) {
     switch (weaponType) {
         case Equipment::EquipmentItem::SWORD :
             return 3;
+        case Equipment::EquipmentItem::ENEMY_SWORD :
+            return 0.3;            
         case Equipment::EquipmentItem::KNIFE :
             return 1;
         case Equipment::EquipmentItem::AX :
@@ -38,7 +40,7 @@ int Weapon::getDamageFor(Equipment::EquipmentItem::Type weaponType) {
 }
 
 Weapon* Weapon::getWeaponFor(MapObject::Type characterType) {
-    return new Weapon(Equipment::EquipmentItem::SWORD);
+    return new Weapon(Equipment::EquipmentItem::ENEMY_SWORD);
 }
 
 

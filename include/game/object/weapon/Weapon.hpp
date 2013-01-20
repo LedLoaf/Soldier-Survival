@@ -11,14 +11,14 @@ public:
     
     Weapon(EquipmentItem::Type type);
     
-    int getDamage();
+    float getDamage();
 
     static bool isWeapon(Equipment::EquipmentItem* equipmentItem);
-    static int getDamageFor(Equipment::EquipmentItem::Type weaponType);
+    static float getDamageFor(Equipment::EquipmentItem::Type weaponType);
     static Weapon* getWeaponFor(MapObject::Type characterType);
     
 protected:
-    int damage;
+    float damage;
 };
     
 }
