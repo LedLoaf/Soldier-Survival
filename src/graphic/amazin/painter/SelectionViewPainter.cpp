@@ -42,7 +42,7 @@ void SelectionViewPainter::init() {
             elementHeight = 50;
             fontPath = "resource/graphic/amazin/font/magnum.ttf";
 
-            textSize = 20;
+            textSize = 30;
 
             paddingLeft = paddingTop = 5;
             break;
@@ -104,10 +104,10 @@ void SelectionViewPainter::init() {
             case view::SelectionViewModel::SIMPLE_MENU : {
                 text = new sf::String();
                 text->SetText(getTextFor(selectableElements[i]->getAction()));
-                // przy text->SetFont(font) segmentation fault - cos zle z plikeim ttf
+//                text->SetStyle(sf::String::Bold);
                 text->SetFont(sf::Font::GetDefaultFont());
                 text->SetSize(textSize);
-                text->SetX(selectionModel->getViewStartPosition()->getX() + paddingLeft);
+                text->SetX(backgroundSprite->GetPosition().x + elementWidth / 2 - textSize);
                 text->SetY(selectionModel->getViewStartPosition()->getY() + i * elementHeight + paddingTop);    
 
                 drawables.push_back(text);
