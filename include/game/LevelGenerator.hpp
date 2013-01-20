@@ -27,6 +27,9 @@ private:
     void generateWalls();
     void generateForest();
     void generateRivers();
+    void generatePaths();
+    void generateGrass();
+    void generateSand();
     void generateGround();
     void generatePlayer();
     void placeEnemies();
@@ -36,6 +39,7 @@ private:
     void placeRandomly(util::Location::Position *p, int dx, int dy, float density, MapObject* tt);
     bool checkClearAround(util::Location::Position *p, int radius);
     bool placeRiverOrBridge(util::Location::Position *p, int bridgeProbability);
+    bool placePath(util::Location::Position *p);
 };
 
 }

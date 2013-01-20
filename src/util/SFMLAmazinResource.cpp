@@ -187,32 +187,95 @@ void SFMLAmazinResource::initMapObjectImages() {
 		game::MapObject::BOSS, bossImage)); 
 
 
-    std::string enemy1Path = "resource/graphic/amazin/game_play/img/tiles/enemy2.png";
+    std::string enemy1Path = "resource/graphic/amazin/game_play/img/tiles/enemy1.png";
     
-    sf::Image* enemyAImage = new sf::Image();
-    if (!enemyAImage->LoadFromFile(enemy1Path))
+    sf::Image* enemy1Image = new sf::Image();
+    if (!enemy1Image->LoadFromFile(enemy1Path))
         std::cout << "Failed to load " << enemy1Path << std::endl;
        
     imageResourceMap.insert(std::pair<game::MapObject::Type, sf::Image*>(
-		game::MapObject::ENEMY_A, enemyAImage)); 
+		game::MapObject::ENEMY_A, enemy1Image)); 
 
-    std::string deadEnemyAPath = "resource/graphic/amazin/game_play/img/tiles/enemy2_dead.png";
+    std::string deadEnemy1Path = "resource/graphic/amazin/game_play/img/tiles/enemy1_dead.png";
     
-    sf::Image* deadEnemyImage = new sf::Image();
-    if (!deadEnemyImage->LoadFromFile(deadEnemyAPath))
-        std::cout << "Failed to load " << deadEnemyAPath << std::endl;
+    sf::Image* deadEnemy1Image = new sf::Image();
+    if (!deadEnemy1Image->LoadFromFile(deadEnemy1Path))
+        std::cout << "Failed to load " << deadEnemy1Path << std::endl;
        
     imageResourceMap.insert(std::pair<game::MapObject::Type, sf::Image*>(
-		game::MapObject::DEAD_ENEMY_A, deadEnemyImage));     
+		game::MapObject::DEAD_ENEMY_A, deadEnemy1Image));     
 
-    std::string enemy2Path = "resource/graphic/amazin/game_play/img/tiles/enemy3.png";
+    std::string enemy2Path = "resource/graphic/amazin/game_play/img/tiles/enemy2.png";
     
-    sf::Image* enemyBImage = new sf::Image();
-    if (!enemyBImage->LoadFromFile(enemy2Path))
+    sf::Image* enemy2Image = new sf::Image();
+    if (!enemy2Image->LoadFromFile(enemy2Path))
         std::cout << "Failed to load " << enemy2Path << std::endl;
        
     imageResourceMap.insert(std::pair<game::MapObject::Type, sf::Image*>(
-		game::MapObject::ENEMY_B, enemyBImage)); 
+		game::MapObject::ENEMY_B, enemy2Image)); 
+    
+    std::string deadEnemy2Path = "resource/graphic/amazin/game_play/img/tiles/enemy2_dead.png";
+    
+    sf::Image* deadEnemy2Image = new sf::Image();
+    if (!deadEnemy2Image->LoadFromFile(deadEnemy2Path))
+        std::cout << "Failed to load " << deadEnemy2Path << std::endl;
+       
+    imageResourceMap.insert(std::pair<game::MapObject::Type, sf::Image*>(
+		game::MapObject::DEAD_ENEMY_B, deadEnemy2Image));   
+    
+    std::string enemy3Path = "resource/graphic/amazin/game_play/img/tiles/enemy3.png";
+    
+    sf::Image* enemy3Image = new sf::Image();
+    if (!enemy3Image->LoadFromFile(enemy3Path))
+        std::cout << "Failed to load " << enemy3Path << std::endl;
+       
+    imageResourceMap.insert(std::pair<game::MapObject::Type, sf::Image*>(
+		game::MapObject::ENEMY_C, enemy3Image)); 
+
+    std::string deadEnemy3Path = "resource/graphic/amazin/game_play/img/tiles/enemy3_dead.png";
+    
+    sf::Image* deadEnemy3Image = new sf::Image();
+    if (!deadEnemy3Image->LoadFromFile(deadEnemy3Path))
+        std::cout << "Failed to load " << deadEnemy3Path << std::endl;
+       
+    imageResourceMap.insert(std::pair<game::MapObject::Type, sf::Image*>(
+		game::MapObject::DEAD_ENEMY_C, deadEnemy3Image));
+    
+    std::string enemy4Path = "resource/graphic/amazin/game_play/img/tiles/enemy4.png";
+    
+    sf::Image* enemy4Image = new sf::Image();
+    if (!enemy4Image->LoadFromFile(enemy4Path))
+        std::cout << "Failed to load " << enemy4Path << std::endl;
+       
+    imageResourceMap.insert(std::pair<game::MapObject::Type, sf::Image*>(
+		game::MapObject::ENEMY_D, enemy4Image)); 
+
+    std::string deadEnemy4Path = "resource/graphic/amazin/game_play/img/tiles/enemy4_dead.png";
+    
+    sf::Image* deadEnemy4Image = new sf::Image();
+    if (!deadEnemy4Image->LoadFromFile(deadEnemy4Path))
+        std::cout << "Failed to load " << deadEnemy4Path << std::endl;
+       
+    imageResourceMap.insert(std::pair<game::MapObject::Type, sf::Image*>(
+		game::MapObject::DEAD_ENEMY_D, deadEnemy4Image));
+    
+    std::string enemy5Path = "resource/graphic/amazin/game_play/img/tiles/enemy5.png";
+    
+    sf::Image* enemy5Image = new sf::Image();
+    if (!enemy5Image->LoadFromFile(enemy5Path))
+        std::cout << "Failed to load " << enemy5Path << std::endl;
+       
+    imageResourceMap.insert(std::pair<game::MapObject::Type, sf::Image*>(
+		game::MapObject::ENEMY_E, enemy5Image)); 
+
+    std::string deadEnemy5Path = "resource/graphic/amazin/game_play/img/tiles/enemy5_dead.png";
+    
+    sf::Image* deadEnemy5Image = new sf::Image();
+    if (!deadEnemy5Image->LoadFromFile(deadEnemy5Path))
+        std::cout << "Failed to load " << deadEnemy5Path << std::endl;
+       
+    imageResourceMap.insert(std::pair<game::MapObject::Type, sf::Image*>(
+		game::MapObject::DEAD_ENEMY_E, deadEnemy5Image));
 }
 
 sf::Image* SFMLAmazinResource::getRedDot() {
