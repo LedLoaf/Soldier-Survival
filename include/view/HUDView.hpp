@@ -19,8 +19,6 @@ public:
     
     virtual View::Type getType();
     
-    virtual void pause();
-    virtual void resume();
     
     void switchToPreviousWeapon();
     void switchToNextWeapon();

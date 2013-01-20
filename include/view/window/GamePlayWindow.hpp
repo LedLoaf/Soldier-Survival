@@ -20,11 +20,14 @@ private:
 	MapView* mapView;
     game::LevelDescription* levelDescription;
     game::LevelGenerator* levelGenerator;
+    bool isGameOver;
 
 public:
 	GamePlayWindow(game::LevelDescription* levelDescription);
     ~GamePlayWindow();
 	void initUI();
+    
+    void gameOver();
         
 	virtual void onEnterPressed();
 	virtual void onArrowPressed(util::Location::Vector vector);

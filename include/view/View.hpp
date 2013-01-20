@@ -38,9 +38,9 @@ public:
 	virtual ~View();
 	virtual Type getType() = 0;
 
-    virtual void pause();
+    void pause();
     bool isPaused();
-    virtual void resume();
+    void resume();
     
 protected:
     int xStart, yStart, xEnd, yEnd;

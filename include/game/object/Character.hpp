@@ -32,7 +32,7 @@ public:
     void beginLife();
     void pauseLife();
     void resumeLife();
-    void endLife();
+    virtual void endLife();
     
     void setHealth(int health);
     int getHealth();    

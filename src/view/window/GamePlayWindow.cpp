@@ -1,4 +1,5 @@
 #include <view/ImageView.hpp>
+#include <view/TextView.hpp>
 #include <view/window/Window.hpp>
 #include <view/window/GamePlayWindow.hpp>
 #include <view/window/PauseWindow.hpp>
@@ -16,6 +17,7 @@ GamePlayWindow::GamePlayWindow(game::LevelDescription* levelDescription) : mapVi
 
     this->levelDescription = levelDescription;
     this->levelGenerator = new game::LevelGenerator(levelDescription);
+    this->isGameOver = false;
     
     initUI();
 }
@@ -27,6 +29,14 @@ GamePlayWindow::~GamePlayWindow() {
     delete levelGenerator;
 }
 
+void GamePlayWindow::gameOver() {
+    isGameOver = true;
+    pause();
+
+    addView(new TextView(game::Application::getInstance().getDeviceManager()->getScreenHeight() / 2, 
+            game::Application::getInstance().getDeviceManager()->getScreenHeight() / 2, 
+            500, game::Application::getInstance().getDeviceManager()->getScreenHeight() - 50, "Game over. Press esc to exit.", TextView::MIDDLE));    
+}
 
 void GamePlayWindow::initUI() {
     
@@ -47,9 +57,6 @@ void GamePlayWindow::initUI() {
     mapView->beginCharactersLife();
 	addView(mapView);
     
-  /* 100 x 100*/  
-
-
 }
 
 
@@ -57,7 +64,7 @@ void GamePlayWindow::onArrowPressed(util::Location::Vector vector) {
     if (hasSubWindow())
         subWindow->onArrowPressed(vector);
     else {
-        if (mapView->canMoveCharacter(mapView->getPlayer(), vector))
+        if (!isGameOver && mapView->canMoveCharacter(mapView->getPlayer(), vector))
         mapView->moveCharacter(mapView->getPlayer(), vector);
     }
     
@@ -82,19 +89,22 @@ void GamePlayWindow::onArrowPressed(util::Location::Vector vector) {
 }
 
 void GamePlayWindow::onCharacterPressed(char c) {
-    switch (c) {
-        case 'f':
-            hudView->switchToNextWeapon();
-            break;
-        case 'v':
-            hudView->switchToPreviousWeapon();
-            break;
-        case 'q':
-            game::Application::getInstance().getGameEngine()->exitGame();
-            break;                 
-//        case 'm':
-//            game::Application::getInstance().getGameEngine()->run();
-//            break;            
+    if (hasSubWindow())
+        subWindow->onCharacterPressed(c); 
+    else {
+        switch (c) {
+            case 'v':
+                hudView->switchToNextWeapon();
+                break;
+            case 'f':
+                hudView->switchToPreviousWeapon();
+                break;
+            case 'm':           
+                pause();
+                PauseWindow* pauseWindow = new PauseWindow(this);
+                subWindow = pauseWindow;    
+                break;
+        }
     }
 }
 
@@ -122,9 +132,7 @@ void GamePlayWindow::onEscPressed() {
     if (hasSubWindow())
         subWindow->onEscPressed();
     else {
-        pause();
-        PauseWindow* pauseWindow = new PauseWindow(this);
-        subWindow = pauseWindow;
+        game::Application::getInstance().getGameEngine()->exitGame();
     }
     
 }
@@ -134,7 +142,7 @@ View::Type GamePlayWindow::getType() {
 }
 
 void GamePlayWindow::pause() {
-//    hudView->pause();
+    hudView->pause();
     mapView->pause();
 //    miniMapView->pause();
 }

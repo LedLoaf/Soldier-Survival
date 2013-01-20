@@ -21,6 +21,8 @@ class Player : public Character {
 public:
     Player(Equipment* equipment, view::MapViewModel* mapViewModel);
     
+    virtual void endLife();
+    
     Equipment* getEquipment();
     std::vector<game::Weapon*>* getWeapons();
     

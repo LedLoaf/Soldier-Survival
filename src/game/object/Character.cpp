@@ -4,6 +4,9 @@
 #include <game/object/MapObject.hpp>
 #include <game/object/weapon/Weapon.hpp>
 
+#include "view/window/GamePlayWindow.hpp"
+#include "game/Application.hpp"
+
 namespace game {
     
 Character::Character(MapObject::Type type, view::MapViewModel* mapViewModel) : MapObject(type), mapViewModel(mapViewModel),

@@ -1,6 +1,8 @@
 #include <iostream>
 #include <vector>
 
+#include <game/Application.hpp>
+#include <view/window/GamePlayWindow.hpp>
 #include <game/object/Character.hpp>
 #include "game/object/Player.hpp"
 #include <game/object/Equipment.hpp>
@@ -68,8 +70,17 @@ void Player::injureUsing(Weapon* weapon) {
     
     health -= weapon->getDamage();
     
-    if (health <= 0)
-        endLife();     
+    if (health <= 0) {
+        health = 0;
+        endLife();    
+    }
+}
+
+void Player::endLife() {
+    life->die();
+    
+    //todo: poprawic na obserwator
+    dynamic_cast<view::GamePlayWindow*>(Application::getInstance().getContext()->getActiveWindow())->gameOver();
 }
     
 int Player::getExperiencePoints() {

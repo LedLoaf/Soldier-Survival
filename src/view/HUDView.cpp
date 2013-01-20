@@ -43,13 +43,13 @@ View::Type HUDView::getType() {
 }
 
 void HUDView::switchToPreviousWeapon() {
-    if (weaponsSelectionView->hasPreviousElement()) {
+    if (!paused && weaponsSelectionView->hasPreviousElement()) {
         weaponsSelectionView->selectPreviousElement();
     }
 }
 
 void HUDView::switchToNextWeapon() {
-    if (weaponsSelectionView->hasNextElement()) {
+    if (!paused && weaponsSelectionView->hasNextElement()) {
         weaponsSelectionView->selectNextElement();
         hudViewModel->setCurrentWeaponForPlayer(
             dynamic_cast<SelectionViewModel::WeaponSelectableElement*>(weaponsSelectionView->getSelectedElement())->getWeapon());
@@ -62,14 +62,7 @@ SelectionView* HUDView::getWeaponSelectionView() {
         hudViewModel->setCurrentWeaponForPlayer(
             dynamic_cast<SelectionViewModel::WeaponSelectableElement*>(weaponsSelectionView->getSelectedElement())->getWeapon());        
     }
-};
-
-void HUDView::pause() {
-        
 }
 
-void HUDView::resume() {
-    
-}
 
 }

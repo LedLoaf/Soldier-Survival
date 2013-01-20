@@ -64,7 +64,7 @@ void GameMasterEngine::resumeGame() {
     delete pauseWindow;
     
     
-    Application::getInstance().getContext()->getActiveWindow()->resume();
+    dynamic_cast<view::GamePlayWindow*>(Application::getInstance().getContext()->getActiveWindow())->resume();
 }
 
 

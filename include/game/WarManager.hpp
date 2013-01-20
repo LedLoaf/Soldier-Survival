@@ -22,7 +22,8 @@ public:
     ~WarManager();
 	void startWar(War* war);
     void stopWar(War* war);
-   
+    void stopAllWars();
+    
     bool isWarAlreadyStartedBetween(Player* player, Enemy* enemy);
     
     void checkWarsExistance();

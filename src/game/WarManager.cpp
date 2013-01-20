@@ -79,4 +79,9 @@ void WarManager::stopWar(War* war) {
     stopWarMutex.Unlock();
 }
 
+void WarManager::stopAllWars() {
+//    for (int i = 0; i < existingWars.size(); i++)
+//        existingWars[i]->stop();
+}
+
 }

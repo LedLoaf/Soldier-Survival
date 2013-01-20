@@ -41,36 +41,20 @@ GamePlayWindow* PauseWindow::getParentWindow() {
 
 
 void PauseWindow::onArrowPressed(util::Location::Vector vector) {
-	if (vector == util::Location::LEFT) {
-		if (selectionView->hasPreviousElement())
-			selectionView->selectPreviousElement();
-	} else if (vector == util::Location::RIGHT) {
-		if (selectionView->hasNextElement())
-			selectionView->selectNextElement();
-	}
-
-
 }
 
 
 void PauseWindow::onEnterPressed() {
-	util::Util::Action optionAction = selectionView->getSelectedElement()->getAction();
-
-	if (optionAction == util::Util::RESUME_GAME) 
-			game::Application::getInstance().getGameEngine()->resumeGame();
-    else if(optionAction == util::Util::RETURN_TO_MAIN_MENU)
-			game::Application::getInstance().getGameEngine()->run();
-	
 }
 
 void PauseWindow::onEscPressed() {
-    gamePlayWindow->setSubWindow(NULL);
-    
-    game::Application::getInstance().getGameEngine()->resumeGame();
+
 }
 
 void PauseWindow::onCharacterPressed(char c) {
+    gamePlayWindow->setSubWindow(NULL);
     
+    game::Application::getInstance().getGameEngine()->resumeGame();    
 }
 
 void PauseWindow::onSpacePressed() {
