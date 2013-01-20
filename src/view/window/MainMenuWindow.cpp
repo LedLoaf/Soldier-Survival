@@ -35,8 +35,14 @@ void MainMenuWindow::initUI() {
 	addView(mainMenuLogo);    
     
     
+<<<<<<< HEAD
 	selectionView = new SelectionView(250, 300, 200, 500, SelectionViewModel::SIMPLE_MENU);
     selectionView->addElement(new SelectionViewModel::SelectableElement(util::Util::RUN_GAME_PLAY));    
+=======
+	selectionView = new SelectionView(250, 300, 500, 500, SelectionViewModel::SIMPLE_MENU);
+    selectionView->addElement(new SelectionViewModel::SelectableElement(util::Util::RUN_GAME_PLAY));    
+    selectionView->addElement(new SelectionViewModel::SelectableElement(util::Util::RUN_ABOUT));
+>>>>>>> 6085ef64e5a7a4929345a05d535f6a3cfc49a19d
     selectionView->addElement(new SelectionViewModel::SelectableElement(util::Util::RUN_EXIT));
     
     selectionView->selectElement(0);
