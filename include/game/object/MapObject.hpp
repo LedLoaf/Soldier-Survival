@@ -34,6 +34,7 @@ public:
     
     MapObject(Type type);
     
+    static bool isEnemy(MapObject* mapObject); 
     static bool isTerrain(MapObject* mapObject); 
     static bool isWall(MapObject* mapObject);  
     static bool isBridge(MapObject* mapObject);  

@@ -8,7 +8,21 @@ namespace game {
 MapObject::MapObject(Type type) {
     this->type = type;
 }
-    
+
+bool MapObject::isEnemy(MapObject* mapObject) {
+    switch (mapObject->getType()) {
+        case MapObject::ENEMY_A:
+        case MapObject::ENEMY_B:
+        case MapObject::ENEMY_C:
+        case MapObject::ENEMY_D:
+        case MapObject::ENEMY_E:
+            return true;
+        default:
+            return false;
+    }
+}
+
+
 bool MapObject::isTerrain(MapObject* mapObject) {
     if (mapObject->getType() == MapObject::GRASS || mapObject->getType() == MapObject::SAND || 
             mapObject->getType() == MapObject::GROUND || mapObject->getType() == MapObject::ROAD || mapObject->getType() == MapObject::BRIDGE) 

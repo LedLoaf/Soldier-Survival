@@ -41,6 +41,17 @@ bool Enemy::canSeePlayer() {
         case MapObject::ENEMY_A:
             if (distance < 6)
                 return true;
+        case MapObject::ENEMY_B:
+            if (distance < 2)
+                return true;
+        case MapObject::ENEMY_C:
+            if (distance < 3)
+                return true;  
+        case MapObject::ENEMY_D:
+            if (distance < 8)
+                return true;
+        case MapObject::ENEMY_E:
+                return true;            
         default:
                 return false;                
     }

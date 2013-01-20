@@ -39,7 +39,7 @@ MapViewModel* MapView::getModel() {
 void MapView::beginCharactersLife() {
     for (int i = 0; i < mapViewModel->getMapWidth(); i++) {
         for (int j = 0; j < mapViewModel->getMapHeight(); j++) {
-            if (mapViewModel->getCharacter(i, j) != NULL && mapViewModel->getCharacter(i, j)->getType() == game::MapObject::ENEMY_A)
+            if (mapViewModel->getCharacter(i, j) != NULL && game::MapObject::isEnemy(mapViewModel->getCharacter(i, j )))
                 mapViewModel->getCharacter(i, j)->beginLife();
         }        
     }
