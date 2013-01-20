@@ -71,9 +71,12 @@ void Enemy::injureUsing(Weapon* weapon) {
         endLife();
     
     // TODO: jak bedzie czas, zamienic na wzorzec Subscriber - Publisher
-    Player* player = dynamic_cast<view::GamePlayWindow*>(Application::getInstance().getContext()->getActiveWindow())->getMapView()->getPlayer();
+    view::Window* activeWindow = Application::getInstance().getContext()->getActiveWindow();
+    if (activeWindow->getType() == view::Window::GAME_PLAY_WINDOW) {
+        Player* player = dynamic_cast<view::GamePlayWindow*>(activeWindow)->getMapView()->getPlayer();
     // TODO: jakos sensowniej przyznawac te punkty doswiadczenia ;). Moze od szybkosci zabicia, itp.
-    player->addExperiencePoints(weapon->getDamage() * 10 * (util::Util::getCurrentTime() % 3)); 
+        player->addExperiencePoints(weapon->getDamage() * 10 * (util::Util::getCurrentTime() % 3)); 
+    }
     
 }
 

@@ -52,6 +52,12 @@ void EnemyLife::Run() {
     }
     // die
     // do poprawy takie branie wskaznika do map view
+    view::Window* activeWindow = Application::getInstance().getContext()->getActiveWindow();
+    while (activeWindow != NULL && activeWindow->getType() != view::Window::GAME_PLAY_WINDOW) {
+        sf::Sleep(0.001f);
+        activeWindow = Application::getInstance().getContext()->getActiveWindow();
+    }
+        
     view::MapView* mapView = dynamic_cast<view::GamePlayWindow*>(game::Application::getInstance().getContext()->getActiveWindow())->getMapView();
     mapView->showDeathOf(character);
     

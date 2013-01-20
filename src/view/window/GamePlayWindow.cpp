@@ -32,6 +32,7 @@ GamePlayWindow::~GamePlayWindow() {
 void GamePlayWindow::gameOver() {
     isGameOver = true;
     pause();
+    mapView->pause();
 
     addView(new TextView(game::Application::getInstance().getDeviceManager()->getScreenHeight() / 2, 
             game::Application::getInstance().getDeviceManager()->getScreenHeight() / 2, 

@@ -80,8 +80,8 @@ void WarManager::stopWar(War* war) {
 }
 
 void WarManager::stopAllWars() {
-//    for (int i = 0; i < existingWars.size(); i++)
-//        existingWars[i]->stop();
+    for (int i = 0; i < existingWars.size(); i++)
+        existingWars[i]->stop();
 }
 
 }

@@ -265,6 +265,7 @@ void MapView::pause() {
             if (ch != NULL)
                 ch->pauseLife();
         }
+    warManager->stopAllWars();
 }
 
 void MapView::resume() {
