@@ -261,6 +261,9 @@ void LevelGenerator::placePlayer() {
             mapModel->put(x, y, player);
             mapModel->put(x+1, y+1, new Enemy(MapObject::ENEMY_A, mapModel));
             mapModel->put(x+2, y+2, new Enemy(MapObject::ENEMY_A, mapModel));
+            mapModel->put(x+3, y+3, new Enemy(MapObject::ENEMY_A, mapModel));
+            mapModel->put(x+4, y+4, new Enemy(MapObject::ENEMY_A, mapModel));
+            mapModel->put(x+5, y+5, new Enemy(MapObject::ENEMY_A, mapModel));
             
             playerPlaced = true;
         }
