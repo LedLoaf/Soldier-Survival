@@ -516,7 +516,7 @@ void LevelGenerator::placeRandomly(util::Location::Position *p, int dx, int dy, 
                     && !MapObject::isBridge(mapModel->getNotMovingObject(ptt->getX(), ptt->getY())))) {
                 switch (tt->getType()) {
                     case game::MapObject::GRASS:
-                    case game::MapObject::GRASS_GREEN:
+//                    case game::MapObject::GRASS_GREEN:
                     case game::MapObject::GROUND:
                     case game::MapObject::WALL:
                     case game::MapObject::RIVER:
@@ -529,6 +529,10 @@ void LevelGenerator::placeRandomly(util::Location::Position *p, int dx, int dy, 
                     case game::MapObject::PLAYER :
                         mapModel->put(ptt->getX(), ptt->getY(), dynamic_cast<game::Player*>(tt));
                         break; 
+                    case game::MapObject::ENEMY_A || game::MapObject::ENEMY_B || game::MapObject::ENEMY_C || 
+                            game::MapObject::ENEMY_D || game::MapObject::ENEMY_E:
+                        mapModel->put(ptt->getX(), ptt->getY(), dynamic_cast<game::Enemy*>(tt));
+                        break;
                     default:
                         mapModel->put(ptt->getX(), ptt->getY(), dynamic_cast<game::Character*>(tt));
                         break; 

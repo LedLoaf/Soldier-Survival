@@ -37,23 +37,23 @@ MapViewModel* MapView::getModel() {
 }
 
 void MapView::beginCharactersLife() {
-//    for (int i = 0; i < mapViewModel->getMapWidth(); i++) {
-//        for (int j = 0; j < mapViewModel->getMapHeight(); j++) {
-//            if (mapViewModel->getCharacter(i, j) != NULL && mapViewModel->getCharacter(i, j)->getType() == game::MapObject::ENEMY_A)
-//                mapViewModel->getCharacter(i, j)->beginLife();
-//        }        
-//    }
+    for (int i = 0; i < mapViewModel->getMapWidth(); i++) {
+        for (int j = 0; j < mapViewModel->getMapHeight(); j++) {
+            if (mapViewModel->getCharacter(i, j) != NULL && mapViewModel->getCharacter(i, j)->getType() == game::MapObject::ENEMY_A)
+                mapViewModel->getCharacter(i, j)->beginLife();
+        }        
+    }
 //    
-    mapViewModel->getCharacter(mapViewModel->getPlayer()->getPosition().getX() + 1, 
-            mapViewModel->getPlayer()->getPosition().getY() + 1)->beginLife();
-    mapViewModel->getCharacter(mapViewModel->getPlayer()->getPosition().getX() + 2, 
-            mapViewModel->getPlayer()->getPosition().getY() + 2)->beginLife();
-    mapViewModel->getCharacter(mapViewModel->getPlayer()->getPosition().getX() + 3, 
-            mapViewModel->getPlayer()->getPosition().getY() + 3)->beginLife();
-    mapViewModel->getCharacter(mapViewModel->getPlayer()->getPosition().getX() + 4, 
-            mapViewModel->getPlayer()->getPosition().getY() + 4)->beginLife();
-    mapViewModel->getCharacter(mapViewModel->getPlayer()->getPosition().getX() + 5, 
-            mapViewModel->getPlayer()->getPosition().getY() + 5)->beginLife();     
+//    mapViewModel->getCharacter(mapViewModel->getPlayer()->getPosition().getX() + 1, 
+//            mapViewModel->getPlayer()->getPosition().getY() + 1)->beginLife();
+//    mapViewModel->getCharacter(mapViewModel->getPlayer()->getPosition().getX() + 2, 
+//            mapViewModel->getPlayer()->getPosition().getY() + 2)->beginLife();
+//    mapViewModel->getCharacter(mapViewModel->getPlayer()->getPosition().getX() + 3, 
+//            mapViewModel->getPlayer()->getPosition().getY() + 3)->beginLife();
+//    mapViewModel->getCharacter(mapViewModel->getPlayer()->getPosition().getX() + 4, 
+//            mapViewModel->getPlayer()->getPosition().getY() + 4)->beginLife();
+//    mapViewModel->getCharacter(mapViewModel->getPlayer()->getPosition().getX() + 5, 
+//            mapViewModel->getPlayer()->getPosition().getY() + 5)->beginLife();     
 }
 
 void MapView::showDeathOf(game::Character* ch) {
