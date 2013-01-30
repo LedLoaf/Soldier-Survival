@@ -54,7 +54,6 @@ void MapViewPainter::init() {
     elementWidth = 40;
     elementHeight = 25;
     
-    std::cout << elementWidth << ", " << elementHeight;
     
     subMapManager = new SubMapManager(mapViewModel, subMapWidth, subMapHeight, playerToWallSpace);
 

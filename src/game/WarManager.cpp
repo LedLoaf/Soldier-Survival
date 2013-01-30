@@ -61,7 +61,7 @@ void WarManager::checkWarsExistance() {
 }
 
 void WarManager::startWar(War* war) {
-    std::cout << "WarManager::startWar()" << std::endl;
+//    std::cout << "WarManager::startWar()" << std::endl;
     
     war->start();
     
